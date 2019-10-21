@@ -74,4 +74,5 @@ public class MainActivity extends AppCompatActivity {
         if(password.length() != 0 && username.length() != 0 && User.map.containsKey(username) && User.map.get(username).equals(password))
             startActivity(intent);
     }
+
 }
