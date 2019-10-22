@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -11,11 +12,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public static String Username = "username";
     public static final String Password = "password";
+    public static UserAccountManager userAccountManager;
+    private final static String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.userAccountManager = new UserAccountManager(getFilesDir().getAbsolutePath());
     }
 
     public void createAccount(View view){
@@ -30,23 +34,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean validate(EditText user_text, String username, String password, EditText pass_text){
-        if (username.length() == 0){
-            user_text.setError("Please enter some text");
+        User user;
+
+        String resultOfCheckingCredentials = userAccountManager.checkUserCredentialsForLogin(username, password);
+        if (resultOfCheckingCredentials.equals("")) {
+            return true;
+        }
+        else {
+            if (resultOfCheckingCredentials.contains("Username")){
+                user_text.setError(resultOfCheckingCredentials);
+            }
+            else if (resultOfCheckingCredentials.contains("Password")) {
+                pass_text.setError(resultOfCheckingCredentials);
+            }
             return false;
         }
-        if(password.length() == 0){
-            pass_text.setError("Please enter some text");
-            return false;
-        }
-        if(!(User.map.containsKey(username))){
-            user_text.setError("Username does not exist");
-            return false;
-        }
-        if(!(User.map.get(username).equals(password))){
-            pass_text.setError("Invalid password");
-            return false;
-        }
-        return true;
     }
 
     public void LoginButton(View view){
@@ -57,22 +59,22 @@ public class MainActivity extends AppCompatActivity {
         String password = editText_pass.getText().toString();
         intent.putExtra(Username, username);
         intent.putExtra(Password, password);
-        if(username.length() == 0){
-            editText_user.setError("Please enter text");
+
+        //find user returns a user object if it can find one based on the username
+        //if it can't, it returns a user object with values (username="", password="", saveStateFile=getFilesDir())
+        //to indicate that it's empty. I also created an isEmpty method in user to easily check for this
+        User user;
+        String resultOfCheckingCredentials = userAccountManager.checkUserCredentialsForLogin(username, password);
+        if (resultOfCheckingCredentials.equals("")) {
+            startActivity(intent);
         }
-        if(password.length() == 0){
-            editText_pass.setError("Please enter text");
-        }
-        if(!(User.map.containsKey(username)) && username.length() != 0){
-            editText_user.setError("Username does not exist");
-        }
-        if (User.map.get(username) != null) {
-            if (!(User.map.get(username).equals(password))) {
-                editText_pass.setError("Invalid password");
+        else {
+            if (resultOfCheckingCredentials.contains("Username")){
+                editText_user.setError(resultOfCheckingCredentials);
+            }
+            else if (resultOfCheckingCredentials.contains("Password")) {
+                editText_pass.setError(resultOfCheckingCredentials);
             }
         }
-        if(password.length() != 0 && username.length() != 0 && User.map.containsKey(username) && User.map.get(username).equals(password))
-            startActivity(intent);
     }
-
 }
