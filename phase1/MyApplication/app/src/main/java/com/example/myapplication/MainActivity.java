@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.myapplication.WhackAMole.MoleActivity;
+
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public static String Username = "username";
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.userAccountManager = new UserAccountManager(getFilesDir().getAbsolutePath());
+//        this.userAccountManager = new UserAccountManager(getFilesDir().getAbsolutePath());
     }
 
     public void createAccount(View view){
@@ -52,29 +54,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoginButton(View view){
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, MoleActivity.class);
         EditText editText_user = (EditText) findViewById(R.id.editText1);
         EditText editText_pass = (EditText) findViewById(R.id.editText);
         String username = editText_user.getText().toString();
         String password = editText_pass.getText().toString();
         intent.putExtra(Username, username);
         intent.putExtra(Password, password);
-
+        startActivity(intent);
         //find user returns a user object if it can find one based on the username
         //if it can't, it returns a user object with values (username="", password="", saveStateFile=getFilesDir())
         //to indicate that it's empty. I also created an isEmpty method in user to easily check for this
-        User user;
-        String resultOfCheckingCredentials = userAccountManager.checkUserCredentialsForLogin(username, password);
-        if (resultOfCheckingCredentials.equals("")) {
-            startActivity(intent);
-        }
-        else {
-            if (resultOfCheckingCredentials.contains("Username")){
-                editText_user.setError(resultOfCheckingCredentials);
-            }
-            else if (resultOfCheckingCredentials.contains("Password")) {
-                editText_pass.setError(resultOfCheckingCredentials);
-            }
-        }
+//        String resultOfCheckingCredentials = userAccountManager.checkUserCredentialsForLogin(username, password);
+//        if (resultOfCheckingCredentials.equals("")) {
+//            startActivity(intent);
+//        }
+//        else {
+//            if (resultOfCheckingCredentials.contains("Username")){
+//                editText_user.setError(resultOfCheckingCredentials);
+//            }
+//            else if (resultOfCheckingCredentials.contains("Password")) {
+//                editText_pass.setError(resultOfCheckingCredentials);
+//            }
+//        }
     }
 }
