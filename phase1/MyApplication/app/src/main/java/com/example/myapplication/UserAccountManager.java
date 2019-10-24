@@ -1,4 +1,4 @@
-package com.example.myapplication;
+/*package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,19 +20,19 @@ public class UserAccountManager {
 
     private final static String TAG = "UserAccountManager";
 
-    /**
+    *//**
      * ArrayList of all user accounts
-     */
+     *//*
     private static ArrayList<User> userAccounts;
 
-    /**
+    *//**
      * Directory to save files in
-     */
+     *//*
     private static String directory;
 
-    /**
+    *//**
      * File holding the list of user accounts
-     */
+     *//*
     private static File userAccountsFile;
 
     public UserAccountManager(String directory){
@@ -40,11 +40,11 @@ public class UserAccountManager {
         this.userAccounts = readUserFile();
     }
 
-    /**
+    *//**
      * Searches for a file of user accounts. If not found, creates a new one. Returns an ArrayList
      * of User objects derived from the file.
      * @return List of User objects
-     */
+     *//*
     private static ArrayList readUserFile() {
         ArrayList<User> userAccounts = new ArrayList<User>();
 
@@ -75,12 +75,12 @@ public class UserAccountManager {
         return userAccounts;
     }
 
-    /**
+    *//**
      * Creates and returns a file object for the save state file of a user. Doesn't matter if the
      * user has no save states, will return a file dedicated to save states only for this user.
      * @param username of user
      * @return save state file
-     */
+     *//*
     private static File createSaveStateFile(String username) {
         String path = directory + "/" + username + "_saveState.txt";
         File file = createFile(path);
@@ -88,11 +88,11 @@ public class UserAccountManager {
         return file;
     }
 
-    /**
+    *//**
      * Creates and returns a file object given a path.
      * @param path
      * @return file at path
-     */
+     *//*
     private static File createFile(String path) {
         File file = new File(path); //create file that will be placed in directory
         if (file.exists()==false) {
@@ -150,12 +150,12 @@ public class UserAccountManager {
         return invalidMsg;
     }
 
-    /**
+    *//**
      * Searches list of user accounts to see if user exists by username. If exists, returns the user.
      * Else, returns an empty user.
      * @param username
      * @return found user
-     */
+     *//*
     public static User findUser(String username) {
         for (User u: userAccounts) {
             if (u.getUsername().equals(username))
@@ -164,14 +164,14 @@ public class UserAccountManager {
         return new User("", "", new File(directory));
     }
 
-    /**
+    *//**
      * Adds user to the ArrayList and user accounts file. Returns true if there is success and false
      * if there is any error.
      * @param username
      * @param password
      * @return whether user could be added or not
      *
-     */
+     *//*
     public static boolean addUser(String username, String password){
         User user = new User(username, password, createSaveStateFile(username));
         if (findUser(user.getUsername()).isEmpty()==false) {
@@ -184,11 +184,16 @@ public class UserAccountManager {
         }
     }
 
-    /**
+    *//*public  String getDirectory() {
+        return directory;
+    }*//*
+
+    *//**
      * Updates the user accounts file by adding a new user
      * @param user
      *
-     */
+     *//*
+
     private static void updateUserFile(User user) {
         BufferedWriter output;
 
@@ -209,25 +214,25 @@ public class UserAccountManager {
     }
 }
 
-/*
+*//*
  * A user object, which holds the user's username and password. Is empty if
  * (username, password, saveState) = ("", "", directory of phone)
- */
+ *//*
 class User {
 
-    /**
+    *//**
      * the username of this user
-     */
+     *//*
     private String username;
 
-    /**
+    *//**
      * the password of this user
-     */
+     *//*
     private String password;
 
-    /**
+    *//**
      * the save state file for this user.
-     */
+     *//*
     private File saveState;
 
     User(String username, String password, File saveState){
@@ -252,10 +257,10 @@ class User {
         return saveState;
     }
 
-    /**
+    *//**
      * Returns the username of this user.
      * @return username of this user
-     */
+     *//*
     public String getUsername() {
         return username;
     }
@@ -267,13 +272,13 @@ class User {
             return false;
     }
 
-    /**
+    *//**
      * Verifies if the given password is correct for this user.
      * @param password guess
      * @return whether this password is correct or not
-     */
+     *//*
     public boolean verifyPassword(String password) {
         return this.password.equals(password);
     }
 
-}
+}*/
