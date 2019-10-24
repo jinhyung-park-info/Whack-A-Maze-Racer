@@ -9,24 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TypeRacer"></activity>
+        <activity android:name=".MazeGame"></activity>
+        <activity android:name=".TypeRacer" />
         <activity
             android:name=".GameActivity"
             android:parentActivityName=".MainActivity">
+
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
-        <activity
-            android:name=".WhackAMole.MoleActivity"
-            android:parentActivityName=".MainActivity">
-        <!-- The meta-data tag is required if you support API level 15 and lower -->
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
-        </activity>activity>
+        <activity android:name=".WhackAMole.MoleActivity" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
