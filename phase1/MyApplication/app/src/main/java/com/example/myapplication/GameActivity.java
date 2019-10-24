@@ -18,7 +18,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void playGame(View v){
-        Intent intent = new Intent(this, Main2Activity.class);
+        Intent intent = new Intent(this, TypeRacer.class);
         startActivity(intent);
 
     }

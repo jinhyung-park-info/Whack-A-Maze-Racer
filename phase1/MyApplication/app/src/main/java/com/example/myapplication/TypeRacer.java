@@ -18,7 +18,7 @@ import java.util.Locale;
 
 
 
-public class Main2Activity extends AppCompatActivity {
+public class TypeRacer extends AppCompatActivity {
 
     TextView textView, textView2;
     EditText editText;
@@ -33,7 +33,7 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_type_racer);
         textView = (TextView) findViewById(R.id.textView);
         editText = findViewById(R.id.editText2);
         text = textView.getText().toString();
