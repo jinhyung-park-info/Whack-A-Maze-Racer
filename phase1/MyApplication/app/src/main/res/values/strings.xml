@@ -9,4 +9,9 @@
     <string name="Done">Done</string>
     <string name="start_game">Start Game</string>
     <string name="Load_Game">Load Game</string>
+    <string name="Statistics">View statistics</string>
+    <string name="Customization">Choose customizations down below</string>
+    <string name="Color">Color</string>
+    <string name="Dark">Dark</string>
+    <string name="Light">Light</string>
 </resources>

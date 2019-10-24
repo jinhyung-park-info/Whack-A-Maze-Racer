@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
         String password = editText_pass.getText().toString();
         intent.putExtra(Username, username);
         intent.putExtra(Password, password);
-        User user = new User(username, password);
-        intent.putExtra(USER, user);
+        //User user = new User(username, password);
+        //intent.putExtra(USER, user);
         if(username.length() == 0){
             editText_user.setError("Please enter text");
         }
