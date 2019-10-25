@@ -30,13 +30,13 @@ public class MoleActivity extends AppCompatActivity {
     }
 
     public void next(View view){
-        Button editText_user = (Button) findViewById(R.id.button);
+        Button nextButton = findViewById(R.id.button);
     if (passed) {
         passed = false;
       Intent intent = new Intent(this, GameActivity.class);
       startActivity(intent);
     }else{
-        editText_user.setError("Please Pass This Level First");
+        nextButton.setError("Please Pass This Level First");
     }
 
     }
