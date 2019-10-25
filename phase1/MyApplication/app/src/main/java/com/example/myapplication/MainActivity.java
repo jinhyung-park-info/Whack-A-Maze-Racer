@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.myapplication.WhackAMole.Mole;
 import com.example.myapplication.WhackAMole.MoleActivity;
 
 import java.io.BufferedReader;
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoginButton(View view){
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, MoleActivity.class);
         EditText editText_user = (EditText) findViewById(R.id.editText1);
         EditText editText_pass = (EditText) findViewById(R.id.editText);
         String username = editText_user.getText().toString();

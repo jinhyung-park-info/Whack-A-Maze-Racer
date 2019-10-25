@@ -1,6 +1,11 @@
 package com.example.myapplication.WhackAMole;
 
 
+import android.content.Intent;
+
+import static androidx.core.content.ContextCompat.createDeviceProtectedStorageContext;
+import static androidx.core.content.ContextCompat.startActivity;
+
 public class MoleThread extends Thread {
 
     public boolean keepRunning = true;
@@ -38,6 +43,10 @@ public class MoleThread extends Thread {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                }
+                if(wamCollection.score >= 15){
+                    keepRunning = false;
+                    this.wamView.gameStatus = "end";
                 }
             }
         }

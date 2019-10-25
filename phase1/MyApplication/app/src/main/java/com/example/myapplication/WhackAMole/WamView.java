@@ -1,5 +1,6 @@
 package com.example.myapplication.WhackAMole;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -77,7 +78,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
 
         scoreBoard = BitmapFactory.decodeResource(res, R.drawable.text_bg_bmp);
-        scoreBoard = SizeAndCoordinate.resizeBitmap(scoreBoard, 900, 525);
+        scoreBoard = SizeAndCoordinate.resizeBitmap(scoreBoard, 850, 550);
 
         Rect mole_rect = new Rect(0, screenHeight * 2 / 7, screenWidth, screenHeight * 5 / 6);
 
@@ -94,7 +95,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     }
 
 
-    public void myDraw() {
+    public void draw() {
 
         try {
             canvas = holder.lockCanvas();
@@ -109,7 +110,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
                         canvas.drawText(endScore, screenWidth / 4, screenHeight * 2 / 3, paint);
                         canvas.drawText(end_message1, screenWidth / 4, screenHeight * 11 / 15, paint);
                         canvas.drawText(end_message2, screenWidth / 4, screenHeight * 12 / 15, paint);
-
                         break;
                 }
             }
@@ -129,8 +129,14 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
                 this.inGameTouch(event, wamCollection);
                 return false;
             case "end":
-                reinitializeGame();
-                gameStatus = "inGame";
+                if(wamCollection.moleThread.keepRunning){
+                    reinitializeGame();
+                    gameStatus = "inGame";
+                }else{
+                    Activity activity = (Activity)getContext();
+                    activity.setContentView(R.layout.activity_mole);
+                    MoleActivity.passed = true;
+                }
         }
         return true;
     }
@@ -166,7 +172,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     public void run() {
         while (thread_active) {
             long start_time = System.currentTimeMillis();
-            myDraw();
+            draw();
             gameTransition();
             long end_time = System.currentTimeMillis();
             if (end_time - start_time < 50) {
@@ -178,5 +184,4 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
             }
         }
     }
-
 }

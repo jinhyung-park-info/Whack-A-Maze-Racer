@@ -69,11 +69,7 @@ public class WamCollection {
         int y = 0;
         for (int i = 0; i < this.currentLives; i++) {
             canvas.drawBitmap(lifePic, x, y, paint);
-            if (x + lifePicWidth >= WamView.screenWidth) {
-                y += lifePicHeight;
-            } else {
-                x += lifePicWidth;
-            }
+            x += lifePicWidth;
         }
 
         paint.setTextSize(WamView.screenHeight / 24);
