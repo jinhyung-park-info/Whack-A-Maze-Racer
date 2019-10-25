@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,13 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 import java.util.Locale;
 
-
-
-
-public class TypeRacer extends AppCompatActivity {
+public class TypeRacerSecondQ extends AppCompatActivity {
 
     TextView question, textView2;
     EditText answer;
@@ -33,13 +28,13 @@ public class TypeRacer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_type_racer);
+        setContentView(R.layout.activity_type_racer_second_q);
         question = (TextView) findViewById(R.id.questionTextView);
         answer = findViewById(R.id.answerEditText);
         text = question.getText().toString();
         textView2 = findViewById(R.id.textView2);
         countDown = findViewById(R.id.countDownTextView);
-    //System.out.println("here");
+        //System.out.println("here");
 
         answer.addTextChangedListener( new TextWatcher() {
             @Override
@@ -65,8 +60,8 @@ public class TypeRacer extends AppCompatActivity {
                     answer.setEnabled(false);
                     answer.clearFocus();
 
-                    Intent goToNextQuestion = new Intent(getApplicationContext(), TypeRacerSecondQ.class);
-                    startActivity(goToNextQuestion);
+                    Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
+                    startActivity(goToEndGame);
 
                 }
 
@@ -118,4 +113,6 @@ public class TypeRacer extends AppCompatActivity {
             countDownTimer.cancel();
         }
     }
+
+
 }

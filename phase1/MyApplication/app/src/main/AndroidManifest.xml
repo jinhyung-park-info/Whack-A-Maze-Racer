@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MazeGame"></activity>
+        <activity android:name=".TypeRacerSecondQ"></activity>
+        <activity android:name=".TypeRacerEnd" />
+        <activity android:name=".MazeGame" />
         <activity android:name=".TypeRacer" />
         <activity
             android:name=".GameActivity"

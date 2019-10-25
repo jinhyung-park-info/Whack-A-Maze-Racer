@@ -2,21 +2,15 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -35,7 +29,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         textView.setText(to_see);*/
     }
     public void DoneButton(View view){
-        EditText editText_2 =  findViewById(R.id.editText2);
+        EditText editText_2 =  findViewById(R.id.answerEditText);
         EditText editText_3 =  findViewById(R.id.editText3);
         String username = editText_2.getText().toString();
         String password = editText_3.getText().toString();
