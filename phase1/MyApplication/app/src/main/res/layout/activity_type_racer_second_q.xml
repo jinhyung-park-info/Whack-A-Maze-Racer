@@ -26,29 +26,35 @@
         android:ems="10"
         android:hint="Type your answer here"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/questionTextView"
+        app:layout_constraintVertical_bias="0.026" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="291dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="132dp"
-        android:text="TextView"
+        android:id="@+id/messageTextView"
+        android:layout_width="314dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="112dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.412"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerEditText" />
 
     <TextView
         android:id="@+id/countDownTextView"
-        android:layout_width="108dp"
-        android:layout_height="83dp"
-        android:layout_marginBottom="108dp"
-        android:text="TextView"
+        android:layout_width="310dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="176dp"
+        android:text="Countdown starts when you first type in."
+        android:textColor="#FA140105"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messageTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
