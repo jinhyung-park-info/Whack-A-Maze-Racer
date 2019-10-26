@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".TypeRacerSecondQ"></activity>
         <activity android:name=".TypeRacerEnd" />
-        <activity android:name=".MazeGame" />
+        <activity android:name=".Maze.MazeGame" />
+        <activity android:name=".Maze.MazeCustomizationActivity" />
         <activity android:name=".TypeRacer" />
         <activity
             android:name=".GameActivity"

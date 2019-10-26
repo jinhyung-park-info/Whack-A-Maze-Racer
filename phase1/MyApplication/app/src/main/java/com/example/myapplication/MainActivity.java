@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.WhackAMole.Mole;
 import com.example.myapplication.WhackAMole.MoleActivity;
 
