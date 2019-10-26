@@ -2,14 +2,13 @@ package com.example.myapplication.WhackAMole;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WamCollection {
+class WamCollection {
 
     private WamView wamView;
     MoleThread moleThread;
@@ -26,13 +25,13 @@ public class WamCollection {
 
     private int holeWidth, holeHeight;
 
-    public int holeDeploymentWidth, holeDeploymentHeight, holeX, holeY;
+    private int holeDeploymentWidth, holeDeploymentHeight, holeX, holeY;
     private Rect holeRect;
 
-    public int score;
+    int score;
 
 
-    public WamCollection(Bitmap holePic, Rect hole_r, Bitmap molePic, Bitmap lifePic, int numLives, int numHolesX, int numHolesY, WamView wamView) {
+    WamCollection(Bitmap holePic, Rect hole_r, Bitmap molePic, Bitmap lifePic, int numLives, int numHolesX, int numHolesY, WamView wamView) {
         this.holeList = new ArrayList<>();
         this.moleList = new ArrayList<>();
 
@@ -70,10 +69,6 @@ public class WamCollection {
             canvas.drawBitmap(lifePic, x, y, paint);
             x += lifePicWidth;
         }
-
-        paint.setTextSize(WamView.screenHeight / 24);
-        paint.setColor(Color.WHITE);
-        canvas.drawText("Score:" + this.score, WamView.screenWidth * 2 / 3, WamView.screenHeight / 18, paint);
     }
 
     void initialize() {
@@ -109,7 +104,7 @@ public class WamCollection {
         this.currentLives = this.numLives;
     }
 
-    public void randomMole() {
+    void randomMole() {
         Random random = new Random();
         int num = random.nextInt(moleList.size());
         Mole mole = moleList.get(num);

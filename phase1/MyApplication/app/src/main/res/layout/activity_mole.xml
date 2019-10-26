@@ -12,7 +12,6 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="130dp"
         android:layout_height="60dp"
-        android:layout_marginTop="60dp"
         android:layout_marginBottom="271dp"
         android:onClick="next"
         android:text="Next"
@@ -20,22 +19,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button" />
+        app:layout_constraintTop_toBottomOf="@+id/Button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button6"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginEnd="140dp"
+        android:text="Difficulties"
+        app:layout_constraintBottom_toTopOf="@+id/Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Button"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="130dp"
         android:layout_height="60dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
         android:onClick="play"
         android:text="Play"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

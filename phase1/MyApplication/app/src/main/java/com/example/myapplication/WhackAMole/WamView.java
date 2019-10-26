@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
@@ -65,20 +66,20 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     protected void initializeGame() {
 
         background = BitmapFactory.decodeResource(res, R.drawable.game_background);
-        background = SizeAndCoordinate.resizeBitmap(background, screenWidth, screenHeight);
+        background = Bitmap.createScaledBitmap(background, screenWidth, screenHeight, true);
 
         holePic = BitmapFactory.decodeResource(res, R.drawable.hole);
-        holePic = SizeAndCoordinate.resizeBitmap(holePic, 300, 300);
+        holePic = Bitmap.createScaledBitmap(holePic, 300, 300, true);
 
         molePic = BitmapFactory.decodeResource(res, R.drawable.lindsey_mole);
-        molePic = (SizeAndCoordinate.resizeBitmap(molePic, 250, 250));
+        molePic = Bitmap.createScaledBitmap(molePic, 250, 250, true);
 
         lifePic = BitmapFactory.decodeResource(res, R.drawable.life);
-        lifePic = SizeAndCoordinate.resizeBitmap(lifePic, 150, 150);
+        lifePic = Bitmap.createScaledBitmap(lifePic, 150, 150, true);
 
 
         scoreBoard = BitmapFactory.decodeResource(res, R.drawable.text_bg_bmp);
-        scoreBoard = SizeAndCoordinate.resizeBitmap(scoreBoard, 850, 550);
+        scoreBoard = Bitmap.createScaledBitmap(scoreBoard, 850, 550, true);
 
         Rect mole_rect = new Rect(0, screenHeight * 2 / 7, screenWidth, screenHeight * 5 / 6);
 
@@ -103,6 +104,9 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
                 switch (gameStatus) {
                     case "inGame":
                         canvas.drawBitmap(background, 0, 0, paint);
+                        paint.setTextSize(WamView.screenHeight / 24);
+                        paint.setColor(Color.WHITE);
+                        canvas.drawText("Score:" + this.wamCollection.score, WamView.screenWidth * 2 / 3, WamView.screenHeight / 18, paint);
                         wamCollection.draw(canvas, paint);
                         break;
                     case "end":
@@ -161,7 +165,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         y = (int) event.getY();
         for (Mole mole : wc.moleList) {
             Rect rect = mole.getTouchRect();
-            if (SizeAndCoordinate.contains(rect, x, y) && mole.getState() != Mole.Movement.HIT) {
+            if(rect.contains(x, y) && mole.getState() != Mole.Movement.HIT) {
                 mole.setState(Mole.Movement.HIT);
                 this.wamCollection.score += 1;
             }

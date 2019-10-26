@@ -1,14 +1,8 @@
 package com.example.myapplication.WhackAMole;
 
-
-import android.content.Intent;
-
-import static androidx.core.content.ContextCompat.createDeviceProtectedStorageContext;
-import static androidx.core.content.ContextCompat.startActivity;
-
 public class MoleThread extends Thread {
 
-    public boolean keepRunning = true;
+    boolean keepRunning = true;
     private WamView wamView;
     private WamCollection wamCollection;
     private int duration = 2400;
@@ -30,10 +24,10 @@ public class MoleThread extends Thread {
                 start_time = System.currentTimeMillis();
                 wamCollection.randomMole();
                 if (wamCollection.score >= 10) {
-                    duration = 600;
+                    setDuration(600);
                     Mole.speed = WamView.screenHeight / 200;
                 } else if (wamCollection.score >= 5) {
-                    duration = 1500;
+                    setDuration(1500);
                     Mole.speed = WamView.screenHeight / 240;
                 }
                 end_time = System.currentTimeMillis();

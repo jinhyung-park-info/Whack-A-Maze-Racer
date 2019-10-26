@@ -23,19 +23,19 @@ class Hole {
         canvas.drawBitmap(hole_bmp, x, y, paint);
     }
 
-    public float getX() {
+    float getX() {
         return x;
     }
 
-    public float getY() {
+    float getY() {
         return y;
     }
 
-    public float getHoleWidth() {
+    float getHoleWidth() {
         return holeWidth;
     }
 
-    public float getHoleHeight() {
+    float getHoleHeight() {
         return holeHeight;
     }
 

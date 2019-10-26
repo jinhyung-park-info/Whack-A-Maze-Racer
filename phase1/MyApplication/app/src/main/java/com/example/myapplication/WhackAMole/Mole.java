@@ -12,7 +12,7 @@ public class Mole {
         UP, DOWN, STILL, HIT
     }
 
-    public static float speed = WamView.screenHeight / 300;
+    static float speed = WamView.screenHeight / 300;
     private Bitmap molePic;
 
     private float y, x, molePicWidth, molePicHeight;
@@ -20,11 +20,11 @@ public class Mole {
     private Movement state;
     private int standByDuration;
 
-    private float picLeft, picRight, picTop, picBottom;
+    private float picLeft, width, picTop, height;
 
     private WamCollection wamCollection;
 
-    public Mole(Hole hole, Bitmap molePic, WamCollection wamCollection) {
+    Mole(Hole hole, Bitmap molePic, WamCollection wamCollection) {
 
         this.molePic = molePic;
         this.hole = hole;
@@ -38,21 +38,21 @@ public class Mole {
 
         picLeft = x;
         picTop = hole.getY() + hole.getHoleHeight() / 2 - (molePicHeight / 2);
-        picRight = x + molePicWidth;
-        picBottom = hole.getY() + hole.getHoleHeight() / 2;
+        width = x + molePicWidth;
+        height = hole.getY() + hole.getHoleHeight() / 2;
 
         state = Movement.STILL;
         standByDuration = 0;
     }
 
-    public void draw(Canvas canvas, Paint paint) {
+    void draw(Canvas canvas, Paint paint) {
         canvas.save();
-        canvas.clipRect(picLeft, picTop, picRight, picBottom);
+        canvas.clipRect(picLeft, picTop, width, height);
         canvas.drawBitmap(this.molePic, x, y, paint);
         canvas.restore();
     }
 
-    public void setMovement() {
+    void setMovement() {
         if (state == Movement.UP) {
             if (y - speed >= picTop) {
                 y -= speed;
@@ -61,10 +61,10 @@ public class Mole {
                 state = Movement.DOWN;
             }
         } else if (state == Movement.DOWN) {
-            if (y + speed <= picBottom) {
+            if (y + speed <= height) {
                 y += speed;
             } else {
-                y = picBottom;
+                y = height;
                 state = Movement.STILL;
                 loseLife();
             }
@@ -73,37 +73,36 @@ public class Mole {
                 standByDuration++;
             } else {
                 standByDuration = 0;
-                y = picBottom;
+                y = height;
                 state = Movement.STILL;
             }
         }
         picLeft = x;
         picTop = hole.getY() + hole.getHoleHeight() / 2 - (molePicHeight * 2 / 3);
-        picRight = x + molePicWidth;
-        picBottom = hole.getY() + hole.getHoleHeight() / 2;
+        width = x + molePicWidth;
+        height = hole.getY() + hole.getHoleHeight() / 2;
     }
 
-    public void setState(Movement state) {
+    void setState(Movement state) {
         this.state = state;
     }
 
-    public Movement getState() {
+    Movement getState() {
         return state;
     }
 
-    public void reset() {
-        y = picBottom;
+    void reset() {
+        y = height;
         state = Movement.STILL;
         speed = WamView.screenHeight / 300;
         this.wamCollection.moleThread.setDuration(2400);
     }
 
-    public Rect getTouchRect() {
-        Rect rect = new Rect((int) x, (int) y, (int) picRight, (int) picBottom);
-        return rect;
+    Rect getTouchRect() {
+        return new Rect((int) x, (int) y, (int) width, (int) height);
     }
 
-    public void loseLife() {
+    private void loseLife() {
         this.wamCollection.currentLives -= 1;
     }
 }
