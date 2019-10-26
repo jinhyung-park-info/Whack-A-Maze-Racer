@@ -19,7 +19,7 @@ class WamCollection {
     private Bitmap lifePic;
     private int numLives;
     int currentLives;
-    private int lifePicWidth;
+    private int lifePicWidth, lifePicHeight;
     private int numHoles;
     private int holesX, holesY;
 
@@ -29,6 +29,7 @@ class WamCollection {
     private Rect holeRect;
 
     int score;
+
 
 
     WamCollection(Bitmap holePic, Rect hole_r, Bitmap molePic, Bitmap lifePic, int numLives, int numHolesX, int numHolesY, WamView wamView) {
@@ -42,6 +43,7 @@ class WamCollection {
 
         this.lifePic = lifePic;
         this.lifePicWidth = this.lifePic.getWidth();
+        this.lifePicHeight = this.lifePic.getHeight();
         this.numLives = numLives;
         this.currentLives = this.numLives;
 
@@ -67,7 +69,12 @@ class WamCollection {
         int y = 0;
         for (int i = 0; i < this.currentLives; i++) {
             canvas.drawBitmap(lifePic, x, y, paint);
-            x += lifePicWidth;
+            if (x + lifePicWidth >= WamView.screenWidth * 5/8) {
+                y += lifePicHeight;
+                x = 0;
+            } else {
+                x += lifePicWidth;
+            }
         }
     }
 

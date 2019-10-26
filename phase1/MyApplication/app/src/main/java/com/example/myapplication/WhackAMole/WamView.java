@@ -18,12 +18,14 @@ import com.example.myapplication.R;
 
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
+    private Resources res = this.getResources();
 
     public String gameStatus = "inGame";
     public static int screenWidth, screenHeight;
-    public Bitmap molePic, holePic, background, lifePic, scoreBoard;
+    public Bitmap molePic, holePic, lifePic, scoreBoard;
 
-    private Resources res = this.getResources();
+    private Bitmap background;
+
     private Canvas canvas;
     private Paint paint;
     private SurfaceHolder holder;
@@ -44,8 +46,8 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
     public void surfaceCreated(SurfaceHolder holder) {
 
-        screenWidth = this.getWidth();
-        screenHeight = this.getHeight();
+        screenWidth = getWidth();
+        screenHeight = getHeight();
         initializeGame();
 
         Thread thread = new Thread(this);
@@ -65,7 +67,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
     protected void initializeGame() {
 
-        background = BitmapFactory.decodeResource(res, R.drawable.game_background);
+        background = BitmapFactory.decodeResource(res, MoleActivity.backgroundID);
         background = Bitmap.createScaledBitmap(background, screenWidth, screenHeight, true);
 
         holePic = BitmapFactory.decodeResource(res, R.drawable.hole);
@@ -83,7 +85,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
         Rect mole_rect = new Rect(0, screenHeight * 2 / 7, screenWidth, screenHeight * 5 / 6);
 
-        wamCollection = new WamCollection(holePic, mole_rect, molePic, lifePic, 3, 2, 2, this);
+        wamCollection = new WamCollection(holePic, mole_rect, molePic, lifePic, MoleActivity.numLives, MoleActivity.numColumns, MoleActivity.numRows, this);
         wamCollection.initialize();
 
         endScore = "Score:" + this.wamCollection.score;
