@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoginButton(View view){
-        Intent intent = new Intent(this, MoleActivity.class);
+        Intent intent = new Intent(this, GameActivity.class);
         EditText editText_user = (EditText) findViewById(R.id.editText1);
         EditText editText_pass = (EditText) findViewById(R.id.editText);
         String username = editText_user.getText().toString();

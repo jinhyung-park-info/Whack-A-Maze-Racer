@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.TypeRacer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.Maze.MazeGame;
+import com.example.myapplication.R;
 
 public class TypeRacerEnd extends AppCompatActivity {
 

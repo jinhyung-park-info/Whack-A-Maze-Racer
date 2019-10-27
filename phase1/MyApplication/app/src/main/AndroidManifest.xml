@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TypeRacerSecondQ"></activity>
-        <activity android:name=".TypeRacerEnd" />
+        <activity android:name=".TypeRacer.TypeRacerSecondQ"></activity>
+        <activity android:name=".TypeRacer.TypeRacerEnd" />
         <activity android:name=".Maze.MazeGame" />
         <activity android:name=".Maze.MazeCustomizationActivity" />
-        <activity android:name=".TypeRacer" />
+        <activity android:name=".TypeRacer.TypeRacer" />
         <activity
             android:name=".GameActivity"
             android:parentActivityName=".MainActivity">

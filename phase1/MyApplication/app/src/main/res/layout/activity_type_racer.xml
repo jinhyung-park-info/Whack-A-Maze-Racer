@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TypeRacer">
+    tools:context=".TypeRacer.TypeRacer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,6 +30,7 @@
             android:layout_height="42dp"
             android:hint="Type your answer here"
             android:text=""
+            android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/messageTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.488"

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
-import com.example.myapplication.Maze.MazeGame;
+import com.example.myapplication.TypeRacer.TypeRacer;
 import com.example.myapplication.WhackAMole.MoleActivity;
 
 public class GameActivity extends AppCompatActivity {
@@ -21,8 +21,8 @@ public class GameActivity extends AppCompatActivity {
         String password = intent.getStringExtra(MainActivity.Password);
     }
 
-    public void playGame(View v){
-        Intent intent = new Intent(this, TypeRacer.class);
+    public void play_Mole(View v){
+        Intent intent = new Intent(this, MoleActivity.class);
         startActivity(intent);
     }
 

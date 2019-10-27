@@ -1,4 +1,5 @@
-package com.example.myapplication;
+package com.example.myapplication.TypeRacer;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,9 +12,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
+import com.example.myapplication.R;
+
 import java.util.Locale;
 
-public class TypeRacerSecondQ extends AppCompatActivity {
+
+public class TypeRacer extends AppCompatActivity {
 
     TextView question, message;
     private TextView countDown;
@@ -27,13 +32,12 @@ public class TypeRacerSecondQ extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_type_racer_second_q);
+        setContentView(R.layout.activity_type_racer);
         question = (TextView) findViewById(R.id.questionTextView);
         answer = findViewById(R.id.answerEditText);
         questionInString = question.getText().toString();
         message = findViewById(R.id.messageTextView);
         countDown = findViewById(R.id.countDownTextView);
-        //System.out.println("here");
 
         answer.addTextChangedListener( new TextWatcher() {
             @Override
@@ -59,16 +63,16 @@ public class TypeRacerSecondQ extends AppCompatActivity {
                     answer.setEnabled(false);
                     answer.clearFocus();
 
-                    Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
-                    startActivity(goToEndGame);
+                    Intent goToNextQuestion = new Intent(getApplicationContext(), TypeRacerSecondQ.class);
+                    startActivity(goToNextQuestion);
 
                 }
+
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
 
             }
         });
@@ -98,6 +102,10 @@ public class TypeRacerSecondQ extends AppCompatActivity {
     }
 
 
+
+
+
+
     public <T extends View> T findViewById(int id) {
         return super.findViewById(id);
     }
@@ -108,6 +116,4 @@ public class TypeRacerSecondQ extends AppCompatActivity {
             countDownTimer.cancel();
         }
     }
-
-
 }
