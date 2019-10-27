@@ -97,7 +97,7 @@ class WamCollection {
             moleList.add(new Mole(hole, molePic, this));
         }
 
-        //Start Thread.
+        //Start Thread controlling mole's activities.
         this.moleThread = new MoleThread(this.wamView, this);
         moleThread.start();
     }

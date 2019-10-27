@@ -1,5 +1,9 @@
 package com.example.myapplication.WhackAMole;
 
+/**
+ * This Thread controls speed and the time interval between moles.
+ */
+
 public class MoleThread extends Thread {
 
     boolean keepRunning = true;
@@ -8,8 +12,8 @@ public class MoleThread extends Thread {
     private int duration = 2400;
 
 
-    MoleThread(WamView main_view, WamCollection wamCollection) {
-        this.wamView = main_view;
+    MoleThread(WamView wamView, WamCollection wamCollection) {
+        this.wamView = wamView;
         this.wamCollection = wamCollection;
     }
 

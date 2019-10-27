@@ -50,7 +50,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
         screenWidth = getWidth();
         screenHeight = getHeight();
-        initializeGame();
+        initialize();
 
         Thread thread = new Thread(this);
         thread.start();
@@ -67,7 +67,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
     }
 
-    protected void initializeGame() {
+    protected void initialize() {
 
         background = BitmapFactory.decodeResource(res, MoleActivity.backgroundID);
         background = Bitmap.createScaledBitmap(background, screenWidth, screenHeight, true);
