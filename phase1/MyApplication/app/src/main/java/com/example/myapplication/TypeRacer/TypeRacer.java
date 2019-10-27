@@ -4,6 +4,7 @@ package com.example.myapplication.TypeRacer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -35,9 +36,21 @@ public class TypeRacer extends AppCompatActivity {
         setContentView(R.layout.activity_type_racer);
         question = (TextView) findViewById(R.id.questionTextView);
         answer = findViewById(R.id.answerEditText);
-        questionInString = question.getText().toString();
         message = findViewById(R.id.messageTextView);
         countDown = findViewById(R.id.countDownTextView);
+        questionInString = question.getText().toString();
+
+        //set up the color
+        Intent intent = getIntent();
+        int trBC = intent.getIntExtra("trBC", Color.BLUE);
+        String difficulty = intent.getStringExtra("difficulty");
+        int textColor = intent.getIntExtra("textColor", Color.BLACK);
+
+        question.setTextColor(textColor);
+        answer.setTextColor(textColor);
+        message.setTextColor(textColor);
+        countDown.setTextColor(textColor);
+
 
         answer.addTextChangedListener( new TextWatcher() {
             @Override

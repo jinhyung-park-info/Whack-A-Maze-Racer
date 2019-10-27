@@ -13,6 +13,7 @@ import com.example.myapplication.GameActivity;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.TypeRacer.TypeRacer;
+import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 
 public class MoleActivity extends AppCompatActivity {
     static boolean passed;
@@ -90,7 +91,7 @@ public class MoleActivity extends AppCompatActivity {
         Button nextButton = findViewById(R.id.button);
         if (passed) {
             passed = false;
-            Intent intent = new Intent(this, TypeRacer.class);
+            Intent intent = new Intent(this, TypeRacerCustomizationActivity.class);
             startActivity(intent);
         } else {
             nextButton.setError("Please Pass This Level First");

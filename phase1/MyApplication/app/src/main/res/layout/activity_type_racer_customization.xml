@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8BC34A"
+    tools:context=".TypeRacer.TypeRacerCustomizationActivity">
+
+    <Button
+        android:id="@+id/tr_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="86dp"
+        android:onClick="goToL3"
+        android:text=" Go to Level 3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tr_Button" />
+
+    <Button
+        android:id="@+id/tr_Button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="86dp"
+        android:onClick="playL2"
+        android:text="Play Level 2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tr_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_tr2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Background"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toStartOf="@+id/textView_tr7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tr13" />
+
+    <TextView
+        android:id="@+id/textView_tr7"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Difficulty"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView_tr2"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tr13" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup_tr4"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup_tr3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tr2">
+
+        <RadioButton
+            android:id="@+id/tr_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:onClick="onRadioButtonClicked"
+            android:text="Green" />
+
+        <RadioButton
+            android:id="@+id/tr_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="White" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView_tr8"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="48dp"
+        android:text="Text Color"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup_tr4" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup_tr"
+        android:layout_width="150dp"
+        android:layout_height="187dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tr8">
+
+        <RadioButton
+            android:id="@+id/textColorBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Black" />
+
+        <RadioButton
+            android:id="@+id/TextColorBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="Blue" />
+
+        <RadioButton
+            android:id="@+id/textColorMagenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Magenta" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup_tr3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup_tr4"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tr7">
+
+        <RadioButton
+            android:id="@+id/hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:onClick="onRadioButtonClicked"
+            android:text="Hot" />
+
+        <RadioButton
+            android:id="@+id/spicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Spicy" />
+
+        <RadioButton
+            android:id="@+id/mild"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="onRadioButtonClicked"
+            android:text="Mild" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView_tr13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Type Racer"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
