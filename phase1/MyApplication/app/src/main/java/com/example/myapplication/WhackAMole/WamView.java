@@ -36,6 +36,8 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     private String endScore;
     private String end_message1;
     private String end_message2;
+    private String end_message3;
+    private String end_message4;
 
     public WamView(Context context) {
         super(context);
@@ -81,7 +83,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
 
         scoreBoard = BitmapFactory.decodeResource(res, R.drawable.text_bg_bmp);
-        scoreBoard = Bitmap.createScaledBitmap(scoreBoard, 850, 550, true);
+        scoreBoard = Bitmap.createScaledBitmap(scoreBoard, screenWidth * 4/5, screenHeight *3/10, true);
 
         Rect mole_rect = new Rect(0, screenHeight * 2 / 7, screenWidth, screenHeight * 5 / 6);
 
@@ -91,12 +93,9 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         endScore = "Score:" + this.wamCollection.score;
         end_message1 = "Press Any Where";
         end_message2 = "to Play Again";
+        end_message3 = "You have passed!";
+        end_message4 = "Next level unlocked!";
     }
-
-    public void reinitializeGame() {
-        wamCollection.reinitialize();
-    }
-
 
     public void draw() {
 
@@ -114,8 +113,13 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
                     case "end":
                         canvas.drawBitmap(scoreBoard, screenWidth / 7, screenHeight * 4 / 7, paint);
                         canvas.drawText(endScore, screenWidth / 4, screenHeight * 2 / 3, paint);
-                        canvas.drawText(end_message1, screenWidth / 4, screenHeight * 11 / 15, paint);
-                        canvas.drawText(end_message2, screenWidth / 4, screenHeight * 12 / 15, paint);
+                        if(wamCollection.moleThread.keepRunning) {
+                            canvas.drawText(end_message1, screenWidth / 4, screenHeight * 11 / 15, paint);
+                            canvas.drawText(end_message2, screenWidth / 4, screenHeight * 12 / 15, paint);
+                        }else{
+                            canvas.drawText(end_message3, screenWidth / 4, screenHeight * 11 / 15, paint);
+                            canvas.drawText(end_message4, screenWidth / 4, screenHeight * 12 / 15, paint);
+                        }
                         break;
                 }
             }
@@ -136,7 +140,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
                 return false;
             case "end":
                 if(wamCollection.moleThread.keepRunning){
-                    reinitializeGame();
+                    wamCollection.reinitialize();
                     gameStatus = "inGame";
                 }else{
                     Activity activity = (Activity)getContext();
