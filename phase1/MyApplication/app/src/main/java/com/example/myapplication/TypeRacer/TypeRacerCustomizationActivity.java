@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 
+import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.Maze.MazeGame;
 import com.example.myapplication.R;
 
@@ -70,14 +71,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
     }
 
     public void goToL3(View view) {
-        Button nextButton = findViewById(R.id.tr_button);
-//        if (passed) {
-//            passed = false;
-//            Intent intent = new Intent(this, MazeGame.class);
-//            startActivity(intent);
-//        } else {
-//            nextButton.setError("Please Pass This Level First");
-//    }
-        startActivity(new Intent(this, MazeGame.class));
+        Intent intent = new Intent(this, MazeCustomizationActivity.class);
+        startActivity(intent);
     }
 }

@@ -40,7 +40,7 @@ public class TypeRacer extends AppCompatActivity {
         countDown = findViewById(R.id.countDownTextView);
         questionInString = question.getText().toString();
 
-        //set up the color
+        //set up the color of the words.
         Intent intent = getIntent();
         int trBC = intent.getIntExtra("trBC", Color.BLUE);
         String difficulty = intent.getStringExtra("difficulty");
@@ -50,6 +50,10 @@ public class TypeRacer extends AppCompatActivity {
         answer.setTextColor(textColor);
         message.setTextColor(textColor);
         countDown.setTextColor(textColor);
+
+        //set up the background color.
+        View view = this.getWindow().getDecorView();
+        view.setBackgroundColor(trBC);
 
 
         answer.addTextChangedListener( new TextWatcher() {
