@@ -148,8 +148,7 @@ public class TypeRacer extends AppCompatActivity {
 
     private void setUser(User new_user) {
         user = new_user;
-        {
-        }
+
     }
 
 }
