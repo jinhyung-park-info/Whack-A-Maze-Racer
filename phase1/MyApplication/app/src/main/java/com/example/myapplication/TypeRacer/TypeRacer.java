@@ -73,10 +73,11 @@ public class TypeRacer extends AppCompatActivity {
         int difficulty = intent.getIntExtra("difficulty", 5);
         //createQuestion(difficulty);
 
-
         showNextQuestion();
 
     }
+
+    //show next question, ends if all questions completed
 
     private void showNextQuestion() {
         if (questionCount < questions.length) {
@@ -95,18 +96,18 @@ public class TypeRacer extends AppCompatActivity {
 
 
     private void checkAnswer() {
-
         answer.addTextChangedListener(
                 new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                        //lifeView.setText(life);
+
                     }
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                         String response = answer.getText().toString();
+                        //start counting
                         if (response.length() == 1) {
                             startTime = System.currentTimeMillis();
                             message.setText("Started");
@@ -127,6 +128,8 @@ public class TypeRacer extends AppCompatActivity {
                                         }
                                     }.start();
                         }
+
+                        //goes to next question if response is correct
 
                         if (response.equals(question.getText().toString())) {
                             endTime = System.currentTimeMillis();
