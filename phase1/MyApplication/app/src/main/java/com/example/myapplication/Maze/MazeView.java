@@ -19,10 +19,6 @@ import java.util.Stack;
 
 import static com.example.myapplication.MainActivity.USER;
 
-/**
- * followed tutorial videos from this playlist
- * https://www.youtube.com/watch?v=I9lTBTAk5MU&list=PLXWbB6KyFkAltCk7FalDz83Pl0-Xh9rPd
- */
 public class MazeView extends View {
 
     private static final String TAG = "MazeView";

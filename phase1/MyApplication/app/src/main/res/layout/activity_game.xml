@@ -11,7 +11,7 @@
         android:layout_width="279dp"
         android:layout_height="78dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="16dp"
         android:onClick="play_Mole"
         android:text="@string/start_game"
@@ -25,11 +25,21 @@
         android:layout_width="279dp"
         android:layout_height="78dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="364dp"
+        android:layout_marginTop="284dp"
         android:layout_marginEnd="16dp"
         android:text="@string/Load_Game"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="279dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="416dp"
+        android:onClick="view_stats"
+        android:text="@string/stats"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

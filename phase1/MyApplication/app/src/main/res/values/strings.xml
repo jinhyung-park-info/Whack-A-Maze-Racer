@@ -9,7 +9,6 @@
     <string name="Done">Done</string>
     <string name="start_game">Start Game</string>
     <string name="Load_Game">Load Game</string>
-    <string name="Statistics">View statistics</string>
     <string name="Customization">Customizations</string>
     <string name="Color">Color</string>
     <string name="Dark">Dark</string>
@@ -30,4 +29,6 @@
     <string name="magenta">Magenta</string>
     <string name="cyan">Cyan</string>
     <string name="bg_colour">Background Colour</string>
+    <string name="stats">View statistics</string>
+    <string name="Exit">Exit application</string>
 </resources>
