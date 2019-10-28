@@ -25,7 +25,7 @@
             app:layout_constraintVertical_bias="0.076" />
 
         <EditText
-            android:id="@+id/answerEditText"
+            android:id="@+id/editText2"
             android:layout_width="333dp"
             android:layout_height="42dp"
             android:hint="Type your answer here"
