@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
+import static com.example.myapplication.MainActivity.USER;
+
 /**
  * followed tutorial videos from this playlist
  * https://www.youtube.com/watch?v=I9lTBTAk5MU&list=PLXWbB6KyFkAltCk7FalDz83Pl0-Xh9rPd
@@ -313,6 +315,7 @@ public class MazeView extends View {
                 this.user_in_maze.setStreaks(games_played);
                 UserManager.update_statistics(contexts, user_in_maze, user_in_maze.getScore(), user_in_maze.getStreaks(), user_in_maze.getWhatever());
                 Intent intent = new Intent(contexts, GameActivity.class);
+                intent.putExtra(USER, user_in_maze);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 contexts.startActivity(intent);
             }
