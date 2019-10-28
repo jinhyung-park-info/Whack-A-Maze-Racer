@@ -34,6 +34,7 @@ public class TypeRacer extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private User user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class TypeRacer extends AppCompatActivity {
             setUser(user_1);
         }
         int trBC = intent.getIntExtra("trBC", Color.BLUE);
-        String difficulty = intent.getStringExtra("difficulty");
+
         int textColor = intent.getIntExtra("textColor", Color.BLACK);
 
         question.setTextColor(textColor);
@@ -62,6 +63,10 @@ public class TypeRacer extends AppCompatActivity {
         //set up the background color.
         View view = this.getWindow().getDecorView();
         view.setBackgroundColor(trBC);
+
+        //set up the difficulty.
+        int difficulty = intent.getIntExtra("difficulty", 5);
+        createQuestion(difficulty);
 
 
         answer.addTextChangedListener( new TextWatcher() {
@@ -102,6 +107,13 @@ public class TypeRacer extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void createQuestion(int d){
+
+        String q =  QuestionCreator.createQ(d);
+        question.setText(q);
+
     }
 
     private void setUser(User new_user){

@@ -22,7 +22,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
     static int numLives = 5;
     static int streak = 0;
     static int trBC = Color.BLUE;
-    static String d = "Mild";
+    static int d = 5;
     static int tC = Color.BLACK;
     private User user;
 
@@ -47,12 +47,15 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         if (((RadioButton) view).isChecked()) {
             switch (view.getId()) {
                 case R.id.hot:
+                    d = 30;
                     numLives = 1;
                     break;
                 case R.id.spicy:
+                    d = 15;
                     numLives = 3;
                     break;
                 case R.id.mild:
+                    d = 5;
                     numLives = 5;
                     break;
                 case R.id.textColorBlack:

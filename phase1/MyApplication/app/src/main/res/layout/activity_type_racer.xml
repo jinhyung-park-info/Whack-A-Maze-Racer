@@ -15,7 +15,7 @@
             android:layout_width="352dp"
             android:layout_height="wrap_content"
             android:background="#00DB0C0C"
-            android:text="This is question 1"
+
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
