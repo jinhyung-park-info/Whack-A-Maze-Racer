@@ -7,7 +7,7 @@
     tools:context=".CreateAccountActivity">
 
     <EditText
-        android:id="@+id/answerEditText"
+        android:id="@+id/editText2"
         android:layout_width="347dp"
         android:layout_height="52dp"
         android:layout_marginStart="16dp"

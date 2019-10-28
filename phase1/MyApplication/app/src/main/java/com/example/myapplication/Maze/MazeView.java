@@ -1,12 +1,17 @@
 package com.example.myapplication.Maze;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.myapplication.GameActivity;
+import com.example.myapplication.User;
+import com.example.myapplication.UserManager;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -102,13 +107,20 @@ public class MazeView extends View {
      */
     private Random rand;
 
+    private User user_in_maze;
+    static final int num_games = 2;
+    private int games_played = 0;
+    private Context contexts;
+
     public MazeView(Context context, int bgColour, String difficulty,
-                    int playerColour) {
+                    int playerColour, User user_1) {
         super(context);
+        contexts = context;
 
         setDifficulty(difficulty);
         this.bgColour = bgColour;
         this.playerColour = playerColour;
+        this.user_in_maze = user_1;
 
         setupPaintObjects();
 
@@ -145,7 +157,7 @@ public class MazeView extends View {
 
         //setup exitPaint
         exitPaint = new Paint();
-        exitPaint.setColor(Color.BLUE);
+        exitPaint.setColor(Color.BLACK);
     }
 
     /**
@@ -294,8 +306,16 @@ public class MazeView extends View {
     }
 
     private void checkExit() {
-        if (player == exit) {
+        if (player == exit && games_played < num_games) {
+            games_played += 1;
             createMaze();
+            if (games_played == num_games) {
+                this.user_in_maze.setStreaks(games_played);
+                UserManager.update_statistics(contexts, user_in_maze, user_in_maze.getScore(), user_in_maze.getStreaks(), user_in_maze.getWhatever());
+                Intent intent = new Intent(contexts, GameActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                contexts.startActivity(intent);
+            }
         }
     }
 

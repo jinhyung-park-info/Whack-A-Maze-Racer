@@ -10,24 +10,29 @@ import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.TypeRacer.TypeRacer;
 import com.example.myapplication.WhackAMole.MoleActivity;
 
+import static com.example.myapplication.MainActivity.USER;
+
 public class GameActivity extends AppCompatActivity {
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
-        String username = intent.getStringExtra(MainActivity.Username);
-        String password = intent.getStringExtra(MainActivity.Password);
+        User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null){
+            setUser(user_1);
+        }
+    }
+    private void setUser(User new_user){
+        user = new_user;
     }
 
     public void play_Mole(View v){
         Intent intent = new Intent(this, MoleActivity.class);
-        startActivity(intent);
-    }
-
-    public void play_Maze(View view) {
-        Intent intent = new Intent(this, MazeCustomizationActivity.class);
+        intent.putExtra(USER, user);
         startActivity(intent);
     }
 }

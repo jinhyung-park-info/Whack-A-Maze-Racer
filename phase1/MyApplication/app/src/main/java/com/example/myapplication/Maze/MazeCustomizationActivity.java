@@ -10,6 +10,9 @@ import android.widget.RadioButton;
 
 import com.example.myapplication.Maze.MazeGame;
 import com.example.myapplication.R;
+import com.example.myapplication.User;
+
+import static com.example.myapplication.MainActivity.USER;
 
 public class MazeCustomizationActivity extends AppCompatActivity {
 
@@ -28,10 +31,17 @@ public class MazeCustomizationActivity extends AppCompatActivity {
      */
     private int playerColour = Color.BLACK;
 
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maze_customization);
+        Intent intent = getIntent();
+        User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null){
+            setUser(user_1);
+        }
     }
 
     /**
@@ -93,11 +103,16 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     }
 
+    private void setUser(User new_user){
+        user = new_user;
+    }
+
     public void startMazeGame(View view) {
         Intent intent = new Intent(this, MazeGame.class);
         intent.putExtra("bgColour", bgColour);
         intent.putExtra("difficulty", difficulty);
         intent.putExtra("playerColour", playerColour);
+        intent.putExtra(USER, user);
         startActivity(intent);
     }
 

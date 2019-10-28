@@ -12,6 +12,9 @@ import android.widget.RadioButton;
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.Maze.MazeGame;
 import com.example.myapplication.R;
+import com.example.myapplication.User;
+
+import static com.example.myapplication.MainActivity.USER;
 
 public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
@@ -21,12 +24,22 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
     static int trBC = Color.BLUE;
     static String d = "Mild";
     static int tC = Color.BLACK;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer_customization);
         passed = false;
+        Intent intent = getIntent();
+        User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null){
+            setUser(user_1);
+        }
+    }
+
+    private void setUser(User new_user){
+        user = new_user;
     }
 
     public void onRadioButtonClicked(View view) {
@@ -67,6 +80,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         intent.putExtra("trBC", trBC);
         intent.putExtra("difficulty", d);
         intent.putExtra("textColor", tC);
+        intent.putExtra(USER, user);
         startActivity(intent);
     }
 

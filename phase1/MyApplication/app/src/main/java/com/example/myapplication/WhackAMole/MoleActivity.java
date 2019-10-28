@@ -14,21 +14,32 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.TypeRacer.TypeRacer;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
+import com.example.myapplication.User;
+
+import static com.example.myapplication.MainActivity.USER;
 
 public class MoleActivity extends AppCompatActivity {
     static boolean passed;
     static int numLives = 5;
     static int numColumns = 2;
     static int numRows = 2;
-    static int backgroundID = R.drawable.game_background;;
+    static int backgroundID = R.drawable.game_background;
+    private User user;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mole);
         Intent intent = getIntent();
-        String username = intent.getStringExtra(MainActivity.Username);
-        String password = intent.getStringExtra(MainActivity.Password);
+        User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null){
+            setUser(user_1);
+        }
+
         passed = false;
+    }
+
+    private void setUser(User new_user){
+        user = new_user;
     }
 
     public void onRadioButtonClicked(View view) {
@@ -92,6 +103,7 @@ public class MoleActivity extends AppCompatActivity {
         if (passed) {
             passed = false;
             Intent intent = new Intent(this, TypeRacerCustomizationActivity.class);
+            intent.putExtra(USER, user);
             startActivity(intent);
         } else {
             nextButton.setError("Please Pass This Level First");

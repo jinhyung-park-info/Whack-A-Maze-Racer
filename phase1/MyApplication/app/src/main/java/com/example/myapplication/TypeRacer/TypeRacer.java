@@ -15,8 +15,11 @@ import android.widget.TextView;
 
 
 import com.example.myapplication.R;
+import com.example.myapplication.User;
 
 import java.util.Locale;
+
+import static com.example.myapplication.MainActivity.USER;
 
 
 public class TypeRacer extends AppCompatActivity {
@@ -29,19 +32,24 @@ public class TypeRacer extends AppCompatActivity {
     private static final long COUNTDOWN_IN_MILLS = 30000;
     private long timeLeftInMillis;
     private CountDownTimer countDownTimer;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer);
         question = (TextView) findViewById(R.id.questionTextView);
-        answer = findViewById(R.id.answerEditText);
+        answer = findViewById(R.id.editText2);
         message = findViewById(R.id.messageTextView);
         countDown = findViewById(R.id.countDownTextView);
         questionInString = question.getText().toString();
 
         //set up the color of the words.
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
+        final User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null){
+            setUser(user_1);
+        }
         int trBC = intent.getIntExtra("trBC", Color.BLUE);
         String difficulty = intent.getStringExtra("difficulty");
         int textColor = intent.getIntExtra("textColor", Color.BLACK);
@@ -81,6 +89,7 @@ public class TypeRacer extends AppCompatActivity {
                     answer.clearFocus();
 
                     Intent goToNextQuestion = new Intent(getApplicationContext(), TypeRacerSecondQ.class);
+                    goToNextQuestion.putExtra(USER, user);
                     startActivity(goToNextQuestion);
 
                 }
@@ -93,6 +102,10 @@ public class TypeRacer extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setUser(User new_user){
+        user = new_user;
     }
 
     private void startCountDown(){

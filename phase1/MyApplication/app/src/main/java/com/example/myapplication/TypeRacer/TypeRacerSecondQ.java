@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.TypeRacer.TypeRacerEnd;
+import com.example.myapplication.User;
 
 import java.util.Locale;
+
+import static com.example.myapplication.MainActivity.USER;
 
 public class TypeRacerSecondQ extends AppCompatActivity {
 
@@ -26,17 +28,22 @@ public class TypeRacerSecondQ extends AppCompatActivity {
     private static final long COUNTDOWN_IN_MILLS = 30000;
     private long timeLeftInMillis;
     private CountDownTimer countDownTimer;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer_second_q);
         question = (TextView) findViewById(R.id.questionTextView);
-        answer = findViewById(R.id.answerEditText);
+        answer = findViewById(R.id.editText2);
         questionInString = question.getText().toString();
         message = findViewById(R.id.messageTextView);
         countDown = findViewById(R.id.countDownTextView);
-        //System.out.println("here");
+        final Intent intent = getIntent();
+        User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null){
+            setUser(user_1);
+        }
 
         answer.addTextChangedListener( new TextWatcher() {
             @Override
@@ -63,6 +70,7 @@ public class TypeRacerSecondQ extends AppCompatActivity {
                     answer.clearFocus();
 
                     Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
+                    goToEndGame.putExtra(USER, user);
                     startActivity(goToEndGame);
 
                 }
@@ -75,6 +83,10 @@ public class TypeRacerSecondQ extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setUser(User new_user){
+        user = new_user;
     }
 
     private void startCountDown(){
