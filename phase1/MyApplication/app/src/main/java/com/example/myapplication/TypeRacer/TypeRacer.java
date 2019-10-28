@@ -33,6 +33,10 @@ public class TypeRacer extends AppCompatActivity {
     private long timeLeftInMillis;
     private CountDownTimer countDownTimer;
     private User user;
+    private int questionCount =0;
+    Boolean timerRunning = false;
+    String questions[] = {"This is question1", "This is question2", "This is question3"};
+
 
 
     @Override
@@ -45,10 +49,11 @@ public class TypeRacer extends AppCompatActivity {
         countDown = findViewById(R.id.countDownTextView);
         questionInString = question.getText().toString();
 
+
         //set up the color of the words.
         final Intent intent = getIntent();
         final User user_1 = (User) intent.getSerializableExtra(USER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUser(user_1);
         }
         int trBC = intent.getIntExtra("trBC", Color.BLUE);
@@ -66,96 +71,86 @@ public class TypeRacer extends AppCompatActivity {
 
         //set up the difficulty.
         int difficulty = intent.getIntExtra("difficulty", 5);
-        createQuestion(difficulty);
+        //createQuestion(difficulty);
 
 
-        answer.addTextChangedListener( new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                String current = answer.getText().toString();
-                if (current.length() == 1){
-                    startTime = System.currentTimeMillis();
-                    message.setText("Started");
-                    timeLeftInMillis = COUNTDOWN_IN_MILLS;
-                    startCountDown();
-                }
-                if(current.equals(questionInString)){
-                    countDownTimer.cancel();
-                    endTime = System.currentTimeMillis();
-                    long currentTime = (endTime-startTime)/1000;
-                    message.setText("Completed in" + " "+ currentTime + " " + "seconds");
-                    answer.setEnabled(false);
-                    answer.clearFocus();
-
-                    Intent goToNextQuestion = new Intent(getApplicationContext(), TypeRacerSecondQ.class);
-                    goToNextQuestion.putExtra(USER, user);
-                    startActivity(goToNextQuestion);
-
-                }
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-
-    public void createQuestion(int d){
-
-        String q =  QuestionCreator.createQ(d);
-        question.setText(q);
+        showNextQuestion();
 
     }
 
-    private void setUser(User new_user){
-        user = new_user;
-    }
-
-    private void startCountDown(){
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000){
-            public void onTick(long millisUntilFinished){
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-            }
-            public void onFinish(){
-                timeLeftInMillis = 0;
-                updateCountDownText();
-            }
-
-        }.start();
-    }
-
-    private void updateCountDownText(){
-        int minutes = (int)(timeLeftInMillis/1000)/60;
-        int seconds = (int)(timeLeftInMillis/1000) % 60;
-
-        String timeFormated = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
-
-        countDown.setText(timeFormated);
-    }
-
-
-
-
-
-
-    public <T extends View> T findViewById(int id) {
-        return super.findViewById(id);
-    }
-
-    protected void onDestroy(){
-        super.onDestroy();
-        if(countDownTimer != null){
-            countDownTimer.cancel();
+    private void showNextQuestion() {
+        if (questionCount < questions.length) {
+            countDown.setText("Countdown starts when you first type in");
+            question.setText(questions[questionCount]);
+            answer.setText("");
+            answer.setEnabled(true);
+            message.setText("");
+            checkAnswer();
+            questionCount = questionCount + 1;
+        } else {
+            Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
+            startActivity(goToEndGame);
         }
     }
+
+
+    private void checkAnswer() {
+
+        answer.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        //lifeView.setText(life);
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        String response = answer.getText().toString();
+                        if (response.length() == 1) {
+                            startTime = System.currentTimeMillis();
+                            message.setText("Started");
+                            if (timerRunning) return;
+                            timerRunning = true;
+                            countDownTimer =
+                                    new CountDownTimer(COUNTDOWN_IN_MILLS, 1000) {
+                                        @Override
+                                        public void onTick(long millisUntilFinished) {
+                                            countDown.setText(Long.toString(millisUntilFinished / 1000));
+                                        }
+
+                                        @Override
+                                        public void onFinish() {
+                                            countDown.setText("0");
+                                            showNextQuestion();
+                                            timerRunning = false;
+                                        }
+                                    }.start();
+                        }
+
+                        if (response.equals(question.getText().toString())) {
+                            endTime = System.currentTimeMillis();
+                            if (countDownTimer != null) countDownTimer.cancel();
+                            timerRunning = false;
+                            answer.setEnabled(false);
+                            answer.clearFocus();
+                            showNextQuestion();
+                        }
+                    }
+
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+                });
+    }
+
+
+    private void setUser(User new_user) {
+        user = new_user;
+        {
+        }
+    }
+
 }
+
