@@ -35,4 +35,10 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra(USER, user);
         startActivity(intent);
     }
+
+    public void view_stats(View view){
+        Intent intent = new Intent(this, PopUp.class);
+        intent.putExtra(USER, user);
+        startActivity(intent);
+    }
 }
