@@ -202,9 +202,13 @@ public class UserManager {
                     int score = Integer.parseInt(text.substring(index_of_first_comma + 2, index_of_second_comma));
                     int streaks = Integer.parseInt(text.substring(index_of_second_comma + 2, index_of_third_comma));
                     int third_variable = Integer.parseInt(text.substring(index_of_third_comma + 2));
+                    /*System.out.println(score);
+                    System.out.println("this is" + (streaks));
+                    System.out.println("this is" + third_variable + "\n");
+                    System.out.println("break");*/
                     user.setScore(score);
                     user.setStreaks(streaks);
-                    user.setWhatever(third_variable);
+                    user.setNum_maze_games_played(third_variable);
                 }
                 //sb.append(text).append("\n");
             }

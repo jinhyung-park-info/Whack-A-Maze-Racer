@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 && validation.get(1)) {
             User user = new User(username, password);
             UserManager.set_statistics(getApplicationContext(), username, user);
+           /* System.out.println(user.getScore());
+            System.out.println(user.getStreaks());
+            System.out.println(user.getNum_maze_games_played());*/
             intent.putExtra(USER, user);
             startActivity(intent);
         }

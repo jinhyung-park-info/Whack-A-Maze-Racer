@@ -6,16 +6,16 @@ import java.util.HashMap;
 public class User implements Serializable {
     private String email;
     private String password;
-    public static HashMap<String, String> map = new HashMap<>();
+    //public static HashMap<String, String> map = new HashMap<>();
     private int score = 0;
     private int streaks = 0;
-    private int whatever = 0;
+    private int num_maze_games_played = 0;
 
 
     User(String Email, String Password){
         this.email = Email;
         this.password = Password;
-        map.put(email, password);
+        //map.put(email, password);
     }
 
     public String getEmail() {
@@ -33,6 +33,6 @@ public class User implements Serializable {
     public void setStreaks(int Streaks){
         streaks = Streaks;
     }
-    public void setWhatever(int Whatever){whatever = Whatever;}
-    public int getWhatever(){ return this.whatever; }
+    public void setNum_maze_games_played(int Whatever){this.num_maze_games_played = Whatever;}
+    public int getNum_maze_games_played(){ return this.num_maze_games_played; }
 }

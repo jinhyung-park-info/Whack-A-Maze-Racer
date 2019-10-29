@@ -1,5 +1,6 @@
 package com.example.myapplication.Maze;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -10,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.myapplication.GameActivity;
+import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
@@ -308,12 +310,13 @@ public class MazeView extends View {
             games_played += 1;
             createMaze();
             if (games_played == num_games) {
-                this.user_in_maze.setStreaks(games_played);
-                UserManager.update_statistics(contexts, user_in_maze, user_in_maze.getScore(), user_in_maze.getStreaks(), user_in_maze.getWhatever());
+                this.user_in_maze.setNum_maze_games_played(user_in_maze.getNum_maze_games_played() + games_played);
+                UserManager.update_statistics(contexts, user_in_maze, user_in_maze.getScore(), user_in_maze.getStreaks(), user_in_maze.getNum_maze_games_played());
                 Intent intent = new Intent(contexts, GameActivity.class);
                 intent.putExtra(USER, user_in_maze);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 contexts.startActivity(intent);
+
             }
         }
     }
@@ -343,22 +346,18 @@ public class MazeView extends View {
                     //move in x direction (left or right)
                     if (differenceX > 0) {
                         //move to the right
-                        Log.i(TAG, "About to move right");
                         movePlayer(Direction.RIGHT);
                     } else {
                         //move to the left
-                        Log.i(TAG, "About to move left");
                         movePlayer(Direction.LEFT);
                     }
                 } else {
                     //move in y direction (up or down)
                     if (differenceY > 0) {
                         //move down
-                        Log.i(TAG, "About to move down");
                         movePlayer(Direction.DOWN);
                     } else {
                         //move up
-                        Log.i(TAG, "About to move up");
                         movePlayer(Direction.UP);
                     }
                 }
@@ -380,7 +379,6 @@ public class MazeView extends View {
         //the space of one cell. so we have to create our maze within this limited space.
         //also since cells are squares, the size of a cell represents both the cell's height & width
 
-        //below if-else structure was taken from a comment under the part 2 of the tut vids
         if (width / cols > height / rows) {
             //adding 1 to the # of cols takes into account the space the margin takes up
             cellSize = height / (rows + 1);

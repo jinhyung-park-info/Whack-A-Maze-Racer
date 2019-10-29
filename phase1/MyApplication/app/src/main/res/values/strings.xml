@@ -31,4 +31,5 @@
     <string name="bg_colour">Background Colour</string>
     <string name="stats">View statistics</string>
     <string name="Exit">Exit application</string>
+    <string name="maze_customization">Maze game customization</string>
 </resources>

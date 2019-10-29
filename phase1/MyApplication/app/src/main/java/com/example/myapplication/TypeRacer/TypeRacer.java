@@ -51,8 +51,8 @@ public class TypeRacer extends AppCompatActivity {
 
 
         //set up the color of the words.
-        final Intent intent = getIntent();
-        final User user_1 = (User) intent.getSerializableExtra(USER);
+        Intent intent = getIntent();
+        User user_1 = (User) intent.getSerializableExtra(USER);
         if (user_1 != null) {
             setUser(user_1);
         }
@@ -89,6 +89,7 @@ public class TypeRacer extends AppCompatActivity {
             questionCount = questionCount + 1;
         } else {
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
+            goToEndGame.putExtra(USER, user);
             startActivity(goToEndGame);
         }
     }
@@ -148,8 +149,6 @@ public class TypeRacer extends AppCompatActivity {
 
     private void setUser(User new_user) {
         user = new_user;
-        {
-        }
     }
 
 }
