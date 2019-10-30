@@ -13,6 +13,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.User;
 
 /** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
@@ -31,6 +32,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private SurfaceHolder holder;
   private boolean thread_active;
 
+  private User user;
   public WamManager wamManager;
 
   private String endScore;
@@ -39,11 +41,12 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private String end_message3;
   private String end_message4;
 
-  public WamView(Context context) {
+  public WamView(Context context, User user) {
     super(context);
     holder = this.getHolder();
     holder.addCallback(this);
     paint = new Paint();
+    this.user = user;
   }
 
   public void surfaceCreated(SurfaceHolder holder) {
@@ -110,6 +113,8 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         switch (gameStatus) {
           case "inGame":
             canvas.drawBitmap(background, 0, 0, paint);
+            canvas.drawText("hit" + activity.user.getScore(), 500, 500, paint);
+            canvas.drawText("hit" + activity.molesHit, 500, 700, paint);
             paint.setTextSize(WamView.screenHeight / 24);
             paint.setColor(Color.WHITE);
             canvas.drawText(
@@ -148,7 +153,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         this.inGameTouch(event, wamManager);
         return false;
       case "end":
-        activity.user.setScore(activity.user.getScore() + wamManager.score);
         if (wamManager.moleThread.keepRunning) {
           wamManager.reinitialize();
           gameStatus = "inGame";
@@ -183,6 +187,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
       if (rect.contains(x, y) && mole.getState() != Mole.Movement.HIT) {
         mole.setState(Mole.Movement.HIT);
         this.wamManager.score += 1;
+        this.activity.molesHit += 1;
       }
     }
   }
@@ -194,7 +199,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
       draw();
       gameTransition();
       long end_time = System.currentTimeMillis();
-      if (end_time - start_time < 50) {
+      if (end_time - start_time < 30) {
         try {
           Thread.sleep(end_time - start_time);
         } catch (InterruptedException e) {

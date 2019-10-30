@@ -20,6 +20,7 @@ public class MoleActivity extends AppCompatActivity {
   static int numColumns = 2;
   static int numRows = 2;
   static int backgroundID = R.drawable.game_background;
+  int molesHit;
   User user;
 
   protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +90,14 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   public void play(View view) {
-    WamView wamView = new WamView(this);
+    WamView wamView = new WamView(this, user);
     setContentView(wamView);
   }
 
   public void next(View view) {
     Button nextButton = findViewById(R.id.button);
     if (passed) {
+      user.setScore(user.getScore() + molesHit);
       Intent intent = new Intent(this, TypeRacerCustomizationActivity.class);
       intent.putExtra(USER, user);
       startActivity(intent);

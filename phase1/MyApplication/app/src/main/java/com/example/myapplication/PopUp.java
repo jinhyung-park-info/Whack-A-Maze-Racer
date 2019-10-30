@@ -40,6 +40,13 @@ public class PopUp extends Activity {
         String to_show = "maze games played: " + user.getNum_maze_games_played();
         statistic_1.setText(to_show);
 
+        EditText statistic_2 =  findViewById(R.id.score);
+      /*  System.out.println(user.getNum_maze_games_played());
+        System.out.println(user.getScore());
+        System.out.println(user.getStreaks());*/
+        String molesHit = "Moles Hit: " + user.getScore();
+        statistic_2.setText(molesHit);
+
     }
 
     private void setUser(User new_user){
