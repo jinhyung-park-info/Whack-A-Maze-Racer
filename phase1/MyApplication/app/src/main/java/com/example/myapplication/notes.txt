@@ -1,0 +1,23 @@
+so for the user class it currently has 3 variables one is the score which i think whack a mole updates,
+type racer can as well one is streaks you can literally change that to whatever you want for typeracer, just
+make sure you're changing the getter and setters as well, so i added a user in every single activity
+in our program so think of it like the user info is literally being passed around from screen to screen all
+the way to the end, with info being updated by each game, all your game needs to do is update the statistic
+by calling user.set whatever variable and also use the user.get method accordingly if you need to, you can
+look at the checkexit method in mazeview to see how i updated the num games played. You will have to call
+UserManager.update_statistics(getApplicationContext(), user.getscore or whatever, user.get second statistic, user.get third statistic);
+you gotta pass in the context dont forget lol. e.g if you're game only updates one statistic you still need to pass all
+three in the function even ifthe other two are the same this function will store the updated
+statistics now here's the main part this function should only be called in 3 cases to save
+processing time not whenever you update the statistic
+
+A. When the user dies in you're game only then save the statistics in the file
+B. When the user has succesfully finished you're game
+C. in methods like onPause and onDestroy when the user decides to leave the game
+
+the reason why im saying in these 3 cases is cause whenever the update statistics is called it essentially
+loops over the entire statistics file and changes the statistics of that user and stores everything in a string
+and then overwrites the file. I gotta do this cause well in java simply replacing the line won't change the file
+it didn't work and i double checked from multiple resources online so yeah. If you want add a 4th statistic for
+the user lemme know ill have to make some minor adjustments in 3 functions in the usermanager class and it should be
+all good.

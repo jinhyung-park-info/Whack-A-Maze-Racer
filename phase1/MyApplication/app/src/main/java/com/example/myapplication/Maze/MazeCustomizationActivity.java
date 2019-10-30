@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 
+import com.example.myapplication.GameActivity;
 import com.example.myapplication.Maze.MazeGame;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
@@ -32,6 +34,8 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     private int playerColour = Color.BLACK;
 
     private User user;
+
+    static boolean passed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,12 +112,29 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     public void startMazeGame(View view) {
-        Intent intent = new Intent(this, MazeGame.class);
+        /*Intent intent = new Intent(this, MazeGame.class);
         intent.putExtra("bgColour", bgColour);
         intent.putExtra("difficulty", difficulty);
         intent.putExtra("playerColour", playerColour);
         intent.putExtra(USER, user);
-        startActivity(intent);
+        startActivity(intent);*/
+        MazeView maze = new MazeView(this, bgColour, difficulty,
+                playerColour, user);
+        setContentView(maze);
+    }
+
+    public void finish_button(View view){
+        Button button = findViewById(R.id.button8);
+        if(passed) {
+            passed = false;
+            Intent intent = new Intent(this, GameActivity.class);
+            intent.putExtra(USER, user);
+            startActivity(intent);
+        }else
+            button.setError("Play the maze game first");
+        {
+
+        }
     }
 
 }

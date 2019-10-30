@@ -89,6 +89,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
     public void goToL3(View view) {
         Intent intent = new Intent(this, MazeCustomizationActivity.class);
+        intent.putExtra(USER, user);
         startActivity(intent);
     }
 }

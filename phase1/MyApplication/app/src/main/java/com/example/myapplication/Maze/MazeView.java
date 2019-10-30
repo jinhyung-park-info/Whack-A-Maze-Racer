@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -111,6 +112,9 @@ public class MazeView extends View {
     static final int num_games = 2;
     private int games_played = 0;
     private Context contexts;
+
+    //static Canvas new_canvas;
+    //static int counter = 0;
 
     public MazeView(Context context, int bgColour, String difficulty,
                     int playerColour, User user_1) {
@@ -303,19 +307,23 @@ public class MazeView extends View {
         //to update the positions on the screen, we have to call onDraw()
         //invalidate() calls onDraw() as soon as possible
         invalidate();
+        //new_on_draw(new_canvas);
     }
 
     private void checkExit() {
         if (player == exit && games_played < num_games) {
             games_played += 1;
             createMaze();
-            if (games_played == num_games) {
+            if (games_played >= num_games) {
                 this.user_in_maze.setNum_maze_games_played(user_in_maze.getNum_maze_games_played() + games_played);
                 UserManager.update_statistics(contexts, user_in_maze, user_in_maze.getScore(), user_in_maze.getStreaks(), user_in_maze.getNum_maze_games_played());
-                Intent intent = new Intent(contexts, GameActivity.class);
+                /*Intent intent = new Intent(contexts, GameActivity.class);
                 intent.putExtra(USER, user_in_maze);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                contexts.startActivity(intent);
+                contexts.startActivity(intent);*/
+                Activity activity = (Activity) contexts;
+                activity.setContentView(R.layout.activity_maze_customization);
+                MazeCustomizationActivity.passed = true;
 
             }
         }
@@ -368,8 +376,10 @@ public class MazeView extends View {
         return super.onTouchEvent(event);
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
+        //new_canvas = canvas;
         canvas.drawColor(bgColour);
 
         int width = getWidth();

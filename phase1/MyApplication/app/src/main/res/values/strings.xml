@@ -32,4 +32,5 @@
     <string name="stats">View statistics</string>
     <string name="Exit">Exit application</string>
     <string name="maze_customization">Maze game customization</string>
+    <string name="Finish">Finish game</string>
 </resources>

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.myapplication.GameActivity;
 import com.example.myapplication.User;
 
 import static com.example.myapplication.MainActivity.USER;
@@ -15,6 +16,7 @@ public class MazeGame extends AppCompatActivity {
 
     private static final String TAG = "MazeGame";
     private User user;
+    //static boolean passed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +34,13 @@ public class MazeGame extends AppCompatActivity {
         //Log.e(TAG, "Found difficulty: " + difficulty);
         int playerColour = intent.getIntExtra("playerColour", Color.BLACK);
         //Log.e(TAG, "Found shape: " + playerShape);
-        MazeView maze = new MazeView(this.getApplicationContext(), bgColour, difficulty,
+        MazeView maze = new MazeView(this, bgColour, difficulty,
                 playerColour, user);
         setContentView(maze);
+        /*if(passed){
+            Intent new_intent = new Intent(this, GameActivity.class);
+            startActivity(new_intent);
+        }*/
 
     }
 
