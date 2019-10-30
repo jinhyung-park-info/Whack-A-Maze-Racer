@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.TypeRacer.TypeRacer;
@@ -31,6 +32,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void play_Mole(View v){
+        MoleActivity.reset();
         Intent intent = new Intent(this, MoleActivity.class);
         intent.putExtra(USER, user);
         startActivity(intent);
