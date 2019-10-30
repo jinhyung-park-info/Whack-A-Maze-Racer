@@ -113,8 +113,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         switch (gameStatus) {
           case "inGame":
             canvas.drawBitmap(background, 0, 0, paint);
-            canvas.drawText("hit" + activity.user.getScore(), 500, 500, paint);
-            canvas.drawText("hit" + activity.molesHit, 500, 700, paint);
             paint.setTextSize(WamView.screenHeight / 24);
             paint.setColor(Color.WHITE);
             canvas.drawText(
