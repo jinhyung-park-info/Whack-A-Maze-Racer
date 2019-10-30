@@ -26,7 +26,7 @@ import static com.example.myapplication.MainActivity.USER;
 
 public class TypeRacer extends AppCompatActivity {
 
-    TextView question, message;
+    TextView question, message, score, streak, whatever;
     private TextView countDown;
     EditText answer;
     String questionInString;
@@ -38,8 +38,12 @@ public class TypeRacer extends AppCompatActivity {
     private int questionCount =0;
     Boolean timerRunning = false;
     ArrayList<String> questions = new ArrayList<>();
+    ArrayList<Integer> scores = new ArrayList<>();
+    ArrayList<Integer> streaks = new ArrayList<>();
+    ArrayList<Integer> whatevers = new ArrayList<>();
 
-
+    // 3 statistics
+    private int scoresCount= 0, streaksPrev= 0, streaksCurr = 0, whateverCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,11 @@ public class TypeRacer extends AppCompatActivity {
         message = findViewById(R.id.messageTextView);
         countDown = findViewById(R.id.countDownTextView);
         questionInString = question.getText().toString();
+
+        // set up the view for statistics
+        score = findViewById(R.id.Statistic1);
+        streak = findViewById(R.id.Statistic2);
+        whatever = findViewById(R.id.Statistic3);
 
 
         //User setUp
@@ -68,6 +77,10 @@ public class TypeRacer extends AppCompatActivity {
         answer.setTextColor(textColor);
         message.setTextColor(textColor);
         countDown.setTextColor(textColor);
+
+        score.setTextColor(textColor);
+        streak.setTextColor(textColor);
+        whatever.setTextColor(textColor);
 
         //set up the background color.
         View view = this.getWindow().getDecorView();
@@ -92,6 +105,11 @@ public class TypeRacer extends AppCompatActivity {
         }
         String q = sb.toString();
         questions.add(q);
+    }
+
+    // method called to update the statistic.
+    public void updateStatistics(){
+
     }
 
     //show next question, ends if all questions completed
@@ -155,7 +173,18 @@ public class TypeRacer extends AppCompatActivity {
                             timerRunning = false;
                             answer.setEnabled(false);
                             answer.clearFocus();
+                            //update statistics
+                            scoresCount += 1;
+                            if (streaksPrev == 1){
+                                streaksCurr += 1;
+                            }
+                            streaksPrev = 1;
+
                             showNextQuestion();
+                        }
+                        else {
+                            streaksPrev = 0;
+                            streaksCurr = 0;
                         }
                     }
 

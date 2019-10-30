@@ -21,7 +21,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
     static boolean passed;
     static int numLives = 5;
     static int streak = 0;
-    static int trBC = Color.BLUE;
+    static int trBC = Color.WHITE;
     static int d = 5;
     static int tC = Color.BLACK;
     private User user;
