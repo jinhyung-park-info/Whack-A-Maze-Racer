@@ -13,7 +13,6 @@
         <activity android:name=".PopUp"
             android:theme="@style/AppTheme.Popup"></activity>
         <activity android:name=".TypeRacer.TypeRacerCustomizationActivity" />
-        <activity android:name=".TypeRacer.TypeRacerSecondQ" />
         <activity android:name=".TypeRacer.TypeRacerEnd" />
         <activity android:name=".Maze.MazeGame" />
         <activity android:name=".Maze.MazeCustomizationActivity" />

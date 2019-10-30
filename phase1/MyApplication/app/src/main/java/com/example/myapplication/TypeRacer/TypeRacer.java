@@ -90,7 +90,7 @@ public class TypeRacer extends AppCompatActivity {
         int difficulty = intent.getIntExtra("difficulty", 5);
 
         //generate a list of questions
-        for (int i = 0; i<5; i++){
+        for (int i = 0; i < 5; i++){
             createQuestion(difficulty);
         }
 
@@ -108,7 +108,7 @@ public class TypeRacer extends AppCompatActivity {
     }
 
     // method called to update the statistic.
-    public void updateStatistics(){
+        public void updateStatistics(){
 
     }
 
