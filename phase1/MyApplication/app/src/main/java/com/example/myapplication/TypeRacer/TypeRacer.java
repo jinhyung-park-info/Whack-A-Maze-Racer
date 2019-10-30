@@ -17,7 +17,9 @@ import android.widget.TextView;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.example.myapplication.MainActivity.USER;
 
@@ -35,7 +37,7 @@ public class TypeRacer extends AppCompatActivity {
     private User user;
     private int questionCount =0;
     Boolean timerRunning = false;
-    String questions[] = {"This is question1", "This is question2", "This is question3"};
+    ArrayList<String> questions = new ArrayList<>();
 
 
 
@@ -50,13 +52,15 @@ public class TypeRacer extends AppCompatActivity {
         questionInString = question.getText().toString();
 
 
-        //set up the color of the words.
-        Intent intent = getIntent();
-        User user_1 = (User) intent.getSerializableExtra(USER);
+        //User setUp
+        final Intent intent = getIntent();
+        final User user_1 = (User) intent.getSerializableExtra(USER);
         if (user_1 != null) {
             setUser(user_1);
         }
-        int trBC = intent.getIntExtra("trBC", Color.BLUE);
+
+        //set up the color of the words.
+        int trBC = intent.getIntExtra("trBC", Color.WHITE);
 
         int textColor = intent.getIntExtra("textColor", Color.BLACK);
 
@@ -71,17 +75,31 @@ public class TypeRacer extends AppCompatActivity {
 
         //set up the difficulty.
         int difficulty = intent.getIntExtra("difficulty", 5);
-        //createQuestion(difficulty);
 
+        //generate a list of questions
+        for (int i = 0; i<5; i++){
+            createQuestion(difficulty);
+        }
 
         showNextQuestion();
 
     }
 
+    public void createQuestion(int d){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < d; i++){
+            sb.append((char) ThreadLocalRandom.current().nextInt(32, 126+1));
+        }
+        String q = sb.toString();
+        questions.add(q);
+    }
+
+    //show next question, ends if all questions completed
+
     private void showNextQuestion() {
-        if (questionCount < questions.length) {
+        if (questionCount < questions.size()) {
             countDown.setText("Countdown starts when you first type in");
-            question.setText(questions[questionCount]);
+            question.setText(questions.get(questionCount));
             answer.setText("");
             answer.setEnabled(true);
             message.setText("");
@@ -96,18 +114,18 @@ public class TypeRacer extends AppCompatActivity {
 
 
     private void checkAnswer() {
-
         answer.addTextChangedListener(
                 new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                        //lifeView.setText(life);
+
                     }
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                         String response = answer.getText().toString();
+                        //start counting
                         if (response.length() == 1) {
                             startTime = System.currentTimeMillis();
                             message.setText("Started");
@@ -129,6 +147,8 @@ public class TypeRacer extends AppCompatActivity {
                                     }.start();
                         }
 
+                        //goes to next question if response is correct
+
                         if (response.equals(question.getText().toString())) {
                             endTime = System.currentTimeMillis();
                             if (countDownTimer != null) countDownTimer.cancel();
@@ -149,7 +169,7 @@ public class TypeRacer extends AppCompatActivity {
 
     private void setUser(User new_user) {
         user = new_user;
+
     }
 
 }
-
