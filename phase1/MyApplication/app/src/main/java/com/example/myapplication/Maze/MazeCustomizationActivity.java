@@ -191,42 +191,6 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             System.out.println("Writing save state file for maze");
             //save maze.saveMaze() to an ArrayList of StringBuilders
             ArrayList<StringBuilder> savedMaze = maze.saveMaze();
-            /*
-            //create a file object in the local directory called [username]_maze_save_state.txt
-            File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
-
-            //create a new [username]_maze_save_state.txt file
-            try {
-                if (!mazeFile.createNewFile())
-                    System.out.println("Couldn't create file");
-            } catch (IOException e) {
-                Log.e(TAG, "Could not create maze save file");
-            }
-
-            FileOutputStream output;
-            try {
-                output = openFileOutput(mazeSaveStateFileName, Context.MODE_PRIVATE);
-
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output));
-
-                //for each stringbuilder in the arraylist
-                for (StringBuilder s : savedMaze) {
-                    //write the stringbuilder to the file, appending a newline character
-                    writer.write(s.toString());
-                    writer.newLine();
-                }
-                //close the file
-                writer.close();
-
-                System.out.println(mazeFile.exists() + " Wrote to file: " + mazeFile.getCanonicalPath());
-            } catch (FileNotFoundException e) {
-                Log.e(TAG, "Could not find maze save state");
-            } catch (IOException e) {
-                Log.e(TAG, "Couldn't write to maze save state file");
-            }
-        }
-*/
-            //File file = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
             FileOutputStream fos = null;
             //overwrites or creates new file
             try {
