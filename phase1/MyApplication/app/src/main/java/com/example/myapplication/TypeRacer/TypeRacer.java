@@ -3,7 +3,6 @@ package com.example.myapplication.TypeRacer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import com.example.myapplication.GameOver;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
+import com.example.myapplication.UserManager;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -95,14 +95,6 @@ public class TypeRacer extends AppCompatActivity {
         countDownTitle = findViewById(R.id.countDownTitleTextView);
         sec = findViewById(R.id.secTextView);
 
-        // initialize 3 statistics
-        countScore = 0; // user.getScore();
-        countStreak = 0; // user.getStreaks();
-        countLife = 3; // user.getLives();
-        score.setText("" + countScore);
-        streak.setText("" + countStreak);
-        life.setText("" + countLife);
-
     }
 
     public void setCustomization() {
@@ -113,6 +105,14 @@ public class TypeRacer extends AppCompatActivity {
         if (user_1 != null) {
             setUser(user_1);
         }
+
+        // initialize 3 statistics
+        countScore = 0;
+        countStreak = user.getStreaks();
+        countLife = 3;
+        score.setText("" + countScore);
+        streak.setText("" + countStreak);
+        life.setText("" + countLife);
 
         //set up the color of the words.
         int trBC = intent.getIntExtra("trBC", Color.WHITE);
@@ -164,9 +164,8 @@ public class TypeRacer extends AppCompatActivity {
             manageTime();
             questionNumber++;
         } else {
-            // user.setScore(countScore);
-            // user.setStreaks(countStreak);
-            // user.setLives(countLife);
+            user.setStreaks(countStreak);
+            UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(USER, user);
             goToEndGame.putExtra("finalScore", "" + countScore);
@@ -240,10 +239,8 @@ public class TypeRacer extends AppCompatActivity {
                 life.setText("" + countLife);
             } else {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
-                // user.setScore(countScore);
-                // user.setStreaks(countStreak);
-                // user.setLives(countLife);
-
+                user.setStreaks(countStreak);
+                UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
                 intent.putExtra(USER, user);
                 startActivity(intent);
             }
