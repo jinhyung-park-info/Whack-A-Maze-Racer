@@ -332,6 +332,7 @@ public class MazeView extends View {
                 intent.putExtra(USER, user_in_maze);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 contexts.startActivity(intent);*/
+                this.user_in_maze.setLast_played_level(0);
                 Activity activity = (Activity) contexts;
                 activity.setContentView(R.layout.activity_maze_customization);
                 MazeCustomizationActivity.passed = true;
