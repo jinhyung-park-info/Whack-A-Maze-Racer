@@ -44,6 +44,29 @@ public class MazeGame extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //save maze.saveGame() to an ArrayList of StringBuilders
+        //Check for a [username]_maze_save_state.txt file in the local directory and if found
+        //delete the file
+        //create a new [username]_maze_save_state.txt file
+        //for each stringbuilder in the arraylist
+        //write the stringbuilder to the file, appending a newline character
+        //close the file
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //initialize an arraylist of stringbuilders
+        //open the file [username]_maze_save_state.txt
+        //for each line the file
+        //trim and convert the line to a stringbuilder and append to arraylist
+        //close file
+        //send this ArrayList to maze.loadGame()
+    }
+
     private void setUser(User new_user){
         user = new_user;
     }

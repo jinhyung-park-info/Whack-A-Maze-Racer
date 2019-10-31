@@ -16,7 +16,9 @@ import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
 
@@ -116,6 +118,7 @@ public class MazeView extends View {
     //static Canvas new_canvas;
     //static int counter = 0;
 
+
     public MazeView(Context context, int bgColour, String difficulty,
                     int playerColour, User user_1) {
         super(context);
@@ -131,6 +134,14 @@ public class MazeView extends View {
         rand = new Random();
 
         createMaze();
+    }
+
+    public void setBgColour(int bgColour) {
+        this.bgColour = bgColour;
+    }
+
+    public void setPlayerColour(int playerColour) {
+        this.playerColour = playerColour;
     }
 
     public void setDifficulty(String difficulty) {
@@ -327,6 +338,129 @@ public class MazeView extends View {
 
             }
         }
+    }
+
+    /**
+     * Returns a Array List String Builder representation of this maze. See readMe.txt for details
+     *
+     * @return saved maze
+     */
+    public ArrayList<StringBuilder> saveMaze() {
+        //initialize arraylist to store lines of text to represent the maze
+        ArrayList<StringBuilder> savedMaze = new ArrayList<>();
+        //set the first index of arraylist to the colour of the maze
+        savedMaze.add(new StringBuilder(Integer.toString(bgColour)));
+        //set second index of arraylist to the player's colour
+        savedMaze.add(new StringBuilder(Integer.toString(playerColour)));
+        //set third index of arraylist to the # of rows in maze
+        savedMaze.add(new StringBuilder(Integer.toString(rows)));
+        //set fourth index of arraylist to the # of cols in maze
+        savedMaze.add(new StringBuilder(Integer.toString(cols)));
+        //set fifth index of arraylist to row of player
+        savedMaze.add(new StringBuilder(Integer.toString(player.getRow())));
+        //set sixth index of arraylsist to col of player
+        savedMaze.add(new StringBuilder(Integer.toString(player.getCol())));
+        //for each row in the 2d array of cells
+        for (int i = 0; i <= cols - 1; i++) {
+            //initialize a stringbuilder
+            StringBuilder currColString = new StringBuilder();
+            //for each cell in the current col
+            for (Cell c : cells[i]) {
+                //if left wall is true
+                if (c.hasLeftWall())
+                    //append 1
+                    currColString.append(1);
+                else
+                    //append 0
+                    currColString.append(0);
+                //if top wall is true
+                if (c.hasTopWall())
+                    //append 1
+                    currColString.append(1);
+                else
+                    //append 0
+                    currColString.append(0);
+                //if right wall is true
+                if (c.hasRightWall())
+                    //append 1
+                    currColString.append(1);
+                else
+                    //append 0
+                    currColString.append(0);
+                //if bottom wall is true
+                if (c.hasBottomWall())
+                    //append 1
+                    currColString.append(1);
+                else
+                    //append 0
+                    currColString.append(0);
+                //append space
+                currColString.append(" ");
+
+            }
+            //add stringbuilder to arraylist
+            savedMaze.add(currColString);
+        }
+        System.out.println(savedMaze);
+        return savedMaze;
+    }
+
+    /**
+     * Loads the maze from an ArrayList StringBuilder representation of the maze. See readMe.txt
+     * for details
+     *
+     * @param savedMaze the maze to be loaded
+     */
+    public void loadMaze(ArrayList<StringBuilder> savedMaze) {
+        //reinitialize 2d array of cells with rows as index 2 in arraylist and columns at the index 3 in arraylist
+        cols = Integer.parseInt(savedMaze.get(3).toString());
+        rows = Integer.parseInt(savedMaze.get(2).toString());
+        cells = new Cell[cols][rows];
+        System.out.println(cols);
+        System.out.println(rows);
+        //set the background colour to index 0 in the arraylist
+        bgColour = Integer.parseInt(savedMaze.get(0).toString());
+        //set the player's colour to index 1 in the arraylist
+        playerColour = Integer.parseInt(savedMaze.get(1).toString());
+        int playerCol = Integer.parseInt(savedMaze.get(5).toString());
+        int playerRow = Integer.parseInt(savedMaze.get(4).toString());
+        //for i from 0 to # of cols - 1
+        for (int i = 0; i <= cols - 1; i++) {
+            //take the ith index (plus 6) of the arraylist, convert the stringbuilder to a string and split that string by spaces
+            String[] currColCells = savedMaze.get(i + 6).toString().trim().split(" ");
+            System.out.println(Arrays.toString(currColCells));
+            //in this splitted string, for each index j
+            for (int j = 0; j <= rows - 1; j++) {
+                String currCell = currColCells[j].trim();
+                //initialize a new cell with col = i, row = j
+                cells[i][j] = new Cell(i, j);
+                //if the char in location 0 is 0
+                if (currCell.charAt(0) == '0')
+                    //set left wall in cell to false
+                    cells[i][j].setLeftWall(false);
+                //if the char in location 1 is 0
+                if (currCell.charAt(1) == '0')
+                    //set top wall in cell to false
+                    cells[i][j].setTopWall(false);
+                //if the char in location 2 is 0
+                if (currCell.charAt(2) == '0')
+                    //set right wall in cell to false
+                    cells[i][j].setRightWall(false);
+                //if the char in location 3 is 0
+                if (currCell.charAt(3) == '0')
+                    //set bottom wall in cell to false
+                    cells[i][j].setBottomWall(false);
+            }
+        }
+
+        //let player equal the cell in the 2d array at 0,0
+        player = cells[playerCol][playerRow];
+        //let exit equal the cell in the 2d array at col - 1, row - 1
+        exit = cells[cols - 1][rows - 1];
+
+        //redraw maze
+        invalidate();
+
     }
 
     @Override
