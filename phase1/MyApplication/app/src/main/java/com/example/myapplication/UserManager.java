@@ -63,42 +63,7 @@ public class UserManager {
         return arr;
     }
 
-    static boolean check_duplicate_username(Context context, String username){
-        FileInputStream fis = null;
 
-        try {
-            fis = context.openFileInput(MainActivity.FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            //StringBuilder sb = new StringBuilder();
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                int index_of_comma = text.indexOf(",");
-                String other_username = text.substring(0, index_of_comma);
-                if (username.equals(other_username)){
-                    return true;
-                }
-                //sb.append(text).append("\n");
-            }
-
-            //System.out.println(sb);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return false;
-    }
 
     //assuming alphanumeric characters only
     static void write_username_and_pass(Context context, FileOutputStream fos, String username, String password) {
@@ -196,7 +161,7 @@ public class UserManager {
             while ((text = br.readLine()) != null) {
                 int index_of_first_comma = text.indexOf(",");
                 String other_username = text.substring(0, index_of_first_comma);
-                if (username.equals(other_username)){
+                if (username.equals(other_username)) {
                     int index_of_second_comma = text.indexOf(",", index_of_first_comma + 1);
                     int index_of_third_comma = text.indexOf(",", index_of_second_comma + 1);
                     int index_of_forth_comma = text.indexOf(",", index_of_third_comma + 1);
@@ -204,19 +169,12 @@ public class UserManager {
                     int streaks = Integer.parseInt(text.substring(index_of_second_comma + 2, index_of_third_comma));
                     int third_variable = Integer.parseInt(text.substring(index_of_third_comma + 2, index_of_forth_comma));
                     int last_played_level = Integer.parseInt(text.substring(index_of_forth_comma + 2));
-                    /*System.out.println(score);
-                    System.out.println("this is" + (streaks));
-                    System.out.println("this is" + third_variable + "\n");
-                    System.out.println("break");*/
                     user.setScore(score);
                     user.setStreaks(streaks);
                     user.setNum_maze_games_played(third_variable);
                     user.setLast_played_level(last_played_level);
                 }
-                //sb.append(text).append("\n");
             }
-
-            //System.out.println(sb);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -233,18 +191,6 @@ public class UserManager {
         }
     }
 
-  /*while ((text = br.readLine()) != null) {
-  int index_of_first_comma = text.indexOf(",");
-  String other_username = text.substring(0, index_of_first_comma);
-  if (user.getEmail().equals(other_username)){
-      int index_of_second_comma = text.indexOf(",", index_of_first_comma + 1);
-      int index_of_third_comma = text.indexOf(",", index_of_second_comma + 1);
-      int score = Integer.parseInt(text.substring(index_of_first_comma + 2, index_of_second_comma));
-      int streaks = Integer.parseInt(text.substring(index_of_second_comma + 2, index_of_third_comma));
-      int third_variable = Integer.parseInt(text.substring(index_of_third_comma + 2, index_of_third_comma));
-      user.setScore(score);
-      user.setStreaks(streaks);
-      user.setWhatever(third_variable);*/
 
     public static void update_statistics(
             Context context, User user, int new_score, int new_streaks, int Third_variable, int last_played_level) {
@@ -268,8 +214,6 @@ public class UserManager {
                     sb.append(text).append("\n");
                 }
             }
-
-            //System.out.println(sb);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

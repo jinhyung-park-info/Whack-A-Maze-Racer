@@ -5,7 +5,7 @@
     android:id="@+id/activity_maze_customization"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
+    android:background="@drawable/background"
     tools:context=".Maze.MazeCustomizationActivity">
 
     <TextView
