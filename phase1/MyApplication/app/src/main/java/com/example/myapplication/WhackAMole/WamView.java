@@ -88,6 +88,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
             activity.numLives,
             activity.numColumns,
             activity.numRows,
+            activity.score,
             this);
     wamManager.initialize();
 
@@ -184,6 +185,10 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
       }
     }
   }
+
+  private void upload_moles_stats(String stats){
+    this.activity.user.setLoad_moles_stats(stats);
+  }
   // Inspired by source 3).
   @Override
   public void run() {
@@ -191,6 +196,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
       long start_time = System.currentTimeMillis();
       draw();
       update();
+      upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
       long end_time = System.currentTimeMillis();
       if (end_time - start_time < 30) {
         try {

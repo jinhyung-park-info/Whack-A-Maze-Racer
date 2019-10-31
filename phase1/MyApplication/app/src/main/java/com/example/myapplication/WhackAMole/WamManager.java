@@ -18,7 +18,7 @@ class WamManager {
   int currentLives;
   private int lifePicWidth, lifePicHeight;
   private int numHoles;
-  private int holesX, holesY;
+  int holesX, holesY;
   private int holeWidth, holeHeight;
   private int holeDeploymentWidth, holeDeploymentHeight, holeX, holeY;
   private Rect holeRect;
@@ -37,6 +37,7 @@ class WamManager {
       int numLives,
       int numHolesX,
       int numHolesY,
+      int score,
       WamView wamView) {
     this.holeList = new ArrayList<>();
     this.moleList = new ArrayList<>();
@@ -53,6 +54,8 @@ class WamManager {
     this.currentLives = this.numLives;
 
     this.molePic = molePic;
+
+    this.score = score;
 
     this.holesX = numHolesX;
     this.holesY = numHolesY;

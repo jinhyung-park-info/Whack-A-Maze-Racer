@@ -48,7 +48,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             setUser(user_1);
         }
         user.setLast_played_level(3);
-        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
+        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level(), user.getLoad_moles_stats());
     }
 
     /**

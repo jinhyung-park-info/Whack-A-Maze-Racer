@@ -165,7 +165,8 @@ public class TypeRacer extends AppCompatActivity {
             questionNumber++;
         } else {
             user.setStreaks(countStreak);
-            UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
+            UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(),
+                    user.getNum_maze_games_played(), user.getLast_played_level(), user.getLoad_moles_stats());
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(USER, user);
             goToEndGame.putExtra("finalScore", "" + countScore);
@@ -240,7 +241,9 @@ public class TypeRacer extends AppCompatActivity {
             } else {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
                 user.setStreaks(countStreak);
-                UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
+                UserManager.update_statistics(this, user, user.getScore(),
+                        user.getStreaks(), user.getNum_maze_games_played(),
+                        user.getLast_played_level(), user.getLoad_moles_stats());
                 intent.putExtra(USER, user);
                 startActivity(intent);
             }
