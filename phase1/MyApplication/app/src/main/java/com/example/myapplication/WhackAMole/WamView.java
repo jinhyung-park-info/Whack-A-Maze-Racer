@@ -1,6 +1,5 @@
 package com.example.myapplication.WhackAMole;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -55,9 +54,13 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     thread_active = true;
   }
 
-  public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
+  public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
+  }
 
-  public void surfaceDestroyed(SurfaceHolder holder) {}
+  public void surfaceDestroyed(SurfaceHolder holder) {
+    upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
+  }
 
   // Method burrowed but significantly modified from source 2).
   protected void initialize() {
@@ -189,6 +192,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private void upload_moles_stats(String stats){
     this.activity.user.setLoad_moles_stats(stats);
   }
+
   // Inspired by source 3).
   @Override
   public void run() {
@@ -196,7 +200,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
       long start_time = System.currentTimeMillis();
       draw();
       update();
-      upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
       long end_time = System.currentTimeMillis();
       if (end_time - start_time < 30) {
         try {

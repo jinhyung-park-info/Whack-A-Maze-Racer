@@ -75,7 +75,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             mazeFile.delete();
         }
 
-        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
+        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level(), user.getLoad_moles_stats());
         startedMaze = false;
 
         if (user.getLast_played_level() != 3) {
