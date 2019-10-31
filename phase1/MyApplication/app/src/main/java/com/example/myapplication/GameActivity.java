@@ -50,18 +50,22 @@ public class GameActivity extends AppCompatActivity {
             case 0:
                 Button loadButton = findViewById(R.id.button4);
                 loadButton.setError("Have not started the game!");
+                break;
             case 1:
                 Intent intent = new Intent(this, MoleActivity.class);
                 intent.putExtra(USER, user);
                 startActivity(intent);
+                break;
             case 2:
                 Intent intent2 = new Intent(this, TypeRacerCustomizationActivity.class);
                 intent2.putExtra(USER, user);
                 startActivity(intent2);
+                break;
             case 3:
                 Intent intent3 = new Intent(this, MazeCustomizationActivity.class);
                 intent3.putExtra(USER, user);
                 startActivity(intent3);
+                break;
         }
     }
 }
