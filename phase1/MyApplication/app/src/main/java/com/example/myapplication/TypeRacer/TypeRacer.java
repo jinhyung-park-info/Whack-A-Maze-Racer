@@ -18,7 +18,6 @@ import com.example.myapplication.R;
 import com.example.myapplication.User;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.example.myapplication.MainActivity.USER;
@@ -26,7 +25,7 @@ import static com.example.myapplication.MainActivity.USER;
 
 public class TypeRacer extends AppCompatActivity {
 
-    TextView question, message, score, streak, whatever;
+    TextView question, score, streak, life, scoreTitle, streakTitle, lifeTitle, countDownTitle, sec;
     private TextView countDown;
     EditText answer;
     String questionInString;
@@ -38,12 +37,9 @@ public class TypeRacer extends AppCompatActivity {
     private int questionCount =0;
     Boolean timerRunning = false;
     ArrayList<String> questions = new ArrayList<>();
-    ArrayList<Integer> scores = new ArrayList<>();
-    ArrayList<Integer> streaks = new ArrayList<>();
-    ArrayList<Integer> whatevers = new ArrayList<>();
 
     // 3 statistics
-    private int scoresCount= 0, streaksPrev= 0, streaksCurr = 0, whateverCount = 0;
+    private int countScore = 0, countStreak = 0, countLife = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +47,18 @@ public class TypeRacer extends AppCompatActivity {
         setContentView(R.layout.activity_type_racer);
         question = (TextView) findViewById(R.id.questionTextView);
         answer = findViewById(R.id.editText2);
-        message = findViewById(R.id.messageTextView);
         countDown = findViewById(R.id.countDownTextView);
         questionInString = question.getText().toString();
 
         // set up the view for statistics
-        score = findViewById(R.id.Statistic1);
-        streak = findViewById(R.id.Statistic2);
-        whatever = findViewById(R.id.Statistic3);
-
+        score = findViewById(R.id.scoreTextView);
+        streak = findViewById(R.id.streakTextView);
+        life = findViewById(R.id.lifeTextView);
+        scoreTitle = findViewById(R.id.scoreTitleTextView);
+        streakTitle = findViewById(R.id.scoreTitleTextView);
+        lifeTitle = findViewById(R.id.lifeTitleTextView);
+        countDownTitle = findViewById(R.id.countDownTitleTextView);
+        sec = findViewById(R.id.secTextView);
 
         //User setUp
         final Intent intent = getIntent();
@@ -75,12 +74,17 @@ public class TypeRacer extends AppCompatActivity {
 
         question.setTextColor(textColor);
         answer.setTextColor(textColor);
-        message.setTextColor(textColor);
         countDown.setTextColor(textColor);
 
         score.setTextColor(textColor);
         streak.setTextColor(textColor);
-        whatever.setTextColor(textColor);
+        life.setTextColor(textColor);
+        scoreTitle.setTextColor(textColor);
+        streakTitle.setTextColor(textColor);
+        lifeTitle.setTextColor(textColor);
+
+        countDownTitle.setTextColor(textColor);
+        sec.setTextColor(textColor);
 
         //set up the background color.
         View view = this.getWindow().getDecorView();
@@ -95,7 +99,6 @@ public class TypeRacer extends AppCompatActivity {
         }
 
         showNextQuestion();
-
     }
 
     public void createQuestion(int d){
@@ -108,7 +111,7 @@ public class TypeRacer extends AppCompatActivity {
     }
 
     // method called to update the statistic.
-        public void updateStatistics(){
+    public void updateStatistics(){
 
     }
 
@@ -116,11 +119,10 @@ public class TypeRacer extends AppCompatActivity {
 
     private void showNextQuestion() {
         if (questionCount < questions.size()) {
-            countDown.setText("Countdown starts when you first type in");
+            countDown.setText("30");
             question.setText(questions.get(questionCount));
             answer.setText("");
             answer.setEnabled(true);
-            message.setText("");
             checkAnswer();
             questionCount = questionCount + 1;
         } else {
@@ -146,7 +148,6 @@ public class TypeRacer extends AppCompatActivity {
                         //start counting
                         if (response.length() == 1) {
                             startTime = System.currentTimeMillis();
-                            message.setText("Started");
                             if (timerRunning) return;
                             timerRunning = true;
                             countDownTimer =
@@ -174,31 +175,31 @@ public class TypeRacer extends AppCompatActivity {
                             answer.setEnabled(false);
                             answer.clearFocus();
                             //update statistics
-                            scoresCount += 1;
-                            if (streaksPrev == 1){
-                                streaksCurr += 1;
-                            }
-                            streaksPrev = 1;
-
+                            countScore++;
+                            countStreak++;
+                            score.setText("" + countScore);
+                            streak.setText("" + countStreak);
                             showNextQuestion();
                         }
+
                         else {
-                            streaksPrev = 0;
-                            streaksCurr = 0;
+                            // this should be updated because it is considered wrong every time the user types a letter.
+                            // should be checked when the user presses the button
                         }
                     }
 
 
                     @Override
                     public void afterTextChanged(Editable s) {
+
                     }
+
                 });
     }
 
 
     private void setUser(User new_user) {
         user = new_user;
-
     }
 
 }
