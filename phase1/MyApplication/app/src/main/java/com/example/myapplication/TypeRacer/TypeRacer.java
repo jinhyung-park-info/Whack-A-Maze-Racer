@@ -109,7 +109,7 @@ public class TypeRacer extends AppCompatActivity {
         // initialize 3 statistics
         countScore = 0;
         countStreak = user.getStreaks();
-        countLife = 3;
+        countLife = intent.getIntExtra("lives", 5);
         score.setText("" + countScore);
         streak.setText("" + countStreak);
         life.setText("" + countLife);

@@ -2,9 +2,11 @@ package com.example.myapplication.Maze;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -15,9 +17,20 @@ import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import static com.example.myapplication.MainActivity.USER;
 
 public class MazeCustomizationActivity extends AppCompatActivity {
+
+    private static final String TAG = "MazeCustomizationActivity";
 
     /**
      * background colour of the screen. by default this is green
@@ -36,19 +49,43 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     private User user;
 
+    private boolean startedMaze;
+
     static boolean passed = false;
+
+    private MazeView maze;
+
+    private String mazeSaveStateFileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maze_customization);
         Intent intent = getIntent();
+
         User user_1 = (User) intent.getSerializableExtra(USER);
         if (user_1 != null){
             setUser(user_1);
         }
         user.setLast_played_level(3);
         UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level(), user.getLoad_moles_stats());
+        mazeSaveStateFileName = user.getEmail() + "_maze_save_state.txt";
+
+        File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
+        if (mazeFile.exists()) {
+            mazeFile.delete();
+        }
+
+        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
+        startedMaze = false;
+
+        if (user.getLast_played_level() != 3) {
+            setContentView(R.layout.activity_maze_customization);
+        } else {
+            setupMaze();
+        }
+
+        user.setLast_played_level(3);
+
     }
 
     /**
@@ -121,9 +158,15 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         intent.putExtra("playerColour", playerColour);
         intent.putExtra(USER, user);
         startActivity(intent);*/
-        MazeView maze = new MazeView(this, bgColour, difficulty,
+        setupMaze();
+    }
+
+    private void setupMaze() {
+        maze = new MazeView(this, bgColour, difficulty,
                 playerColour, user);
+
         setContentView(maze);
+        startedMaze = true;
     }
 
     public void finish_button(View view){
@@ -140,4 +183,67 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Saves the maze when activity is interrupted, if the player already started playing the maze.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (startedMaze) {
+            System.out.println("Writing save state file for maze");
+            //save maze.saveMaze() to an ArrayList of StringBuilders
+            ArrayList<StringBuilder> savedMaze = maze.saveMaze();
+            FileOutputStream fos = null;
+            //overwrites or creates new file
+            try {
+                fos = getApplicationContext().openFileOutput(mazeSaveStateFileName, MODE_PRIVATE);
+                try {
+                    for (StringBuilder s : savedMaze) {
+                        //write the stringbuilder to the file, appending a newline character
+                        fos.write(s.toString().getBytes());
+                        fos.write("\n".getBytes());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //if (startedMaze) {
+        //initialize an arraylist of stringbuilders
+        ArrayList<StringBuilder> savedMaze = new ArrayList<>();
+        //open the file [username]_maze_save_state.txt
+        File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
+        try {
+            Scanner input = new Scanner(mazeFile);
+            //for each line the file
+            while (input.hasNextLine()) {
+                //trim and convert the line to a stringbuilder and append to arraylist
+                savedMaze.add(new StringBuilder(input.nextLine().trim()));
+            }
+            //close file
+            input.close();
+            //send this ArrayList to maze.loadMaze()
+            maze.loadMaze(savedMaze);
+            mazeFile.delete();
+        } catch (FileNotFoundException e) {
+            Log.e(TAG, "Maze file not found on resume");
+        }
+
+        //}
+    }
 }
