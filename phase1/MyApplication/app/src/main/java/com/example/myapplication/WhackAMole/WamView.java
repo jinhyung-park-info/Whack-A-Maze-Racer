@@ -55,11 +55,9 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   }
 
   public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-    upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
   }
 
   public void surfaceDestroyed(SurfaceHolder holder) {
-    upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
   }
 
   // Method burrowed but significantly modified from source 2).
@@ -185,6 +183,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         mole.setState(Mole.Movement.HIT);
         this.wamManager.score += 1;
         this.activity.molesHit += 1;
+        upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
       }
     }
   }
