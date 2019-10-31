@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,27 +30,25 @@ public class PopUp extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*0.8), (int)(height * 0.6));
-
-        EditText statistic_1 =  findViewById(R.id.editText5);
+        
+        EditText mazeCompletedButton =  findViewById(R.id.mazeCompleted);
       /*  System.out.println(user.getNum_maze_games_played());
         System.out.println(user.getScore());
         System.out.println(user.getStreaks());*/
         String to_show = "maze games played: " + user.getNum_maze_games_played();
-        statistic_1.setText(to_show);
+        mazeCompletedButton.setText(to_show);
 
-        EditText statistic_2 =  findViewById(R.id.score);
-      /*  System.out.println(user.getNum_maze_games_played());
-        System.out.println(user.getScore());
-        System.out.println(user.getStreaks());*/
+        EditText molesHitButton =  findViewById(R.id.molesHit);
         String molesHit = "Moles Hit: " + user.getScore();
-        statistic_2.setText(molesHit);
+        molesHitButton.setText(molesHit);
 
-        EditText statistic_4 =  findViewById(R.id.level);
-      /*  System.out.println(user.getNum_maze_games_played());
-        System.out.println(user.getScore());
-        System.out.println(user.getStreaks());*/
+        EditText levelButton =  findViewById(R.id.level);
         String level = "Last Played Level: " + user.getLast_played_level();
-        statistic_4.setText(level);
+        levelButton.setText(level);
+
+        EditText streakButton =  findViewById(R.id.streak);
+        String streak = "Last Played Level: " + user.getStreaks();
+        streakButton.setText(streak);
     }
 
     private void setUser(User new_user){

@@ -8,7 +8,7 @@
     tools:context=".PopUp">
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/exit"
         android:layout_width="167dp"
         android:layout_height="85dp"
         android:onClick="close"
@@ -18,38 +18,38 @@
         app:layout_constraintTop_toBottomOf="@+id/level" />
 
     <EditText
-        android:id="@+id/score"
+        android:id="@+id/molesHit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Score: "
-        app:layout_constraintBottom_toTopOf="@+id/editText7"
-        app:layout_constraintStart_toStartOf="@+id/editText5"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintBottom_toTopOf="@+id/streak"
+        app:layout_constraintStart_toStartOf="@+id/mazeCompleted"
+        app:layout_constraintTop_toBottomOf="@+id/mazeCompleted" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/mazeCompleted"
         android:layout_width="254dp"
         android:layout_height="47dp"
         android:layout_marginStart="59dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/score"
+        app:layout_constraintBottom_toTopOf="@+id/molesHit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/streak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/level"
-        app:layout_constraintStart_toStartOf="@+id/score"
-        app:layout_constraintTop_toBottomOf="@+id/score" />
+        app:layout_constraintStart_toStartOf="@+id/molesHit"
+        app:layout_constraintTop_toBottomOf="@+id/molesHit" />
 
     <EditText
         android:id="@+id/level"
@@ -58,8 +58,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
-        app:layout_constraintStart_toStartOf="@+id/editText7"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        app:layout_constraintBottom_toTopOf="@+id/exit"
+        app:layout_constraintStart_toStartOf="@+id/streak"
+        app:layout_constraintTop_toBottomOf="@+id/streak" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
