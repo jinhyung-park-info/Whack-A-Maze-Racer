@@ -28,7 +28,6 @@ import static com.example.myapplication.MainActivity.USER;
 public class TypeRacer extends AppCompatActivity {
 
     TextView question, score, streak, life, scoreTitle, streakTitle, lifeTitle, countDownTitle, sec;
-    String questionInString;
     ArrayList<String> questions = new ArrayList<>();
     private int questionNumber = 0;
     EditText answer;
@@ -61,8 +60,7 @@ public class TypeRacer extends AppCompatActivity {
             public void onClick(View v) {
 
                 //goes to next question if response is correct
-                String response = answer.getText().toString();
-                if (response.equals(question.getText().toString())) {
+                if (userIsCorrect()) {
                     endTime = System.currentTimeMillis();
                     if (countDownTimer != null) countDownTimer.cancel();
                     timerRunning = false;
@@ -73,6 +71,7 @@ public class TypeRacer extends AppCompatActivity {
                 }
                 else {
                     updateStatistics(false);
+                    showNextQuestion();
                 }
             }
         });
@@ -82,7 +81,6 @@ public class TypeRacer extends AppCompatActivity {
         question = findViewById(R.id.questionTextView);
         answer = findViewById(R.id.editText2);
         countDown = findViewById(R.id.countDownTextView);
-        questionInString = question.getText().toString();
         score = findViewById(R.id.scoreTextView);
         streak = findViewById(R.id.streakTextView);
         life = findViewById(R.id.lifeTextView);
@@ -158,17 +156,18 @@ public class TypeRacer extends AppCompatActivity {
             question.setText(questions.get(questionNumber));
             answer.setText("");
             answer.setEnabled(true);
-            checkAnswer();
+            manageTime();
             questionNumber++;
         } else {
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(USER, user);
+            goToEndGame.putExtra("finalScore", "" + countScore);
             startActivity(goToEndGame);
         }
     }
 
 
-    private void checkAnswer() {
+    private void manageTime() {
         answer.addTextChangedListener(
                 new TextWatcher() {
                     @Override
@@ -210,6 +209,11 @@ public class TypeRacer extends AppCompatActivity {
                     }
 
                 });
+    }
+
+    public boolean userIsCorrect() {
+        String response = answer.getText().toString();
+        return response.equals(question.getText().toString());
     }
 
     // method called to update the statistic.
