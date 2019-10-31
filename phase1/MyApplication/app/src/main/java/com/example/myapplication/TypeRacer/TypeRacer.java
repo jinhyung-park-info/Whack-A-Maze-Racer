@@ -3,6 +3,7 @@ package com.example.myapplication.TypeRacer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -77,6 +78,10 @@ public class TypeRacer extends AppCompatActivity {
         });
     }
 
+    private void setUser(User new_user) {
+        user = new_user;
+    }
+
     public void getTexts() {
         question = findViewById(R.id.questionTextView);
         answer = findViewById(R.id.editText2);
@@ -91,9 +96,9 @@ public class TypeRacer extends AppCompatActivity {
         sec = findViewById(R.id.secTextView);
 
         // initialize 3 statistics
-        countScore = 0;
-        countStreak = 0;
-        countLife = 3;
+        countScore = 0; // user.getScore();
+        countStreak = 0; // user.getStreaks();
+        countLife = 3; // user.getLives();
         score.setText("" + countScore);
         streak.setText("" + countStreak);
         life.setText("" + countLife);
@@ -159,6 +164,9 @@ public class TypeRacer extends AppCompatActivity {
             manageTime();
             questionNumber++;
         } else {
+            // user.setScore(countScore);
+            // user.setStreaks(countStreak);
+            // user.setLives(countLife);
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(USER, user);
             goToEndGame.putExtra("finalScore", "" + countScore);
@@ -224,22 +232,23 @@ public class TypeRacer extends AppCompatActivity {
             score.setText("" + countScore);
             streak.setText("" + countStreak);
         } else {
-            if (countLife > 1) {
-                countStreak = 0;
-                countLife--;
+            countStreak = 0;
+            countLife--;
+
+            if (countLife > 0) {
                 streak.setText("" + countStreak);
                 life.setText("" + countLife);
             } else {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
+                // user.setScore(countScore);
+                // user.setStreaks(countStreak);
+                // user.setLives(countLife);
+
                 intent.putExtra(USER, user);
                 startActivity(intent);
             }
         }
     }
 
-
-    private void setUser(User new_user) {
-        user = new_user;
-    }
 
 }
