@@ -8,10 +8,8 @@ import android.graphics.Paint;
 class Hole {
   private Bitmap hole_bmp;
   private float x, y, holeWidth, holeHeight;
-  private WamManager wamManager;
 
-  Hole(int x, int y, Bitmap hole_bmp, WamManager wamManager) {
-    this.wamManager = wamManager;
+  Hole(int x, int y, Bitmap hole_bmp) {
     this.x = x;
     this.y = y;
     this.hole_bmp = hole_bmp;

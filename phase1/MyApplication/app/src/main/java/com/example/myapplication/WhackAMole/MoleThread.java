@@ -6,10 +6,11 @@ package com.example.myapplication.WhackAMole;
  */
 public class MoleThread extends Thread {
 
+  private int duration = 2400;
   boolean keepRunning = true;
+
   private WamView wamView;
   private WamManager wamManager;
-  private int duration = 2400;
 
   MoleThread(WamView wamView, WamManager wamManager) {
     this.wamView = wamView;

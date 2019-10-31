@@ -32,7 +32,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void play_Mole(View v){
-        MoleActivity.reset();
         Intent intent = new Intent(this, MoleActivity.class);
         intent.putExtra(USER, user);
         startActivity(intent);

@@ -13,6 +13,7 @@ import com.example.myapplication.GameActivity;
 import com.example.myapplication.Maze.MazeGame;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
+import com.example.myapplication.UserManager;
 
 import static com.example.myapplication.MainActivity.USER;
 
@@ -46,6 +47,8 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         if (user_1 != null){
             setUser(user_1);
         }
+        user.setLast_played_level(3);
+        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
     }
 
     /**

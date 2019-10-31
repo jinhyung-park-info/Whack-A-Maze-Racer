@@ -10,6 +10,7 @@ public class User implements Serializable {
     private int score = 0;
     private int streaks = 0;
     private int num_maze_games_played = 0;
+    private int last_played_level = 0;
 
 
     User(String Email, String Password){
@@ -35,4 +36,6 @@ public class User implements Serializable {
     }
     public void setNum_maze_games_played(int Whatever){this.num_maze_games_played = Whatever;}
     public int getNum_maze_games_played(){ return this.num_maze_games_played; }
+    public void setLast_played_level(int level){this.last_played_level = level; }
+    public int getLast_played_level(){return this.last_played_level;}
 }

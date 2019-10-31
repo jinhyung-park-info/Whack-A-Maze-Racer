@@ -14,8 +14,8 @@
         android:onClick="close"
         android:text="Close"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editText8"
-        app:layout_constraintTop_toBottomOf="@+id/editText8" />
+        app:layout_constraintStart_toStartOf="@+id/level"
+        app:layout_constraintTop_toBottomOf="@+id/level" />
 
     <EditText
         android:id="@+id/score"
@@ -47,12 +47,12 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/editText8"
+        app:layout_constraintBottom_toTopOf="@+id/level"
         app:layout_constraintStart_toStartOf="@+id/score"
         app:layout_constraintTop_toBottomOf="@+id/score" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

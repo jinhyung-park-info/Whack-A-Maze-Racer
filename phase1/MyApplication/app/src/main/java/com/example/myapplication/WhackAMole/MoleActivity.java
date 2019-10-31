@@ -1,5 +1,6 @@
 package com.example.myapplication.WhackAMole;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,19 +9,30 @@ import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.User;
+import com.example.myapplication.UserManager;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.example.myapplication.MainActivity.USER;
 
 public class MoleActivity extends AppCompatActivity {
   boolean passed;
-  static int numLives = 5;
-  static int numColumns = 2;
-  static int numRows = 2;
-  static int backgroundID = R.drawable.game_background;
+  int numLives;
+  int numColumns;
+  int numRows;
+  int backgroundID = R.drawable.game_background;
   int molesHit;
+
   User user;
 
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +43,9 @@ public class MoleActivity extends AppCompatActivity {
     if (user_1 != null) {
       setUser(user_1);
     }
-
+    user.setLast_played_level(1);
+    UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
+    reset();
     passed = false;
   }
 
@@ -90,13 +104,14 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   public void play(View view) {
-    WamView wamView = new WamView(this, user);
+    WamView wamView = new WamView(this);
     setContentView(wamView);
   }
 
   public void next(View view) {
     Button nextButton = findViewById(R.id.button);
     if (passed) {
+      passed = false;
       user.setScore(user.getScore() + molesHit);
       Intent intent = new Intent(this, TypeRacerCustomizationActivity.class);
       intent.putExtra(USER, user);
@@ -107,9 +122,53 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   // Used to reset customization to default after restarting game.
-  public static void reset() {
+  public void reset() {
     numLives = 5;
     numRows = 2;
     numColumns = 2;
+  }
+
+  public void load(Context context, String username, User user){
+
+    FileInputStream fis = null;
+
+    try {
+      fis = context.openFileInput(MainActivity.Stats_file);
+      InputStreamReader isr = new InputStreamReader(fis);
+      BufferedReader br = new BufferedReader(isr);
+
+      String text;
+
+      while ((text = br.readLine()) != null) {
+        int index_of_first_comma = text.indexOf(",");
+        String other_username = text.substring(0, index_of_first_comma);
+        if (username.equals(other_username)){
+          int index_of_second_comma = text.indexOf(",", index_of_first_comma + 1);
+          int index_of_third_comma = text.indexOf(",", index_of_second_comma + 1);
+          int index_of_forth_comma = text.indexOf(",", index_of_third_comma + 1);
+          //          int index_of_fifth_comma = text.indexOf(",", index_of_forth_comma + 1);
+          //          int index_of_sixth_comma = text.indexOf(",", index_of_fifth_comma + 1);
+          //          int index_of_seventh_comma = text.indexOf(",", index_of_sixth_comma + 1);
+
+          List data = Arrays.asList(text.substring(index_of_forth_comma + 2));
+        }
+      }
+
+      //System.out.println(sb);
+
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      if (fis != null) {
+        try {
+          fis.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+
   }
 }

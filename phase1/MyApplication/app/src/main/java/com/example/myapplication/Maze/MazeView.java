@@ -316,7 +316,7 @@ public class MazeView extends View {
             createMaze();
             if (games_played >= num_games) {
                 this.user_in_maze.setNum_maze_games_played(user_in_maze.getNum_maze_games_played() + games_played);
-                UserManager.update_statistics(contexts, user_in_maze, user_in_maze.getScore(), user_in_maze.getStreaks(), user_in_maze.getNum_maze_games_played());
+                UserManager.update_statistics(contexts, user_in_maze, user_in_maze.getScore(), user_in_maze.getStreaks(), user_in_maze.getNum_maze_games_played(), user_in_maze.getLast_played_level());
                 /*Intent intent = new Intent(contexts, GameActivity.class);
                 intent.putExtra(USER, user_in_maze);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

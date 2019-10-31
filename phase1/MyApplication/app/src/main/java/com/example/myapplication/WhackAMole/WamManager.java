@@ -11,10 +11,6 @@ import java.util.Random;
 /** Inspired by FishTank Project */
 class WamManager {
 
-  private WamView wamView;
-  MoleThread moleThread;
-  private ArrayList<Hole> holeList;
-  ArrayList<Mole> moleList;
   private Bitmap holePic;
   private Bitmap molePic;
   private Bitmap lifePic;
@@ -26,8 +22,12 @@ class WamManager {
   private int holeWidth, holeHeight;
   private int holeDeploymentWidth, holeDeploymentHeight, holeX, holeY;
   private Rect holeRect;
-
   int score;
+
+  private WamView wamView;
+  MoleThread moleThread;
+  private ArrayList<Hole> holeList;
+  ArrayList<Mole> moleList;
 
   WamManager(
       Bitmap holePic,
@@ -99,12 +99,12 @@ class WamManager {
               + (i / holesX) * holeDeploymentHeight
               + holeDeploymentHeight / 2
               - holeHeight / 2;
-      holeList.add(new Hole(holeX, holeY, holePic, this));
+      holeList.add(new Hole(holeX, holeY, holePic));
     }
 
     // Add one mole for each hole into mole collection.
     for (Hole hole : holeList) {
-      moleList.add(new Mole(hole, molePic, this));
+      moleList.add(new Mole(hole, molePic));
     }
 
     // Start Thread controlling mole's activities.
@@ -125,14 +125,18 @@ class WamManager {
     Random random = new Random();
     int num = random.nextInt(moleList.size());
     Mole mole = moleList.get(num);
-    if (mole.getState() == Mole.Movement.STILL) {
+    if (mole.getState() == Mole.Movement.STANDBY) {
       mole.setState(Mole.Movement.UP);
     }
   }
 
-  void setMoleMovement() {
+  void move() {
     for (Mole mole : this.moleList) {
-      mole.setMovement();
+      mole.move();
+      if (mole.loseLife) {
+        this.currentLives -= 1;
+        mole.loseLife = false;
+      }
     }
   }
 }

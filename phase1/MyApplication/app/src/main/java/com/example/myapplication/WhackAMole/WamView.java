@@ -1,5 +1,6 @@
 package com.example.myapplication.WhackAMole;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -13,40 +14,33 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.User;
 
 /** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
   private Resources res = this.getResources();
   private final MoleActivity activity = (MoleActivity) getContext();
-
   public String gameStatus = "inGame";
   public static int screenWidth, screenHeight;
   public Bitmap molePic, holePic, lifePic, scoreBoard;
-
   private Bitmap background;
-
   private Canvas canvas;
   private Paint paint;
   private SurfaceHolder holder;
   private boolean thread_active;
-
-  private User user;
-  public WamManager wamManager;
-
   private String endScore;
   private String end_message1;
   private String end_message2;
   private String end_message3;
   private String end_message4;
 
-  public WamView(Context context, User user) {
+  public WamManager wamManager;
+
+  public WamView(Context context) {
     super(context);
     holder = this.getHolder();
     holder.addCallback(this);
     paint = new Paint();
-    this.user = user;
   }
 
   public void surfaceCreated(SurfaceHolder holder) {
@@ -68,7 +62,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   // Method burrowed but significantly modified from source 2).
   protected void initialize() {
 
-    background = BitmapFactory.decodeResource(res, MoleActivity.backgroundID);
+    background = BitmapFactory.decodeResource(res, activity.backgroundID);
     background = Bitmap.createScaledBitmap(background, screenWidth, screenHeight, true);
 
     holePic = BitmapFactory.decodeResource(res, R.drawable.hole);
@@ -81,8 +75,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     lifePic = Bitmap.createScaledBitmap(lifePic, 150, 150, true);
 
     scoreBoard = BitmapFactory.decodeResource(res, R.drawable.text_bg_bmp);
-    scoreBoard =
-        Bitmap.createScaledBitmap(scoreBoard, screenWidth * 4 / 5, screenHeight * 3 / 10, true);
+    scoreBoard = Bitmap.createScaledBitmap(scoreBoard, screenWidth * 4 / 5, screenHeight * 3 / 10, true);
 
     Rect mole_rect = new Rect(0, screenHeight * 2 / 7, screenWidth, screenHeight * 5 / 6);
 
@@ -92,9 +85,9 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
             mole_rect,
             molePic,
             lifePic,
-            MoleActivity.numLives,
-            MoleActivity.numColumns,
-            MoleActivity.numRows,
+            activity.numLives,
+            activity.numColumns,
+            activity.numRows,
             this);
     wamManager.initialize();
 
@@ -155,6 +148,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
           wamManager.reinitialize();
           gameStatus = "inGame";
         } else {
+          activity.reset();
           activity.setContentView(R.layout.activity_mole);
           this.activity.passed = true;
         }
@@ -162,10 +156,11 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     return true;
   }
 
-  private void gameTransition() {
+  // Update in game statistics.
+  private void update() {
     switch (gameStatus) {
       case "inGame":
-        this.wamManager.setMoleMovement();
+        this.wamManager.move();
         if (this.wamManager.currentLives <= 0) {
           this.gameStatus = "end";
         }
@@ -195,7 +190,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     while (thread_active) {
       long start_time = System.currentTimeMillis();
       draw();
-      gameTransition();
+      update();
       long end_time = System.currentTimeMillis();
       if (end_time - start_time < 30) {
         try {

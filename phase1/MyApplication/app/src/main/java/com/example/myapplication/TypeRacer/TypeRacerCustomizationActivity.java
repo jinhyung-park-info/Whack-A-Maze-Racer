@@ -13,6 +13,7 @@ import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.Maze.MazeGame;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
+import com.example.myapplication.UserManager;
 
 import static com.example.myapplication.MainActivity.USER;
 
@@ -36,6 +37,8 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         if (user_1 != null){
             setUser(user_1);
         }
+        user.setLast_played_level(2);
+        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
     }
 
     private void setUser(User new_user){

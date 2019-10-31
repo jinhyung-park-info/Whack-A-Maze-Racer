@@ -47,6 +47,12 @@ public class PopUp extends Activity {
         String molesHit = "Moles Hit: " + user.getScore();
         statistic_2.setText(molesHit);
 
+        EditText statistic_4 =  findViewById(R.id.level);
+      /*  System.out.println(user.getNum_maze_games_played());
+        System.out.println(user.getScore());
+        System.out.println(user.getStreaks());*/
+        String level = "Last Played Level: " + user.getLast_played_level();
+        statistic_4.setText(level);
     }
 
     private void setUser(User new_user){
