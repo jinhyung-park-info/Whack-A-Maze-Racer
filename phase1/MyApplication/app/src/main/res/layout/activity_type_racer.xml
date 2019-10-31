@@ -29,7 +29,7 @@
             android:id="@+id/editText2"
             android:layout_width="333dp"
             android:layout_height="42dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="28dp"
             android:hint="Type your answer here"
             android:inputType="text"
             android:text=""
@@ -164,6 +164,17 @@
             app:layout_constraintStart_toEndOf="@+id/countDownTextView"
             app:layout_constraintTop_toTopOf="@+id/editText2"
             app:layout_constraintVertical_bias="0.198" />
+
+        <Button
+            android:id="@+id/doneButton"
+            android:layout_width="101dp"
+            android:layout_height="53dp"
+            android:text="Done"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countDownTitleTextView"
+            app:layout_constraintVertical_bias="0.095" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
