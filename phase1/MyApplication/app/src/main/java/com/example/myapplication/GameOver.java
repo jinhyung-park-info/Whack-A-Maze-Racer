@@ -36,7 +36,6 @@ public class GameOver extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void setUser(User new_user){

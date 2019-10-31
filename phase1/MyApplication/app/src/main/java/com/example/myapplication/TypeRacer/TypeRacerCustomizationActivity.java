@@ -21,7 +21,6 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
     static boolean passed;
     static int numLives = 5;
-    static int streak = 0;
     static int trBC = Color.WHITE;
     static int d = 5;
     static int tC = Color.BLACK;
@@ -86,6 +85,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         intent.putExtra("trBC", trBC);
         intent.putExtra("difficulty", d);
         intent.putExtra("textColor", tC);
+        intent.putExtra("lives", numLives);
         intent.putExtra(USER, user);
         startActivity(intent);
     }
