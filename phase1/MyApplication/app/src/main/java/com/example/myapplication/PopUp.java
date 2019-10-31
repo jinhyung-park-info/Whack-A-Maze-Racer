@@ -30,7 +30,7 @@ public class PopUp extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*0.8), (int)(height * 0.6));
-        
+
         EditText mazeCompletedButton =  findViewById(R.id.mazeCompleted);
       /*  System.out.println(user.getNum_maze_games_played());
         System.out.println(user.getScore());
@@ -47,7 +47,7 @@ public class PopUp extends Activity {
         levelButton.setText(level);
 
         EditText streakButton =  findViewById(R.id.streak);
-        String streak = "Last Played Level: " + user.getStreaks();
+        String streak = "TypeRacer Streak: " + user.getStreaks();
         streakButton.setText(streak);
     }
 
