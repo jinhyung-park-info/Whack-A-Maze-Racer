@@ -183,14 +183,6 @@ public class MoleActivity extends AppCompatActivity {
           setContentView(wamView);
           loaded = false;
           user.setLoad_moles_stats(" 0");
-    UserManager.update_statistics(
-            this,
-            user,
-            user.getScore(),
-            user.getStreaks(),
-            user.getNum_maze_games_played(),
-            user.getLast_played_level(),
-            user.getLoad_moles_stats());
         }
 
 
