@@ -117,6 +117,7 @@ class WamManager {
 
   void reinitialize() {
     this.score = 0;
+    this.moleThread.setDuration(2400);
     for (Mole mole : moleList) {
       mole.reset();
     }

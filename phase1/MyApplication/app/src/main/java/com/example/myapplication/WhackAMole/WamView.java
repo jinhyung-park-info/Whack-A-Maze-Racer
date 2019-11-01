@@ -153,6 +153,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
           gameStatus = "inGame";
         } else {
           activity.reset();
+          used = false;
           activity.setContentView(R.layout.activity_mole);
           this.activity.passed = true;
         }
@@ -176,6 +177,16 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   }
 
   private void inGameTouch(MotionEvent event, WamManager wc) {
+    upload_moles_stats(
+            wamManager.currentLives
+                    + " "
+                    + wamManager.holesX
+                    + " "
+                    + wamManager.holesY
+                    + " "
+                    + wamManager.score
+                    + " "
+                    + activity.backgroundID);
     int x, y;
     x = (int) event.getX();
     y = (int) event.getY();
@@ -197,22 +208,12 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   @Override
   public void run() {
     while (thread_active) {
-      upload_moles_stats(
-          wamManager.currentLives
-              + " "
-              + wamManager.holesX
-              + " "
-              + wamManager.holesY
-              + " "
-              + wamManager.score
-              + " "
-              + activity.backgroundID);
+
       long start_time = System.currentTimeMillis();
-      UserManager.update_statistics(activity, activity.user);
       draw();
       update();
       long end_time = System.currentTimeMillis();
-      if (end_time - start_time < 30) {
+      if (end_time - start_time < 50) {
         try {
           Thread.sleep(end_time - start_time);
         } catch (InterruptedException e) {
