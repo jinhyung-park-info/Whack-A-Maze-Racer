@@ -115,7 +115,7 @@ public class UserManager {
                 fos = context.openFileOutput(MainActivity.Stats_file, MODE_APPEND);
                 try {
                     fos.write(username.getBytes());
-                    fos.write(", 0, 0, 0, 0".getBytes());
+                    fos.write(", 0, 0, 0, 0, 0".getBytes());
                     fos.write("\n".getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -129,7 +129,7 @@ public class UserManager {
                 fos = context.openFileOutput(MainActivity.Stats_file, MODE_PRIVATE);
                 try {
                     fos.write(username.getBytes());
-                    fos.write(", 0, 0, 0, 0".getBytes());
+                    fos.write(", 0, 0, 0, 0, 0".getBytes());
                     fos.write("\n".getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -165,14 +165,21 @@ public class UserManager {
                     int index_of_second_comma = text.indexOf(",", index_of_first_comma + 1);
                     int index_of_third_comma = text.indexOf(",", index_of_second_comma + 1);
                     int index_of_forth_comma = text.indexOf(",", index_of_third_comma + 1);
+                    int index_of_fifth_comma = text.indexOf(",", index_of_forth_comma + 1);
                     int score = Integer.parseInt(text.substring(index_of_first_comma + 2, index_of_second_comma));
                     int streaks = Integer.parseInt(text.substring(index_of_second_comma + 2, index_of_third_comma));
-                    int third_variable = Integer.parseInt(text.substring(index_of_third_comma + 2, index_of_forth_comma));
-                    int last_played_level = Integer.parseInt(text.substring(index_of_forth_comma + 2));
+                    int streak = Integer.parseInt(text.substring(index_of_third_comma + 2, index_of_forth_comma));
+                    int last_played_level = Integer.parseInt(text.substring(index_of_forth_comma + 2, index_of_fifth_comma));
+                    String load_moles_stats = text.substring(index_of_fifth_comma + 1);
+                    /*System.out.println(score);
+                    System.out.println("this is" + (streaks));
+                    System.out.println("this is" + streak + "\n");
+                    System.out.println("break");*/
                     user.setScore(score);
                     user.setStreaks(streaks);
-                    user.setNum_maze_games_played(third_variable);
+                    user.setNum_maze_games_played(streak);
                     user.setLast_played_level(last_played_level);
+                    user.setLoad_moles_stats(load_moles_stats);
                 }
             }
 
@@ -193,7 +200,7 @@ public class UserManager {
 
 
     public static void update_statistics(
-            Context context, User user, int new_score, int new_streaks, int Third_variable, int last_played_level) {
+            Context context, User user, int new_score, int new_streaks, int streak, int last_played_level, String load_moles_stats) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 
@@ -208,7 +215,7 @@ public class UserManager {
                 int index_of_first_comma = text.indexOf(",");
                 String other_username = text.substring(0, index_of_first_comma);
                 if (user.getEmail().equals(other_username)){
-                    String new_text = other_username + ", " + new_score + ", " + new_streaks + ", " + Third_variable + ", " + last_played_level + "\n";
+                    String new_text = other_username + ", " + new_score + ", " + new_streaks + ", " + streak + ", " + last_played_level + "," + load_moles_stats + "\n";
                     sb.append(new_text);
                 } else {
                     sb.append(text).append("\n");

@@ -1,6 +1,5 @@
 package com.example.myapplication.WhackAMole;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -55,9 +54,11 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     thread_active = true;
   }
 
-  public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
+  public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+  }
 
-  public void surfaceDestroyed(SurfaceHolder holder) {}
+  public void surfaceDestroyed(SurfaceHolder holder) {
+  }
 
   // Method burrowed but significantly modified from source 2).
   protected void initialize() {
@@ -88,6 +89,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
             activity.numLives,
             activity.numColumns,
             activity.numRows,
+            activity.score,
             this);
     wamManager.initialize();
 
@@ -181,9 +183,15 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         mole.setState(Mole.Movement.HIT);
         this.wamManager.score += 1;
         this.activity.molesHit += 1;
+        upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
       }
     }
   }
+
+  private void upload_moles_stats(String stats){
+    this.activity.user.setLoad_moles_stats(stats);
+  }
+
   // Inspired by source 3).
   @Override
   public void run() {

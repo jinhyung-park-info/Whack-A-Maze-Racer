@@ -52,6 +52,7 @@ public class GameActivity extends AppCompatActivity {
                 loadButton.setError("Have not started the game!");
                 break;
             case 1:
+                MoleActivity.loaded = true;
                 Intent intent = new Intent(this, MoleActivity.class);
                 intent.putExtra(USER, user);
                 startActivity(intent);

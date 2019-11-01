@@ -63,26 +63,26 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         User user_1 = (User) intent.getSerializableExtra(USER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUser(user_1);
         }
+
         mazeSaveStateFileName = user.getEmail() + "_maze_save_state.txt";
-
-        File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
-        if (mazeFile.exists()) {
-            mazeFile.delete();
-        }
-
-        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
         startedMaze = false;
 
+        //if they clicked start game instead of load game and properly went through each level
         if (user.getLast_played_level() != 3) {
+            File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
+            if (mazeFile.exists()) {
+                mazeFile.delete();
+            }
             setContentView(R.layout.activity_maze_customization);
         } else {
             setupMaze();
         }
 
         user.setLast_played_level(3);
+        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level(), user.getLoad_moles_stats());
 
     }
 
@@ -145,7 +145,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     }
 
-    private void setUser(User new_user){
+    private void setUser(User new_user) {
         user = new_user;
     }
 
@@ -167,14 +167,14 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         startedMaze = true;
     }
 
-    public void finish_button(View view){
+    public void finish_button(View view) {
         Button button = findViewById(R.id.button8);
-        if(passed) {
+        if (passed) {
             passed = false;
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra(USER, user);
             startActivity(intent);
-        }else
+        } else
             button.setError("Play the maze game first");
         {
 
@@ -221,27 +221,27 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //if (startedMaze) {
-        //initialize an arraylist of stringbuilders
-        ArrayList<StringBuilder> savedMaze = new ArrayList<>();
-        //open the file [username]_maze_save_state.txt
-        File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
-        try {
-            Scanner input = new Scanner(mazeFile);
-            //for each line the file
-            while (input.hasNextLine()) {
-                //trim and convert the line to a stringbuilder and append to arraylist
-                savedMaze.add(new StringBuilder(input.nextLine().trim()));
+        if (startedMaze) {
+            //initialize an arraylist of stringbuilders
+            ArrayList<StringBuilder> savedMaze = new ArrayList<>();
+            //open the file [username]_maze_save_state.txt
+            File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
+            try {
+                Scanner input = new Scanner(mazeFile);
+                //for each line the file
+                while (input.hasNextLine()) {
+                    //trim and convert the line to a stringbuilder and append to arraylist
+                    savedMaze.add(new StringBuilder(input.nextLine().trim()));
+                }
+                //close file
+                input.close();
+                //send this ArrayList to maze.loadMaze()
+                maze.loadMaze(savedMaze);
+                mazeFile.delete();
+            } catch (FileNotFoundException e) {
+                Log.e(TAG, "Maze file not found on resume");
             }
-            //close file
-            input.close();
-            //send this ArrayList to maze.loadMaze()
-            maze.loadMaze(savedMaze);
-            mazeFile.delete();
-        } catch (FileNotFoundException e) {
-            Log.e(TAG, "Maze file not found on resume");
-        }
 
-        //}
+        }
     }
 }

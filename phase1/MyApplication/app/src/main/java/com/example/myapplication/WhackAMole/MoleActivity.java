@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,21 +33,61 @@ public class MoleActivity extends AppCompatActivity {
   int numRows;
   int backgroundID = R.drawable.game_background;
   int molesHit;
+  int score = 0;
+  public static boolean loaded;
 
   User user;
 
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_mole);
+
     Intent intent = getIntent();
     User user_1 = (User) intent.getSerializableExtra(USER);
     if (user_1 != null) {
       setUser(user_1);
     }
     user.setLast_played_level(1);
-    UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level());
+    UserManager.update_statistics(
+        this,
+        user,
+        user.getScore(),
+        user.getStreaks(),
+        user.getNum_maze_games_played(),
+        user.getLast_played_level(),
+        user.getLoad_moles_stats());
     reset();
-    passed = false;
+
+    if (loaded && !user.getLoad_moles_stats().equals(" 0")) {
+      load(this, user);
+    }else{setContentView(R.layout.activity_mole);}
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    UserManager.update_statistics(
+        this,
+        user,
+        user.getScore(),
+        user.getStreaks(),
+        user.getNum_maze_games_played(),
+        user.getLast_played_level(),
+        user.getLoad_moles_stats());
+
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    UserManager.update_statistics(
+        this,
+        user,
+        user.getScore(),
+        user.getStreaks(),
+        user.getNum_maze_games_played(),
+        user.getLast_played_level(),
+        user.getLoad_moles_stats());
+
   }
 
   private void setUser(User new_user) {
@@ -126,49 +167,25 @@ public class MoleActivity extends AppCompatActivity {
     numLives = 5;
     numRows = 2;
     numColumns = 2;
+    score = 0;
+    backgroundID = R.drawable.game_background;
   }
 
-  public void load(Context context, String username, User user){
+  public void load(Context context, User user) {
+   String load = user.getLoad_moles_stats();
+   String[] stats = load.split(" ");
 
-    FileInputStream fis = null;
-
-    try {
-      fis = context.openFileInput(MainActivity.Stats_file);
-      InputStreamReader isr = new InputStreamReader(fis);
-      BufferedReader br = new BufferedReader(isr);
-
-      String text;
-
-      while ((text = br.readLine()) != null) {
-        int index_of_first_comma = text.indexOf(",");
-        String other_username = text.substring(0, index_of_first_comma);
-        if (username.equals(other_username)){
-          int index_of_second_comma = text.indexOf(",", index_of_first_comma + 1);
-          int index_of_third_comma = text.indexOf(",", index_of_second_comma + 1);
-          int index_of_forth_comma = text.indexOf(",", index_of_third_comma + 1);
-          //          int index_of_fifth_comma = text.indexOf(",", index_of_forth_comma + 1);
-          //          int index_of_sixth_comma = text.indexOf(",", index_of_fifth_comma + 1);
-          //          int index_of_seventh_comma = text.indexOf(",", index_of_sixth_comma + 1);
-
-          List data = Arrays.asList(text.substring(index_of_forth_comma + 2));
+          this.score = Integer.parseInt(stats[3]);
+          this.numLives = Integer.parseInt(stats[0]);
+          this.numColumns = Integer.parseInt(stats[1]);
+          this.numRows = Integer.parseInt(stats[2]);
+          WamView wamView = new WamView(this);
+          setContentView(wamView);
+          loaded = false;
+          user.setLoad_moles_stats(" 0");
         }
-      }
 
-      //System.out.println(sb);
 
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      if (fis != null) {
-        try {
-          fis.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    }
 
-  }
+
 }
