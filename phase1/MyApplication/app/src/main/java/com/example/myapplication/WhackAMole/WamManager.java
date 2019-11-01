@@ -121,7 +121,7 @@ class WamManager {
     for (Mole mole : moleList) {
       mole.reset();
     }
-
+    wamView.thread_active = true;
     this.currentLives = this.numLives;
   }
 

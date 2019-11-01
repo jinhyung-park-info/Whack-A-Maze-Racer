@@ -27,7 +27,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private Canvas canvas;
   private Paint paint;
   private SurfaceHolder holder;
-  private boolean thread_active;
+  boolean thread_active;
   private String endScore;
   private String end_message1;
   private String end_message2;
@@ -148,6 +148,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         this.inGameTouch(event, wamManager);
         return false;
       case "end":
+        thread_active = false;
         if (wamManager.moleThread.keepRunning && !used) {
           wamManager.reinitialize();
           gameStatus = "inGame";
@@ -163,6 +164,16 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
   // Update in game statistics.
   private void update() {
+    upload_moles_stats(
+            wamManager.currentLives
+                    + " "
+                    + wamManager.holesX
+                    + " "
+                    + wamManager.holesY
+                    + " "
+                    + wamManager.score
+                    + " "
+                    + activity.backgroundID);
     switch (gameStatus) {
       case "inGame":
         this.wamManager.move();
@@ -177,16 +188,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   }
 
   private void inGameTouch(MotionEvent event, WamManager wc) {
-    upload_moles_stats(
-            wamManager.currentLives
-                    + " "
-                    + wamManager.holesX
-                    + " "
-                    + wamManager.holesY
-                    + " "
-                    + wamManager.score
-                    + " "
-                    + activity.backgroundID);
     int x, y;
     x = (int) event.getX();
     y = (int) event.getY();

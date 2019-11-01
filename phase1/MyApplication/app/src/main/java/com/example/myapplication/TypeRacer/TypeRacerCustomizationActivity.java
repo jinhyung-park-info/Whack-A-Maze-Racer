@@ -31,7 +31,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         passed = false;
         Intent intent = getIntent();
         User user_1 = (User) intent.getSerializableExtra(USER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUser(user_1);
         }
         user.setLast_played_level(2);
