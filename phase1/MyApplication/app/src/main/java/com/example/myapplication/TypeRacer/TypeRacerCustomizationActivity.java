@@ -21,9 +21,9 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
     static boolean passed;
     static int numLives = 5;
-    static int trBC = Color.WHITE;
+    static int backGround = Color.WHITE;
     static int d = 5;
-    static int tC = Color.BLACK;
+    static int textColor = Color.BLACK;
     private User user;
 
     @Override
@@ -46,45 +46,61 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
     public void onRadioButtonClicked(View view) {
 
-        if (((RadioButton) view).isChecked()) {
-            switch (view.getId()) {
-                case R.id.hot:
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch (view.getId()) {
+            case R.id.hot:
+                if (checked) {
                     d = 30;
                     numLives = 1;
-                    break;
-                case R.id.spicy:
+                }
+                break;
+            case R.id.spicy:
+                if (checked) {
                     d = 15;
                     numLives = 3;
-                    break;
-                case R.id.mild:
+                }
+                break;
+            case R.id.mild:
+                if (checked) {
                     d = 5;
                     numLives = 5;
-                    break;
-                case R.id.textColorBlack:
-                    tC = Color.BLACK;
-                    break;
-                case R.id.TextColorBlue:
-                    tC = Color.BLUE;
-                    break;
-                case R.id.textColorMagenta:
-                    tC = Color.MAGENTA;
-                    break;
-                case R.id.tr_white:
-                    trBC = Color.WHITE;
-                    break;
-                case R.id.tr_green:
-                    trBC = Color.GREEN;
-                    break;
+                }
+                break;
+            case R.id.textColorBlack:
+                if (checked) {
+                    textColor = Color.BLACK;
+                }
+                break;
+            case R.id.TextColorBlue:
+                if (checked) {
+                    textColor = Color.BLUE;
+                }
+                break;
+            case R.id.textColorMagenta:
+                if (checked) {
+                    textColor = Color.MAGENTA;
+                }
+                break;
+            case R.id.tr_white:
+                if (checked) {
+                    backGround = Color.WHITE;
+                }
+                break;
+            case R.id.tr_green:
+                if (checked) {
+                    backGround = Color.GREEN;
+                }
+                break;
 
             }
-        }
     }
 
     public void playL2(View view) {
         Intent intent = new Intent(this, TypeRacer.class);
-        intent.putExtra("trBC", trBC);
+        intent.putExtra("backGroundColorKey", backGround);
         intent.putExtra("difficulty", d);
-        intent.putExtra("textColor", tC);
+        intent.putExtra("textColorKey", textColor);
         intent.putExtra("lives", numLives);
         intent.putExtra(USER, user);
         startActivity(intent);

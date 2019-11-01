@@ -8,29 +8,17 @@
     tools:context=".TypeRacer.TypeRacerCustomizationActivity">
 
     <Button
-        android:id="@+id/tr_button"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="86dp"
-        android:onClick="goToL3"
-        android:text=" Go to Level 3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tr_Button" />
-
-    <Button
         android:id="@+id/tr_Button"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="130dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginBottom="72dp"
         android:onClick="playL2"
         android:text="Play Level 2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tr_button"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -109,6 +97,7 @@
             android:id="@+id/textColorBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:onClick="onRadioButtonClicked"
             android:text="Black" />
 
@@ -116,7 +105,7 @@
             android:id="@+id/TextColorBlue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:checked="false"
             android:onClick="onRadioButtonClicked"
             android:text="Blue" />
 
