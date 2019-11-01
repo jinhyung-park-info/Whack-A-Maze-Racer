@@ -64,7 +64,6 @@ public class TypeRacer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer);
-
         Intent intent = getIntent();
         final User user_1 = (User) intent.getSerializableExtra(USER);
         if (user_1 != null) {
@@ -141,6 +140,9 @@ public class TypeRacer extends AppCompatActivity {
                         fos.write(this.countDown.getText().toString().getBytes());
                         fos.write("\n".getBytes());
 
+                        countDownTimer.cancel();
+
+
                         user.setThereIsSaved(true);
 
                     } catch (IOException e) {
@@ -164,10 +166,17 @@ public class TypeRacer extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        Intent intent = getIntent();
+        final User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null) {
+            setUser(user_1);
+        }
+
         if (user.getThereIsSaved()) {
             FileInputStream fis = null;
             try {
-                fis = getApplicationContext().openFileInput(MainActivity.Stats_file);
+                fis = getApplicationContext().openFileInput(user.getEmail() + "_typeracer.txt");
                 InputStreamReader isr = new InputStreamReader(fis);
                 BufferedReader rd = new BufferedReader(isr);
 
@@ -183,7 +192,7 @@ public class TypeRacer extends AppCompatActivity {
                 this.backGroundColor = Integer.parseInt(rd.readLine());
                 this.textColor = Integer.parseInt(rd.readLine());
 
-                if (rd.readLine() == "False") {
+                if (!Boolean.valueOf(rd.readLine())) {
                     this.timerRunning = false;
                 } else {
                     this.timerRunning = true;
@@ -197,8 +206,27 @@ public class TypeRacer extends AppCompatActivity {
                 score.setText("" + countScore);
                 streak.setText("" + countStreak);
                 life.setText("" + countLife);
-                countDown.setText(rd.readLine());
-                question.setText(questions.get(questionNumber));
+                int time = Integer.parseInt(rd.readLine());
+
+                startTime = System.currentTimeMillis();
+                timerRunning = true;
+                countDownTimer =
+                        new CountDownTimer(time * 1000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                countDown.setText(Long.toString(millisUntilFinished / 1000));
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                updateStatistics(false);
+                                countDown.setText("0");
+                                showNextQuestion();
+                                timerRunning = false;
+                            }
+                        }.start();
+
+                question.setText(questions.get(questionNumber - 1));
                 answer.setText("" + answerString);
                 answer.setEnabled(true);
                 manageTime();
@@ -225,6 +253,8 @@ public class TypeRacer extends AppCompatActivity {
                 });
 
                 user.setThereIsSaved(false);
+                File newFile = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
+                newFile.delete();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
