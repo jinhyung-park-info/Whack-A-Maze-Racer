@@ -57,11 +57,9 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     thread_active = true;
   }
 
-  public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-  }
+  public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
 
-  public void surfaceDestroyed(SurfaceHolder holder) {
-  }
+  public void surfaceDestroyed(SurfaceHolder holder) {}
 
   // Method burrowed but significantly modified from source 2).
   protected void initialize() {
@@ -79,7 +77,8 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     lifePic = Bitmap.createScaledBitmap(lifePic, 150, 150, true);
 
     scoreBoard = BitmapFactory.decodeResource(res, R.drawable.text_bg_bmp);
-    scoreBoard = Bitmap.createScaledBitmap(scoreBoard, screenWidth * 4 / 5, screenHeight * 3 / 10, true);
+    scoreBoard =
+        Bitmap.createScaledBitmap(scoreBoard, screenWidth * 4 / 5, screenHeight * 3 / 10, true);
 
     Rect mole_rect = new Rect(0, screenHeight * 2 / 7, screenWidth, screenHeight * 5 / 6);
 
@@ -190,7 +189,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     }
   }
 
-  private void upload_moles_stats(String stats){
+  private void upload_moles_stats(String stats) {
     this.activity.user.setLoad_moles_stats(stats);
   }
 
@@ -198,11 +197,18 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   @Override
   public void run() {
     while (thread_active) {
-      upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score + " " + activity.backgroundID);
+      upload_moles_stats(
+          wamManager.currentLives
+              + " "
+              + wamManager.holesX
+              + " "
+              + wamManager.holesY
+              + " "
+              + wamManager.score
+              + " "
+              + activity.backgroundID);
       long start_time = System.currentTimeMillis();
-      UserManager.update_statistics(
-              activity,
-              activity.user);
+      UserManager.update_statistics(activity, activity.user);
       draw();
       update();
       long end_time = System.currentTimeMillis();

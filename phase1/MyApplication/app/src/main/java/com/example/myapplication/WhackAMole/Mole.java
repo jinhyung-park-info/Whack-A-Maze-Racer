@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 /** Obtained but significantly modified from source 2) */
-
 class Mole {
 
   public enum Movement {
@@ -100,5 +99,4 @@ class Mole {
   Rect getTouchRect() {
     return new Rect((int) x, (int) y, (int) width, (int) height);
   }
-
 }

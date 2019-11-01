@@ -9,20 +9,10 @@ import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.example.myapplication.MainActivity.USER;
 
@@ -47,35 +37,30 @@ public class MoleActivity extends AppCompatActivity {
       setUser(user_1);
     }
     user.setLast_played_level(1);
-    UserManager.update_statistics(
-        this,
-        user);
+    UserManager.update_statistics(this, user);
     reset();
 
     if (loaded && !user.getLoad_moles_stats().equals(" 0")) {
       load(this, user);
-    }else{setContentView(R.layout.activity_mole);}
+    } else {
+      setContentView(R.layout.activity_mole);
+    }
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    UserManager.update_statistics(
-        this,
-        user);
-
+    UserManager.update_statistics(this, user);
   }
 
   @Override
   protected void onPause() {
     super.onPause();
-    UserManager.update_statistics(
-        this,
-        user);
-
+    UserManager.update_statistics(this, user);
   }
+
   @Override
-  public void onBackPressed(){}
+  public void onBackPressed() {}
 
   private void setUser(User new_user) {
     user = new_user;
@@ -162,22 +147,18 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   public void load(Context context, User user) {
-   String load = user.getLoad_moles_stats();
-   String[] stats = load.split(" ");
+    String load = user.getLoad_moles_stats();
+    String[] stats = load.split(" ");
 
-          this.score = Integer.parseInt(stats[3]);
-          this.numLives = Integer.parseInt(stats[0]);
-          this.numColumns = Integer.parseInt(stats[1]);
-          this.numRows = Integer.parseInt(stats[2]);
-          this.backgroundID = Integer.parseInt(stats[4]);
-          WamView wamView = new WamView(this);
-          setContentView(wamView);
-          loaded = false;
-          wamView.used = true;
-          user.setLoad_moles_stats(" 0");
-        }
-
-
-
-
+    this.score = Integer.parseInt(stats[3]);
+    this.numLives = Integer.parseInt(stats[0]);
+    this.numColumns = Integer.parseInt(stats[1]);
+    this.numRows = Integer.parseInt(stats[2]);
+    this.backgroundID = Integer.parseInt(stats[4]);
+    WamView wamView = new WamView(this);
+    setContentView(wamView);
+    loaded = false;
+    wamView.used = true;
+    user.setLoad_moles_stats(" 0");
+  }
 }
