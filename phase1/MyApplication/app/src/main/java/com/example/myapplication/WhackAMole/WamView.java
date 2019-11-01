@@ -32,6 +32,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private String end_message2;
   private String end_message3;
   private String end_message4;
+  boolean used;
 
   public WamManager wamManager;
 
@@ -40,6 +41,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     holder = this.getHolder();
     holder.addCallback(this);
     paint = new Paint();
+    this.used = false;
   }
 
   public void surfaceCreated(SurfaceHolder holder) {
@@ -146,7 +148,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         this.inGameTouch(event, wamManager);
         return false;
       case "end":
-        if (wamManager.moleThread.keepRunning) {
+        if (wamManager.moleThread.keepRunning && !used) {
           wamManager.reinitialize();
           gameStatus = "inGame";
         } else {
@@ -183,7 +185,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         mole.setState(Mole.Movement.HIT);
         this.wamManager.score += 1;
         this.activity.molesHit += 1;
-        upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
       }
     }
   }
@@ -196,6 +197,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   @Override
   public void run() {
     while (thread_active) {
+      upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
       long start_time = System.currentTimeMillis();
       draw();
       update();
