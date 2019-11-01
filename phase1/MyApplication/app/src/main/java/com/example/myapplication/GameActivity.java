@@ -58,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case 2:
-                Intent intent2 = new Intent(this, TypeRacer.class);
+                Intent intent2 = new Intent(this, TypeRacerCustomizationActivity.class);
                 intent2.putExtra(USER, user);
                 startActivity(intent2);
                 break;
