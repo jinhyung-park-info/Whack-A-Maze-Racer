@@ -16,10 +16,21 @@ import android.widget.TextView;
 
 
 import com.example.myapplication.GameOver;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -43,39 +54,192 @@ public class TypeRacer extends AppCompatActivity {
     private long timeLeftInMillis;
     private CountDownTimer countDownTimer;
     Boolean timerRunning = false;
-
     private User user;
+    int backGroundColor;
+    int textColor;
+    int parameterDifficulty;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer);
-        getTexts();
-        setCustomization();
-        showNextQuestion();
 
-        Button doneBtn = (Button)findViewById(R.id.doneButton);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        Intent intent = getIntent();
+        final User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null) {
+            setUser(user_1);
+        }
 
-                //goes to next question if response is correct
-                if (userIsCorrect()) {
-                    endTime = System.currentTimeMillis();
-                    if (countDownTimer != null) countDownTimer.cancel();
-                    timerRunning = false;
-                    answer.setEnabled(false);
-                    answer.clearFocus();
-                    updateStatistics(true);
-                    showNextQuestion();
+        if (!user.getThereIsSaved()) {
+            backGroundColor = intent.getExtras().getInt("backGroundColorKey");
+            textColor = intent.getExtras().getInt("textColorKey");
+            getTexts();
+            countLife = intent.getExtras().getInt("lives");
+            parameterDifficulty = intent.getIntExtra("difficulty", 5);
+
+            setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
+            showNextQuestion();
+            Button doneBtn = (Button)findViewById(R.id.doneButton);
+            doneBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //goes to next question if response is correct
+                    if (userIsCorrect()) {
+                        endTime = System.currentTimeMillis();
+                        if (countDownTimer != null) countDownTimer.cancel();
+                        timerRunning = false;
+                        answer.setEnabled(false);
+                        answer.clearFocus();
+                        updateStatistics(true);
+                        showNextQuestion();
+                    } else {
+                        updateStatistics(false);
+                        showNextQuestion();
+                    }
                 }
-                else {
-                    updateStatistics(false);
-                    showNextQuestion();
+            });
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+            FileOutputStream fos = null;
+            // File file = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
+                try {
+                    fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
+                    try {
+                        fos.write(String.valueOf(this.countScore).getBytes());
+                        fos.write("\n".getBytes());
+                        fos.write(String.valueOf(this.countLife).getBytes());
+                        fos.write("\n".getBytes());
+                        fos.write(String.valueOf(this.countStreak).getBytes());
+                        fos.write("\n".getBytes());
+                        fos.write(String.valueOf(this.questionNumber).getBytes());
+                        fos.write("\n".getBytes());
+                        for (int i = 0; i < 5; i++) {
+                            fos.write(this.questions.get(i).getBytes());
+                            fos.write("\n".getBytes());
+                        }
+                        fos.write(this.answer.getText().toString().getBytes());
+                        fos.write("\n".getBytes());
+
+                        fos.write(String.valueOf(this.backGroundColor).getBytes());
+                        fos.write("\n".getBytes());
+
+                        fos.write(String.valueOf(this.textColor).getBytes());
+                        fos.write("\n".getBytes());
+
+                        fos.write(this.timerRunning.toString().getBytes());
+                        fos.write("\n".getBytes());
+
+                        fos.write(String.valueOf(this.parameterDifficulty).getBytes());
+                        fos.write("\n".getBytes());
+
+                        fos.write(this.countDown.getText().toString().getBytes());
+                        fos.write("\n".getBytes());
+
+                        user.setThereIsSaved(true);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (fos != null) {
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (user.getThereIsSaved()) {
+            FileInputStream fis = null;
+            try {
+                fis = getApplicationContext().openFileInput(MainActivity.Stats_file);
+                InputStreamReader isr = new InputStreamReader(fis);
+                BufferedReader rd = new BufferedReader(isr);
+
+                this.countScore = Integer.parseInt(rd.readLine());
+                this.countLife = Integer.parseInt(rd.readLine());
+                this.countStreak = Integer.parseInt(rd.readLine());
+                this.questionNumber = Integer.parseInt(rd.readLine());
+                this.questions = new ArrayList<>();
+                for (int i = 0; i < 5; i++) {
+                    questions.add(rd.readLine());
+                }
+                String answerString = rd.readLine();
+                this.backGroundColor = Integer.parseInt(rd.readLine());
+                this.textColor = Integer.parseInt(rd.readLine());
+
+                if (rd.readLine() == "False") {
+                    this.timerRunning = false;
+                } else {
+                    this.timerRunning = true;
+                }
+
+                this.parameterDifficulty = Integer.parseInt(rd.readLine());
+
+                getTexts();
+                setCustomization(backGroundColor, textColor, countLife, parameterDifficulty);
+
+                score.setText("" + countScore);
+                streak.setText("" + countStreak);
+                life.setText("" + countLife);
+                countDown.setText(rd.readLine());
+                question.setText(questions.get(questionNumber));
+                answer.setText("" + answerString);
+                answer.setEnabled(true);
+                manageTime();
+
+                Button doneBtn = (Button)findViewById(R.id.doneButton);
+                doneBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //goes to next question if response is correct
+                        if (userIsCorrect()) {
+                            endTime = System.currentTimeMillis();
+                            if (countDownTimer != null) countDownTimer.cancel();
+                            timerRunning = false;
+                            answer.setEnabled(false);
+                            answer.clearFocus();
+                            updateStatistics(true);
+                            showNextQuestion();
+                        } else {
+                            updateStatistics(false);
+                            showNextQuestion();
+                        }
+                    }
+                });
+
+                user.setThereIsSaved(false);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        });
+        }
     }
 
     private void setUser(User new_user) {
@@ -97,27 +261,18 @@ public class TypeRacer extends AppCompatActivity {
 
     }
 
-    public void setCustomization() {
+    public void setCustomization(int backGroundColor, int textColor, int lives, int diffi) {
 
         //User setUp
-        final Intent intent = getIntent();
-        final User user_1 = (User) intent.getSerializableExtra(USER);
-        if (user_1 != null) {
-            setUser(user_1);
+
+        if (!user.getThereIsSaved()) {
+            // initialize 3 statistics
+            countScore = 0;
+            countStreak = user.getStreaks();
+            score.setText("" + countScore);
+            streak.setText("" + countStreak);
+            life.setText("" + lives);
         }
-
-        // initialize 3 statistics
-        countScore = 0;
-        countStreak = user.getStreaks();
-        countLife = intent.getIntExtra("lives", 5);
-        score.setText("" + countScore);
-        streak.setText("" + countStreak);
-        life.setText("" + countLife);
-
-        //set up the color of the words.
-        int trBC = intent.getIntExtra("trBC", Color.WHITE);
-        int textColor = intent.getIntExtra("textColor", Color.BLACK);
-
         question.setTextColor(textColor);
         answer.setTextColor(textColor);
         countDown.setTextColor(textColor);
@@ -132,14 +287,15 @@ public class TypeRacer extends AppCompatActivity {
 
         //set up the background color.
         View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(trBC);
+        view.setBackgroundColor(backGroundColor);
 
-        //set up the difficulty.
-        int difficulty = intent.getIntExtra("difficulty", 5);
+        if (!user.getThereIsSaved()) {
+            //set up the difficulty.
 
-        //generate a list of questions
-        for (int i = 0; i < 5; i++){
-            createQuestion(difficulty);
+            //generate a list of questions
+            for (int i = 0; i < 5; i++){
+                createQuestion(diffi);
+            }
         }
 
     }
@@ -187,7 +343,7 @@ public class TypeRacer extends AppCompatActivity {
 
                         String response = answer.getText().toString();
                         //start counting
-                        if (response.length() == 1) {
+                        if (response.length() == 1 || user.getThereIsSaved()) {
                             startTime = System.currentTimeMillis();
                             if (timerRunning) return;
                             timerRunning = true;
