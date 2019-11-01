@@ -82,6 +82,14 @@
             android:checked="true"
             android:onClick="onRadioButtonClicked"
             android:text="Beach" />
+
+        <RadioButton
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Space" />
+
     </RadioGroup>
 
     <TextView

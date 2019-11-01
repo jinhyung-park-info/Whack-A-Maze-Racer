@@ -127,6 +127,9 @@ public class MoleActivity extends AppCompatActivity {
         case R.id.grass:
           backgroundID = R.drawable.game_background_grass;
           break;
+        case R.id.space:
+          backgroundID = R.drawable.game_background_space;
+          break;
       }
     }
   }
