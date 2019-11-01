@@ -13,6 +13,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.UserManager;
 
 /** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
@@ -197,8 +198,11 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   @Override
   public void run() {
     while (thread_active) {
-      upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score);
+      upload_moles_stats(wamManager.currentLives + " " + wamManager.holesX  + " " + wamManager.holesY  + " " + wamManager.score + " " + activity.backgroundID);
       long start_time = System.currentTimeMillis();
+      UserManager.update_statistics(
+              activity,
+              activity.user);
       draw();
       update();
       long end_time = System.currentTimeMillis();

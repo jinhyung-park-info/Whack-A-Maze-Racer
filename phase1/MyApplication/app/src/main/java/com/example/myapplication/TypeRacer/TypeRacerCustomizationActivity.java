@@ -37,8 +37,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
             setUser(user_1);
         }
         user.setLast_played_level(2);
-        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(),
-                user.getNum_maze_games_played(), user.getLast_played_level(), user.getLoad_moles_stats());
+        UserManager.update_statistics(this, user);
     }
 
     private void setUser(User new_user){
@@ -80,6 +79,9 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed(){}
 
     public void playL2(View view) {
         Intent intent = new Intent(this, TypeRacer.class);

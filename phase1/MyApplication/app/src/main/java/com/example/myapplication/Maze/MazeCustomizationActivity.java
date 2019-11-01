@@ -82,9 +82,12 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         }
 
         user.setLast_played_level(3);
-        UserManager.update_statistics(this, user, user.getScore(), user.getStreaks(), user.getNum_maze_games_played(), user.getLast_played_level(), user.getLoad_moles_stats());
+        UserManager.update_statistics(this, user);
 
     }
+
+    @Override
+    public void onBackPressed(){}
 
     /**
      * Updates the customization according to the given view.

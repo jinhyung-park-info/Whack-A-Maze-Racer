@@ -199,8 +199,7 @@ public class UserManager {
     }
 
 
-    public static void update_statistics(
-            Context context, User user, int new_score, int new_streaks, int streak, int last_played_level, String load_moles_stats) {
+    public static void update_statistics(Context context, User user) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 
@@ -215,7 +214,7 @@ public class UserManager {
                 int index_of_first_comma = text.indexOf(",");
                 String other_username = text.substring(0, index_of_first_comma);
                 if (user.getEmail().equals(other_username)){
-                    String new_text = other_username + ", " + new_score + ", " + new_streaks + ", " + streak + ", " + last_played_level + "," + load_moles_stats + "\n";
+                    String new_text = other_username + ", " + user.getScore() + ", " + user.getStreaks() + ", " + user.getNum_maze_games_played() + ", " + user.getLast_played_level() + "," + user.getLoad_moles_stats() + "\n";
                     sb.append(new_text);
                 } else {
                     sb.append(text).append("\n");

@@ -49,12 +49,7 @@ public class MoleActivity extends AppCompatActivity {
     user.setLast_played_level(1);
     UserManager.update_statistics(
         this,
-        user,
-        user.getScore(),
-        user.getStreaks(),
-        user.getNum_maze_games_played(),
-        user.getLast_played_level(),
-        user.getLoad_moles_stats());
+        user);
     reset();
 
     if (loaded && !user.getLoad_moles_stats().equals(" 0")) {
@@ -67,12 +62,7 @@ public class MoleActivity extends AppCompatActivity {
     super.onDestroy();
     UserManager.update_statistics(
         this,
-        user,
-        user.getScore(),
-        user.getStreaks(),
-        user.getNum_maze_games_played(),
-        user.getLast_played_level(),
-        user.getLoad_moles_stats());
+        user);
 
   }
 
@@ -81,14 +71,11 @@ public class MoleActivity extends AppCompatActivity {
     super.onPause();
     UserManager.update_statistics(
         this,
-        user,
-        user.getScore(),
-        user.getStreaks(),
-        user.getNum_maze_games_played(),
-        user.getLast_played_level(),
-        user.getLoad_moles_stats());
+        user);
 
   }
+  @Override
+  public void onBackPressed(){}
 
   private void setUser(User new_user) {
     user = new_user;
@@ -179,6 +166,7 @@ public class MoleActivity extends AppCompatActivity {
           this.numLives = Integer.parseInt(stats[0]);
           this.numColumns = Integer.parseInt(stats[1]);
           this.numRows = Integer.parseInt(stats[2]);
+          this.backgroundID = Integer.parseInt(stats[4]);
           WamView wamView = new WamView(this);
           setContentView(wamView);
           loaded = false;
