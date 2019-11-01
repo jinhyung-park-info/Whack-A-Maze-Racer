@@ -129,27 +129,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_tr7">
 
         <RadioButton
-            android:id="@+id/hot"
+            android:id="@+id/hard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
             android:onClick="onRadioButtonClicked"
-            android:text="Hot" />
+            android:text="Hard" />
 
         <RadioButton
-            android:id="@+id/spicy"
+            android:id="@+id/normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
-            android:text="Spicy" />
+            android:text="Normal" />
 
         <RadioButton
-            android:id="@+id/mild"
+            android:id="@+id/easy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:onClick="onRadioButtonClicked"
-            android:text="Mild" />
+            android:text="Easy" />
     </RadioGroup>
 
     <TextView

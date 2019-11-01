@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
-import com.example.myapplication.Maze.MazeGame;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
@@ -50,19 +48,19 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
 
         switch (view.getId()) {
-            case R.id.hot:
+            case R.id.hard:
                 if (checked) {
                     d = 30;
                     numLives = 1;
                 }
                 break;
-            case R.id.spicy:
+            case R.id.normal:
                 if (checked) {
                     d = 15;
                     numLives = 3;
                 }
                 break;
-            case R.id.mild:
+            case R.id.easy:
                 if (checked) {
                     d = 5;
                     numLives = 5;
