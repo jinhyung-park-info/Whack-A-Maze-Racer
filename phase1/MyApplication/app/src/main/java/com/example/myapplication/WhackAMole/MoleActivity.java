@@ -182,6 +182,7 @@ public class MoleActivity extends AppCompatActivity {
           WamView wamView = new WamView(this);
           setContentView(wamView);
           loaded = false;
+          wamView.used = true;
           user.setLoad_moles_stats(" 0");
         }
 
