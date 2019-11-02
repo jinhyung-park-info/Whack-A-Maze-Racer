@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
-import com.example.myapplication.TypeRacer.TypeRacer;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.WhackAMole.MoleActivity;
 
@@ -44,6 +42,8 @@ public class GameActivity extends AppCompatActivity {
         if(file_maze.exists()){
             file_maze.delete();
         }
+        user.setLoad_moles_stats("0");
+        UserManager.update_statistics(this, user);
         Intent intent = new Intent(this, MoleActivity.class);
         intent.putExtra(USER, user);
         startActivity(intent);

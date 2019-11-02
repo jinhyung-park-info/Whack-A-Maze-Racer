@@ -13,7 +13,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.UserManager;
 
 /** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
@@ -60,6 +59,8 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
 
   public void surfaceDestroyed(SurfaceHolder holder) {}
+
+  String getGameStatus(){return this.gameStatus;}
 
   // Method burrowed but significantly modified from source 2).
   protected void initialize() {

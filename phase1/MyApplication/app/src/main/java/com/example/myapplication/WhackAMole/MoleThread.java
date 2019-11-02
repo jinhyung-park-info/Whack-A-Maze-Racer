@@ -23,16 +23,16 @@ public class MoleThread extends Thread {
 
   public void run() {
     while (keepRunning) {
-      if (wamView.gameStatus.equals("inGame")) {
+      if (wamView.getGameStatus().equals("inGame")) {
         long start_time, end_time;
         start_time = System.currentTimeMillis();
         wamManager.randomMole();
         if (wamManager.score >= 10) {
           setDuration(600);
-          Mole.speed = WamView.screenHeight / 200;
+          Mole.setSpeed(WamView.screenHeight / 200);
         } else if (wamManager.score >= 5) {
           setDuration(1500);
-          Mole.speed = WamView.screenHeight / 240;
+          Mole.setSpeed(WamView.screenHeight / 240);
         }
         end_time = System.currentTimeMillis();
         if (end_time - start_time < duration) {

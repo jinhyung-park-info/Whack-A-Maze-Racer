@@ -15,7 +15,7 @@ class Mole {
     HIT
   }
 
-  static float speed = WamView.screenHeight / 300;
+  private static float speed = WamView.screenHeight / 300;
   private Bitmap molePic;
   private float y, x, molePicWidth, molePicHeight;
   private Hole hole;
@@ -99,4 +99,6 @@ class Mole {
   Rect getTouchRect() {
     return new Rect((int) x, (int) y, (int) width, (int) height);
   }
+
+  static void setSpeed(int new_speed){speed = new_speed;}
 }

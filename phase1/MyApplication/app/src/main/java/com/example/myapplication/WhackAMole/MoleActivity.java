@@ -40,7 +40,7 @@ public class MoleActivity extends AppCompatActivity {
     UserManager.update_statistics(this, user);
     reset();
 
-    if (loaded && !user.getLoad_moles_stats().equals(" 0")) {
+    if (loaded && !user.getLoad_moles_stats().equals("0")) {
       load(this, user);
     } else {
       setContentView(R.layout.activity_mole);
@@ -129,6 +129,7 @@ public class MoleActivity extends AppCompatActivity {
     if (passed) {
       passed = false;
       user.setScore(user.getScore() + molesHit);
+      user.setLoad_moles_stats("0");
       Intent intent = new Intent(this, TypeRacerCustomizationActivity.class);
       intent.putExtra(USER, user);
       startActivity(intent);
@@ -159,6 +160,7 @@ public class MoleActivity extends AppCompatActivity {
     setContentView(wamView);
     loaded = false;
     wamView.used = true;
-    user.setLoad_moles_stats(" 0");
+    user.setLoad_moles_stats("0");
+    UserManager.update_statistics(this, user);
   }
 }

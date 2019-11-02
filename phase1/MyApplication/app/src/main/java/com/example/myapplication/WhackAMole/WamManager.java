@@ -20,7 +20,7 @@ class WamManager {
   private int numHoles;
   int holesX, holesY;
   private int holeWidth, holeHeight;
-  private int holeDeploymentWidth, holeDeploymentHeight, holeX, holeY;
+  private int holeDeploymentWidth, holeDeploymentHeight;
   private Rect holeRect;
   int score;
 
@@ -62,6 +62,8 @@ class WamManager {
     this.numHoles = numHolesX * numHolesY;
 
     this.wamView = wamView;
+    this.holeDeploymentWidth = (holeRect.right - holeRect.left) / holesX;
+    this.holeDeploymentHeight = (holeRect.bottom - holeRect.top) / holesY;
   }
 
   void draw(Canvas canvas, Paint paint) {
@@ -89,12 +91,12 @@ class WamManager {
   // Idea of spreading out holes evenly on canvas obtained from source 2)
   void initialize() {
     this.currentLives = this.numLives;
-    holeDeploymentWidth = (holeRect.right - holeRect.left) / holesX;
-    holeDeploymentHeight = (holeRect.bottom - holeRect.top) / holesY;
 
     holeList = new ArrayList<>();
 
     // Add numHoles number of holes into hole collection.
+    int holeX;
+    int holeY;
     for (int i = 0; i < this.numHoles; i++) {
       holeX = (i % holesX) * holeDeploymentWidth + holeDeploymentWidth / 2 - holeWidth / 2;
       holeY =

@@ -170,7 +170,7 @@ public class UserManager {
                     int streaks = Integer.parseInt(text.substring(index_of_second_comma + 2, index_of_third_comma));
                     int streak = Integer.parseInt(text.substring(index_of_third_comma + 2, index_of_forth_comma));
                     int last_played_level = Integer.parseInt(text.substring(index_of_forth_comma + 2, index_of_fifth_comma));
-                    String load_moles_stats = text.substring(index_of_fifth_comma + 1);
+                    String load_moles_stats = text.substring(index_of_fifth_comma + 2);
                     /*System.out.println(score);
                     System.out.println("this is" + (streaks));
                     System.out.println("this is" + streak + "\n");
