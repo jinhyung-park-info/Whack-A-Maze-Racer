@@ -143,6 +143,7 @@ public class TypeRacer extends AppCompatActivity {
                         if (countDownTimer != null) {
                             countDownTimer.cancel();
                         }
+                        
 
                         user.setThereIsSaved(true);
 
