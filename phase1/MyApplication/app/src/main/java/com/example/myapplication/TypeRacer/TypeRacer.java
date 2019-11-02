@@ -140,8 +140,9 @@ public class TypeRacer extends AppCompatActivity {
                         fos.write(this.countDown.getText().toString().getBytes());
                         fos.write("\n".getBytes());
 
-                        countDownTimer.cancel();
-
+                        if (countDownTimer != null) {
+                            countDownTimer.cancel();
+                        }
 
                         user.setThereIsSaved(true);
 
