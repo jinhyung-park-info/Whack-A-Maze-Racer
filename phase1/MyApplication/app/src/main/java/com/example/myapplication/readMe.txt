@@ -1,3 +1,6 @@
+Multi-Byte string are not allowed to be entered as the username or password
+
+
 Saving for the Maze Game
 -------------------------
 Every time the MazeCustomizationActivity is interrupted, onPause is called and

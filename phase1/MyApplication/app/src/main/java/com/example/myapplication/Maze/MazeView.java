@@ -7,16 +7,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.myapplication.GameActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -114,9 +111,6 @@ public class MazeView extends View {
     static final int num_games = 2;
     private int games_played = 0;
     private Context contexts;
-
-    //static Canvas new_canvas;
-    //static int counter = 0;
 
 
     public MazeView(Context context, int bgColour, String difficulty,
@@ -252,6 +246,10 @@ public class MazeView extends View {
 
     /**
      * Initializes the 2d array of cells and initializes each individual cell element in the array.
+     * https://www.youtube.com/watch?v=8Ju_uxJ9v44
+     * https://stackoverflow.com/questions/38502/whats-a-good-algorithm-to-generate-a-maze
+     * These links were used in order to help us choose  which algorithm to create the maze and to
+     * create the maze
      */
     private void createMaze() {
         //recursive backtracking algorithm for creating mazes
@@ -318,7 +316,6 @@ public class MazeView extends View {
         //to update the positions on the screen, we have to call onDraw()
         //invalidate() calls onDraw() as soon as possible
         invalidate();
-        //new_on_draw(new_canvas);
     }
 
     private void checkExit() {
@@ -327,13 +324,10 @@ public class MazeView extends View {
             createMaze();
             if (games_played >= num_games) {
                 this.user_in_maze.setNum_maze_games_played(user_in_maze.getNum_maze_games_played() + games_played);
-                UserManager.update_statistics(contexts, user_in_maze);
-                /*Intent intent = new Intent(contexts, GameActivity.class);
-                intent.putExtra(USER, user_in_maze);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                contexts.startActivity(intent);*/
                 this.user_in_maze.setLast_played_level(0);
-                Activity activity = (Activity) contexts;
+                UserManager.update_statistics(contexts, user_in_maze);
+                Activity activity = (MazeCustomizationActivity) contexts;
+                ((MazeCustomizationActivity) contexts).reset();
                 activity.setContentView(R.layout.activity_maze_customization);
                 MazeCustomizationActivity.passed = true;
 
@@ -402,7 +396,7 @@ public class MazeView extends View {
             //add stringbuilder to arraylist
             savedMaze.add(currColString);
         }
-        System.out.println(savedMaze);
+        //System.out.println(savedMaze);
         return savedMaze;
     }
 
@@ -464,6 +458,13 @@ public class MazeView extends View {
 
     }
 
+    /**
+    https://codetheory.in/android-ontouchevent-ontouchlistener-motionevent-to-detect-common-gestures/
+    https://developer.android.com/training/graphics/opengl/touch#java
+    https://www.youtube.com/watch?v=SYoN-OvdZ3M part1-4 regarding onTouchEvent
+    all of these links were used to help us understand onTouch and how we can implement onTouch in
+    our own game properly.
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -540,7 +541,6 @@ public class MazeView extends View {
         //and verticalMargin units down
         canvas.translate(horizontalMargin, verticalMargin);
 
-        //TODO use strategy design to remove duplication of looping through this 2d array
         for (int x = 0; x < cols; x++) {
             for (int y = 0; y < rows; y++) {
                 if (cells[x][y].hasTopWall()) {
@@ -575,7 +575,6 @@ public class MazeView extends View {
 
             //we will add this to the top left corner and subtract it from the bottom right corner
             float margin = cellSize / 10;
-            //TODO use strategy design pattern to reduce duplication of code
             //draw the player
             canvas.drawRect(player.getCol() * cellSize + margin,
                     player.getRow() * cellSize + margin,

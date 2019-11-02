@@ -2,7 +2,6 @@ package com.example.myapplication.Maze;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,17 +11,14 @@ import android.widget.Button;
 import android.widget.RadioButton;
 
 import com.example.myapplication.GameActivity;
-import com.example.myapplication.Maze.MazeGame;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -82,7 +78,8 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         }
 
         user.setLast_played_level(3);
-        UserManager.update_statistics(this, user);
+        UserManager.update_statistics(getApplicationContext(), user);
+        reset();
 
     }
 
@@ -153,12 +150,6 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     public void startMazeGame(View view) {
-        /*Intent intent = new Intent(this, MazeGame.class);
-        intent.putExtra("bgColour", bgColour);
-        intent.putExtra("difficulty", difficulty);
-        intent.putExtra("playerColour", playerColour);
-        intent.putExtra(USER, user);
-        startActivity(intent);*/
         setupMaze();
     }
 
@@ -246,5 +237,11 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void reset() {
+       bgColour = Color.GREEN;
+       difficulty = "Normal";
+       playerColour = Color.BLACK;
     }
 }

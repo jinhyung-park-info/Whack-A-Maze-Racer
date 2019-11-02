@@ -13,6 +13,8 @@ import com.example.myapplication.TypeRacer.TypeRacer;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.WhackAMole.MoleActivity;
 
+import java.io.File;
+
 import static com.example.myapplication.MainActivity.USER;
 
 public class GameActivity extends AppCompatActivity {
@@ -34,6 +36,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void play_Mole(View v){
+        File file_type = new File(getApplicationContext().getFilesDir(),user.getEmail() + "_typeracer.txt");
+        File file_maze = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_maze_save_state.txt");
+        if(file_type.exists()){
+            file_type.delete();
+        }
+        if(file_maze.exists()){
+            file_maze.delete();
+        }
         Intent intent = new Intent(this, MoleActivity.class);
         intent.putExtra(USER, user);
         startActivity(intent);
