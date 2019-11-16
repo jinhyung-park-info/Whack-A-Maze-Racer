@@ -60,7 +60,9 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   @Override
-  public void onBackPressed() {}
+  public void onBackPressed() {
+    setContentView(R.layout.activity_mole);
+  }
 
   private void setUser(User new_user) {
     user = new_user;

@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.WhackAMole.MoleActivity;
+import com.example.myapplication.WhackAMole.MoleInstructionActivity;
 
 import java.io.File;
 
@@ -44,7 +45,7 @@ public class GameActivity extends AppCompatActivity {
         }
         user.setLoad_moles_stats("0");
         UserManager.update_statistics(this, user);
-        Intent intent = new Intent(this, MoleActivity.class);
+        Intent intent = new Intent(this, MoleInstructionActivity.class);
         intent.putExtra(USER, user);
         startActivity(intent);
     }
