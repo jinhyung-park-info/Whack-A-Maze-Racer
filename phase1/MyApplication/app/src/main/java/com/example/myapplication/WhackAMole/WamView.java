@@ -32,7 +32,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private String end_message2;
   private String end_message3;
   private String end_message4;
-  boolean used;
 
   public WamManager wamManager;
 
@@ -41,7 +40,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     holder = this.getHolder();
     holder.addCallback(this);
     paint = new Paint();
-    this.used = false;
   }
 
   public void surfaceCreated(SurfaceHolder holder) {
@@ -60,8 +58,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
   public void surfaceDestroyed(SurfaceHolder holder) {}
 
-  String getGameStatus(){return this.gameStatus;}
-
   // Method burrowed but significantly modified from source 2).
   protected void initialize() {
 
@@ -78,8 +74,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     lifePic = Bitmap.createScaledBitmap(lifePic, 150, 150, true);
 
     scoreBoard = BitmapFactory.decodeResource(res, R.drawable.text_bg_bmp);
-    scoreBoard =
-        Bitmap.createScaledBitmap(scoreBoard, screenWidth * 4 / 5, screenHeight * 3 / 10, true);
+    scoreBoard = Bitmap.createScaledBitmap(scoreBoard, screenWidth * 4 / 5, screenHeight * 3 / 10, true);
 
     Rect mole_rect = new Rect(0, screenHeight * 2 / 7, screenWidth, screenHeight * 5 / 6);
 
@@ -92,8 +87,8 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
             activity.numLives,
             activity.numColumns,
             activity.numRows,
-            activity.score,
-            this);
+            activity.score
+        );
     wamManager.initialize();
 
     endScore = "Score:" + this.wamManager.score;
@@ -123,7 +118,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
           case "end":
             canvas.drawBitmap(scoreBoard, screenWidth / 7, screenHeight * 4 / 7, paint);
             canvas.drawText(endScore, screenWidth / 4, screenHeight * 2 / 3, paint);
-            if (wamManager.moleThread.keepRunning) {
+            if (thread_active) {
               canvas.drawText(end_message1, screenWidth / 4, screenHeight * 11 / 15, paint);
               canvas.drawText(end_message2, screenWidth / 4, screenHeight * 12 / 15, paint);
             } else {
@@ -150,15 +145,14 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         return false;
       case "end":
         thread_active = false;
-        if (wamManager.moleThread.keepRunning && !used) {
-          wamManager.reinitialize();
-          gameStatus = "inGame";
-        } else {
-          activity.reset();
-          used = false;
-          activity.setContentView(R.layout.activity_mole);
+        if (wamManager.score >= 15) {
           this.activity.passed = true;
-        }
+          }
+        wamManager.reinitialize();
+        gameStatus = "inGame";
+        activity.reset();
+        activity.setContentView(R.layout.activity_mole);
+
     }
     return true;
   }
@@ -210,7 +204,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   @Override
   public void run() {
     while (thread_active) {
-
       long start_time = System.currentTimeMillis();
       draw();
       update();

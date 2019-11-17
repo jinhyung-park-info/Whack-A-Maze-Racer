@@ -18,7 +18,6 @@ class Mole {
   private static float speed = WamView.screenHeight / 300;
   private Bitmap molePic;
   private float y, x, molePicWidth, molePicHeight;
-  private Hole hole;
   private Movement state;
   private int standByDuration;
   private float picLeft, width, picTop, height;
@@ -27,7 +26,6 @@ class Mole {
   Mole(Hole hole, Bitmap molePic) {
 
     this.molePic = molePic;
-    this.hole = hole;
 
     molePicWidth = this.molePic.getWidth();
     molePicHeight = this.molePic.getHeight();
@@ -42,6 +40,11 @@ class Mole {
 
     state = Movement.STANDBY;
     standByDuration = 0;
+
+    picLeft = x;
+    picTop = hole.getY() + hole.getHoleHeight() / 2 - (molePicHeight * 2 / 3);
+    width = x + molePicWidth;
+    height = hole.getY() + hole.getHoleHeight() / 2;
   }
 
   void draw(Canvas canvas, Paint paint) {
@@ -76,10 +79,6 @@ class Mole {
         state = Movement.STANDBY;
       }
     }
-    picLeft = x;
-    picTop = hole.getY() + hole.getHoleHeight() / 2 - (molePicHeight * 2 / 3);
-    width = x + molePicWidth;
-    height = hole.getY() + hole.getHoleHeight() / 2;
   }
 
   void setState(Movement state) {

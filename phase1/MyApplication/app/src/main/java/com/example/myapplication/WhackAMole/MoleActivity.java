@@ -27,6 +27,7 @@ public class MoleActivity extends AppCompatActivity {
   public static boolean loaded;
 
   User user;
+  private WamView wamView;
 
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -62,6 +63,8 @@ public class MoleActivity extends AppCompatActivity {
   @Override
   public void onBackPressed() {
     setContentView(R.layout.activity_mole);
+    reset();
+    wamView.thread_active = false;
   }
 
   private void setUser(User new_user) {
@@ -122,7 +125,10 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   public void play(View view) {
-    WamView wamView = new WamView(this);
+    if(wamView == null){
+      wamView = new WamView(this);
+      }
+    wamView.thread_active = true;
     setContentView(wamView);
   }
 
@@ -161,7 +167,6 @@ public class MoleActivity extends AppCompatActivity {
     WamView wamView = new WamView(this);
     setContentView(wamView);
     loaded = false;
-    wamView.used = true;
     user.setLoad_moles_stats("0");
     UserManager.update_statistics(this, user);
   }

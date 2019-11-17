@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /** Inspired by FishTank Project */
-class WamManager {
+class WamManager implements Runnable{
 
   private Bitmap holePic;
   private Bitmap molePic;
@@ -23,11 +23,13 @@ class WamManager {
   private int holeDeploymentWidth, holeDeploymentHeight;
   private Rect holeRect;
   int score;
+  private boolean keepRunning;
+  private Thread thread;
+  private int duration;
 
-  private WamView wamView;
-  MoleThread moleThread;
   private ArrayList<Hole> holeList;
   ArrayList<Mole> moleList;
+
 
   WamManager(
       Bitmap holePic,
@@ -37,8 +39,8 @@ class WamManager {
       int numLives,
       int numHolesX,
       int numHolesY,
-      int score,
-      WamView wamView) {
+      int score
+  ) {
     this.holeList = new ArrayList<>();
     this.moleList = new ArrayList<>();
 
@@ -61,9 +63,11 @@ class WamManager {
     this.holesY = numHolesY;
     this.numHoles = numHolesX * numHolesY;
 
-    this.wamView = wamView;
     this.holeDeploymentWidth = (holeRect.right - holeRect.left) / holesX;
     this.holeDeploymentHeight = (holeRect.bottom - holeRect.top) / holesY;
+
+    this.duration = 2400;
+
   }
 
   void draw(Canvas canvas, Paint paint) {
@@ -112,18 +116,20 @@ class WamManager {
       moleList.add(new Mole(hole, molePic));
     }
 
-    // Start Thread controlling mole's activities.
-    this.moleThread = new MoleThread(this.wamView, this);
-    moleThread.start();
+    for (Hole hole : holeList) {
+      moleList.add(new PaulMole(hole, molePic));
+    }
+    keepRunning = true;
+    thread = new Thread(this);
+    thread.start();
   }
 
   void reinitialize() {
     this.score = 0;
-    this.moleThread.setDuration(2400);
+    duration = 2400;
     for (Mole mole : moleList) {
       mole.reset();
     }
-    wamView.thread_active = true;
     this.currentLives = this.numLives;
   }
 
@@ -142,6 +148,29 @@ class WamManager {
       if (mole.loseLife) {
         this.currentLives -= 1;
         mole.loseLife = false;
+      }
+    }
+  }
+  @Override
+  public void run() {
+    while (keepRunning) {
+      long start_time, end_time;
+      start_time = System.currentTimeMillis();
+      randomMole();
+      if (score >= 10) {
+        duration = 600;
+        Mole.setSpeed(WamView.screenHeight / 200);
+      } else if (score >= 5) {
+        duration = 1500;
+        Mole.setSpeed(WamView.screenHeight / 240);
+      }
+      end_time = System.currentTimeMillis();
+      if (end_time - start_time < duration) {
+        try {
+          Thread.sleep(duration - (end_time - start_time));
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
       }
     }
   }
