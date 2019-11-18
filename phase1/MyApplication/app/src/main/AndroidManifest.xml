@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WhackAMole.MoleInstructionActivity"></activity>
+        <activity android:name=".TypeRacer.typeRacerInstruction"></activity>
+        <activity android:name=".WhackAMole.MoleInstructionActivity" />
         <activity android:name=".GameOver" />
         <activity
             android:name=".PopUp"

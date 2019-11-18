@@ -98,7 +98,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
     public void onBackPressed(){}
 
     public void playL2(View view) {
-        Intent intent = new Intent(this, TypeRacer.class);
+        Intent intent = new Intent(this, typeRacerInstruction.class);
         intent.putExtra("backGroundColorKey", backGround);
         intent.putExtra("difficulty", d);
         intent.putExtra("textColorKey", textColor);

@@ -151,7 +151,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         return false;
       case "end":
         thread_active = false;
-        if (wamManager.score >= 15) {
+        if (wamManager.score >= 1) {
           this.activity.passed = true;
           }
         wamManager.reinitialize();
