@@ -14,6 +14,9 @@ import android.view.SurfaceView;
 
 import com.example.myapplication.R;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
@@ -21,7 +24,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private final MoleActivity activity = (MoleActivity) getContext();
   public String gameStatus = "inGame";
   public static int screenWidth, screenHeight;
-  public Bitmap molePic, holePic, lifePic, scoreBoard;
+  public Bitmap molePic, molePic2, holePic, lifePic, scoreBoard;
   private Bitmap background;
   private Canvas canvas;
   private Paint paint;
@@ -70,6 +73,9 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     molePic = BitmapFactory.decodeResource(res, R.drawable.lindsey_mole);
     molePic = Bitmap.createScaledBitmap(molePic, 250, 250, true);
 
+    molePic2 = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
+    molePic2 = Bitmap.createScaledBitmap(molePic2, 250, 250, true);
+
     lifePic = BitmapFactory.decodeResource(res, R.drawable.life);
     lifePic = Bitmap.createScaledBitmap(lifePic, 150, 150, true);
 
@@ -77,12 +83,12 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     scoreBoard = Bitmap.createScaledBitmap(scoreBoard, screenWidth * 4 / 5, screenHeight * 3 / 10, true);
 
     Rect mole_rect = new Rect(0, screenHeight * 2 / 7, screenWidth, screenHeight * 5 / 6);
-
+    Bitmap[] molePics = {molePic, molePic2};
     wamManager =
         new WamManager(
             holePic,
             mole_rect,
-            molePic,
+            molePics,
             lifePic,
             activity.numLives,
             activity.numColumns,
@@ -190,7 +196,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
       Rect rect = mole.getTouchRect();
       if (rect.contains(x, y) && mole.getState() != Mole.Movement.HIT) {
         mole.setState(Mole.Movement.HIT);
-        this.wamManager.score += 1;
+        this.wamManager.score += mole.value;
         this.activity.molesHit += 1;
       }
     }

@@ -21,15 +21,54 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/in7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Hitting Lindsey gets 1 point, but missing her deducts 1 life"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/play"
+        app:layout_constraintStart_toStartOf="@+id/in6"
+        app:layout_constraintTop_toBottomOf="@+id/in6" />
+
+    <TextView
+        android:id="@+id/in6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Hitting Paul deducts 1 point"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/in7"
+        app:layout_constraintStart_toStartOf="@+id/in2"
+        app:layout_constraintTop_toBottomOf="@+id/in2" />
+
+    <TextView
         android:id="@+id/in2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="- Reach 15 points to pass this level"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/play"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/in6"
+        app:layout_constraintStart_toStartOf="@+id/in4"
         app:layout_constraintTop_toBottomOf="@+id/in4" />
+
+    <TextView
+        android:id="@+id/in4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Game becomes more difficult as score increases"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/in2"
+        app:layout_constraintStart_toStartOf="@+id/in3"
+        app:layout_constraintTop_toBottomOf="@+id/in3" />
+
+    <TextView
+        android:id="@+id/in3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Left click on moles to hit"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/in4"
+        app:layout_constraintStart_toStartOf="@+id/in5"
+        app:layout_constraintTop_toBottomOf="@+id/in5" />
 
     <TextView
         android:id="@+id/in5"
@@ -37,21 +76,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="- Use mouse cursor to navigate to emerging moles"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/in3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/in" />
-
-    <TextView
-        android:id="@+id/in4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="- Game becomes more difficult as score increases"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/in2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/in3" />
 
     <TextView
         android:id="@+id/in"
@@ -65,16 +93,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/in3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="- Left click on moles to hit"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/in4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/in5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

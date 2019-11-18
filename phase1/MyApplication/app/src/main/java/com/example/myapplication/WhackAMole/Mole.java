@@ -22,10 +22,14 @@ class Mole {
   private int standByDuration;
   private float picLeft, width, picTop, height;
   boolean loseLife = false;
+  int value;
+  int lifeCount;
 
   Mole(Hole hole, Bitmap molePic) {
 
     this.molePic = molePic;
+    this.value = 1;
+    this.lifeCount = 1;
 
     molePicWidth = this.molePic.getWidth();
     molePicHeight = this.molePic.getHeight();

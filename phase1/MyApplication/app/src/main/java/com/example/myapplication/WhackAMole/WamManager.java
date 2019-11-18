@@ -12,7 +12,7 @@ import java.util.Random;
 class WamManager implements Runnable{
 
   private Bitmap holePic;
-  private Bitmap molePic;
+  private Bitmap[] molePic;
   private Bitmap lifePic;
   private int numLives;
   int currentLives;
@@ -30,11 +30,10 @@ class WamManager implements Runnable{
   private ArrayList<Hole> holeList;
   ArrayList<Mole> moleList;
 
-
   WamManager(
       Bitmap holePic,
       Rect hole_r,
-      Bitmap molePic,
+      Bitmap[] molePic,
       Bitmap lifePic,
       int numLives,
       int numHolesX,
@@ -113,11 +112,8 @@ class WamManager implements Runnable{
 
     // Add one mole for each hole into mole collection.
     for (Hole hole : holeList) {
-      moleList.add(new Mole(hole, molePic));
-    }
-
-    for (Hole hole : holeList) {
-      moleList.add(new PaulMole(hole, molePic));
+      moleList.add(new Mole(hole, molePic[0]));
+      moleList.add(new PaulMole(hole, molePic[1]));
     }
     keepRunning = true;
     thread = new Thread(this);
@@ -146,7 +142,7 @@ class WamManager implements Runnable{
     for (Mole mole : this.moleList) {
       mole.move();
       if (mole.loseLife) {
-        this.currentLives -= 1;
+        this.currentLives -= mole.lifeCount;
         mole.loseLife = false;
       }
     }
