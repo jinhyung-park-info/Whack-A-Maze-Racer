@@ -97,6 +97,8 @@ public class TypeRacer extends AppCompatActivity {
                     updateStatistics(false);
                     showNextQuestion();
                 }
+
+
             }
         });
     }
@@ -110,31 +112,8 @@ public class TypeRacer extends AppCompatActivity {
                 try {
                     fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
                     try {
-                        fos.write(String.valueOf(this.countScore).getBytes());
-                        fos.write("\n".getBytes());
-                        fos.write(String.valueOf(this.countLife).getBytes());
-                        fos.write("\n".getBytes());
-                        fos.write(String.valueOf(this.countStreak).getBytes());
-                        fos.write("\n".getBytes());
-                        fos.write(String.valueOf(this.questionNumber).getBytes());
-                        fos.write("\n".getBytes());
-                        for (int i = 0; i < 5; i++) {
-                            fos.write(this.questions.get(i).getBytes());
-                            fos.write("\n".getBytes());
-                        }
-                        fos.write(this.answer.getText().toString().getBytes());
-                        fos.write("\n".getBytes());
-
-                        fos.write(String.valueOf(this.backGroundColor).getBytes());
-                        fos.write("\n".getBytes());
-
-                        fos.write(String.valueOf(this.textColor).getBytes());
-                        fos.write("\n".getBytes());
 
                         fos.write(this.timerRunning.toString().getBytes());
-                        fos.write("\n".getBytes());
-
-                        fos.write(String.valueOf(this.parameterDifficulty).getBytes());
                         fos.write("\n".getBytes());
 
                         fos.write(this.countDown.getText().toString().getBytes());
@@ -143,7 +122,6 @@ public class TypeRacer extends AppCompatActivity {
                         if (countDownTimer != null) {
                             countDownTimer.cancel();
                         }
-
 
                         user.setThereIsSaved(true);
 
@@ -182,32 +160,12 @@ public class TypeRacer extends AppCompatActivity {
                 InputStreamReader isr = new InputStreamReader(fis);
                 BufferedReader rd = new BufferedReader(isr);
 
-                this.countScore = Integer.parseInt(rd.readLine());
-                this.countLife = Integer.parseInt(rd.readLine());
-                this.countStreak = Integer.parseInt(rd.readLine());
-                this.questionNumber = Integer.parseInt(rd.readLine());
-                this.questions = new ArrayList<>();
-                for (int i = 0; i < 5; i++) {
-                    questions.add(rd.readLine());
-                }
-                String answerString = rd.readLine();
-                this.backGroundColor = Integer.parseInt(rd.readLine());
-                this.textColor = Integer.parseInt(rd.readLine());
-
                 if (!Boolean.valueOf(rd.readLine())) {
                     this.timerRunning = false;
                 } else {
                     this.timerRunning = true;
                 }
 
-                this.parameterDifficulty = Integer.parseInt(rd.readLine());
-
-                getTexts();
-                setCustomization(backGroundColor, textColor, countLife, parameterDifficulty);
-
-                score.setText("" + countScore);
-                streak.setText("" + countStreak);
-                life.setText("" + countLife);
                 int time = Integer.parseInt(rd.readLine());
 
                 startTime = System.currentTimeMillis();
@@ -228,9 +186,7 @@ public class TypeRacer extends AppCompatActivity {
                             }
                         }.start();
 
-                question.setText(questions.get(questionNumber - 1));
-                answer.setText("" + answerString);
-                answer.setEnabled(true);
+
                 manageTime();
 
                 Button doneBtn = (Button)findViewById(R.id.doneButton);
@@ -376,7 +332,7 @@ public class TypeRacer extends AppCompatActivity {
                         String response = answer.getText().toString();
                         //start counting
                         if (response.length() == 1 || user.getThereIsSaved()) {
-                            startTime = System.currentTimeMillis();
+                            startTime = COUNTDOWN_IN_MILLS;
                             if (timerRunning) return;
                             timerRunning = true;
                             countDownTimer =
