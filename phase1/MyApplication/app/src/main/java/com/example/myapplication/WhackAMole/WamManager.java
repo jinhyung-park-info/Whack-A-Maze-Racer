@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.example.myapplication.GameConstants;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -65,7 +67,7 @@ class WamManager implements Runnable{
     this.holeDeploymentWidth = (holeRect.right - holeRect.left) / holesX;
     this.holeDeploymentHeight = (holeRect.bottom - holeRect.top) / holesY;
 
-    this.duration = 2400;
+    this.duration = GameConstants.moleDefaultDuration;
 
   }
 
@@ -122,7 +124,7 @@ class WamManager implements Runnable{
 
   void reinitialize() {
     this.score = 0;
-    duration = 2400;
+    duration = GameConstants.moleDefaultDuration;
     for (Mole mole : moleList) {
       mole.reset();
     }

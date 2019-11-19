@@ -12,10 +12,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
@@ -151,7 +149,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         return false;
       case "end":
         thread_active = false;
-        if (wamManager.score >= 1) {
+        if (wamManager.score >= GameConstants.molePassingScore) {
           this.activity.passed = true;
           }
         wamManager.reinitialize();
