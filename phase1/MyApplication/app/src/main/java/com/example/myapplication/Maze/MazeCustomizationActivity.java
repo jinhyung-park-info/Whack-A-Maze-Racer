@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.example.myapplication.GameActivity;
 import com.example.myapplication.R;
@@ -74,7 +75,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             }
             setContentView(R.layout.activity_maze_customization);
         } else {
-            setupMaze();
+            setContentView(R.layout.activity_maze_customization);
         }
 
         user.setLast_played_level(3);
@@ -169,7 +170,8 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             intent.putExtra(USER, user);
             startActivity(intent);
         } else
-            button.setError("Play the maze game first");
+            Toast.makeText(getApplicationContext(), "Please pass this level first",
+                    Toast.LENGTH_LONG).show();
         {
 
         }

@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
@@ -35,17 +36,17 @@ public class MazeView extends View {
     /**
      * a 2d array that holds the cell objects
      */
-    private Cell[][] cells;
+    Cell[][] cells;
 
     /**
      * the player in the maze
      */
-    private Cell player;
+    Cell player;
 
     /**
      * the exit of the maze
      */
-    private Cell exit;
+    Cell exit;
 
     /**
      * the size of each cell on the screen
@@ -80,12 +81,12 @@ public class MazeView extends View {
     /**
      * the number of columns the maze will have
      */
-    private int cols;
+    int cols;
 
     /**
      * the number of rows the maze will have
      */
-    private int rows;
+    int rows;
 
     /**
      * the background colour of the maze
@@ -100,17 +101,17 @@ public class MazeView extends View {
     /**
      * the thickness of the lines representing the walls
      */
-    private static final float WALL_THICKNESS = 4;
+    //private static final float WALL_THICKNESS = 4;
 
     /**
      * Random number generator used when generating the maze
      */
-    private Random rand;
 
     private User user_in_maze;
-    static final int num_games = 2;
     private int games_played = 0;
     private Context contexts;
+
+    private MazeCreation mazeCreation;
 
 
     public MazeView(Context context, int bgColour, String difficulty,
@@ -119,13 +120,26 @@ public class MazeView extends View {
         contexts = context;
 
         setDifficulty(difficulty);
+        cells = new Cell[cols][rows];
+
         this.bgColour = bgColour;
         this.playerColour = playerColour;
         this.user_in_maze = user_1;
+        mazeCreation = new MazeCreation();
 
-        setupPaintObjects();
+        wallPaint = new Paint();
+        wallPaint.setColor(Color.BLACK);
+        wallPaint.setStrokeWidth(GameConstants.MazeWallThickness);
 
-        rand = new Random();
+        //setup playerPaint
+        playerPaint = new Paint();
+        playerPaint.setColor(playerColour);
+
+        //setup exitPaint
+        exitPaint = new Paint();
+        exitPaint.setColor(Color.BLACK);
+
+        //setupPaintObjects(wallPaint, playerPaint, exitPaint);
 
         createMaze();
     }
@@ -151,98 +165,6 @@ public class MazeView extends View {
         }
     }
 
-    /**
-     * Initializes the wall, player, and exit paint objects
-     */
-    private void setupPaintObjects() {
-        //setup wallPaint
-        wallPaint = new Paint();
-        wallPaint.setColor(Color.BLACK);
-        wallPaint.setStrokeWidth(WALL_THICKNESS);
-
-        //setup playerPaint
-        playerPaint = new Paint();
-        playerPaint.setColor(playerColour);
-
-        //setup exitPaint
-        exitPaint = new Paint();
-        exitPaint.setColor(Color.BLACK);
-    }
-
-    /**
-     * Returns a neighbouring cell of the given cell. If there is more than one neighbour,
-     * returns a random neighbour.
-     *
-     * @param currentCell
-     * @return neighbourCell
-     */
-    private Cell getNeighbour(Cell currentCell) {
-        //check for unvisited neighbours
-        ArrayList<Cell> neighbours = new ArrayList<>();
-
-        //left neighbour
-        if (currentCell.getCol() > 0) {
-            if (!cells[currentCell.getCol() - 1][currentCell.getRow()].wasVisited()) {
-                neighbours.add(cells[currentCell.getCol() - 1][currentCell.getRow()]);
-            }
-        }
-        //right neighbour
-        if (currentCell.getCol() < cols - 1) {
-            if (!cells[currentCell.getCol() + 1][currentCell.getRow()].wasVisited()) {
-                neighbours.add(cells[currentCell.getCol() + 1][currentCell.getRow()]);
-            }
-        }
-        //top neighbour
-        if (currentCell.getRow() > 0) {
-            if (!cells[currentCell.getCol()][currentCell.getRow() - 1].wasVisited()) {
-                neighbours.add(cells[currentCell.getCol()][currentCell.getRow() - 1]);
-            }
-        }
-        //bottom neighbour
-        if (currentCell.getRow() < rows - 1) {
-            if (!cells[currentCell.getCol()][currentCell.getRow() + 1].wasVisited()) {
-                neighbours.add(cells[currentCell.getCol()][currentCell.getRow() + 1]);
-            }
-        }
-
-        if (neighbours.size() > 0) {
-            int chosenNeighbourIndex = rand.nextInt(neighbours.size());
-            return neighbours.get(chosenNeighbourIndex);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Removes the wall between two neighbouring cells
-     *
-     * @param current cell
-     * @param next    cell
-     */
-    private void removeWall(Cell current, Cell next) {
-        //next cell is above current
-        if (current.getCol() == next.getCol() && current.getRow() == next.getRow() + 1) {
-            current.setTopWall(false);
-            next.setBottomWall(false);
-        }
-        //next cell is below current
-        else if (current.getCol() == next.getCol() && current.getRow() == next.getRow() - 1) {
-            current.setBottomWall(false);
-            next.setTopWall(false);
-        }
-        //next cell is to the left of current
-        else if (current.getCol() == next.getCol() + 1 && current.getRow() == next.getRow()) {
-            current.setLeftWall(false);
-            next.setRightWall(false);
-        }
-        //next cell is to the right of current
-        else if (current.getCol() == next.getCol() - 1 && current.getRow() == next.getRow()) {
-            current.setRightWall(false);
-            next.setLeftWall(false);
-        }
-
-
-    }
 
     /**
      * Initializes the 2d array of cells and initializes each individual cell element in the array.
@@ -252,40 +174,9 @@ public class MazeView extends View {
      * create the maze
      */
     private void createMaze() {
-        //recursive backtracking algorithm for creating mazes
-        Stack<Cell> stackVisitedCells = new Stack<>();
-        Cell current, next;
-
-        cells = new Cell[cols][rows];
-
-        for (int x = 0; x < cols; x++) {
-            for (int y = 0; y < rows; y++) {
-                cells[x][y] = new Cell(x, y);
-            }
-        }
-
+        cells = mazeCreation.RecursiveBacktracker(cells, cols, rows);
         player = cells[0][0];
         exit = cells[cols - 1][rows - 1];
-
-        current = cells[0][0];
-        current.setVisited(true);
-
-        //do this until all cells have been visited
-        do {
-            next = getNeighbour(current);
-
-            //this is done when we find a neighbouring cell
-            if (next != null) {
-                removeWall(current, next);
-                stackVisitedCells.push(current);
-                current = next;
-                current.setVisited(true);
-            }
-            //if we don't find a neighbouring cell, we have to backtrack
-            else {
-                current = stackVisitedCells.pop();
-            }
-        } while (!stackVisitedCells.isEmpty());
     }
 
     private void movePlayer(Direction direction) {
@@ -319,10 +210,10 @@ public class MazeView extends View {
     }
 
     private void checkExit() {
-        if (player == exit && games_played < num_games) {
+        if (player == exit && games_played < GameConstants.TotalMazeGames) {
             games_played += 1;
             createMaze();
-            if (games_played >= num_games) {
+            if (games_played >= GameConstants.TotalMazeGames) {
                 this.user_in_maze.setNum_maze_games_played(user_in_maze.getNum_maze_games_played() + games_played);
                 this.user_in_maze.setLast_played_level(0);
                 UserManager.update_statistics(contexts, user_in_maze);
@@ -591,104 +482,11 @@ public class MazeView extends View {
         }
 
 
+
     }
 
-    private class Cell {
-        /**
-         * whether this cell has a wall on the top or not
-         */
-        private boolean topWall = true;
-
-        /**
-         * whether this cell has a wall at the bottom or not
-         */
-        private boolean bottomWall = true;
-
-        /**
-         * whether this cell has a wall on the left side or not
-         */
-        private boolean leftWall = true;
-
-        /**
-         * whether this cell has a wall on the right side or not
-         */
-        private boolean rightWall = true;
-
-        /**
-         * tells us if this cell was "visited" by the imaginary
-         * person paving the path for the maze
-         */
-        private boolean visited = false;
-
-        /**
-         * the column position of this cell
-         */
-        private int col;
-
-        /**
-         * the row position of this cell
-         */
-        private int row;
-
-        Cell(int col, int row) {
-            this.col = col;
-            this.row = row;
-        }
-
-        boolean hasTopWall() {
-            return topWall;
-        }
-
-        void setTopWall(boolean topWall) {
-            this.topWall = topWall;
-        }
-
-        boolean hasBottomWall() {
-            return bottomWall;
-        }
-
-        void setBottomWall(boolean bottomWall) {
-            this.bottomWall = bottomWall;
-        }
-
-        boolean hasLeftWall() {
-            return leftWall;
-        }
-
-        void setLeftWall(boolean leftWall) {
-            this.leftWall = leftWall;
-        }
-
-        boolean hasRightWall() {
-            return rightWall;
-        }
-
-        void setRightWall(boolean rightWall) {
-            this.rightWall = rightWall;
-        }
-
-        int getCol() {
-            return col;
-        }
-
-        void setCol(int col) {
-            this.col = col;
-        }
-
-        int getRow() {
-            return row;
-        }
-
-        void setRow(int row) {
-            this.row = row;
-        }
-
-        boolean wasVisited() {
-            return visited;
-        }
-
-        void setVisited(boolean visited) {
-            this.visited = visited;
-        }
-    }
 }
+
+
+
+

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -142,7 +143,8 @@ public class MoleActivity extends AppCompatActivity {
       intent.putExtra(USER, user);
       startActivity(intent);
     } else {
-      nextButton.setError("Please Pass This Level First");
+      Toast.makeText(getApplicationContext(), "Please pass this level first",
+              Toast.LENGTH_LONG).show();
     }
   }
 
