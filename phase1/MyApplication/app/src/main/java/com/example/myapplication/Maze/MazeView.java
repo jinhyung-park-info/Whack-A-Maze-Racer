@@ -3,6 +3,9 @@ package com.example.myapplication.Maze;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -44,6 +47,11 @@ public class MazeView extends View {
     Cell player;
 
     /**
+     * A list of collectibles in the maze
+     */
+    ArrayList<Collectible> collectibles;
+
+    /**
      * the exit of the maze
      */
     Cell exit;
@@ -79,6 +87,11 @@ public class MazeView extends View {
     private Paint exitPaint;
 
     /**
+     * the paint object of the collectibles of the maze
+     */
+    private Paint collectiblePaint;
+
+    /**
      * the number of columns the maze will have
      */
     int cols;
@@ -99,6 +112,11 @@ public class MazeView extends View {
     private int playerColour;
 
     /**
+     * Determines if the maze will have collectibles or not
+     */
+    private boolean collectiblesEnabled;
+
+    /**
      * the thickness of the lines representing the walls
      */
     //private static final float WALL_THICKNESS = 4;
@@ -112,6 +130,9 @@ public class MazeView extends View {
     private Context contexts;
 
     private MazeCreation mazeCreation;
+
+    private Bitmap collectibleBitmap;
+    private Resources res = this.getResources();
 
 
     public MazeView(Context context, int bgColour, String difficulty,
@@ -138,6 +159,12 @@ public class MazeView extends View {
         //setup exitPaint
         exitPaint = new Paint();
         exitPaint.setColor(Color.BLACK);
+
+        collectiblesEnabled = true;
+        collectibles = new ArrayList<Collectible>();
+        collectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.a_plus);
+        collectiblePaint = new Paint();
+        collectiblePaint.setColor(Color.LTGRAY);
 
         //setupPaintObjects(wallPaint, playerPaint, exitPaint);
 
@@ -177,6 +204,20 @@ public class MazeView extends View {
         cells = mazeCreation.RecursiveBacktracker(cells, cols, rows);
         player = cells[0][0];
         exit = cells[cols - 1][rows - 1];
+
+        for (int i = 0; i < GameConstants.NumberOfMazeCollectibles; i++) {
+            int[] coordinates = generateRandomCoordinates();
+            collectibles.add(new Collectible(coordinates[0], coordinates[1]));
+        }
+    }
+
+    private int[] generateRandomCoordinates() {
+        int[] randCoordinates = new int[2];
+
+        randCoordinates[0] = (int) (Math.random() * (cols - 1)); //setting rand col
+        randCoordinates[1] = (int) (Math.random() * (rows - 1)); //setting rand row
+
+        return randCoordinates;
     }
 
     private void movePlayer(Direction direction) {
@@ -204,6 +245,10 @@ public class MazeView extends View {
 
         checkExit();
 
+        if (collectiblesEnabled) {
+            checkCollectibles();
+        }
+
         //to update the positions on the screen, we have to call onDraw()
         //invalidate() calls onDraw() as soon as possible
         invalidate();
@@ -223,6 +268,23 @@ public class MazeView extends View {
                 MazeCustomizationActivity.passed = true;
 
             }
+        }
+    }
+
+    private void checkCollectibles() {
+        ArrayList<Collectible> collectiblesToRemove = new ArrayList<>();
+
+        for (Collectible c : collectibles) {
+            if (player.getCol() == c.getCol() && player.getRow() == c.getRow()) {
+                c.setCollected(true);
+                //TODO use the points attribute to set score
+                //TODO add to user stats
+                collectiblesToRemove.add(c); //directly removing objects will mess up the loop
+            }
+        }
+
+        for (Collectible c : collectiblesToRemove) {
+            collectibles.remove(c);
         }
     }
 
@@ -298,6 +360,8 @@ public class MazeView extends View {
      * @param savedMaze the maze to be loaded
      */
     public void loadMaze(ArrayList<StringBuilder> savedMaze) {
+        //leaving and returning to the maze scares away the collectibles
+        collectiblesEnabled = false;
         //reinitialize 2d array of cells with rows as index 2 in arraylist and columns at the index 3 in arraylist
         cols = Integer.parseInt(savedMaze.get(3).toString());
         rows = Integer.parseInt(savedMaze.get(2).toString());
@@ -432,6 +496,8 @@ public class MazeView extends View {
         //and verticalMargin units down
         canvas.translate(horizontalMargin, verticalMargin);
 
+        rescaleBitmaps();
+
         for (int x = 0; x < cols; x++) {
             for (int y = 0; y < rows; y++) {
                 if (cells[x][y].hasTopWall()) {
@@ -479,10 +545,23 @@ public class MazeView extends View {
                     (exit.getCol() + 1) * cellSize - margin,
                     (exit.getRow() + 1) * cellSize - margin,
                     exitPaint);
+
+            if (collectiblesEnabled) {
+                //draw collectibles
+                for (Collectible c : collectibles) {
+                    canvas.drawBitmap(collectibleBitmap,
+                            c.getCol() * cellSize + margin,
+                            c.getRow() * cellSize + margin, collectiblePaint);
+                }
+            }
         }
 
+    }
 
-
+    private void rescaleBitmaps() {
+        collectibleBitmap = Bitmap.createScaledBitmap(collectibleBitmap,
+                (int) Math.floor(cellSize * 0.8),
+                (int) Math.floor(cellSize * 0.8), true);
     }
 
 }

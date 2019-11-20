@@ -21,17 +21,16 @@
 
     <EditText
         android:id="@+id/instructionsBody"
-        android:layout_width="324dp"
-        android:layout_height="385dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="327dp"
+        android:layout_height="418dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:lineSpacingExtra="10sp"
-        android:text="-Navigate through the maze to reach the black square.\n\n-To move, drag your character up, down, left or right on the screen with your finger. \n\n-Touch collectibles to gain extra points."
+        android:text="-Navigate through the maze to reach the black square.\n\n-To move, drag your character up, down, left or right on the screen with your finger. \n\n-Touch collectibles to gain extra points.\n \n-Leaving the game midway scares away the collectibles, so collect them as quickly as you can!"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructionsTitle" />
 
