@@ -214,8 +214,11 @@ public class MazeView extends View {
     private int[] generateRandomCoordinates() {
         int[] randCoordinates = new int[2];
 
-        randCoordinates[0] = (int) (Math.random() * (cols - 1)); //setting rand col
-        randCoordinates[1] = (int) (Math.random() * (rows - 1)); //setting rand row
+        while ((randCoordinates[0] == 0 && randCoordinates[1] == 0) ||
+                (randCoordinates[0] == cols - 1 && randCoordinates[1] == rows - 1)) {
+            randCoordinates[0] = (int) (Math.random() * (cols)); //setting rand col
+            randCoordinates[1] = (int) (Math.random() * (rows)); //setting rand row
+        }
 
         return randCoordinates;
     }
