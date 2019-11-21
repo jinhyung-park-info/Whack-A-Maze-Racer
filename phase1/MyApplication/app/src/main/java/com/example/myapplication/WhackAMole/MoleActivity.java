@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.GameActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.User;
@@ -139,7 +140,7 @@ public class MoleActivity extends AppCompatActivity {
       passed = false;
       user.setScore(user.getScore() + molesHit);
       user.setLoad_moles_stats("0");
-      Intent intent = new Intent(this, TypeRacerCustomizationActivity.class);
+      Intent intent = new Intent(this, GameActivity.class);
       intent.putExtra(USER, user);
       startActivity(intent);
     } else {

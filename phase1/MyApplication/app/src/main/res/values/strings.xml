@@ -35,4 +35,8 @@
     <string name="Finish">Finish game</string>
     <string name="Create">Create Account</string>
     <string name="instructions_title">Instructions</string>
+    <string name="PlayMole">Play Whack A Mole</string>
+    <string name="PlayType">Play TypeRacer</string>
+    <string name="PlayMaze">Play Maze</string>
+    <string name="GoBack">Go Back to Main Menu</string>
 </resources>

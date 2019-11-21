@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.myapplication.GameActivity;
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.Maze.MazeInstructionsActivity;
 import com.example.myapplication.R;
@@ -36,7 +37,7 @@ public class TypeRacerEnd extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MazeInstructionsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                 intent.putExtra(USER, user);
                 startActivity(intent);
             }

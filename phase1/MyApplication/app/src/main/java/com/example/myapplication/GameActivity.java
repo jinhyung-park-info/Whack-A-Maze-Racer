@@ -36,14 +36,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void play_Mole(View v){
-        File file_type = new File(getApplicationContext().getFilesDir(),user.getEmail() + "_typeracer.txt");
-        File file_maze = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_maze_save_state.txt");
-        if(file_type.exists()){
-            file_type.delete();
-        }
-        if(file_maze.exists()){
-            file_maze.delete();
-        }
         user.setLoad_moles_stats("0");
         UserManager.update_statistics(this, user);
         Intent intent = new Intent(this, MoleInstructionActivity.class);
@@ -54,6 +46,20 @@ public class GameActivity extends AppCompatActivity {
 
     public void view_stats(View view){
         Intent intent = new Intent(this, PopUp.class);
+        intent.putExtra(USER, user);
+        startActivity(intent);
+    }
+
+    public void PlayGame(View view){
+        File file_type = new File(getApplicationContext().getFilesDir(),user.getEmail() + "_typeracer.txt");
+        File file_maze = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_maze_save_state.txt");
+        if(file_type.exists()){
+            file_type.delete();
+        }
+        if(file_maze.exists()){
+            file_maze.delete();
+        }
+        Intent intent = new Intent(this, PlayGamesActivity.class);
         intent.putExtra(USER, user);
         startActivity(intent);
     }
