@@ -17,7 +17,7 @@
     <string name="hard">Hard</string>
     <string name="normal">Normal</string>
     <string name="easy">Easy</string>
-    <string name="character">Character Colour</string>
+    <string name="character">Character</string>
     <string name="circle">Circle</string>
     <string name="square">Square</string>
     <string name="green">Green</string>
@@ -25,8 +25,8 @@
     <string name="red">Red</string>
     <string name="yellow">Yellow</string>
     <string name="white">White</string>
-    <string name="black">Black</string>
-    <string name="magenta">Magenta</string>
+    <string name="char1">Lindsey</string>
+    <string name="char2">Paul</string>
     <string name="cyan">Cyan</string>
     <string name="bg_colour">Background Colour</string>
     <string name="stats">View statistics</string>

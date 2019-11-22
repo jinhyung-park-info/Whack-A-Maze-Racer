@@ -10,7 +10,7 @@ The format of the file is below:
 
 --start of file--
 [colour of maze]
-[colour of player]
+[player character (0 for lindsey, 1 for paul)]
 [number of rows]
 [number of columns]
 [player row]

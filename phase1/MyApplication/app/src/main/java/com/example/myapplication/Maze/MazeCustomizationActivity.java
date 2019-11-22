@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import com.example.myapplication.GameActivity;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
-import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
 import java.io.File;
@@ -24,8 +22,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static com.example.myapplication.MainActivity.USER;
 
 public class MazeCustomizationActivity extends AppCompatActivity {
 
@@ -42,9 +38,9 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     private String difficulty = "Normal";
 
     /**
-     * the player's colour. by default this is black
+     * the player type. by default this is lindsey, which is represented by 0. Paul is 1
      */
-    private int playerColour = Color.BLACK;
+    private int playerType = 0;
 
     private UserManager usermanager;
 
@@ -136,17 +132,14 @@ public class MazeCustomizationActivity extends AppCompatActivity {
                 if (checked)
                     difficulty = "Easy";
                 break;
-            case R.id.radioButtonBlack:
+            case R.id.radioButtonChar1:
                 if (checked)
-                    playerColour = Color.BLACK;
+                    playerType = 0;
                 break;
-            case R.id.radioButtonMagenta:
+            case R.id.radioButtonCharTwo:
                 if (checked)
-                    playerColour = Color.MAGENTA;
+                    playerType = 1;
                 break;
-            case R.id.radioButtonCyan:
-                if (checked)
-                    playerColour = Color.CYAN;
         }
 
     }
@@ -161,7 +154,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     private void setupMaze() {
         maze = new MazeView(this, bgColour, difficulty,
-                playerColour, usermanager);
+                playerType, usermanager);
 
         setContentView(maze);
         startedMaze = true;
@@ -249,6 +242,6 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     public void reset() {
        bgColour = Color.GREEN;
        difficulty = "Normal";
-       playerColour = Color.BLACK;
+        playerType = 0;
     }
 }

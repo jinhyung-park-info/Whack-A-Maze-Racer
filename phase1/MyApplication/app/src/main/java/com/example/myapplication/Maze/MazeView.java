@@ -107,9 +107,9 @@ public class MazeView extends View {
     private int bgColour;
 
     /**
-     * the colour of the player
+     * the type of the player. by default, this is 0 which represents lindsey. 1 is paul
      */
-    private int playerColour;
+    private int playerType;
 
     /**
      * Determines if the maze will have collectibles or not
@@ -133,11 +133,12 @@ public class MazeView extends View {
     private MazeCreation mazeCreation;
 
     private Bitmap collectibleBitmap;
+    private Bitmap playerBitmap;
     private Resources res = this.getResources();
 
 
     public MazeView(Context context, int bgColour, String difficulty,
-                    int playerColour, UserManager user_1) {
+                    int playerType, UserManager user_1) {
         super(context);
         contexts = context;
 
@@ -145,7 +146,7 @@ public class MazeView extends View {
         cells = new Cell[cols][rows];
 
         this.bgColour = bgColour;
-        this.playerColour = playerColour;
+        this.playerType = playerType;
         this.userManager = user_1;
         this.user_in_maze = user_1.getUser();
         mazeCreation = new MazeCreation();
@@ -156,7 +157,7 @@ public class MazeView extends View {
 
         //setup playerPaint
         playerPaint = new Paint();
-        playerPaint.setColor(playerColour);
+        playerPaint.setColor(Color.MAGENTA);
 
         //setup exitPaint
         exitPaint = new Paint();
@@ -168,6 +169,11 @@ public class MazeView extends View {
         collectiblePaint = new Paint();
         collectiblePaint.setColor(Color.LTGRAY);
 
+        if (playerType == 0)
+            playerBitmap = BitmapFactory.decodeResource(res, R.drawable.lindsey_mole);
+        else
+            playerBitmap = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
+
         //setupPaintObjects(wallPaint, playerPaint, exitPaint);
 
         createMaze();
@@ -177,8 +183,8 @@ public class MazeView extends View {
         this.bgColour = bgColour;
     }
 
-    public void setPlayerColour(int playerColour) {
-        this.playerColour = playerColour;
+    public void setPlayerType(int playerType) {
+        this.playerType = playerType;
     }
 
     public void setDifficulty(String difficulty) {
@@ -303,8 +309,8 @@ public class MazeView extends View {
         ArrayList<StringBuilder> savedMaze = new ArrayList<>();
         //set the first index of arraylist to the colour of the maze
         savedMaze.add(new StringBuilder(Integer.toString(bgColour)));
-        //set second index of arraylist to the player's colour
-        savedMaze.add(new StringBuilder(Integer.toString(playerColour)));
+        //set second index of arraylist to the player's type
+        savedMaze.add(new StringBuilder(Integer.toString(playerType)));
         //set third index of arraylist to the # of rows in maze
         savedMaze.add(new StringBuilder(Integer.toString(rows)));
         //set fourth index of arraylist to the # of cols in maze
@@ -376,7 +382,7 @@ public class MazeView extends View {
         //set the background colour to index 0 in the arraylist
         bgColour = Integer.parseInt(savedMaze.get(0).toString());
         //set the player's colour to index 1 in the arraylist
-        playerColour = Integer.parseInt(savedMaze.get(1).toString());
+        playerType = Integer.parseInt(savedMaze.get(1).toString());
         int playerCol = Integer.parseInt(savedMaze.get(5).toString());
         int playerRow = Integer.parseInt(savedMaze.get(4).toString());
         //for i from 0 to # of cols - 1
@@ -537,12 +543,10 @@ public class MazeView extends View {
 
             //we will add this to the top left corner and subtract it from the bottom right corner
             float margin = cellSize / 10;
+
             //draw the player
-            canvas.drawRect(player.getCol() * cellSize + margin,
-                    player.getRow() * cellSize + margin,
-                    (player.getCol() + 1) * cellSize - margin,
-                    (player.getRow() + 1) * cellSize - margin,
-                    playerPaint);
+            canvas.drawBitmap(playerBitmap, player.getCol() * cellSize + margin,
+                    player.getRow() * cellSize + margin, playerPaint);
 
             //draw the exit
             canvas.drawRect(exit.getCol() * cellSize + margin,
@@ -563,8 +567,14 @@ public class MazeView extends View {
 
     }
 
+    /**
+     * Resizes all the bitmap images used in the maze.
+     */
     private void rescaleBitmaps() {
         collectibleBitmap = Bitmap.createScaledBitmap(collectibleBitmap,
+                (int) Math.floor(cellSize * 0.8),
+                (int) Math.floor(cellSize * 0.8), true);
+        playerBitmap = Bitmap.createScaledBitmap(playerBitmap,
                 (int) Math.floor(cellSize * 0.8),
                 (int) Math.floor(cellSize * 0.8), true);
     }
