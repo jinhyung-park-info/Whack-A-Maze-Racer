@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,15 +12,26 @@ import java.util.ArrayList;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
+    private UserManager userManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        Intent intent = getIntent();
+        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        if (user_1 != null){
+            setUserManager(user_1);
+        }
 
     }
 
+    private void setUserManager(UserManager newManager){
+        userManager = newManager;
+    }
+
     public boolean validate_2(String username, String password, EditText editText_2, EditText editText_3){
-        ArrayList<Boolean> arr = UserManager.check_username_and_password(getApplicationContext(), username, password);
+        ArrayList<Boolean> arr = userManager.check_username_and_password(getApplicationContext(), username, password);
         if(arr.get(0)){
             editText_2.setError("Username already exists");
             return false;
@@ -56,9 +69,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         String password = editText_3.getText().toString();
         if(validate_2(username, password, editText_2, editText_3)){
             FileOutputStream fos = null;
-            UserManager.write_username_and_pass(getApplicationContext(), fos, username, password);
+            userManager.write_username_and_pass(getApplicationContext(), fos, username, password);
             fos = null;
-            UserManager.write_username_and_statistics(getApplicationContext(), fos, username);
+            userManager.write_username_and_statistics(getApplicationContext(), fos, username);
             finish();
         }
     }

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.GameActivity;
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.User;
@@ -28,6 +29,7 @@ public class MoleActivity extends AppCompatActivity {
   int score = 0;
   public static boolean loaded;
 
+  private UserManager userManager;
   User user;
   private WamView wamView;
 
@@ -35,12 +37,13 @@ public class MoleActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
 
     Intent intent = getIntent();
-    User user_1 = (User) intent.getSerializableExtra(USER);
-    if (user_1 != null) {
-      setUser(user_1);
+    UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+    if (user_1 != null){
+      setUserManager(user_1);
+      user = userManager.getUser();
     }
     user.setLast_played_level(1);
-    UserManager.update_statistics(this, user);
+    userManager.update_statistics(this, user);
     reset();
 
     if (loaded && !user.getLoad_moles_stats().equals("0")) {
@@ -53,13 +56,13 @@ public class MoleActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    UserManager.update_statistics(this, user);
+    userManager.update_statistics(this, user);
   }
 
   @Override
   protected void onPause() {
     super.onPause();
-    UserManager.update_statistics(this, user);
+    userManager.update_statistics(this, user);
   }
 
   @Override
@@ -69,8 +72,8 @@ public class MoleActivity extends AppCompatActivity {
     wamView.thread_active = false;
   }
 
-  private void setUser(User new_user) {
-    user = new_user;
+  private void setUserManager(UserManager newManager){
+    userManager = newManager;
   }
 
   public void onRadioButtonClicked(View view) {
@@ -140,8 +143,10 @@ public class MoleActivity extends AppCompatActivity {
       passed = false;
       user.setScore(user.getScore() + molesHit);
       user.setLoad_moles_stats("0");
+      user.setLast_played_level(0);
+      userManager.update_statistics(getApplicationContext(), user);
       Intent intent = new Intent(this, GameActivity.class);
-      intent.putExtra(USER, user);
+      intent.putExtra(GameConstants.USERMANAGER, userManager);
       startActivity(intent);
     } else {
       Toast.makeText(getApplicationContext(), "Please pass this level first",
@@ -171,6 +176,6 @@ public class MoleActivity extends AppCompatActivity {
     setContentView(wamView);
     loaded = false;
     user.setLoad_moles_stats("0");
-    UserManager.update_statistics(this, user);
+    userManager.update_statistics(this, user);
   }
 }

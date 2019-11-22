@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
@@ -22,7 +23,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
     static int backGround = Color.WHITE;
     static int d = 5;
     static int textColor = Color.BLACK;
-    private User user;
+    private UserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +31,16 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_type_racer_customization);
         passed = false;
         Intent intent = getIntent();
-        User user_1 = (User) intent.getSerializableExtra(USER);
+        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
-            setUser(user_1);
+            setUserManager(user_1);
+            userManager.getUser().setLast_played_level(2);
+            userManager.update_statistics(this, userManager.getUser());
         }
-        user.setLast_played_level(2);
-        UserManager.update_statistics(this, user);
     }
 
-    private void setUser(User new_user){
-        user = new_user;
+    private void setUserManager(UserManager newManager){
+        userManager = newManager;
     }
 
     public void onRadioButtonClicked(View view) {
@@ -103,13 +104,8 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         intent.putExtra("difficulty", d);
         intent.putExtra("textColorKey", textColor);
         intent.putExtra("lives", numLives);
-        intent.putExtra(USER, user);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
-    public void goToL3(View view) {
-        Intent intent = new Intent(this, MazeCustomizationActivity.class);
-        intent.putExtra(USER, user);
-        startActivity(intent);
-    }
 }

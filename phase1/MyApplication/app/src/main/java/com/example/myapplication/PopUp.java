@@ -11,6 +11,7 @@ import static com.example.myapplication.MainActivity.USER;
 
 public class PopUp extends Activity {
 
+    private UserManager userManager;
     private User user;
 
     @Override
@@ -19,9 +20,10 @@ public class PopUp extends Activity {
         setContentView(R.layout.activity_pop_up);
 
         Intent intent = getIntent();
-        User user_1 = (User) intent.getSerializableExtra(USER);
+        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null){
-            setUser(user_1);
+            setUserManager(user_1);
+            user = userManager.getUser();
         }
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -51,8 +53,8 @@ public class PopUp extends Activity {
         streakButton.setText(streak);
     }
 
-    private void setUser(User new_user){
-        user = new_user;
+    private void setUserManager(UserManager newManager){
+        userManager = newManager;
     }
 
     public void close(View view){

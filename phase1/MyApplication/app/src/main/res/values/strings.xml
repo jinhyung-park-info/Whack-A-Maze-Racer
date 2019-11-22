@@ -39,4 +39,6 @@
     <string name="PlayType">Play TypeRacer</string>
     <string name="PlayMaze">Play Maze</string>
     <string name="GoBack">Go Back to Main Menu</string>
+    <string name="ScoreBoard">View Scoreboard</string>
+    <string name="Logout">Logout</string>
 </resources>

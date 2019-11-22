@@ -10,6 +10,8 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private UserManager userManager;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public static final  String  FILE_NAME = "user_data.txt";
     public static final String USER = "user";
@@ -19,10 +21,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userManager = new UserManager();
     }
 
     public void createAccount(View view){
         Intent intent = new Intent(this, CreateAccountActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
 
     }
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             editText_pass.setError("Commas are not allowed in username and passwords");
             return false;
         }
-        ArrayList<Boolean> validation = UserManager.check_username_and_password(getApplicationContext(), username, password);
+        ArrayList<Boolean> validation = userManager.check_username_and_password(getApplicationContext(), username, password);
         if (validation.get(0)){
             if(!(validation.get(1))){
                 editText_pass.setError("Incorrect Password");
@@ -79,8 +83,11 @@ public class MainActivity extends AppCompatActivity {
         String password = editText_pass.getText().toString();
         if (validate(username, password, editText_user, editText_pass)){
             User user = new User(username, password);
-            UserManager.set_statistics(getApplicationContext(), username, user);
+            //userManager = new UserManager(user);
+            userManager.set_statistics(getApplicationContext(), user);
+            userManager.setUser(user);
             intent.putExtra(USER, user);
+            intent.putExtra(GameConstants.USERMANAGER, userManager);
             startActivity(intent);
         }
     }

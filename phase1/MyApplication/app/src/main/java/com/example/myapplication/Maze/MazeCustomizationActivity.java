@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.myapplication.GameActivity;
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
@@ -44,7 +46,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
      */
     private int playerColour = Color.BLACK;
 
-    private User user;
+    private UserManager usermanager;
 
     private boolean startedMaze;
 
@@ -59,16 +61,17 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
 
-        User user_1 = (User) intent.getSerializableExtra(USER);
+        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        System.out.println(user_1 == null);
         if (user_1 != null) {
-            setUser(user_1);
+            setUserManager(user_1);
         }
 
-        mazeSaveStateFileName = user.getEmail() + "_maze_save_state.txt";
+        mazeSaveStateFileName = usermanager.getUser().getEmail() + "_maze_save_state.txt";
         startedMaze = false;
 
         //if they clicked start game instead of load game and properly went through each level
-        if (user.getLast_played_level() != 3) {
+        if (usermanager.getUser().getLast_played_level() != 3) {
             File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
             if (mazeFile.exists()) {
                 mazeFile.delete();
@@ -78,8 +81,10 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             setContentView(R.layout.activity_maze_customization);
         }
 
-        user.setLast_played_level(3);
-        UserManager.update_statistics(getApplicationContext(), user);
+        System.out.println(usermanager.getUser().getLast_played_level());
+        usermanager.getUser().setLast_played_level(3);
+        System.out.println(usermanager.getUser().getLast_played_level());
+        usermanager.update_statistics(getApplicationContext(), usermanager.getUser());
         reset();
 
     }
@@ -146,8 +151,8 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     }
 
-    private void setUser(User new_user) {
-        user = new_user;
+    private void setUserManager(UserManager newManager){
+        usermanager = newManager;
     }
 
     public void startMazeGame(View view) {
@@ -156,7 +161,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     private void setupMaze() {
         maze = new MazeView(this, bgColour, difficulty,
-                playerColour, user);
+                playerColour, usermanager);
 
         setContentView(maze);
         startedMaze = true;
@@ -167,7 +172,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         if (passed) {
             passed = false;
             Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra(USER, user);
+            intent.putExtra(GameConstants.USERMANAGER, usermanager);
             startActivity(intent);
         } else
             Toast.makeText(getApplicationContext(), "Please pass this level first",

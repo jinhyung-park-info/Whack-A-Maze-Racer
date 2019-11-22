@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
@@ -15,7 +16,8 @@ import static com.example.myapplication.MainActivity.USER;
 
 public class typeRacerInstruction extends AppCompatActivity {
 
-    User user;
+    private UserManager userManager;
+    //User user;
     static int numLives = 5;
     static int backGround = Color.WHITE;
     static int d = 5;
@@ -27,10 +29,10 @@ public class typeRacerInstruction extends AppCompatActivity {
         setContentView(R.layout.activity_type_racer_instruction);
 
         Intent intent = getIntent();
-        User user_1 = (User) intent.getSerializableExtra(USER);
-        if (user_1 != null) {
-            setUser(user_1);
-    }
+        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        if (user_1 != null){
+            setUserManager(user_1);
+        }
         
             backGround = intent.getExtras().getInt("backGroundColorKey");
             textColor = intent.getExtras().getInt("textColorKey");
@@ -41,17 +43,16 @@ public class typeRacerInstruction extends AppCompatActivity {
 
 
     public void playTypeRacer(View v){
-        UserManager.update_statistics(this, user);
         Intent intent = new Intent(this, TypeRacer.class);
         intent.putExtra("backGroundColorKey", backGround);
         intent.putExtra("difficulty", d);
         intent.putExtra("textColorKey", textColor);
         intent.putExtra("lives", numLives);
-        intent.putExtra(USER, user);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
-    private void setUser(User new_user) {
-        user = new_user;
+    private void setUserManager(UserManager newManager){
+        userManager = newManager;
     }
 }

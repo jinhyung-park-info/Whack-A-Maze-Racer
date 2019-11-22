@@ -9,25 +9,27 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapplication.GameActivity;
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.Maze.MazeInstructionsActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
+import com.example.myapplication.UserManager;
 
 import static com.example.myapplication.MainActivity.USER;
 
 public class TypeRacerEnd extends AppCompatActivity {
-    private User user;
+    private UserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer_end);
 
-        Intent previous = getIntent();
-        User user_1 = (User) previous.getSerializableExtra(USER);
+        Intent intent = getIntent();
+        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null){
-            setUser(user_1);
+            setUserManager(user_1);
         }
 
         TextView finalScore = findViewById(R.id.finalScoreTextView);
@@ -38,13 +40,13 @@ public class TypeRacerEnd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GameActivity.class);
-                intent.putExtra(USER, user);
+                intent.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent);
             }
         });
 
     }
-    private void setUser(User new_user){
-        user = new_user;
+    private void setUserManager(UserManager newManager){
+        userManager = newManager;
     }
 }

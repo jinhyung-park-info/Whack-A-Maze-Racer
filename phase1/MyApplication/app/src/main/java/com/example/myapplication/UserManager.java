@@ -10,15 +10,36 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_APPEND;
 import static android.content.Context.MODE_PRIVATE;
 
-public class UserManager {
+public class UserManager implements Serializable {
+
+
+    //ArrayList will store the user or users if 2 or more users want to login
+    private User user;
     //the first index will represent if username is in the file and the second index will represent
     // the password
-    static ArrayList<Boolean> check_username_and_password(Context context, String username, String password){
+
+
+    UserManager(){
+
+    }
+    UserManager(User User){
+        user = User;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    ArrayList<Boolean> check_username_and_password(Context context, String username, String password){
         InputStream fis = null;
         ArrayList<Boolean> arr = new ArrayList<Boolean>();
         try {
@@ -66,7 +87,7 @@ public class UserManager {
 
 
     //assuming alphanumeric characters only
-    static void write_username_and_pass(Context context, FileOutputStream fos, String username, String password) {
+    void write_username_and_pass(Context context, FileOutputStream fos, String username, String password) {
         File file = new File(context.getFilesDir(),MainActivity.FILE_NAME);
         if(file.exists()){
             try {
@@ -108,7 +129,7 @@ public class UserManager {
         }
     }
 
-    static void write_username_and_statistics(Context context, FileOutputStream fos, String username) {
+    void write_username_and_statistics(Context context, FileOutputStream fos, String username) {
         File file = new File(context.getFilesDir(),MainActivity.Stats_file);
         if(file.exists()){
             try {
@@ -148,7 +169,7 @@ public class UserManager {
         }
     }
 
-    static void set_statistics(Context context, String username, User user){
+    void set_statistics(Context context, User user){
         FileInputStream fis = null;
 
         try {
@@ -161,7 +182,7 @@ public class UserManager {
             while ((text = br.readLine()) != null) {
                 int index_of_first_comma = text.indexOf(",");
                 String other_username = text.substring(0, index_of_first_comma);
-                if (username.equals(other_username)) {
+                if (user.getEmail().equals(other_username)) {
                     int index_of_second_comma = text.indexOf(",", index_of_first_comma + 1);
                     int index_of_third_comma = text.indexOf(",", index_of_second_comma + 1);
                     int index_of_forth_comma = text.indexOf(",", index_of_third_comma + 1);
@@ -199,7 +220,7 @@ public class UserManager {
     }
 
 
-    public static void update_statistics(Context context, User user) {
+    public  void update_statistics(Context context, User user) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 

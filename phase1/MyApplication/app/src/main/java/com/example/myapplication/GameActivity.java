@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.Maze.MazeInstructionsActivity;
@@ -19,40 +20,33 @@ import static com.example.myapplication.MainActivity.USER;
 
 public class GameActivity extends AppCompatActivity {
 
-    private User user;
+    private UserManager userManager;
+
+    //private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
-        User user_1 = (User) intent.getSerializableExtra(USER);
-        if (user_1 != null){
-            setUser(user_1);
+        UserManager userManager1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        if (userManager1 != null){
+            setUserManager(userManager1);
         }
     }
-    private void setUser(User new_user){
-        user = new_user;
-    }
-
-    public void play_Mole(View v){
-        user.setLoad_moles_stats("0");
-        UserManager.update_statistics(this, user);
-        Intent intent = new Intent(this, MoleInstructionActivity.class);
-
-        intent.putExtra(USER, user);
-        startActivity(intent);
+    private void setUserManager(UserManager usermanage){
+        userManager = usermanage;
     }
 
     public void view_stats(View view){
         Intent intent = new Intent(this, PopUp.class);
-        intent.putExtra(USER, user);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
     public void PlayGame(View view){
-        File file_type = new File(getApplicationContext().getFilesDir(),user.getEmail() + "_typeracer.txt");
-        File file_maze = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_maze_save_state.txt");
+        File file_type = new File(getApplicationContext().getFilesDir(),userManager.getUser().getEmail() + "_typeracer.txt");
+        File file_maze = new File(getApplicationContext().getFilesDir(), userManager.getUser().getEmail() + "_maze_save_state.txt");
         if(file_type.exists()){
             file_type.delete();
         }
@@ -60,32 +54,37 @@ public class GameActivity extends AppCompatActivity {
             file_maze.delete();
         }
         Intent intent = new Intent(this, PlayGamesActivity.class);
-        intent.putExtra(USER, user);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
     public void resume(View view){
-        switch (user.getLast_played_level()){
+        switch (userManager.getUser().getLast_played_level()){
             case 0:
                 Button loadButton = findViewById(R.id.button4);
-                loadButton.setError("Have not started the game!");
+                Toast.makeText(getApplicationContext(), "You have not played a game yet"
+                        , Toast.LENGTH_LONG).show();
                 break;
             case 1:
                 MoleActivity.loaded = true;
                 Intent intent = new Intent(this, MoleActivity.class);
-                intent.putExtra(USER, user);
+                intent.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent);
                 break;
             case 2:
                 Intent intent2 = new Intent(this, TypeRacerCustomizationActivity.class);
-                intent2.putExtra(USER, user);
+                intent2.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent2);
                 break;
             case 3:
                 Intent intent3 = new Intent(this, MazeCustomizationActivity.class);
-                intent3.putExtra(USER, user);
+                intent3.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent3);
                 break;
         }
+    }
+
+    public void Logout(View view){
+        finish();
     }
 }

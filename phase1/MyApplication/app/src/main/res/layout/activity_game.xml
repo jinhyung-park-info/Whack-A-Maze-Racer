@@ -9,39 +9,70 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="279dp"
+        android:layout_width="0dp"
         android:layout_height="78dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="168dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="65dp"
         android:onClick="PlayGame"
         android:text="@string/start_game"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="279dp"
+        android:layout_width="0dp"
         android:layout_height="78dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="284dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="65dp"
         android:onClick="resume"
         android:text="@string/Load_Game"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/exit"
-        android:layout_width="279dp"
+        android:layout_width="0dp"
         android:layout_height="78dp"
-        android:layout_marginTop="416dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="296dp"
+        android:layout_marginEnd="65dp"
         android:onClick="view_stats"
         android:text="@string/stats"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="396dp"
+        android:layout_marginEnd="65dp"
+        android:text="@string/ScoreBoard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="504dp"
+        android:layout_marginEnd="65dp"
+        android:onClick="Logout"
+        android:text="@string/Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

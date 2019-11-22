@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class MazeCreation{
+
+interface MazeMaker{
+   Cell[][] MakeMaze(Cell[][] cells, int cols, int rows);
+}
+
+public class MazeCreation implements MazeMaker{
 
     /**
      * Returns a neighbouring cell of the given cell. If there is more than one neighbour,
@@ -89,7 +94,9 @@ public class MazeCreation{
      * These links were used in order to help us choose  which algorithm to create the maze and to
      * create the maze
      */
-    Cell[][] RecursiveBacktracker(Cell[][] cells, int cols, int rows) {
+
+    @Override
+    public Cell[][] MakeMaze(Cell[][] cells, int cols, int rows) {
         //recursive backtracking algorithm for creating mazes
         Stack<Cell> stackVisitedCells = new Stack<>();
         Cell current, next;

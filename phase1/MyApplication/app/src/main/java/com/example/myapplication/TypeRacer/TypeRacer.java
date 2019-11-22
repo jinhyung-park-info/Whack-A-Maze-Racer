@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.GameOver;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
@@ -54,6 +55,7 @@ public class TypeRacer extends AppCompatActivity {
     private long timeLeftInMillis;
     private CountDownTimer countDownTimer;
     Boolean timerRunning = false;
+    private UserManager userManager;
     private User user;
     int backGroundColor;
     int textColor;
@@ -65,43 +67,48 @@ public class TypeRacer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer);
         Intent intent = getIntent();
-        final User user_1 = (User) intent.getSerializableExtra(USER);
+        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
-            setUser(user_1);
-        }
+            setUserManager(user_1);
+            user = user_1.getUser();
 
-        if (!user.getThereIsSaved()) {
-        backGroundColor = intent.getExtras().getInt("backGroundColorKey");
-        textColor = intent.getExtras().getInt("textColorKey");
-        getTexts();
-        countLife = intent.getExtras().getInt("lives");
-        parameterDifficulty = intent.getIntExtra("difficulty", 5);
+            if (!user.getThereIsSaved()) {
+                backGroundColor = intent.getExtras().getInt("backGroundColorKey");
+                textColor = intent.getExtras().getInt("textColorKey");
+                getTexts();
+                countLife = intent.getExtras().getInt("lives");
+                parameterDifficulty = intent.getIntExtra("difficulty", 5);
 
-        setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
-        showNextQuestion();
-        Button doneBtn = (Button) findViewById(R.id.doneButton);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
+                showNextQuestion();
+                Button doneBtn = (Button) findViewById(R.id.doneButton);
+                doneBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                //goes to next question if response is correct
-                if (userIsCorrect()) {
-                    endTime = System.currentTimeMillis();
-                    if (countDownTimer != null) countDownTimer.cancel();
-                    timerRunning = false;
-                    answer.setEnabled(false);
-                    answer.clearFocus();
-                    updateStatistics(true);
-                    showNextQuestion();
-                } else {
-                    updateStatistics(false);
-                    showNextQuestion();
-                }
+                        //goes to next question if response is correct
+                        if (userIsCorrect()) {
+                            endTime = System.currentTimeMillis();
+                            if (countDownTimer != null) countDownTimer.cancel();
+                            timerRunning = false;
+                            answer.setEnabled(false);
+                            answer.clearFocus();
+                            updateStatistics(true);
+                            showNextQuestion();
+                        } else {
+                            updateStatistics(false);
+                            showNextQuestion();
+                        }
 
 
+                    }
+                });
             }
-        });
+        }
     }
+
+    private void setUserManager(UserManager newManager){
+        userManager = newManager;
     }
 
     @Override
@@ -148,10 +155,10 @@ public class TypeRacer extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
-        final User user_1 = (User) intent.getSerializableExtra(USER);
+        /*final User user_1 = (User) intent.getSerializableExtra(USER);
         if (user_1 != null) {
             setUser(user_1);
-        }
+        }*/
 
         if (user.getThereIsSaved()) {
             FileInputStream fis = null;
@@ -230,10 +237,6 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
-    private void setUser(User new_user) {
-        user = new_user;
-    }
-
     public void getTexts() {
         question = findViewById(R.id.questionTextView);
         answer = findViewById(R.id.editText2);
@@ -308,10 +311,11 @@ public class TypeRacer extends AppCompatActivity {
             manageTime();
             questionNumber++;
         } else {
+            user.setLast_played_level(0);
             user.setStreaks(countStreak);
-            UserManager.update_statistics(this, user);
+            userManager.update_statistics(this, user);
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
-            goToEndGame.putExtra(USER, user);
+            goToEndGame.putExtra(GameConstants.USERMANAGER, userManager);
             goToEndGame.putExtra("finalScore", "" + countScore);
             startActivity(goToEndGame);
         }
@@ -384,7 +388,7 @@ public class TypeRacer extends AppCompatActivity {
             } else {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
                 user.setStreaks(countStreak);
-                UserManager.update_statistics(this, user);
+                userManager.update_statistics(this, user);
                 intent.putExtra(USER, user);
                 startActivity(intent);
             }

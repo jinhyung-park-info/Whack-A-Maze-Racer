@@ -125,6 +125,7 @@ public class MazeView extends View {
      * Random number generator used when generating the maze
      */
 
+    private UserManager userManager;
     private User user_in_maze;
     private int games_played = 0;
     private Context contexts;
@@ -136,7 +137,7 @@ public class MazeView extends View {
 
 
     public MazeView(Context context, int bgColour, String difficulty,
-                    int playerColour, User user_1) {
+                    int playerColour, UserManager user_1) {
         super(context);
         contexts = context;
 
@@ -145,7 +146,8 @@ public class MazeView extends View {
 
         this.bgColour = bgColour;
         this.playerColour = playerColour;
-        this.user_in_maze = user_1;
+        this.userManager = user_1;
+        this.user_in_maze = user_1.getUser();
         mazeCreation = new MazeCreation();
 
         wallPaint = new Paint();
@@ -201,7 +203,7 @@ public class MazeView extends View {
      * create the maze
      */
     private void createMaze() {
-        cells = mazeCreation.RecursiveBacktracker(cells, cols, rows);
+        cells = mazeCreation.MakeMaze(cells, cols, rows);
         player = cells[0][0];
         exit = cells[cols - 1][rows - 1];
 
@@ -264,7 +266,7 @@ public class MazeView extends View {
             if (games_played >= GameConstants.TotalMazeGames) {
                 this.user_in_maze.setNum_maze_games_played(user_in_maze.getNum_maze_games_played() + games_played);
                 this.user_in_maze.setLast_played_level(0);
-                UserManager.update_statistics(contexts, user_in_maze);
+                userManager.update_statistics(contexts, user_in_maze);
                 Activity activity = (MazeCustomizationActivity) contexts;
                 ((MazeCustomizationActivity) contexts).reset();
                 activity.setContentView(R.layout.activity_maze_customization);
