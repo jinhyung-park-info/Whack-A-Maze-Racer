@@ -38,7 +38,7 @@ public class MoleActivity extends AppCompatActivity {
 
     Intent intent = getIntent();
     UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-    if (user_1 != null){
+    if (user_1 != null) {
       setUserManager(user_1);
       user = userManager.getUser();
     }
@@ -46,7 +46,8 @@ public class MoleActivity extends AppCompatActivity {
     userManager.update_statistics(this, user);
     reset();
 
-    if (loaded && !user.getLoad_moles_stats().equals("0")) {
+    //if (loaded && !user.getLoad_moles_stats().equals("0")) {
+    if (loaded && !user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats).equals("0")){
       load(this, user);
     } else {
       setContentView(R.layout.activity_mole);
@@ -141,8 +142,10 @@ public class MoleActivity extends AppCompatActivity {
     Button nextButton = findViewById(R.id.button);
     if (passed) {
       passed = false;
-      user.setScore(user.getScore() + molesHit);
-      user.setLoad_moles_stats("0");
+      //user.setScore(user.getScore() + molesHit);
+      //user.setLoad_moles_stats("0");
+      int CurrMolesHit = (int) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit);
+      user.setStatistic(GameConstants.NameGame1, GameConstants.MoleHit, CurrMolesHit + molesHit);
       user.setLast_played_level(0);
       userManager.update_statistics(getApplicationContext(), user);
       Intent intent = new Intent(this, GameActivity.class);
@@ -164,7 +167,8 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   public void load(Context context, User user) {
-    String load = user.getLoad_moles_stats();
+    //String load = user.getLoad_moles_stats();
+    String load = (String) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats);
     String[] stats = load.split(" ");
 
     this.score = Integer.parseInt(stats[3]);
@@ -175,7 +179,8 @@ public class MoleActivity extends AppCompatActivity {
     WamView wamView = new WamView(this);
     setContentView(wamView);
     loaded = false;
-    user.setLoad_moles_stats("0");
+    //user.setLoad_moles_stats("0");
+    user.setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, "0");
     userManager.update_statistics(this, user);
   }
 }

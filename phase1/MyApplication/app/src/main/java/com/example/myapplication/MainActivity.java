@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             //userManager = new UserManager(user);
             userManager.set_statistics(getApplicationContext(), user);
             userManager.setUser(user);
+            System.out.println(user.getMap());
             intent.putExtra(USER, user);
             intent.putExtra(GameConstants.USERMANAGER, userManager);
             startActivity(intent);

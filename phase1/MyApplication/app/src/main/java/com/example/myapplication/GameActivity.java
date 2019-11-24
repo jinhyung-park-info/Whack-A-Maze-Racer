@@ -85,6 +85,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void Logout(View view){
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -12,6 +12,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import com.example.myapplication.GameConstants;
 
 import static android.content.Context.MODE_APPEND;
 import static android.content.Context.MODE_PRIVATE;
@@ -28,9 +33,9 @@ public class UserManager implements Serializable {
     UserManager(){
 
     }
-    UserManager(User User){
-        user = User;
-    }
+    //UserManager(User User){
+        //user = User;
+    //}
     public User getUser() {
         return user;
     }
@@ -136,7 +141,9 @@ public class UserManager implements Serializable {
                 fos = context.openFileOutput(MainActivity.Stats_file, MODE_APPEND);
                 try {
                     fos.write(username.getBytes());
-                    fos.write(", 0, 0, 0, 0, 0".getBytes());
+                    String s = new String(new char[GameConstants.TotalNumOfStastics]).replace(
+                            "\0", ", 0");
+                    fos.write(s.getBytes());
                     fos.write("\n".getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -150,7 +157,9 @@ public class UserManager implements Serializable {
                 fos = context.openFileOutput(MainActivity.Stats_file, MODE_PRIVATE);
                 try {
                     fos.write(username.getBytes());
-                    fos.write(", 0, 0, 0, 0, 0".getBytes());
+                    String s = new String(new char[GameConstants.TotalNumOfStastics]).replace(
+                            "\0", ", 0");
+                    fos.write(s.getBytes());
                     fos.write("\n".getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -187,20 +196,28 @@ public class UserManager implements Serializable {
                     int index_of_third_comma = text.indexOf(",", index_of_second_comma + 1);
                     int index_of_forth_comma = text.indexOf(",", index_of_third_comma + 1);
                     int index_of_fifth_comma = text.indexOf(",", index_of_forth_comma + 1);
-                    int score = Integer.parseInt(text.substring(index_of_first_comma + 2, index_of_second_comma));
+                    int LastPlayedLevel = Integer.parseInt(text.substring(index_of_first_comma + 2, index_of_second_comma));
                     int streaks = Integer.parseInt(text.substring(index_of_second_comma + 2, index_of_third_comma));
-                    int streak = Integer.parseInt(text.substring(index_of_third_comma + 2, index_of_forth_comma));
-                    int last_played_level = Integer.parseInt(text.substring(index_of_forth_comma + 2, index_of_fifth_comma));
+                    int NumMazeGame = Integer.parseInt(text.substring(index_of_third_comma + 2, index_of_forth_comma));
+                    int MoleHit = Integer.parseInt(text.substring(index_of_forth_comma + 2, index_of_fifth_comma));
                     String load_moles_stats = text.substring(index_of_fifth_comma + 2);
                     /*System.out.println(score);
                     System.out.println("this is" + (streaks));
                     System.out.println("this is" + streak + "\n");
                     System.out.println("break");*/
-                    user.setScore(score);
+                    Object[] TypeRacer = new Object[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak, streaks};
+                    Object[] WhackAMole = new Object[]{GameConstants.NameGame1, GameConstants.MoleStats, load_moles_stats, GameConstants.MoleHit, MoleHit};
+                    Object[] Maze = new Object[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed, NumMazeGame};
+                    ArrayList<Object[]> ArrayOfGameStats = new ArrayList<>();
+                    ArrayOfGameStats.add(TypeRacer);
+                    ArrayOfGameStats.add(Maze);
+                    ArrayOfGameStats.add(WhackAMole);
+                    user.SetStasticsInMap(ArrayOfGameStats);
+                    user.setLast_played_level(LastPlayedLevel);
+                    /*user.setScore(MoleHit);
                     user.setStreaks(streaks);
-                    user.setNum_maze_games_played(streak);
-                    user.setLast_played_level(last_played_level);
-                    user.setLoad_moles_stats(load_moles_stats);
+                    user.setNum_maze_games_played(NumMazeGame);
+                    user.setLoad_moles_stats(load_moles_stats);*/
                 }
             }
 
@@ -219,6 +236,19 @@ public class UserManager implements Serializable {
         }
     }
 
+    /**
+    Return an ArrayList of user information with the first index being the last played level,the
+     second index being the savescore boolean value, then the maze statistics depending on how many
+     there are, then typeracer then whackAMole Stats and if a new game is added its stats as well.
+
+     */
+
+    private ArrayList<Object> updateStaisticsHelper(User user){
+        ArrayList<Object> arr = new ArrayList<>();
+        //List<Integer> list = Arrays.asList(user.getOverallScore(), user.getLast_played_level(), user.getScore());
+        return arr;
+    }
+
 
     public  void update_statistics(Context context, User user) {
         FileInputStream fis = null;
@@ -235,7 +265,9 @@ public class UserManager implements Serializable {
                 int index_of_first_comma = text.indexOf(",");
                 String other_username = text.substring(0, index_of_first_comma);
                 if (user.getEmail().equals(other_username)){
-                    String new_text = other_username + ", " + user.getScore() + ", " + user.getStreaks() + ", " + user.getNum_maze_games_played() + ", " + user.getLast_played_level() + ", " + user.getLoad_moles_stats() + "\n";
+                    String new_text = other_username  + ", " + user.getLast_played_level() + ", " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak)
+                            + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed)
+                            + ", "  +  user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit) + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats) + "\n";
                     sb.append(new_text);
                 } else {
                     sb.append(text).append("\n");

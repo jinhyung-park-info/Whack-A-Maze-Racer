@@ -7,8 +7,6 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
 
-import static com.example.myapplication.MainActivity.USER;
-
 public class PopUp extends Activity {
 
     private UserManager userManager;
@@ -33,24 +31,24 @@ public class PopUp extends Activity {
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*0.8), (int)(height * 0.6));
 
-        EditText mazeCompletedButton =  findViewById(R.id.mazeCompleted);
+        EditText mazeCompletedText =  findViewById(R.id.mazeCompleted);
       /*  System.out.println(user.getNum_maze_games_played());
         System.out.println(user.getScore());
         System.out.println(user.getStreaks());*/
-        String to_show = "maze games played: " + user.getNum_maze_games_played();
-        mazeCompletedButton.setText(to_show);
+        String to_show = "maze games played: " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed);
+        mazeCompletedText.setText(to_show);
 
-        EditText molesHitButton =  findViewById(R.id.molesHit);
-        String molesHit = "Moles Hit: " + user.getScore();
-        molesHitButton.setText(molesHit);
+        EditText molesHitText =  findViewById(R.id.molesHit);
+        String molesHit = "Moles Hit: " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit);
+        molesHitText.setText(molesHit);
 
         EditText levelButton =  findViewById(R.id.level);
         String level = "Last Played Level: " + user.getLast_played_level();
         levelButton.setText(level);
 
-        EditText streakButton =  findViewById(R.id.streak);
-        String streak = "TypeRacer Streak: " + user.getStreaks();
-        streakButton.setText(streak);
+        EditText streakText =  findViewById(R.id.streak);
+        String streak = "TypeRacer Streak: " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
+        streakText.setText(streak);
     }
 
     private void setUserManager(UserManager newManager){

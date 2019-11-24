@@ -259,7 +259,7 @@ public class TypeRacer extends AppCompatActivity {
         if (!user.getThereIsSaved()) {
             // initialize 3 statistics
             countScore = 0;
-            countStreak = user.getStreaks();
+            countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
             score.setText("" + countScore);
             streak.setText("" + countStreak);
             life.setText("" + lives);
@@ -312,7 +312,8 @@ public class TypeRacer extends AppCompatActivity {
             questionNumber++;
         } else {
             user.setLast_played_level(0);
-            user.setStreaks(countStreak);
+            //user.setStreaks(countStreak);
+            user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
             userManager.update_statistics(this, user);
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(GameConstants.USERMANAGER, userManager);
@@ -387,7 +388,8 @@ public class TypeRacer extends AppCompatActivity {
                 life.setText("" + countLife);
             } else {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
-                user.setStreaks(countStreak);
+                //user.setStreaks(countStreak);
+                user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
                 userManager.update_statistics(this, user);
                 intent.putExtra(USER, user);
                 startActivity(intent);

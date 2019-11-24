@@ -270,7 +270,9 @@ public class MazeView extends View {
             games_played += 1;
             createMaze();
             if (games_played >= GameConstants.TotalMazeGames) {
-                this.user_in_maze.setNum_maze_games_played(user_in_maze.getNum_maze_games_played() + games_played);
+                int CurrGamesPlayed = (int) user_in_maze.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed);
+                this.user_in_maze.setStatistic(GameConstants.NameGame3,
+                        GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + games_played);
                 this.user_in_maze.setLast_played_level(0);
                 userManager.update_statistics(contexts, user_in_maze);
                 Activity activity = (MazeCustomizationActivity) contexts;
