@@ -74,30 +74,35 @@ public class TypeRacer extends AppCompatActivity {
 
                 setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
                 showNextQuestion();
-                Button doneBtn = (Button) findViewById(R.id.doneButton);
-                doneBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        //goes to next question if response is correct
-                        if (userIsCorrect()) {
-                            endTime = System.currentTimeMillis();
-                            if (countDownTimer != null) countDownTimer.cancel();
-                            timerRunning = false;
-                            answer.setEnabled(false);
-                            answer.clearFocus();
-                            updateStatistics(true);
-                            showNextQuestion();
-                        } else {
-                            updateStatistics(false);
-                            showNextQuestion();
-                        }
-
-
-                    }
-                });
+                checkIfCorrect();
             }
         }
+    }
+    
+    private void checkIfCorrect() {
+
+        Button doneBtn = (Button) findViewById(R.id.doneButton);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //goes to next question if response is correct
+                if (userIsCorrect()) {
+                    endTime = System.currentTimeMillis();
+                    if (countDownTimer != null) countDownTimer.cancel();
+                    timerRunning = false;
+                    answer.setEnabled(false);
+                    answer.clearFocus();
+                    updateStatistics(true);
+                    showNextQuestion();
+                } else {
+                    updateStatistics(false);
+                    showNextQuestion();
+                }
+
+
+            }
+        });
     }
 
     private void setUserManager(UserManager newManager){
@@ -230,7 +235,7 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
-    public void getTexts() {
+    private void getTexts() {
         question = findViewById(R.id.questionTextView);
         answer = findViewById(R.id.editText2);
         countDown = findViewById(R.id.countDownTextView);
@@ -238,7 +243,7 @@ public class TypeRacer extends AppCompatActivity {
         streak = findViewById(R.id.streakTextView);
         life = findViewById(R.id.lifeTextView);
         scoreTitle = findViewById(R.id.scoreTitleTextView);
-        streakTitle = findViewById(R.id.scoreTitleTextView);
+        streakTitle = findViewById(R.id.streakTitleTextView);
         lifeTitle = findViewById(R.id.lifeTitleTextView);
         countDownTitle = findViewById(R.id.countDownTitleTextView);
         sec = findViewById(R.id.secTextView);
