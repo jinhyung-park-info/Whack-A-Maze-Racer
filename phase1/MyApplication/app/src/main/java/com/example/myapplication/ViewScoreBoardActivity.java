@@ -71,23 +71,25 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
     public void setupScoreBoard(String SortingChooser){
         if(SortingChooser.equals("Overall Score")){
             Collections.sort(ArrayOfUsers);
+            List<User> ArrayUser;
             if(GameConstants.NumPeopleOnScoreBoard >= ArrayOfUsers.size()){
-                ;
+                ArrayUser = ArrayOfUsers;
             }else{
-                ArrayOfUsers = ArrayOfUsers.subList(0, GameConstants.NumPeopleOnScoreBoard);
+                ArrayUser = ArrayOfUsers.subList(0, GameConstants.NumPeopleOnScoreBoard);
             }
-            setupTextViews(ArrayOfUsers, ArrayOfTextView, null, null);
+            setupTextViews(ArrayUser, ArrayOfTextView, null, null);
         }else{
             String[] Attributes = getAttributesForSorting(SortingChooser);
             String GameName = Attributes[0];
             String Statistic = Attributes[1];
+            List<User> ArrayUser;
             Collections.sort(ArrayOfUsers, new SortingUser(GameName, Statistic));
             if(GameConstants.NumPeopleOnScoreBoard >= ArrayOfUsers.size()){
-                ;
+                ArrayUser = ArrayOfUsers;
             }else{
-                ArrayOfUsers = ArrayOfUsers.subList(0, GameConstants.NumPeopleOnScoreBoard);
+                ArrayUser = ArrayOfUsers.subList(0, GameConstants.NumPeopleOnScoreBoard);
             }
-            setupTextViews(ArrayOfUsers, ArrayOfTextView, GameName, Statistic);
+            setupTextViews(ArrayUser, ArrayOfTextView, GameName, Statistic);
 
         }
     }
