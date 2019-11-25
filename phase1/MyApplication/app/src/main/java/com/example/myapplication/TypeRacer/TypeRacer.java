@@ -230,7 +230,7 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
-    public void getTexts() {
+    private void getTexts() {
         question = findViewById(R.id.questionTextView);
         answer = findViewById(R.id.editText2);
         countDown = findViewById(R.id.countDownTextView);
@@ -238,7 +238,7 @@ public class TypeRacer extends AppCompatActivity {
         streak = findViewById(R.id.streakTextView);
         life = findViewById(R.id.lifeTextView);
         scoreTitle = findViewById(R.id.scoreTitleTextView);
-        streakTitle = findViewById(R.id.scoreTitleTextView);
+        streakTitle = findViewById(R.id.streakTitleTextView);
         lifeTitle = findViewById(R.id.lifeTitleTextView);
         countDownTitle = findViewById(R.id.countDownTitleTextView);
         sec = findViewById(R.id.secTextView);
