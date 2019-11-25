@@ -32,11 +32,6 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
             setUserManager(userManager1);
             ArrayOfUsers = userManager.getListOfAllUsers(getApplicationContext(), userManager.getUser());
             ArrayOfUsers.add(userManager.getUser());
-            if(GameConstants.NumPeopleOnScoreBoard >= ArrayOfUsers.size()){
-                ;
-            }else{
-                ArrayOfUsers = ArrayOfUsers.subList(0, GameConstants.NumPeopleOnScoreBoard);
-            }
         }
 
         TextView FirstUser = findViewById(R.id.FirstUser);
@@ -65,7 +60,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         TextView Header = findViewById(R.id.HeaderScoreBoard);
         String header = "     Username" + "          " + text;
         Header.setText(header);
-        setupScoreBoard(ArrayOfUsers, text);
+        setupScoreBoard(text);
     }
 
     @Override
@@ -73,16 +68,26 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
 
     }
 
-    public void setupScoreBoard(List<User> ArrayUsers, String SortingChooser){
+    public void setupScoreBoard(String SortingChooser){
         if(SortingChooser.equals("Overall Score")){
-            Collections.sort(ArrayUsers);
-            setupTextViews(ArrayUsers, ArrayOfTextView, null, null);
+            Collections.sort(ArrayOfUsers);
+            if(GameConstants.NumPeopleOnScoreBoard >= ArrayOfUsers.size()){
+                ;
+            }else{
+                ArrayOfUsers = ArrayOfUsers.subList(0, GameConstants.NumPeopleOnScoreBoard);
+            }
+            setupTextViews(ArrayOfUsers, ArrayOfTextView, null, null);
         }else{
             String[] Attributes = getAttributesForSorting(SortingChooser);
             String GameName = Attributes[0];
             String Statistic = Attributes[1];
-            Collections.sort(ArrayUsers, new SortingUser(GameName, Statistic));
-            setupTextViews(ArrayUsers, ArrayOfTextView, GameName, Statistic);
+            Collections.sort(ArrayOfUsers, new SortingUser(GameName, Statistic));
+            if(GameConstants.NumPeopleOnScoreBoard >= ArrayOfUsers.size()){
+                ;
+            }else{
+                ArrayOfUsers = ArrayOfUsers.subList(0, GameConstants.NumPeopleOnScoreBoard);
+            }
+            setupTextViews(ArrayOfUsers, ArrayOfTextView, GameName, Statistic);
 
         }
     }
