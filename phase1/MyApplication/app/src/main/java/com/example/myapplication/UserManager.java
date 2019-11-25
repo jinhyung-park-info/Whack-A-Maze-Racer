@@ -166,6 +166,7 @@ public class UserManager implements Serializable {
                 fos.write(username.getBytes());
                 String s = new String(new char[GameConstants.TotalNumOfStastics]).replace(
                         "\0", ", 0");
+                System.out.println(s);
                 fos.write(s.getBytes());
                 fos.write("\n".getBytes());
             } catch (IOException e) {
@@ -340,9 +341,9 @@ public class UserManager implements Serializable {
         int index_of_sixth_comma = line.indexOf(",", index_of_fifth_comma + 1);
         int LastPlayedLevel = Integer.parseInt(line.substring(index_of_first_comma + 2, index_of_second_comma));
         int OverallScore = Integer.parseInt(line.substring(index_of_second_comma + 2, index_of_third_comma));
-        int streaks = Integer.parseInt(line.substring(index_of_third_comma + 2, index_of_third_comma));
-        int NumMazeGame = Integer.parseInt(line.substring(index_of_forth_comma + 2, index_of_forth_comma));
-        int MoleHit = Integer.parseInt(line.substring(index_of_fifth_comma + 2, index_of_fifth_comma));
+        int streaks = Integer.parseInt(line.substring(index_of_third_comma + 2, index_of_forth_comma));
+        int NumMazeGame = Integer.parseInt(line.substring(index_of_forth_comma + 2, index_of_fifth_comma));
+        int MoleHit = Integer.parseInt(line.substring(index_of_fifth_comma + 2, index_of_sixth_comma));
         String load_moles_stats = line.substring(index_of_sixth_comma + 2);
         Object[] TypeRacer = new Object[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak, streaks};
         Object[] WhackAMole = new Object[]{GameConstants.NameGame1, GameConstants.MoleStats, load_moles_stats, GameConstants.MoleHit, MoleHit};
