@@ -178,7 +178,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     /**
      * Saves the maze when activity is interrupted, if the player already started playing the maze.
      */
-   /* @Override
+    @Override
     protected void onPause() {
         super.onPause();
         if (startedMaze) {
@@ -210,9 +210,9 @@ public class MazeCustomizationActivity extends AppCompatActivity {
                 }
             }
         }
-    }*/
+    }
 
-    /*@Override
+    @Override
     protected void onResume() {
         super.onResume();
         if (startedMaze) {
@@ -237,7 +237,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             }
 
         }
-    }*/
+    }
 
     public void reset() {
        bgColour = Color.GREEN;
