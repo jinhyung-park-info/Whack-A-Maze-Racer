@@ -242,6 +242,6 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     public void reset() {
        bgColour = Color.GREEN;
        difficulty = "Normal";
-        playerType = 0;
+       playerType = 0;
     }
 }

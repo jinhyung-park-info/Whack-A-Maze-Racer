@@ -49,8 +49,8 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         spinner.setOnItemSelectedListener(this);
         //setupScoreBoard(ArrayOfUsers, "Overall Score");
     }
-    private void setUserManager(UserManager usermanage){
-        userManager = usermanage;
+    private void setUserManager(UserManager usermanager){
+        userManager = usermanager;
     }
 
     @Override
