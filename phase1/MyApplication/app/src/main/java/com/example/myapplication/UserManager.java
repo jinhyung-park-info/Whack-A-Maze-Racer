@@ -371,7 +371,6 @@ public class UserManager implements Serializable {
                 int index_of_comma = text.indexOf(",");
                 String username = text.substring(0, index_of_comma);
                 if (user.getEmail().equals(username)){
-                    ;
                 }else{
                     User NewUser = new User(username);
                     Helper(text, NewUser);
@@ -399,7 +398,7 @@ public class UserManager implements Serializable {
 
     }
 
-    private void AddStatisticAtSpecificPlaceForPreviousAccounts(Context context, int position, int numTimes){
+    public void AddStatisticAtSpecificPlaceForPreviousAccounts(Context context, int position, int numTimes) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 
@@ -426,10 +425,11 @@ public class UserManager implements Serializable {
                     }
                     int indexComma = y;
                     String firstHalf = text.substring(0, y);
-                    String secondHalf = text.substring(y, text.length());
+                    String secondHalf = text.substring(y);
                     String middle = new String(new char[numTimes]).replace(
                             "\0", ", 0");
                     String newtext = firstHalf + middle + secondHalf;
+                    sb.append("\n");
                     sb.append(newtext);
                 } else {
                     sb.append(text).append("\n");

@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class GameConstants {
+    public static int limiter = 0;
     public static final String USERMANAGER = "UserManager";
     public static final int molePassingScore = 5;
     public static final int moleDefaultDuration = 2400;
