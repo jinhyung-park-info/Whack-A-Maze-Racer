@@ -69,6 +69,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/FirstUser"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/SecondUser"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/ThirdUser"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/FourthUser"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:textSize="20sp" />
+
         </LinearLayout>
     </ScrollView>
 

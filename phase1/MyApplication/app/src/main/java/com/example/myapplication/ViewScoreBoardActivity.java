@@ -10,11 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class ViewScoreBoardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private UserManager userManager;
     private String[] arr = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected","TypeRacerStreak"};
+    private List<User> ArrayOfUsers;
+    private  TextView[] ArrayOfTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +30,21 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         UserManager userManager1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (userManager1 != null){
             setUserManager(userManager1);
+            ArrayOfUsers = userManager.getListOfAllUsers(getApplicationContext(), userManager.getUser());
+            ArrayOfUsers.add(userManager.getUser());
+            if(GameConstants.NumPeopleOnScoreBoard >= ArrayOfUsers.size()){
+                ;
+            }else{
+                ArrayOfUsers = ArrayOfUsers.subList(0, GameConstants.NumPeopleOnScoreBoard);
+            }
         }
 
-        //TextView textView = findViewById(R.id.textViewChoose);
-        //textView.setText("Choose a Statistic");
+        TextView FirstUser = findViewById(R.id.FirstUser);
+        TextView SecondUser = findViewById(R.id.SecondUser);
+        TextView ThirdUser = findViewById(R.id.ThirdUser);
+        TextView FourthUser = findViewById(R.id.FourthUser);
+        ArrayOfTextView = new TextView[]{FirstUser, SecondUser, ThirdUser, FourthUser};
+
 
         Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -35,6 +52,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        //setupScoreBoard(ArrayOfUsers, "Overall Score");
     }
     private void setUserManager(UserManager usermanage){
         userManager = usermanage;
@@ -45,13 +63,59 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         String text = adapterView.getItemAtPosition(i).toString();
         //Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_LONG).show();
         TextView Header = findViewById(R.id.HeaderScoreBoard);
-        String header = "     Username" +"          " + text;
+        String header = "     Username" + "          " + text;
         Header.setText(header);
+        setupScoreBoard(ArrayOfUsers, text);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public void setupScoreBoard(List<User> ArrayUsers, String SortingChooser){
+        if(SortingChooser.equals("Overall Score")){
+            Collections.sort(ArrayUsers);
+            setupTextViews(ArrayUsers, ArrayOfTextView, null, null);
+        }else{
+            String[] Attributes = getAttributesForSorting(SortingChooser);
+            String GameName = Attributes[0];
+            String Statistic = Attributes[1];
+            Collections.sort(ArrayUsers, new SortingUser(GameName, Statistic));
+            setupTextViews(ArrayUsers, ArrayOfTextView, GameName, Statistic);
+
+        }
+    }
+
+    private void setupTextViews(List<User> arrayUsers, TextView[] arrayOfTextView, String GameName,
+                                String Statistic) {
+        int i = 0;
+        for(User user: arrayUsers){
+            TextView textViewObject = arrayOfTextView[i];
+            if (GameName == null) {
+                String text = "   " + (i + 1) + ". " + user.getEmail() + "                " + user.getOverallScore();
+                textViewObject.setText(text);
+            }else{
+                String text = "   " + (i + 1) + ". " + user.getEmail() + "                " +
+                        user.getStatistic(GameName, Statistic);
+                textViewObject.setText(text);
+            }
+            i ++;
+        }
+    }
+
+    private String[] getAttributesForSorting(String sortingChooser) {
+        switch (sortingChooser){
+            case "Moles Hit":
+                return new String[]{GameConstants.NameGame1, GameConstants.MoleHit};
+            case "Num MazeGames Played":
+                return new String[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed};
+            case "Num MazeItems Collected":
+                return new String[]{GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze};
+            case "TypeRacerStreak":
+                return new String[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak};
+        }
+        return new String[]{};
     }
 
     public void GoBackToMainMenu(View view){
