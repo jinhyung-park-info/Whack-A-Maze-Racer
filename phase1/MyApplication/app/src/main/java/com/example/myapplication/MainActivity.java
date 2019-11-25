@@ -77,14 +77,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void LoginButton(View view){
         Intent intent = new Intent(this, GameActivity.class);
-        EditText editText_user = (EditText) findViewById(R.id.editText1);
-        EditText editText_pass = (EditText) findViewById(R.id.editText);
+        EditText editText_user = findViewById(R.id.editText1);
+        EditText editText_pass = findViewById(R.id.editText);
         String username = editText_user.getText().toString();
         String password = editText_pass.getText().toString();
         if (validate(username, password, editText_user, editText_pass)){
             User user = new User(username);
             user.setPassword(password);
             //userManager = new UserManager(user);
+            if (GameConstants.limiter == 0) {
+                GameConstants.limiter = 1;
+                userManager.AddStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
+            }
             userManager.setStatistics(getApplicationContext(), user);
             userManager.setUser(user);
             System.out.println(user.getMap());
