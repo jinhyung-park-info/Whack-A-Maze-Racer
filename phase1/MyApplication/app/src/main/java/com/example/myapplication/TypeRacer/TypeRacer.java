@@ -74,30 +74,35 @@ public class TypeRacer extends AppCompatActivity {
 
                 setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
                 showNextQuestion();
-                Button doneBtn = (Button) findViewById(R.id.doneButton);
-                doneBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        //goes to next question if response is correct
-                        if (userIsCorrect()) {
-                            endTime = System.currentTimeMillis();
-                            if (countDownTimer != null) countDownTimer.cancel();
-                            timerRunning = false;
-                            answer.setEnabled(false);
-                            answer.clearFocus();
-                            updateStatistics(true);
-                            showNextQuestion();
-                        } else {
-                            updateStatistics(false);
-                            showNextQuestion();
-                        }
-
-
-                    }
-                });
+                checkIfCorrect();
             }
         }
+    }
+    
+    private void checkIfCorrect() {
+
+        Button doneBtn = (Button) findViewById(R.id.doneButton);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //goes to next question if response is correct
+                if (userIsCorrect()) {
+                    endTime = System.currentTimeMillis();
+                    if (countDownTimer != null) countDownTimer.cancel();
+                    timerRunning = false;
+                    answer.setEnabled(false);
+                    answer.clearFocus();
+                    updateStatistics(true);
+                    showNextQuestion();
+                } else {
+                    updateStatistics(false);
+                    showNextQuestion();
+                }
+
+
+            }
+        });
     }
 
     private void setUserManager(UserManager newManager){
