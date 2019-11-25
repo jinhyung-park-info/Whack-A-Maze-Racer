@@ -2,14 +2,12 @@ package com.example.myapplication.Maze;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -20,10 +18,6 @@ import com.example.myapplication.UserManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
-import java.util.Stack;
-
-import static com.example.myapplication.MainActivity.USER;
 
 public class MazeView extends View {
 
@@ -274,7 +268,7 @@ public class MazeView extends View {
                 this.user_in_maze.setStatistic(GameConstants.NameGame3,
                         GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + games_played);
                 this.user_in_maze.setLast_played_level(0);
-                userManager.update_statistics(contexts, user_in_maze);
+                userManager.updateStatistics(contexts, user_in_maze);
                 Activity activity = (MazeCustomizationActivity) contexts;
                 ((MazeCustomizationActivity) contexts).reset();
                 activity.setContentView(R.layout.activity_maze_customization);

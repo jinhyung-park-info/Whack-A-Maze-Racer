@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class User implements Serializable {
+public class User implements Comparable<User>, Serializable{
     private String email;
     private String password;
     private  HashMap<String, HashMap<String, Object>> map = new HashMap<String, HashMap<String, Object>>();
@@ -16,13 +16,13 @@ public class User implements Serializable {
     private String load_moles_stats;*/
    private boolean thereIsSaved = false;
    private int last_played_level = 0;
-    private int OverallScore = 0;
+   private int OverallScore = 0;
+   private boolean SaveToScoreBoard = true;
 
 
 
-    User(String Email, String Password){
+    User(String Email){
         this.email = Email;
-        this.password = Password;
         for (String GameName: GameConstants.GameNames) {
             HashMap<String, Object> Stastics = new HashMap<String, Object>();
             for (String StasticsOfGame : GameConstants.getArrayOfStatistics(GameName)) {
@@ -34,6 +34,22 @@ public class User implements Serializable {
             }
             map.put(GameName, Stastics);
         }
+    }
+
+    public boolean isSaveToScoreBoard() {
+        return SaveToScoreBoard;
+    }
+
+    public void setSaveToScoreBoard(boolean saveToScoreBoard) {
+        SaveToScoreBoard = saveToScoreBoard;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getOverallScore() {
@@ -96,6 +112,17 @@ public class User implements Serializable {
 
     public boolean getThereIsSaved() { return this.thereIsSaved; }
     public void setThereIsSaved(boolean isSaved) { this.thereIsSaved = isSaved; }
+
+    @Override
+    public int compareTo(User user) {
+        if(this.getOverallScore() < user.getOverallScore()){
+            return 1;
+        }else if(this.getOverallScore() > user.getOverallScore()){
+            return -1;
+        }else{
+            return 0;
+        }
+    }
 
     /*public int getScore(){ return score; }
     public int getStreaks(){ return this.streaks; }

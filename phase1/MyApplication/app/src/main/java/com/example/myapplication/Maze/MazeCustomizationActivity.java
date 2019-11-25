@@ -80,7 +80,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         System.out.println(usermanager.getUser().getLast_played_level());
         usermanager.getUser().setLast_played_level(3);
         System.out.println(usermanager.getUser().getLast_played_level());
-        usermanager.update_statistics(getApplicationContext(), usermanager.getUser());
+        usermanager.updateStatistics(getApplicationContext(), usermanager.getUser());
         reset();
 
     }
@@ -178,7 +178,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     /**
      * Saves the maze when activity is interrupted, if the player already started playing the maze.
      */
-    @Override
+   /* @Override
     protected void onPause() {
         super.onPause();
         if (startedMaze) {
@@ -210,9 +210,9 @@ public class MazeCustomizationActivity extends AppCompatActivity {
                 }
             }
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         if (startedMaze) {
@@ -237,7 +237,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             }
 
         }
-    }
+    }*/
 
     public void reset() {
        bgColour = Color.GREEN;

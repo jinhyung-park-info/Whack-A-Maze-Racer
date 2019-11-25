@@ -9,12 +9,8 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.example.myapplication.GameConstants;
-import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
-
-import static com.example.myapplication.MainActivity.USER;
 
 public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
@@ -35,7 +31,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         if (user_1 != null) {
             setUserManager(user_1);
             userManager.getUser().setLast_played_level(2);
-            userManager.update_statistics(this, userManager.getUser());
+            userManager.updateStatistics(this, userManager.getUser());
         }
     }
 

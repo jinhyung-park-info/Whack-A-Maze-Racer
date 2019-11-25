@@ -41,4 +41,12 @@
     <string name="GoBack">Go Back to Main Menu</string>
     <string name="ScoreBoard">View Scoreboard</string>
     <string name="Logout">Logout</string>
+    <string-array name="Statistics">
+        <item>Overall Score</item>
+        <item>Moles Hit</item>
+        <item>Num MazeGames Played</item>
+        <item>Num MazeItems Collected</item>
+        <item>TypeRacerStreak</item>
+    </string-array>
+    <string name="ChooseStatistic">Choose a Stastic:</string>
 </resources>

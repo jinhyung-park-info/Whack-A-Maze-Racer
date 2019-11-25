@@ -56,6 +56,7 @@
         android:layout_marginStart="65dp"
         android:layout_marginTop="396dp"
         android:layout_marginEnd="65dp"
+        android:onClick="ViewScoreBoard"
         android:text="@string/ScoreBoard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

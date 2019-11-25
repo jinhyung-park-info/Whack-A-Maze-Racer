@@ -15,6 +15,8 @@ import com.example.myapplication.WhackAMole.MoleActivity;
 import com.example.myapplication.WhackAMole.MoleInstructionActivity;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static com.example.myapplication.MainActivity.USER;
 
@@ -88,4 +90,22 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void ViewScoreBoard(View view){
+        Intent intent = new Intent(this, ViewScoreBoardActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
+        /*ArrayList<User> arr = userManager.getListOfAllUsers(getApplicationContext(), userManager.getUser());
+        arr.add(userManager.getUser());
+        for(User users: arr){
+            System.out.println(users.getEmail());
+            System.out.println(users.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed));
+        }
+        Collections.sort(arr, new SortingUser(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed));
+        for(User users: arr){
+            System.out.println(users.getEmail());
+            System.out.println(users.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed));
+        }
+    }*/
 }

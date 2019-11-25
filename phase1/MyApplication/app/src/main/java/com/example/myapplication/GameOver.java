@@ -13,7 +13,7 @@ import static com.example.myapplication.MainActivity.USER;
 
 public class GameOver extends AppCompatActivity {
 
-    private User user;
+    private UserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class GameOver extends AppCompatActivity {
         setContentView(R.layout.activity_game_over);
 
         Intent previous = getIntent();
-        User user_1 = (User) previous.getSerializableExtra(USER);
+        UserManager user_1 = (UserManager) previous.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null){
             setUser(user_1);
         }
@@ -31,14 +31,14 @@ public class GameOver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TypeRacerCustomizationActivity.class);
-                intent.putExtra(USER, user);
+                intent.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent);
             }
         });
 
     }
 
-    private void setUser(User new_user){
-        user = new_user;
+    private void setUser(UserManager new_user){
+        userManager = new_user;
     }
 }

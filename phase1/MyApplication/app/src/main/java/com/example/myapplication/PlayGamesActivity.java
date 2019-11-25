@@ -7,14 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myapplication.Maze.MazeInstructionsActivity;
-import com.example.myapplication.TypeRacer.TypeRacer;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
-import com.example.myapplication.TypeRacer.typeRacerInstruction;
 import com.example.myapplication.WhackAMole.MoleInstructionActivity;
-
-import java.io.File;
-
-import static com.example.myapplication.MainActivity.USER;
 
 public class PlayGamesActivity extends AppCompatActivity {
 
@@ -35,7 +29,7 @@ public class PlayGamesActivity extends AppCompatActivity {
     public void playMole(View v){
         //userManager.getUser().setLoad_moles_stats("0");
         userManager.getUser().setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, "0");
-        userManager.update_statistics(this, userManager.getUser());
+        userManager.updateStatistics(this, userManager.getUser());
         Intent intent = new Intent(this, MoleInstructionActivity.class);
 
         intent.putExtra(GameConstants.USERMANAGER, userManager);

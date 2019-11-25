@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
         String username = editText_user.getText().toString();
         String password = editText_pass.getText().toString();
         if (validate(username, password, editText_user, editText_pass)){
-            User user = new User(username, password);
+            User user = new User(username);
+            user.setPassword(password);
             //userManager = new UserManager(user);
-            userManager.set_statistics(getApplicationContext(), user);
+            userManager.setStatistics(getApplicationContext(), user);
             userManager.setUser(user);
             System.out.println(user.getMap());
-            intent.putExtra(USER, user);
             intent.putExtra(GameConstants.USERMANAGER, userManager);
             startActivity(intent);
         }

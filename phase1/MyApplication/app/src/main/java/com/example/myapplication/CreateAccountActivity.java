@@ -69,9 +69,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         String password = editText_3.getText().toString();
         if(validate_2(username, password, editText_2, editText_3)){
             FileOutputStream fos = null;
-            userManager.write_username_and_pass(getApplicationContext(), fos, username, password);
+            userManager.writeUsernameAndPass(getApplicationContext(), fos, username, password);
             fos = null;
-            userManager.write_username_and_statistics(getApplicationContext(), fos, username);
+            userManager.writeUsernameAndStatistics(getApplicationContext(), fos, username);
             finish();
         }
     }

@@ -13,11 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.GameActivity;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
-import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
-
-import static com.example.myapplication.MainActivity.USER;
 
 public class MoleActivity extends AppCompatActivity {
   boolean passed;
@@ -43,7 +40,7 @@ public class MoleActivity extends AppCompatActivity {
       user = userManager.getUser();
     }
     user.setLast_played_level(1);
-    userManager.update_statistics(this, user);
+    userManager.updateStatistics(this, user);
     reset();
 
     //if (loaded && !user.getLoad_moles_stats().equals("0")) {
@@ -57,13 +54,13 @@ public class MoleActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    userManager.update_statistics(this, user);
+    userManager.updateStatistics(this, user);
   }
 
   @Override
   protected void onPause() {
     super.onPause();
-    userManager.update_statistics(this, user);
+    userManager.updateStatistics(this, user);
   }
 
   @Override
@@ -147,7 +144,7 @@ public class MoleActivity extends AppCompatActivity {
       int CurrMolesHit = (int) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit);
       user.setStatistic(GameConstants.NameGame1, GameConstants.MoleHit, CurrMolesHit + molesHit);
       user.setLast_played_level(0);
-      userManager.update_statistics(getApplicationContext(), user);
+      userManager.updateStatistics(getApplicationContext(), user);
       Intent intent = new Intent(this, GameActivity.class);
       intent.putExtra(GameConstants.USERMANAGER, userManager);
       startActivity(intent);
@@ -181,6 +178,6 @@ public class MoleActivity extends AppCompatActivity {
     loaded = false;
     //user.setLoad_moles_stats("0");
     user.setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, "0");
-    userManager.update_statistics(this, user);
+    userManager.updateStatistics(this, user);
   }
 }

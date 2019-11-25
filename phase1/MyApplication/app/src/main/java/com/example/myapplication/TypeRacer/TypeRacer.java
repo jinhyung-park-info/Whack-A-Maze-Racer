@@ -4,7 +4,6 @@ package com.example.myapplication.TypeRacer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -17,25 +16,19 @@ import android.widget.TextView;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.GameOver;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-
-import static com.example.myapplication.MainActivity.USER;
 
 
 public class TypeRacer extends AppCompatActivity {
@@ -314,7 +307,7 @@ public class TypeRacer extends AppCompatActivity {
             user.setLast_played_level(0);
             //user.setStreaks(countStreak);
             user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
-            userManager.update_statistics(this, user);
+            userManager.updateStatistics(this, user);
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(GameConstants.USERMANAGER, userManager);
             goToEndGame.putExtra("finalScore", "" + countScore);
@@ -390,8 +383,8 @@ public class TypeRacer extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
                 //user.setStreaks(countStreak);
                 user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
-                userManager.update_statistics(this, user);
-                intent.putExtra(USER, user);
+                userManager.updateStatistics(this, user);
+                intent.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent);
             }
         }
