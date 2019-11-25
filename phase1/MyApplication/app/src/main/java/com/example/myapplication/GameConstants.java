@@ -20,6 +20,7 @@ public abstract class GameConstants {
     public static final String NameGame3 = "Maze";
     public static final String MoleHit = "MoleHit";
     public static final String MoleStats = "MoleStats";
+    public static final String MoleScore = "MoleScore";
     public static final String NumMazeGamesPlayed = "NumMazeGamesPlayed";
     public static final String TypeRacerStreak = "TypeRacerStreak";
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";

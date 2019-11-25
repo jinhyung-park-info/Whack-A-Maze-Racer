@@ -1,6 +1,7 @@
 package com.example.myapplication.WhackAMole;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.view.SurfaceView;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
+import com.example.myapplication.SaveScoreActivity;
 
 /** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
@@ -31,8 +33,6 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private String endScore;
   private String end_message1;
   private String end_message2;
-  private String end_message3;
-  private String end_message4;
 
   public WamManager wamManager;
 
@@ -96,10 +96,8 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     wamManager.initialize();
 
     endScore = "Score:" + this.wamManager.score;
-    end_message1 = "Press Any Where";
-    end_message2 = "to Play Again";
-    end_message3 = "You have passed!";
-    end_message4 = "Next level unlocked!";
+    end_message1 = "You have been";
+    end_message2 = "overtaken by moles";
   }
   // Draw method inspired by FishTank Project.
   public void draw() {
@@ -122,13 +120,8 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
           case "end":
             canvas.drawBitmap(scoreBoard, screenWidth / 7, screenHeight * 4 / 7, paint);
             canvas.drawText(endScore, screenWidth / 4, screenHeight * 2 / 3, paint);
-            if (thread_active) {
-              canvas.drawText(end_message1, screenWidth / 4, screenHeight * 11 / 15, paint);
-              canvas.drawText(end_message2, screenWidth / 4, screenHeight * 12 / 15, paint);
-            } else {
-              canvas.drawText(end_message3, screenWidth / 4, screenHeight * 11 / 15, paint);
-              canvas.drawText(end_message4, screenWidth / 4, screenHeight * 12 / 15, paint);
-            }
+            canvas.drawText(end_message1, screenWidth / 4, screenHeight * 11 / 15, paint);
+            canvas.drawText(end_message2, screenWidth / 4, screenHeight * 12 / 15, paint);
             break;
         }
       }
@@ -149,14 +142,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         return false;
       case "end":
         thread_active = false;
-        if (wamManager.score >= GameConstants.molePassingScore) {
-          this.activity.passed = true;
-          }
-        wamManager.reinitialize();
-        gameStatus = "inGame";
-        activity.reset();
-        activity.setContentView(R.layout.activity_mole);
-
+        activity.conclude();
     }
     return true;
   }
@@ -192,16 +178,15 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     y = (int) event.getY();
     for (Mole mole : wc.moleList) {
       Rect rect = mole.getTouchRect();
-      if (rect.contains(x, y) && mole.getState() != Mole.Movement.HIT) {
+      if (rect.contains(x, y) && mole.getState() != Mole.Movement.HIT && mole.getState() != Mole.Movement.STANDBY) {
         mole.setState(Mole.Movement.HIT);
-        this.wamManager.score += mole.value;
+        this.wamManager.score = Math.max(0, this.wamManager.score + mole.value);
         this.activity.molesHit += 1;
       }
     }
   }
 
   private void upload_moles_stats(String stats) {
-    //this.activity.user.setLoad_moles_stats(stats);
     this.activity.user.setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, stats);
   }
 

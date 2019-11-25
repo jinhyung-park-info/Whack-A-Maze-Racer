@@ -23,6 +23,7 @@
         <activity android:name=".TypeRacer.TypeRacerEnd" />
         <activity android:name=".Maze.MazeCustomizationActivity" />
         <activity android:name=".TypeRacer.TypeRacer" />
+        <activity android:name=".SaveScoreActivity" />
         <activity
             android:name=".GameActivity"
             android:parentActivityName=".MainActivity">

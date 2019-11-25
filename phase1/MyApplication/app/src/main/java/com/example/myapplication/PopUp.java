@@ -49,6 +49,10 @@ public class PopUp extends Activity {
         EditText streakText =  findViewById(R.id.streak);
         String streak = "TypeRacer Streak: " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
         streakText.setText(streak);
+
+        EditText overallText =  findViewById(R.id.overall);
+        String overall = "Overall Score: " + user.getOverallScore();
+        overallText.setText(overall);
     }
 
     private void setUserManager(UserManager newManager){

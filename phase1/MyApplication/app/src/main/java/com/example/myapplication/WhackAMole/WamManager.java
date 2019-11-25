@@ -122,15 +122,6 @@ class WamManager implements Runnable{
     thread.start();
   }
 
-  void reinitialize() {
-    this.score = 0;
-    duration = GameConstants.moleDefaultDuration;
-    for (Mole mole : moleList) {
-      mole.reset();
-    }
-    this.currentLives = this.numLives;
-  }
-
   void randomMole() {
     Random random = new Random();
     int num = random.nextInt(moleList.size());

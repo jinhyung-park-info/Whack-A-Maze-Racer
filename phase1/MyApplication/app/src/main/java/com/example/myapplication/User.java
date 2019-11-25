@@ -12,12 +12,11 @@ public class User implements Comparable<User>, Serializable{
     private int streaks = 0;
     private int num_maze_games_played = 0;
     private int last_played_level = 0;
+    private boolean thereIsSaved = false; */
     private boolean thereIsSaved = false;
-    private String load_moles_stats;*/
-   private boolean thereIsSaved = false;
-   private int last_played_level = 0;
-   private int OverallScore = 0;
-   private boolean SaveToScoreBoard = true;
+    private int last_played_level = 0;
+    private int OverallScore = 0;
+    private boolean SaveToScoreBoard = true;
 
 
 
@@ -57,7 +56,9 @@ public class User implements Comparable<User>, Serializable{
     }
 
     public void setOverallScore(int overallScore) {
-        OverallScore = overallScore;
+        if (isSaveToScoreBoard()) {
+            OverallScore = overallScore;
+        }
     }
 
     public String getEmail() {
@@ -98,9 +99,9 @@ public class User implements Comparable<User>, Serializable{
 
     public Object getStatistic(String GameName, String StatisticName){
         if (map.get(GameName) != null){
-            HashMap<String, Object> StasticMap = map.get(GameName);
-            if(StasticMap.get(StatisticName) != null){
-                return StasticMap.get(StatisticName);
+            HashMap<String, Object> statisticMap = map.get(GameName);
+            if(statisticMap.get(StatisticName) != null){
+                return statisticMap.get(StatisticName);
             }
         }
         return null;
