@@ -68,7 +68,8 @@
                 android:id="@+id/HeaderScoreBoard"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/FirstUser"
