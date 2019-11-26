@@ -48,7 +48,7 @@ public class TypeRacer extends AppCompatActivity {
     private int countScore, countStreak, countLife;
 
     // Time related Attributes
-    private static final long COUNTDOWN_IN_MILLS = 30000;
+    private static final long COUNTDOWN_IN_MILLS = GameConstants.timeLimitInMills;
     private CountDownTimer countDownTimer;
     private Boolean timerRunning = false;
 
@@ -155,7 +155,7 @@ public class TypeRacer extends AppCompatActivity {
     // shows next question, ends if all questions completed
     private void showNextQuestion() {
         if (questionNumber < questions.size()) {
-            textViewMap.get("countDown").setText("30");
+            textViewMap.get("countDown").setText("" + (int) GameConstants.timeLimitInMills / 1000);
             textViewMap.get("question").setText(questions.get(questionNumber).getQuestionContent());
             answer.setText("");
             answer.setEnabled(true);

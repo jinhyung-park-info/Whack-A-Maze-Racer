@@ -1,11 +1,13 @@
 package com.example.myapplication.TypeRacer;
 
+import com.example.myapplication.GameConstants;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GoldenQuestion extends Question {
 
     public GoldenQuestion() {
-        this.point = 5;
+        this.point = GameConstants.goldenQuestionPoint;
     }
 
 }
