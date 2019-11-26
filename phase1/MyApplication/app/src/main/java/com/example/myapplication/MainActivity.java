@@ -85,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
             User user = new User(username);
             user.setPassword(password);
             //userManager = new UserManager(user);
-            if (GameConstants.limiter == 0) {
+            /*if (GameConstants.limiter == 0) {
                 GameConstants.limiter = 1;
-                userManager.addStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
-            }
+                //userManager.addStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
+            }*/
             //if (GameConstants.limiter == 0) {
             //GameConstants.limiter = 1;
             //userManager.AddStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
