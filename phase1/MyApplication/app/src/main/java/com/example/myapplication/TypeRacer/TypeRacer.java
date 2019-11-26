@@ -38,8 +38,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class TypeRacer extends AppCompatActivity {
 
     Map<String, TextView> textViewMap;
-    ArrayList<String> questions = new ArrayList<>();
-
+    QuestionFactory questionFactory;
+    ArrayList<Question> questions;
     private int questionNumber = 0;
     EditText answer;
 
@@ -81,10 +81,6 @@ public class TypeRacer extends AppCompatActivity {
             countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
             textViewMap.get("score").setText("" + countScore);
             textViewMap.get("streak").setText("" + countStreak);
-
-
-
-
 
 
             setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
@@ -296,10 +292,8 @@ public class TypeRacer extends AppCompatActivity {
         textViewMap.get("life").setText("" + lives);
 
         // 4. Create questions according to the difficulty
-        for (int i = 0; i < 5; i++){
-            createQuestion(diffi);
-        }
-
+        questionFactory = new QuestionFactory(diffi);
+        questions = questionFactory.createQuestionSet();
     }
 
     private void setAllTextColor(Map<String, TextView> map, int textColor) {
@@ -308,21 +302,11 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
-
-    public void createQuestion(int d){
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < d; i++){
-            sb.append((char) ThreadLocalRandom.current().nextInt(32, 126+1));
-        }
-        String q = sb.toString();
-        questions.add(q);
-    }
-
     // shows next question, ends if all questions completed
     private void showNextQuestion() {
         if (questionNumber < questions.size()) {
             textViewMap.get("countDown").setText("30");
-            textViewMap.get("question").setText(questions.get(questionNumber));
+            textViewMap.get("question").setText(questions.get(questionNumber).getQuestionContent());
             answer.setText("");
             answer.setEnabled(true);
             manageTime();
@@ -386,7 +370,7 @@ public class TypeRacer extends AppCompatActivity {
     // method called to update the statistic.
     public void updateStatistics(boolean isCorrect){
         if (isCorrect) {
-            countScore++;
+            countScore = countScore + questions.get(questionNumber - 1).getPoint();
             countStreak++;
             textViewMap.get("score").setText("" + countScore);
             textViewMap.get("streak").setText("" + countStreak);
