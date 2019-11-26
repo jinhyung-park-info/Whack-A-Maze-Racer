@@ -37,25 +37,23 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class TypeRacer extends AppCompatActivity {
 
-    Map<String, TextView> textViewMap;
-    ArrayList<String> questions = new ArrayList<>();
-
+    // Screen Display related attributes
+    private Map<String, TextView> textViewMap;
+    private QuestionFactory questionFactory;
+    private ArrayList<Question> questions;
     private int questionNumber = 0;
-    EditText answer;
+    private EditText answer;
 
-    // 3 statistics
+    // 3 Statistics
     private int countScore, countStreak, countLife;
 
-    long startTime, endTime;
+    // Time related Attributes
     private static final long COUNTDOWN_IN_MILLS = 30000;
-    private long timeLeftInMillis;
     private CountDownTimer countDownTimer;
-    Boolean timerRunning = false;
+    private Boolean timerRunning = false;
+
     private UserManager userManager;
     private User user;
-    int backGroundColor;
-    int textColor;
-    int parameterDifficulty;
 
 
     @Override
@@ -69,182 +67,30 @@ public class TypeRacer extends AppCompatActivity {
             user = user_1.getUser();
 
             getTextViews();
-            backGroundColor = intent.getExtras().getInt("backGroundColorKey");
-            textColor = intent.getExtras().getInt("textColorKey");
-            countLife = intent.getExtras().getInt("lives");
-            parameterDifficulty = intent.getIntExtra("difficulty", 5);
 
-
-            // User setUp
             // initialize 3 statistics
             countScore = 0;
-            countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
             textViewMap.get("score").setText("" + countScore);
+
+            countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
             textViewMap.get("streak").setText("" + countStreak);
 
+            countLife = intent.getExtras().getInt("lives");
 
+            int backGroundColor = intent.getExtras().getInt("backGroundColorKey");
+            int textColor = intent.getExtras().getInt("textColorKey");
+            int parameterDifficulty = intent.getIntExtra("difficulty", 5);
 
-
-
-
-            setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
+            setCustomization(backGroundColor, textColor, countLife, parameterDifficulty);
             showNextQuestion();
             prepareForScreenUpdate();
 
         }
     }
 
-    private void prepareForScreenUpdate() {
-
-        Button doneBtn = (Button) findViewById(R.id.doneButton);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //goes to next question if response is correct
-                if (userIsCorrect()) {
-                    endTime = System.currentTimeMillis();
-                    if (countDownTimer != null) countDownTimer.cancel();
-                    timerRunning = false;
-                    answer.setEnabled(false);
-                    answer.clearFocus();
-                    updateStatistics(true);
-                    showNextQuestion();
-                } else {
-                    updateStatistics(false);
-                    showNextQuestion();
-                }
-
-
-            }
-        });
-    }
-
     private void setUserManager(UserManager newManager){
         userManager = newManager;
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        FileOutputStream fos = null;
-        // File file = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
-        try {
-            fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
-            try {
-
-                fos.write(this.timerRunning.toString().getBytes());
-                fos.write("\n".getBytes());
-
-                fos.write(textViewMap.get("countDown").getText().toString().getBytes());
-                fos.write("\n".getBytes());
-
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
-
-                user.setThereIsSaved(true);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        Intent intent = getIntent();
-
-        if (user.getThereIsSaved()) {
-            FileInputStream fis = null;
-            try {
-                fis = getApplicationContext().openFileInput(user.getEmail() + "_typeracer.txt");
-                InputStreamReader isr = new InputStreamReader(fis);
-                BufferedReader rd = new BufferedReader(isr);
-
-                if (!Boolean.valueOf(rd.readLine())) {
-                    this.timerRunning = false;
-                } else {
-                    this.timerRunning = true;
-                }
-
-                int time = Integer.parseInt(rd.readLine());
-
-                startTime = System.currentTimeMillis();
-                timerRunning = true;
-                countDownTimer =
-                        new CountDownTimer(time * 1000, 1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                                textViewMap.get("countDown").setText(Long.toString(millisUntilFinished / 1000));
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                updateStatistics(false);
-                                textViewMap.get("countDown").setText("0");
-                                showNextQuestion();
-                                timerRunning = false;
-                            }
-                        }.start();
-
-                manageTime();
-
-                Button doneBtn = (Button)findViewById(R.id.doneButton);
-                doneBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        //goes to next question if response is correct
-                        if (userIsCorrect()) {
-                            endTime = System.currentTimeMillis();
-                            if (countDownTimer != null) countDownTimer.cancel();
-                            timerRunning = false;
-                            answer.setEnabled(false);
-                            answer.clearFocus();
-                            updateStatistics(true);
-                            showNextQuestion();
-                        } else {
-                            updateStatistics(false);
-                            showNextQuestion();
-                        }
-                    }
-                });
-
-                user.setThereIsSaved(false);
-                File newFile = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
-                newFile.delete();
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fis != null) {
-                    try {
-                        fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    }
-
 
     private void getTextViews() {
         textViewMap = new HashMap<>();
@@ -296,10 +142,8 @@ public class TypeRacer extends AppCompatActivity {
         textViewMap.get("life").setText("" + lives);
 
         // 4. Create questions according to the difficulty
-        for (int i = 0; i < 5; i++){
-            createQuestion(diffi);
-        }
-
+        questionFactory = new QuestionFactory(diffi);
+        questions = questionFactory.createQuestionSet();
     }
 
     private void setAllTextColor(Map<String, TextView> map, int textColor) {
@@ -308,21 +152,11 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
-
-    public void createQuestion(int d){
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < d; i++){
-            sb.append((char) ThreadLocalRandom.current().nextInt(32, 126+1));
-        }
-        String q = sb.toString();
-        questions.add(q);
-    }
-
     // shows next question, ends if all questions completed
     private void showNextQuestion() {
         if (questionNumber < questions.size()) {
             textViewMap.get("countDown").setText("30");
-            textViewMap.get("question").setText(questions.get(questionNumber));
+            textViewMap.get("question").setText(questions.get(questionNumber).getQuestionContent());
             answer.setText("");
             answer.setEnabled(true);
             manageTime();
@@ -351,8 +185,8 @@ public class TypeRacer extends AppCompatActivity {
 
                         String response = answer.getText().toString();
                         //start counting
-                        if (response.length() == 1 || user.getThereIsSaved()) {
-                            startTime = COUNTDOWN_IN_MILLS;
+                        if (response.length() == 1) {
+
                             if (timerRunning) return;
                             timerRunning = true;
                             countDownTimer =
@@ -386,7 +220,7 @@ public class TypeRacer extends AppCompatActivity {
     // method called to update the statistic.
     public void updateStatistics(boolean isCorrect){
         if (isCorrect) {
-            countScore++;
+            countScore = countScore + questions.get(questionNumber - 1).getPoint();
             countStreak++;
             textViewMap.get("score").setText("" + countScore);
             textViewMap.get("streak").setText("" + countStreak);
@@ -408,4 +242,120 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
+    private void prepareForScreenUpdate() {
+
+        Button doneBtn = (Button) findViewById(R.id.doneButton);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (countDownTimer != null) countDownTimer.cancel();
+                timerRunning = false;
+
+                //goes to next question if response is correct
+                if (userIsCorrect()) {
+                    answer.setEnabled(false);
+                    answer.clearFocus();
+                    updateStatistics(true);
+                    showNextQuestion();
+                } else {
+                    updateStatistics(false);
+                    showNextQuestion();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        FileOutputStream fos = null;
+        // File file = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
+        try {
+            fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
+            try {
+
+                fos.write(this.timerRunning.toString().getBytes());
+                fos.write("\n".getBytes());
+
+                fos.write(textViewMap.get("countDown").getText().toString().getBytes());
+                fos.write("\n".getBytes());
+
+                if (countDownTimer != null) {
+                    countDownTimer.cancel();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        FileInputStream fis = null;
+        try {
+            fis = getApplicationContext().openFileInput(user.getEmail() + "_typeracer.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader rd = new BufferedReader(isr);
+
+            if (!Boolean.valueOf(rd.readLine())) {
+                this.timerRunning = false;
+            } else {
+                this.timerRunning = true;
+            }
+
+            int time = Integer.parseInt(rd.readLine());
+
+            timerRunning = true;
+            countDownTimer =
+                        new CountDownTimer(time * 1000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                textViewMap.get("countDown").setText(Long.toString(millisUntilFinished / 1000));
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                updateStatistics(false);
+                                textViewMap.get("countDown").setText("0");
+                                showNextQuestion();
+                                timerRunning = false;
+                            }
+                        }.start();
+
+            prepareForScreenUpdate();
+
+            File newFile = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
+            newFile.delete();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 }
