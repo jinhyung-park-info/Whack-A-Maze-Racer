@@ -12,7 +12,7 @@ public class Collectible extends Cell {
 
     Collectible(int col, int row) {
         super(col, row);
-        points = 1;
+        points = 10;
     }
 
     public int getPoints() {
