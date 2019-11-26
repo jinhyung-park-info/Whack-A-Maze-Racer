@@ -8,8 +8,8 @@ import android.view.View;
 
 public class SaveScoreActivity extends AppCompatActivity {
 
-  int moleScore;
-    int moleHigh;
+  int moleScore = 0;
+  int moleHigh = 0;
   UserManager userManager;
   User user;
 
@@ -19,8 +19,13 @@ public class SaveScoreActivity extends AppCompatActivity {
     setContentView(R.layout.activity_save_score);
 
     Intent intent = getIntent();
-    moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
-    moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
+    //if from MoleActivity
+    if(intent.getSerializableExtra(GameConstants.MoleScore) != null) {
+      moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
+      moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
+    }
+
+    //if from MazeCustomizationActivity
     UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
     if (user_1 != null) {
       setUserManager(user_1);
