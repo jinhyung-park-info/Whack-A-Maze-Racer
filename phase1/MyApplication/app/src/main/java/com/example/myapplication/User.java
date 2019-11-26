@@ -11,7 +11,7 @@ public class User implements Comparable<User>, Serializable{
     private boolean thereIsSaved = false;
     private int lastPlayedLevel = 0;
     private int overallScore = 0;
-    private boolean savedToScoreBoard = true;
+    private int currency = 0;
 
 
 
@@ -30,12 +30,12 @@ public class User implements Comparable<User>, Serializable{
         }
     }
 
-    public boolean isSavedToScoreBoard() {
-        return savedToScoreBoard;
+    public int getCurrency() {
+        return currency;
     }
 
-    public void setSavedToScoreBoard(boolean savedToScoreBoard) {
-        this.savedToScoreBoard = savedToScoreBoard;
+    public void setCurrency(int currency) {
+        this.currency = currency;
     }
 
     public String getPassword() {
@@ -51,9 +51,7 @@ public class User implements Comparable<User>, Serializable{
     }
 
     public void setOverallScore(int overallScore) {
-        if (isSavedToScoreBoard()) {
             this.overallScore = overallScore;
-        }
     }
 
     public String getEmail() {
