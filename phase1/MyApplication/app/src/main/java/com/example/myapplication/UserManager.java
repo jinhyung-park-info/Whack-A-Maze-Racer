@@ -242,14 +242,18 @@ public class UserManager implements Serializable {
             String text;
 
             while ((text = br.readLine()) != null) {
-                int index_of_first_comma = text.indexOf(",");
-                String other_username = text.substring(0, index_of_first_comma);
-                if (user.getEmail().equals(other_username)) {
-                    user = Helper(text, user);
+                if(text.equals("") | text.equals(" ")){
+                    ;
+                }else {
+                    int index_of_first_comma = text.indexOf(",");
+                    String other_username = text.substring(0, index_of_first_comma);
+                    if (user.getEmail().equals(other_username)) {
+                        user = Helper(text, user);
                     /*user.setScore(MoleHit);
                     user.setStreaks(streaks);
                     user.setNum_maze_games_played(NumMazeGame);
                     user.setLoad_moles_stats(load_moles_stats);*/
+                    }
                 }
             }
 
