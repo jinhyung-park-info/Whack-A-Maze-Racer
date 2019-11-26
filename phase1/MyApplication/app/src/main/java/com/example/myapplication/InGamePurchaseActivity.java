@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class InGamePurchaseActivity extends AppCompatActivity {
 
     UserManager userManager;
@@ -38,9 +41,15 @@ public class InGamePurchaseActivity extends AppCompatActivity {
     }
 
     public void buyCurrency(View view){
-        user.setCurrency(user.getCurrency() + 50);
-        userManager.updateStatistics(this, user);
 
+        EditText codeText =  findViewById(R.id.code);
+        String code = codeText.getText().toString();
+
+        List<String> list = Arrays.asList(GameConstants.validGiftCodes);
+        if (list.contains(code)) {
+            user.setCurrency(user.getCurrency() + 50);
+            userManager.updateStatistics(this, user);
+      }
         TextView currencyText =  findViewById(R.id.numGems);
         String currency = "Gems Remaining: " + user.getCurrency();
         currencyText.setText(currency);

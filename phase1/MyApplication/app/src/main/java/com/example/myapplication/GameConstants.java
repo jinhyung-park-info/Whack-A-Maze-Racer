@@ -27,6 +27,7 @@ public abstract class GameConstants {
     public static final String NumMazeGamesPlayed = "NumMazeGamesPlayed";
     public static final String TypeRacerStreak = "TypeRacerStreak";
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";
+    public static final String[] validGiftCodes = new String[]{"207", "lindsey", "paul"};
     public static final String[] OptionsForScoreBoard = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected","TypeRacerStreak"};
     public static final String purchase = "purchase"; //this is key used for in game purchase
