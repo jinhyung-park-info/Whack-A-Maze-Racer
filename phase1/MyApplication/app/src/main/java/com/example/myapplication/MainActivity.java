@@ -89,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
                 GameConstants.limiter = 1;
                 userManager.addStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
             }
+            //if (GameConstants.limiter == 0) {
+            //GameConstants.limiter = 1;
+            //userManager.AddStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
+            //}
             userManager.setStatistics(getApplicationContext(), user);
             userManager.setUser(user);
             System.out.println(user.getMap());

@@ -47,6 +47,7 @@
         <item>Num MazeGames Played</item>
         <item>Num MazeItems Collected</item>
         <item>TypeRacerStreak</item>
+        <item>Mole All Time High</item>
     </string-array>
     <string name="ChooseStatistic">Choose a Stastic:</string>
 </resources>

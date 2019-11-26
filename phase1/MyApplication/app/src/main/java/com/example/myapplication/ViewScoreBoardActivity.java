@@ -18,7 +18,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
 
     private UserManager userManager;
     private String[] arr = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
-            "Num MazeItems Collected","TypeRacerStreak"};
+            "Num MazeItems Collected", "TypeRacerStreak", "Mole All Time High"};
     private List<User> ArrayOfUsers;
     private  TextView[] ArrayOfTextView;
 
@@ -121,6 +121,8 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
                 return new String[]{GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze};
             case "TypeRacerStreak":
                 return new String[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak};
+            case "Mole All Time High":
+                return new String[]{GameConstants.NameGame1, GameConstants.MoleAllTimeHigh};
         }
         return new String[]{};
     }
