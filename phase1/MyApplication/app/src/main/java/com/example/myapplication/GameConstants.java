@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public abstract class GameConstants {
     public static int limiter = 0;
     public static final String USERMANAGER = "UserManager";
+    public static final int usernameLength = 8;
     public static final int molePassingScore = 5;
     public static final int moleDefaultDuration = 2400;
     public static final int TotalMazeGames = 2;
@@ -15,7 +16,7 @@ public abstract class GameConstants {
     public static final int NumberOfMazeCollectibles = 3;
     //2 for user and 6 for the games
     public static final int TotalNumOfStastics = 9;
-    public static final int NumPeopleOnScoreBoard = 4;
+    public static final int NumPeopleOnScoreBoard = 5;
     public static final String NameGame1 = "Whack-A-Mole";
     public static final String NameGame2 = "TypeRacer";
     public static final String NameGame3 = "Maze";

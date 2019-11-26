@@ -34,11 +34,19 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
             ArrayOfUsers.add(userManager.getUser());
         }
 
-        TextView FirstUser = findViewById(R.id.FirstUser);
-        TextView SecondUser = findViewById(R.id.SecondUser);
-        TextView ThirdUser = findViewById(R.id.ThirdUser);
-        TextView FourthUser = findViewById(R.id.FourthUser);
-        ArrayOfTextView = new TextView[]{FirstUser, SecondUser, ThirdUser, FourthUser};
+        TextView FirstUserName = findViewById(R.id.FirstUserName);
+        TextView SecondUserName = findViewById(R.id.SecondUserName);
+        TextView ThirdUserName = findViewById(R.id.ThirdUserName);
+        TextView FourthUserName = findViewById(R.id.FourthUserName);
+        TextView FifthUserName = findViewById(R.id.FifthUserName);
+        TextView FirstUserStat = findViewById(R.id.FirstUserStat);
+        TextView SecondUserStat = findViewById(R.id.SecondUserStat);
+        TextView ThirdUserStat = findViewById(R.id.ThirdUserStat);
+        TextView FourthUserStat = findViewById(R.id.FourthUserStat);
+        TextView FifthUserStat = findViewById(R.id.FifthUserStat);
+        ArrayOfTextView = new TextView[]{FirstUserName, FirstUserStat, SecondUserName,
+                SecondUserStat, ThirdUserName, ThirdUserStat, FourthUserName, FourthUserStat,
+                FifthUserName, FifthUserStat};
 
 
         Spinner spinner = findViewById(R.id.spinner);
@@ -57,9 +65,11 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
         //Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_LONG).show();
-        TextView Header = findViewById(R.id.HeaderScoreBoard);
-        String header = "     Username" + "          " + text;
-        Header.setText(header);
+        //TextView Header = findViewById(R.id.HeaderUserName);
+        TextView Statistic = findViewById(R.id.StatisticName);
+        //String header = "     Username" + "          " + text;
+        //Header.setText("Username");
+        Statistic.setText(text);
         setupScoreBoard(text);
     }
 
@@ -98,16 +108,20 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
                                 String Statistic) {
         int i = 0;
         for(User user: arrayUsers){
-            TextView textViewObject = arrayOfTextView[i];
+            //TextView textViewObject = arrayOfTextView[i];
             if (GameName == null) {
-                String text = "   " + (i + 1) + ". " + user.getEmail() + "                " + user.getOverallScore();
-                textViewObject.setText(text);
+                //String text = "   " + (i + 1) + ". " + user.getEmail() + "                " + user.getOverallScore();
+                //textViewObject.setText(text);
+                arrayOfTextView[i].setText(user.getEmail());
+                arrayOfTextView[i + 1].setText(String.valueOf(user.getOverallScore()));
             }else{
-                String text = "   " + (i + 1) + ". " + user.getEmail() + "                " +
+                /*String text = "   " + (i + 1) + ". " + user.getEmail() + "                " +
                         user.getStatistic(GameName, Statistic);
-                textViewObject.setText(text);
+                textViewObject.setText(text);*/
+                arrayOfTextView[i].setText(user.getEmail());
+                arrayOfTextView[i + 1].setText(String.valueOf(user.getStatistic(GameName, Statistic)));
             }
-            i ++;
+            i += 2;
         }
     }
 

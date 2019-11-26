@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
             editText_pass.setError("Please enter text;");
             return false;
         }
+        if (username.length() > GameConstants.usernameLength) {
+            editText_user.setError("Usernames cannot be longer than " + GameConstants.usernameLength + " long");
+        }
         if(username.length() == 0){
             editText_user.setError("Please enter text");
             return false;

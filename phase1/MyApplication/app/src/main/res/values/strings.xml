@@ -50,4 +50,5 @@
         <item>Mole All Time High</item>
     </string-array>
     <string name="ChooseStatistic">Choose a Stastic:</string>
+    <string name="Username">Username</string>
 </resources>
