@@ -120,8 +120,8 @@ public class MazeView extends View {
      */
 
     private UserManager userManager;
-    private User user_in_maze;
-    private int games_played = 0;
+    private User userInMaze;
+    private int gamesPlayed = 0;
     private Context contexts;
 
     private MazeCreation mazeCreation;
@@ -142,7 +142,7 @@ public class MazeView extends View {
         this.bgColour = bgColour;
         this.playerType = playerType;
         this.userManager = user_1;
-        this.user_in_maze = user_1.getUser();
+        this.userInMaze = user_1.getUser();
         mazeCreation = new MazeCreation();
 
         wallPaint = new Paint();
@@ -260,15 +260,15 @@ public class MazeView extends View {
     }
 
     private void checkExit() {
-        if (player == exit && games_played < GameConstants.TotalMazeGames) {
-            games_played += 1;
+        if (player == exit && gamesPlayed < GameConstants.TotalMazeGames) {
+            gamesPlayed += 1;
             createMaze();
-            if (games_played >= GameConstants.TotalMazeGames) {
-                int CurrGamesPlayed = (int) user_in_maze.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed);
-                this.user_in_maze.setStatistic(GameConstants.NameGame3,
-                        GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + games_played);
-                this.user_in_maze.setLast_played_level(0);
-                userManager.updateStatistics(contexts, user_in_maze);
+            if (gamesPlayed >= GameConstants.TotalMazeGames) {
+                int CurrGamesPlayed = (int) userInMaze.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed);
+                this.userInMaze.setStatistic(GameConstants.NameGame3,
+                        GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + gamesPlayed);
+                this.userInMaze.setLast_played_level(0);
+                userManager.updateStatistics(contexts, userInMaze);
                 Activity activity = (MazeCustomizationActivity) contexts;
                 ((MazeCustomizationActivity) contexts).reset();
                 activity.setContentView(R.layout.activity_maze_customization);
@@ -283,10 +283,23 @@ public class MazeView extends View {
 
         for (Collectible c : collectibles) {
             if (player.getCol() == c.getCol() && player.getRow() == c.getRow()) {
-                c.setCollected(true);
-                //TODO use the points attribute to set score
-                //TODO add to user stats
+                int newNumCollectiblesCollected;
+                int newScore;
+
+                //update num of collectibles collected
+                newNumCollectiblesCollected = (int) userInMaze.getStatistic(GameConstants.NameGame3,
+                        GameConstants.NumCollectiblesCollectedMaze) + 1;
+                userInMaze.setStatistic(GameConstants.NameGame3,
+                        GameConstants.NumCollectiblesCollectedMaze, newNumCollectiblesCollected);
+
+                //update score
+                newScore = userInMaze.getOverallScore() + c.getPoints();
+                userInMaze.setOverallScore(newScore);
+
                 collectiblesToRemove.add(c); //directly removing objects will mess up the loop
+
+                System.out.println(userInMaze.getStatistic(GameConstants.NameGame3,
+                        GameConstants.NumCollectiblesCollectedMaze) + " " + userInMaze.getOverallScore());
             }
         }
 

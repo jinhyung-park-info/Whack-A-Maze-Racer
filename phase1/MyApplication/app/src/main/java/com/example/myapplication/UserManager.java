@@ -166,7 +166,6 @@ public class UserManager implements Serializable {
                 fos.write(username.getBytes());
                 String s = new String(new char[GameConstants.TotalNumOfStastics]).replace(
                         "\0", ", 0");
-                System.out.println(s);
                 fos.write(s.getBytes());
                 fos.write("\n".getBytes());
             } catch (IOException e) {
@@ -243,14 +242,18 @@ public class UserManager implements Serializable {
             String text;
 
             while ((text = br.readLine()) != null) {
-                int index_of_first_comma = text.indexOf(",");
-                String other_username = text.substring(0, index_of_first_comma);
-                if (user.getEmail().equals(other_username)) {
-                    user = Helper(text, user);
+                if(text.equals("") | text.equals(" ")){
+                    ;
+                }else {
+                    int index_of_first_comma = text.indexOf(",");
+                    String other_username = text.substring(0, index_of_first_comma);
+                    if (user.getEmail().equals(other_username)) {
+                        user = Helper(text, user);
                     /*user.setScore(MoleHit);
                     user.setStreaks(streaks);
                     user.setNum_maze_games_played(NumMazeGame);
                     user.setLoad_moles_stats(load_moles_stats);*/
+                    }
                 }
             }
 
@@ -375,7 +378,6 @@ public class UserManager implements Serializable {
                 int index_of_comma = text.indexOf(",");
                 String username = text.substring(0, index_of_comma);
                 if (user.getEmail().equals(username)){
-                    ;
                 }else{
                     User NewUser = new User(username);
                     Helper(text, NewUser);
@@ -397,6 +399,97 @@ public class UserManager implements Serializable {
             }
         }
         return arr;
+    }
+
+    private void AddXAmounntOfStasticToPreviousAccounts(Context context, int poistion, int numTimes){
+
+    }
+
+    public void AddStatisticAtSpecificPlaceForPreviousAccounts(Context context, int position, int numTimes) {
+        FileInputStream fis = null;
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            fis = context.openFileInput(MainActivity.Stats_file);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            //StringBuilder sb = new StringBuilder();
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                int numCommas = countOccurrences(text, ',');
+                if (numCommas != GameConstants.TotalNumOfStastics) {
+                    int b = 0;
+                    int y = 0;
+                    for (int i = 0; i <= text.length(); i++) {
+                        if (b == position - 1) {
+                            y = i - 1;
+                            break;
+                        }
+                        if (text.charAt(i) == ',') {
+                            b += 1;
+                        }
+                    }
+                    int indexComma = y;
+                    String firstHalf = text.substring(0, y);
+                    String secondHalf = text.substring(y);
+                    String middle = new String(new char[numTimes]).replace(
+                            "\0", ", 0");
+                    String newtext = firstHalf + middle + secondHalf;
+                    sb.append("\n");
+                    sb.append(newtext);
+                } else {
+                    sb.append(text).append("\n");
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // write the new string with the replaced line OVER the same file
+        FileOutputStream fileOut = null;
+        try {
+            fileOut = context.openFileOutput(MainActivity.Stats_file, MODE_PRIVATE);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            if (fileOut != null)
+                fileOut.write(sb.toString().getBytes());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            if (fileOut != null)
+                fileOut.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static int countOccurrences(String line, char comma)
+    {
+        int count = 0;
+        for (int i=0; i < line.length(); i++)
+        {
+            if (line.charAt(i) == comma)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
 }
