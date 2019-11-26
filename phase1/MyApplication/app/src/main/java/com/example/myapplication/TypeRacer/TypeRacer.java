@@ -37,25 +37,23 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class TypeRacer extends AppCompatActivity {
 
-    Map<String, TextView> textViewMap;
-    QuestionFactory questionFactory;
-    ArrayList<Question> questions;
+    // Screen Display related attributes
+    private Map<String, TextView> textViewMap;
+    private QuestionFactory questionFactory;
+    private ArrayList<Question> questions;
     private int questionNumber = 0;
-    EditText answer;
+    private EditText answer;
 
-    // 3 statistics
+    // 3 Statistics
     private int countScore, countStreak, countLife;
 
-    long startTime, endTime;
+    // Time related Attributes
     private static final long COUNTDOWN_IN_MILLS = 30000;
-    private long timeLeftInMillis;
     private CountDownTimer countDownTimer;
-    Boolean timerRunning = false;
+    private Boolean timerRunning = false;
+
     private UserManager userManager;
     private User user;
-    int backGroundColor;
-    int textColor;
-    int parameterDifficulty;
 
 
     @Override
@@ -69,11 +67,10 @@ public class TypeRacer extends AppCompatActivity {
             user = user_1.getUser();
 
             getTextViews();
-            backGroundColor = intent.getExtras().getInt("backGroundColorKey");
-            textColor = intent.getExtras().getInt("textColorKey");
+            int backGroundColor = intent.getExtras().getInt("backGroundColorKey");
+            int textColor = intent.getExtras().getInt("textColorKey");
+            int parameterDifficulty = intent.getIntExtra("difficulty", 5);
             countLife = intent.getExtras().getInt("lives");
-            parameterDifficulty = intent.getIntExtra("difficulty", 5);
-
 
             // User setUp
             // initialize 3 statistics
@@ -83,7 +80,7 @@ public class TypeRacer extends AppCompatActivity {
             textViewMap.get("streak").setText("" + countStreak);
 
 
-            setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
+            setCustomization(backGroundColor, textColor, this.countLife, parameterDifficulty);
             showNextQuestion();
             prepareForScreenUpdate();
 
@@ -99,7 +96,6 @@ public class TypeRacer extends AppCompatActivity {
 
                 //goes to next question if response is correct
                 if (userIsCorrect()) {
-                    endTime = System.currentTimeMillis();
                     if (countDownTimer != null) countDownTimer.cancel();
                     timerRunning = false;
                     answer.setEnabled(false);
@@ -180,7 +176,6 @@ public class TypeRacer extends AppCompatActivity {
 
                 int time = Integer.parseInt(rd.readLine());
 
-                startTime = System.currentTimeMillis();
                 timerRunning = true;
                 countDownTimer =
                         new CountDownTimer(time * 1000, 1000) {
@@ -207,7 +202,6 @@ public class TypeRacer extends AppCompatActivity {
 
                         //goes to next question if response is correct
                         if (userIsCorrect()) {
-                            endTime = System.currentTimeMillis();
                             if (countDownTimer != null) countDownTimer.cancel();
                             timerRunning = false;
                             answer.setEnabled(false);
@@ -336,7 +330,7 @@ public class TypeRacer extends AppCompatActivity {
                         String response = answer.getText().toString();
                         //start counting
                         if (response.length() == 1 || user.getThereIsSaved()) {
-                            startTime = COUNTDOWN_IN_MILLS;
+
                             if (timerRunning) return;
                             timerRunning = true;
                             countDownTimer =
