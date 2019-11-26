@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
+
 import com.example.myapplication.TypeRacer.TypeRacer;
 
 import java.lang.reflect.Array;
@@ -20,6 +22,12 @@ public abstract class GameConstants {
     public static final int regularQuestionPoint = 1;
     public static final int goldenQuestionPoint = 5;
     public static final long timeLimitInMills = 30000;
+    public static final int backGroundDefault = Color.WHITE;
+    public static final int textColorDefault = Color.BLACK;
+    public static final int difficultyDefault = 5;
+    public static final int minLife = 1;
+    public static final int maxLife = 5;
+
 
     // Maze Game Constants
     public static final int TotalMazeGames = 2;
