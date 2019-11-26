@@ -69,9 +69,9 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         TextView Statistic = findViewById(R.id.StatisticName);
         //String header = "     Username" + "          " + text;
         //Header.setText("Username");
-        List<User> clone = new ArrayList<User>(ArrayOfUsers);
+        List<User> cloneOfUsers = new ArrayList<>(ArrayOfUsers);
         Statistic.setText(text);
-        setupScoreBoard(text, clone);
+        setupScoreBoard(text, cloneOfUsers);
     }
 
     @Override
