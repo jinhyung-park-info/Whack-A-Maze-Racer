@@ -299,7 +299,7 @@ public class TypeRacer extends AppCompatActivity {
         for (int i = 0; i < 5; i++){
             createQuestion(diffi);
         }
-        
+
     }
 
     private void setAllTextColor(Map<String, TextView> map, int textColor) {
