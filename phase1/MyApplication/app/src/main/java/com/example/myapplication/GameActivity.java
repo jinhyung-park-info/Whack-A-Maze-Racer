@@ -9,16 +9,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
-import com.example.myapplication.Maze.MazeInstructionsActivity;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.WhackAMole.MoleActivity;
-import com.example.myapplication.WhackAMole.MoleInstructionActivity;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-
-import static com.example.myapplication.MainActivity.USER;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -61,7 +55,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void resume(View view){
-        switch (userManager.getUser().getLast_played_level()){
+        switch (userManager.getUser().getLastPlayedLevel()) {
             case 0:
                 Button loadButton = findViewById(R.id.button4);
                 Toast.makeText(getApplicationContext(), "You have not played a game yet"

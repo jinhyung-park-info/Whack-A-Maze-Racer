@@ -36,7 +36,7 @@ public class MoleActivity extends AppCompatActivity {
       setUserManager(user_1);
       user = userManager.getUser();
     }
-    user.setLast_played_level(1);
+    user.setLastPlayedLevel(1);
     writeMoleStats();
     reset();
 
@@ -139,7 +139,7 @@ public class MoleActivity extends AppCompatActivity {
     int CurrMolesHit = (int) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit);
     user.setStatistic(GameConstants.NameGame1, GameConstants.MoleHit, CurrMolesHit + molesHit);
     molesHit = 0;
-    user.setLast_played_level(0);
+    user.setLastPlayedLevel(0);
     writeMoleStats();
     Intent intent = new Intent(this, SaveScoreActivity.class);
     intent.putExtra(GameConstants.USERMANAGER, userManager);

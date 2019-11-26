@@ -43,7 +43,7 @@ public class PopUp extends Activity {
         molesHitText.setText(molesHit);
 
         EditText levelButton =  findViewById(R.id.level);
-        String level = "Last Played Level: " + user.getLast_played_level();
+        String level = "Last Played Level: " + user.getLastPlayedLevel();
         levelButton.setText(level);
 
         EditText streakText =  findViewById(R.id.streak);

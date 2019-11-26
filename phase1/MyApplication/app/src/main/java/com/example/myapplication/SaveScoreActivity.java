@@ -2,12 +2,9 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import com.example.myapplication.WhackAMole.MoleActivity;
 
 public class SaveScoreActivity extends AppCompatActivity {
 
@@ -34,7 +31,7 @@ public class SaveScoreActivity extends AppCompatActivity {
   }
 
   public void save(View view) {
-    user.setSaveToScoreBoard(true);
+    user.setSavedToScoreBoard(true);
     user.setOverallScore(user.getOverallScore() + moleScore);
     userManager.updateStatistics(this, user);
     Intent intent = new Intent(this, GameActivity.class);
@@ -43,7 +40,7 @@ public class SaveScoreActivity extends AppCompatActivity {
   }
 
   public void notSave(View view) {
-    user.setSaveToScoreBoard(false);
+    user.setSavedToScoreBoard(false);
     userManager.updateStatistics(this, user);
     Intent intent = new Intent(this, GameActivity.class);
     intent.putExtra(GameConstants.USERMANAGER, userManager);

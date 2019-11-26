@@ -30,7 +30,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
-            userManager.getUser().setLast_played_level(2);
+            userManager.getUser().setLastPlayedLevel(2);
             userManager.updateStatistics(this, userManager.getUser());
         }
     }

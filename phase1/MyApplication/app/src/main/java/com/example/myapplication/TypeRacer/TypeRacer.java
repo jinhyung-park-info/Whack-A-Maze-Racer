@@ -81,7 +81,7 @@ public class TypeRacer extends AppCompatActivity {
     
     private void checkIfCorrect() {
 
-        Button doneBtn = (Button) findViewById(R.id.doneButton);
+        Button doneBtn = findViewById(R.id.doneButton);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,11 +165,7 @@ public class TypeRacer extends AppCompatActivity {
                 InputStreamReader isr = new InputStreamReader(fis);
                 BufferedReader rd = new BufferedReader(isr);
 
-                if (!Boolean.valueOf(rd.readLine())) {
-                    this.timerRunning = false;
-                } else {
-                    this.timerRunning = true;
-                }
+                this.timerRunning = Boolean.valueOf(rd.readLine());
 
                 int time = Integer.parseInt(rd.readLine());
 
@@ -194,7 +190,7 @@ public class TypeRacer extends AppCompatActivity {
 
                 manageTime();
 
-                Button doneBtn = (Button)findViewById(R.id.doneButton);
+                Button doneBtn = findViewById(R.id.doneButton);
                 doneBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -309,7 +305,7 @@ public class TypeRacer extends AppCompatActivity {
             manageTime();
             questionNumber++;
         } else {
-            user.setLast_played_level(0);
+            user.setLastPlayedLevel(0);
             //user.setStreaks(countStreak);
             user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
             userManager.updateStatistics(this, user);

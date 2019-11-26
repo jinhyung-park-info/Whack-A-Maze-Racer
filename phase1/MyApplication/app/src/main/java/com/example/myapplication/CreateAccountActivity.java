@@ -31,7 +31,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public boolean validate_2(String username, String password, EditText editText_2, EditText editText_3){
-        ArrayList<Boolean> arr = userManager.check_username_and_password(getApplicationContext(), username, password);
+        ArrayList<Boolean> arr = userManager.checkUsernameAndPassword(getApplicationContext(), username, password);
         if(arr.get(0)){
             editText_2.setError("Username already exists");
             return false;

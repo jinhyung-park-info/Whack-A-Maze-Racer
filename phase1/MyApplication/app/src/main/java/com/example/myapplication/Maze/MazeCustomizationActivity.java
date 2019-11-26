@@ -67,7 +67,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         startedMaze = false;
 
         //if they clicked start game instead of load game and properly went through each level
-        if (usermanager.getUser().getLast_played_level() != 3) {
+        if (usermanager.getUser().getLastPlayedLevel() != 3) {
             File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
             if (mazeFile.exists()) {
                 mazeFile.delete();
@@ -77,9 +77,9 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             setContentView(R.layout.activity_maze_customization);
         }
 
-        System.out.println(usermanager.getUser().getLast_played_level());
-        usermanager.getUser().setLast_played_level(3);
-        System.out.println(usermanager.getUser().getLast_played_level());
+        System.out.println(usermanager.getUser().getLastPlayedLevel());
+        usermanager.getUser().setLastPlayedLevel(3);
+        System.out.println(usermanager.getUser().getLastPlayedLevel());
         usermanager.updateStatistics(getApplicationContext(), usermanager.getUser());
         reset();
 

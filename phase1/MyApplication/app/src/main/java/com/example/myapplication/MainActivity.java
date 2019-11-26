@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             editText_pass.setError("Commas are not allowed in username and passwords");
             return false;
         }
-        ArrayList<Boolean> validation = userManager.check_username_and_password(getApplicationContext(), username, password);
+        ArrayList<Boolean> validation = userManager.checkUsernameAndPassword(getApplicationContext(), username, password);
         if (validation.get(0)){
             if(!(validation.get(1))){
                 editText_pass.setError("Incorrect Password");
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             //userManager = new UserManager(user);
             if (GameConstants.limiter == 0) {
                 GameConstants.limiter = 1;
-                userManager.AddStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
+                userManager.addStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
             }
             userManager.setStatistics(getApplicationContext(), user);
             userManager.setUser(user);
