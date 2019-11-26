@@ -16,7 +16,7 @@ class Mole {
   }
 
   private static float speed = WamView.screenHeight / 300;
-  private Bitmap molePic;
+  Bitmap molePic;
   private float y, x, molePicWidth, molePicHeight;
   private Movement state;
   private int standByDuration;
@@ -25,9 +25,8 @@ class Mole {
   int value;
   int lifeCount;
 
-  Mole(Hole hole, Bitmap molePic) {
-
-    this.molePic = molePic;
+  Mole(Hole hole) {
+    this.molePic = WamView.genericMole;
     this.value = 1;
     this.lifeCount = 1;
 

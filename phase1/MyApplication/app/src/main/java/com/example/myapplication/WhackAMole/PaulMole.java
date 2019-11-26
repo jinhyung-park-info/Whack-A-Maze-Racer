@@ -1,11 +1,10 @@
 package com.example.myapplication.WhackAMole;
 
-import android.graphics.Bitmap;
-
 public class PaulMole extends Mole{
 
-    PaulMole(Hole hole, Bitmap molePic){
-        super(hole, molePic);
+    PaulMole(Hole hole){
+        super(hole);
+        this.molePic = WamView.molePic2;
         this.value = -1;
         this.lifeCount = 0;
     }

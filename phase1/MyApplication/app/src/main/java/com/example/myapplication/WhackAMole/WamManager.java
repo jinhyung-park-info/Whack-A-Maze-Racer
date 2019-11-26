@@ -13,9 +13,6 @@ import java.util.Random;
 /** Inspired by FishTank Project */
 class WamManager implements Runnable{
 
-  private Bitmap holePic;
-  private Bitmap[] molePic;
-  private Bitmap lifePic;
   private int numLives;
   int currentLives;
   private int lifePicWidth, lifePicHeight;
@@ -28,15 +25,13 @@ class WamManager implements Runnable{
   private boolean keepRunning;
   private Thread thread;
   private int duration;
+  private MoleFactory moleFactory = new MoleFactory();
 
   private ArrayList<Hole> holeList;
   ArrayList<Mole> moleList;
 
   WamManager(
-      Bitmap holePic,
       Rect hole_r,
-      Bitmap[] molePic,
-      Bitmap lifePic,
       int numLives,
       int numHolesX,
       int numHolesY,
@@ -46,17 +41,13 @@ class WamManager implements Runnable{
     this.moleList = new ArrayList<>();
 
     this.holeRect = hole_r;
-    this.holePic = holePic;
-    holeWidth = holePic.getWidth();
-    holeHeight = holePic.getHeight();
+    holeWidth = WamView.holePic.getWidth();
+    holeHeight = WamView.holePic.getHeight();
 
-    this.lifePic = lifePic;
-    this.lifePicWidth = this.lifePic.getWidth();
-    this.lifePicHeight = this.lifePic.getHeight();
+    this.lifePicWidth = WamView.lifePic.getWidth();
+    this.lifePicHeight = WamView.lifePic.getHeight();
     this.numLives = numLives;
     this.currentLives = this.numLives;
-
-    this.molePic = molePic;
 
     this.score = score;
 
@@ -83,7 +74,7 @@ class WamManager implements Runnable{
     int x = 0;
     int y = 0;
     for (int i = 0; i < this.currentLives; i++) {
-      canvas.drawBitmap(lifePic, x, y, paint);
+      canvas.drawBitmap(WamView.lifePic, x, y, paint);
       if (x + lifePicWidth >= WamView.screenWidth * 5 / 8) {
         y += lifePicHeight;
         x = 0;
@@ -109,13 +100,14 @@ class WamManager implements Runnable{
               + (i / holesX) * holeDeploymentHeight
               + holeDeploymentHeight / 2
               - holeHeight / 2;
-      holeList.add(new Hole(holeX, holeY, holePic));
+      holeList.add(new Hole(holeX, holeY, WamView.holePic));
     }
 
     // Add one mole for each hole into mole collection.
     for (Hole hole : holeList) {
-      moleList.add(new Mole(hole, molePic[0]));
-      moleList.add(new PaulMole(hole, molePic[1]));
+      moleList.add(moleFactory.createMole("generic", hole));
+      moleList.add(moleFactory.createMole("lindsey", hole));
+      moleList.add(moleFactory.createMole("paul", hole));
     }
     keepRunning = true;
     thread = new Thread(this);
