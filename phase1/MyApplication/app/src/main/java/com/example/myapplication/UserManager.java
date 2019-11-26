@@ -12,46 +12,49 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import com.example.myapplication.GameConstants;
 
 import static android.content.Context.MODE_APPEND;
 import static android.content.Context.MODE_PRIVATE;
 
 public class UserManager implements Serializable {
 
-
-    //ArrayList will store the user or users if 2 or more users want to login
+    /**
+     * The user this class manages
+     */
     private User user;
-    //the first index will represent if username is in the file and the second index will represent
-    // the password
 
-
-    UserManager(){
-
-    }
-    //UserManager(User User){
-        //user = User;
-    //}
+    /**
+     * Gets the user this class manages
+     *
+     * @return user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Set the user this class manages
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
-    ArrayList<Boolean> check_username_and_password(Context context, String username, String password){
+    /**
+     * Verifies if the given username and password combination is valid
+     *
+     * @param context  of this device
+     * @param username of the user
+     * @param password of the user
+     * @return username password combo is valid?
+     */
+    ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password){
         InputStream fis = null;
         ArrayList<Boolean> arr = new ArrayList<Boolean>();
         try {
             fis = context.openFileInput(MainActivity.FILE_NAME);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            //StringBuilder sb = new StringBuilder();
             String text;
 
             while ((text = br.readLine()) != null) {
@@ -89,11 +92,19 @@ public class UserManager implements Serializable {
         return arr;
     }
 
-
-    private void writeUsernameAndPassHelper(Context context, FileOutputStream fos, String username,String password,
-                                      int MODE){
+    /**
+     * Helper method to write a username and password to the file
+     *
+     * @param context  of the device
+     * @param fos      file output stream
+     * @param username of the user
+     * @param password of the user
+     * @param mode     of interaction with file
+     */
+    private void writeUsernameAndPassHelper(Context context, FileOutputStream fos, String username,
+                                            String password, int mode) {
         try {
-            fos = context.openFileOutput(MainActivity.FILE_NAME, MODE);
+            fos = context.openFileOutput(MainActivity.FILE_NAME, mode);
             try {
                 fos.write(username.getBytes());
                 fos.write(", ".getBytes());
@@ -115,53 +126,34 @@ public class UserManager implements Serializable {
         }
     }
 
+    /**
+     * Writes a username and password to the file
+     * @param context of the device
+     * @param fos file output stream
+     * @param username of the user
+     * @param password of the user
+     */
     //assuming alphanumeric characters only
     void writeUsernameAndPass(Context context, FileOutputStream fos, String username, String password) {
-        File file = new File(context.getFilesDir(),MainActivity.FILE_NAME);
+        File file = new File(context.getFilesDir(), MainActivity.FILE_NAME);
         if(file.exists()){
             writeUsernameAndPassHelper(context, fos, username, password, MODE_APPEND);
-            /*try {
-                fos = context.openFileOutput(MainActivity.FILE_NAME, MODE_APPEND);
-                try {
-                    fos.write(username.getBytes());
-                    fos.write(", ".getBytes());
-                    fos.write(password.getBytes());
-                    fos.write("\n".getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }*/
-
         } else { //file does not exist make one and write to it
             writeUsernameAndPassHelper(context, fos, username, password, MODE_PRIVATE);
-            /*try {
-                fos = context.openFileOutput(MainActivity.FILE_NAME, MODE_PRIVATE);
-                try {
-                    fos.write(username.getBytes());
-                    fos.write(", ".getBytes());
-                    fos.write(password.getBytes());
-                    fos.write("\n".getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }*/
         }
     }
-    private void writeUsernameAndStatisticsHelper(Context context, FileOutputStream fos, String username, int MODE){
+
+    /**
+     * Helper method to write statistics of a new user to the file
+     *
+     * @param context  of the device
+     * @param fos      file output stream
+     * @param username of the user
+     * @param mode     of interaction with file
+     */
+    private void writeUsernameAndStatisticsHelper(Context context, FileOutputStream fos, String username, int mode) {
         try {
-            fos = context.openFileOutput(MainActivity.Stats_file, MODE);
+            fos = context.openFileOutput(MainActivity.Stats_file, mode);
             try {
                 fos.write(username.getBytes());
                 String s = new String(new char[GameConstants.TotalNumOfStastics]).replace(
@@ -184,79 +176,43 @@ public class UserManager implements Serializable {
         }
     }
 
+    /**
+     * Writes the statistics of a new user to the file.
+     *
+     * @param context of the device
+     * @param fos file output stream
+     * @param username of the user
+     */
     void writeUsernameAndStatistics(Context context, FileOutputStream fos, String username) {
         File file = new File(context.getFilesDir(),MainActivity.Stats_file);
         if(file.exists()){
             writeUsernameAndStatisticsHelper(context, fos, username, MODE_APPEND);
-            /*try {
-                fos = context.openFileOutput(MainActivity.Stats_file, MODE_APPEND);
-                try {
-                    fos.write(username.getBytes());
-                    String s = new String(new char[GameConstants.TotalNumOfStastics]).replace(
-                            "\0", ", 0");
-                    fos.write(s.getBytes());
-                    fos.write("\n".getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }*/
-
         } else { //file does not exist make one and write to it
             writeUsernameAndStatisticsHelper(context, fos, username, MODE_PRIVATE);
-           /* try {
-                fos = context.openFileOutput(MainActivity.Stats_file, MODE_PRIVATE);
-                try {
-                    fos.write(username.getBytes());
-                    String s = new String(new char[GameConstants.TotalNumOfStastics]).replace(
-                            "\0", ", 0");
-                    fos.write(s.getBytes());
-                    fos.write("\n".getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }*/
         }
     }
 
+    /**
+     * Set the statistics of the user in the file
+     *
+     * @param context of the device
+     * @param user
+     */
     void setStatistics(Context context, User user){
         FileInputStream fis = null;
-
         try {
             fis = context.openFileInput(MainActivity.Stats_file);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            //StringBuilder sb = new StringBuilder();
             String text;
 
             while ((text = br.readLine()) != null) {
-                if(text.equals("") | text.equals(" ")){
-                    ;
-                }else {
-                    int index_of_first_comma = text.indexOf(",");
-                    String other_username = text.substring(0, index_of_first_comma);
-                    if (user.getEmail().equals(other_username)) {
-                        user = Helper(text, user);
-                    /*user.setScore(MoleHit);
-                    user.setStreaks(streaks);
-                    user.setNum_maze_games_played(NumMazeGame);
-                    user.setLoad_moles_stats(load_moles_stats);*/
-                    }
+                int index_of_first_comma = text.indexOf(",");
+                String other_username = text.substring(0, index_of_first_comma);
+                if (user.getEmail().equals(other_username)) {
+                    user = helper(text, user);
                 }
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -272,7 +228,12 @@ public class UserManager implements Serializable {
         }
     }
 
-
+    /**
+     * Update the statistics of a user in the file
+     *
+     * @param context of the device
+     * @param user
+     */
     public  void updateStatistics(Context context, User user) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
@@ -281,19 +242,17 @@ public class UserManager implements Serializable {
             fis = context.openFileInput(MainActivity.Stats_file);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            //StringBuilder sb = new StringBuilder();
             String text;
 
             while ((text = br.readLine()) != null) {
                 int index_of_first_comma = text.indexOf(",");
                 String other_username = text.substring(0, index_of_first_comma);
-                if (user.getEmail().equals(other_username)){
-                    String new_text = other_username  + ", " + user.getLast_played_level() + ", "  + user.getOverallScore()
+                if (user.getEmail().equals(other_username)) {
+                    String new_text = other_username + ", " + user.getLastPlayedLevel() + ", "  + user.getOverallScore()
                             + ", " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak)
                             + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed)
                             + ", "  +  user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit)
-                            + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats)
-                            + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh) + "\n";
+                            + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats) + "\n";
                     sb.append(new_text);
                 } else {
                     sb.append(text).append("\n");
@@ -336,31 +295,36 @@ public class UserManager implements Serializable {
 
     }
 
-    private User Helper(String line, User user){
-        int index_of_first_comma = line.indexOf(",");
-        int index_of_second_comma = line.indexOf(",", index_of_first_comma + 1);
-        int index_of_third_comma = line.indexOf(",", index_of_second_comma + 1);
-        int index_of_forth_comma = line.indexOf(",", index_of_third_comma + 1);
-        int index_of_fifth_comma = line.indexOf(",", index_of_forth_comma + 1);
-        int index_of_sixth_comma = line.indexOf(",", index_of_fifth_comma + 1);
-        int index_of_seventh_comma = line.indexOf(",", index_of_sixth_comma + 1);
-        int LastPlayedLevel = Integer.parseInt(line.substring(index_of_first_comma + 2, index_of_second_comma));
-        int OverallScore = Integer.parseInt(line.substring(index_of_second_comma + 2, index_of_third_comma));
-        int streaks = Integer.parseInt(line.substring(index_of_third_comma + 2, index_of_forth_comma));
-        int NumMazeGame = Integer.parseInt(line.substring(index_of_forth_comma + 2, index_of_fifth_comma));
-        int MoleHit = Integer.parseInt(line.substring(index_of_fifth_comma + 2, index_of_sixth_comma));
-        String load_moles_stats = line.substring(index_of_sixth_comma + 2, index_of_seventh_comma);
-        int MoleAllTimeHigh = Integer.parseInt(line.substring((index_of_seventh_comma + 2)));
-        Object[] TypeRacer = new Object[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak, streaks};
-        Object[] WhackAMole = new Object[]{GameConstants.NameGame1, GameConstants.MoleStats, load_moles_stats, GameConstants.MoleHit, MoleHit, GameConstants.MoleAllTimeHigh, MoleAllTimeHigh};
-        Object[] Maze = new Object[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed, NumMazeGame};
-        ArrayList<Object[]> ArrayOfGameStats = new ArrayList<>();
-        ArrayOfGameStats.add(TypeRacer);
-        ArrayOfGameStats.add(Maze);
-        ArrayOfGameStats.add(WhackAMole);
-        user.SetStasticsInMap(ArrayOfGameStats);
-        user.setLast_played_level(LastPlayedLevel);
-        user.setOverallScore(OverallScore);
+    /**
+     * Helper method to transfer the user statistics in the file to the user object
+     *
+     * @param line in the file
+     * @param user
+     * @return the updated user
+     */
+    private User helper(String line, User user) {
+        int indexOfFirstComma = line.indexOf(",");
+        int indexOfSecondComma = line.indexOf(",", indexOfFirstComma + 1);
+        int indexOfThirdComma = line.indexOf(",", indexOfSecondComma + 1);
+        int indexOfForthComma = line.indexOf(",", indexOfThirdComma + 1);
+        int indexOfFifthComma = line.indexOf(",", indexOfForthComma + 1);
+        int indexOfSixthComma = line.indexOf(",", indexOfFifthComma + 1);
+        int lastPlayedLevel = Integer.parseInt(line.substring(indexOfFirstComma + 2, indexOfSecondComma));
+        int overallScore = Integer.parseInt(line.substring(indexOfSecondComma + 2, indexOfThirdComma));
+        int streaks = Integer.parseInt(line.substring(indexOfThirdComma + 2, indexOfForthComma));
+        int numMazeGame = Integer.parseInt(line.substring(indexOfForthComma + 2, indexOfFifthComma));
+        int moleHit = Integer.parseInt(line.substring(indexOfFifthComma + 2, indexOfSixthComma));
+        String loadMolesStats = line.substring(indexOfSixthComma + 2);
+        Object[] typeRacer = new Object[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak, streaks};
+        Object[] whackAMole = new Object[]{GameConstants.NameGame1, GameConstants.MoleStats, loadMolesStats, GameConstants.MoleHit, moleHit};
+        Object[] maze = new Object[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed, numMazeGame};
+        ArrayList<Object[]> arrayOfGameStats = new ArrayList<>();
+        arrayOfGameStats.add(typeRacer);
+        arrayOfGameStats.add(maze);
+        arrayOfGameStats.add(whackAMole);
+        user.setStatisticsInMap(arrayOfGameStats);
+        user.setLastPlayedLevel(lastPlayedLevel);
+        user.setOverallScore(overallScore);
         return user;
     }
 
@@ -371,7 +335,6 @@ public class UserManager implements Serializable {
             fis = context.openFileInput(MainActivity.Stats_file);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            //StringBuilder sb = new StringBuilder();
             String text;
 
             while ((text = br.readLine()) != null) {
@@ -380,7 +343,7 @@ public class UserManager implements Serializable {
                 if (user.getEmail().equals(username)){
                 }else{
                     User NewUser = new User(username);
-                    Helper(text, NewUser);
+                    helper(text, NewUser);
                     arr.add(NewUser);
                 }
             }
@@ -401,11 +364,19 @@ public class UserManager implements Serializable {
         return arr;
     }
 
-    private void AddXAmounntOfStasticToPreviousAccounts(Context context, int poistion, int numTimes){
+    /*private void AddXAmountOfStatisticToPreviousAccounts(Context context, int position, int numTimes){
 
     }
+    */
 
-    public void AddStatisticAtSpecificPlaceForPreviousAccounts(Context context, int position, int numTimes) {
+    /**
+     * Add a statistic at a specific place for previous accounts.
+     *
+     * @param context  of the device
+     * @param position in the line of the statistic to be added
+     * @param numTimes the number of times a statistic will be added
+     */
+    public void addStatisticAtSpecificPlaceForPreviousAccounts(Context context, int position, int numTimes) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 
@@ -413,7 +384,6 @@ public class UserManager implements Serializable {
             fis = context.openFileInput(MainActivity.Stats_file);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            //StringBuilder sb = new StringBuilder();
             String text;
 
             while ((text = br.readLine()) != null) {
@@ -435,9 +405,9 @@ public class UserManager implements Serializable {
                     String secondHalf = text.substring(y);
                     String middle = new String(new char[numTimes]).replace(
                             "\0", ", 0");
-                    String newtext = firstHalf + middle + secondHalf;
+                    String newText = firstHalf + middle + secondHalf;
                     sb.append("\n");
-                    sb.append(newtext);
+                    sb.append(newText);
                 } else {
                     sb.append(text).append("\n");
                 }
@@ -456,7 +426,6 @@ public class UserManager implements Serializable {
                 }
             }
         }
-
         // write the new string with the replaced line OVER the same file
         FileOutputStream fileOut = null;
         try {
@@ -479,12 +448,18 @@ public class UserManager implements Serializable {
 
     }
 
-    public static int countOccurrences(String line, char comma)
+    /**
+     * Count the occurences of a character in a line
+     *
+     * @param line
+     * @param character
+     * @return
+     */
+    public static int countOccurrences(String line, char character)
     {
         int count = 0;
-        for (int i=0; i < line.length(); i++)
-        {
-            if (line.charAt(i) == comma)
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == character)
             {
                 count++;
             }

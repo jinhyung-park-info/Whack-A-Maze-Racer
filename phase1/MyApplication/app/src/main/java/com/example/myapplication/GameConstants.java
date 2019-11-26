@@ -29,7 +29,7 @@ public abstract class GameConstants {
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";
     public static final String[] OptionsForScoreBoard = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected","TypeRacerStreak"};
-    public static final String[]  WhackAMoleStatistics = new String[]{MoleStats, MoleHit, MoleAllTimeHigh};
+    public static final String[] WhackAMoleStatistics = new String[]{MoleStats, MoleHit, MoleAllTimeHigh};
     public static final String[]  TypeRacerStatistics = new String[]{TypeRacerStreak};
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
     public static String[] GameNames = new String[]{NameGame1, NameGame2, NameGame3};

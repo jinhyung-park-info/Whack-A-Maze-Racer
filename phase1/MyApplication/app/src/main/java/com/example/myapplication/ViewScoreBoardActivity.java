@@ -18,7 +18,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
 
     private UserManager userManager;
     private String[] arr = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
-            "Num MazeItems Collected","TypeRacerStreak", "Mole All Time High"};
+            "Num MazeItems Collected", "TypeRacerStreak", "Mole All Time High"};
     private List<User> ArrayOfUsers;
     private  TextView[] ArrayOfTextView;
 

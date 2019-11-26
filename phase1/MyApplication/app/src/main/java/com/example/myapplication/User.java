@@ -8,39 +8,34 @@ public class User implements Comparable<User>, Serializable{
     private String email;
     private String password;
     private  HashMap<String, HashMap<String, Object>> map = new HashMap<String, HashMap<String, Object>>();
-   /* private int score = 0;
-    private int streaks = 0;
-    private int num_maze_games_played = 0;
-    private int last_played_level = 0;
-    private boolean thereIsSaved = false; */
     private boolean thereIsSaved = false;
-    private int last_played_level = 0;
-    private int OverallScore = 0;
-    private boolean SaveToScoreBoard = true;
+    private int lastPlayedLevel = 0;
+    private int overallScore = 0;
+    private boolean savedToScoreBoard = true;
 
 
 
     User(String Email){
         this.email = Email;
-        for (String GameName: GameConstants.GameNames) {
-            HashMap<String, Object> Stastics = new HashMap<String, Object>();
-            for (String StasticsOfGame : GameConstants.getArrayOfStatistics(GameName)) {
-                if (StasticsOfGame.equals(GameConstants.MoleStats)){
-                    Stastics.put(StasticsOfGame, " ");
+        for (String gameName : GameConstants.GameNames) {
+            HashMap<String, Object> statistics = new HashMap<String, Object>();
+            for (String statisticsOfGame : GameConstants.getArrayOfStatistics(gameName)) {
+                if (statisticsOfGame.equals(GameConstants.MoleStats)) {
+                    statistics.put(statisticsOfGame, " ");
                 }else {
-                    Stastics.put(StasticsOfGame, 0);
+                    statistics.put(statisticsOfGame, 0);
                 }
             }
-            map.put(GameName, Stastics);
+            map.put(gameName, statistics);
         }
     }
 
-    public boolean isSaveToScoreBoard() {
-        return SaveToScoreBoard;
+    public boolean isSavedToScoreBoard() {
+        return savedToScoreBoard;
     }
 
-    public void setSaveToScoreBoard(boolean saveToScoreBoard) {
-        SaveToScoreBoard = saveToScoreBoard;
+    public void setSavedToScoreBoard(boolean savedToScoreBoard) {
+        this.savedToScoreBoard = savedToScoreBoard;
     }
 
     public String getPassword() {
@@ -52,12 +47,12 @@ public class User implements Comparable<User>, Serializable{
     }
 
     public int getOverallScore() {
-        return OverallScore;
+        return overallScore;
     }
 
     public void setOverallScore(int overallScore) {
-        if (isSaveToScoreBoard()) {
-            OverallScore = overallScore;
+        if (isSavedToScoreBoard()) {
+            this.overallScore = overallScore;
         }
     }
 
@@ -69,47 +64,51 @@ public class User implements Comparable<User>, Serializable{
         return map;
     }
 
-    private void SetStasticsHelper(Object[] arr){
-        String GameName = (String) arr[0];
+    private void setStatisticsHelper(Object[] arr) {
+        String gameName = (String) arr[0];
         for(int i = 1; i <= arr.length; i++){
             if(i % 2 == 1 && i + 1 <= arr.length){
-                String StatisticName = (String) arr[i];
-                Object new_value = arr[i + 1];
-                HashMap<String, Object> GameMap = map.get(GameName);
-                if(GameMap != null && GameMap.containsKey(StatisticName)){
-                    GameMap.put(StatisticName, new_value);
+                String statisticName = (String) arr[i];
+                Object newValue = arr[i + 1];
+                HashMap<String, Object> gameMap = map.get(gameName);
+                if (gameMap != null && gameMap.containsKey(statisticName)) {
+                    gameMap.put(statisticName, newValue);
                 }
             }
 
         }
     }
 
-    public void SetStasticsInMap(ArrayList<Object[]> ArrayOfGameStats){
-        for (Object[] arr: ArrayOfGameStats){
-            SetStasticsHelper(arr);
+    public void setStatisticsInMap(ArrayList<Object[]> arrayOfGameStats) {
+        for (Object[] arr : arrayOfGameStats) {
+            setStatisticsHelper(arr);
         }
     }
 
-    public void setStatistic(String GameName, String StatisticName, Object Statistic){
-        if (map.get(GameName) != null){
-            HashMap<String, Object> StasticMap = map.get(GameName);
-            if(StasticMap.get(StatisticName) != null) StasticMap.put(StatisticName, Statistic);
+    public void setStatistic(String gameName, String statisticName, Object statistic) {
+        if (map.get(gameName) != null) {
+            HashMap<String, Object> statisticMap = map.get(gameName);
+            if (statisticMap.get(statisticName) != null) statisticMap.put(statisticName, statistic);
         }
     }
 
-    public Object getStatistic(String GameName, String StatisticName){
-        if (map.get(GameName) != null){
-            HashMap<String, Object> statisticMap = map.get(GameName);
-            if(statisticMap.get(StatisticName) != null){
-                return statisticMap.get(StatisticName);
+    public Object getStatistic(String gameName, String statisticName) {
+        if (map.get(gameName) != null) {
+            HashMap<String, Object> statisticMap = map.get(gameName);
+            if (statisticMap.get(statisticName) != null) {
+                return statisticMap.get(statisticName);
             }
         }
         return null;
     }
 
-    public int getLast_played_level(){return this.last_played_level;}
+    public int getLastPlayedLevel() {
+        return this.lastPlayedLevel;
+    }
 
-    public void setLast_played_level(int level){this.last_played_level = level; }
+    public void setLastPlayedLevel(int level) {
+        this.lastPlayedLevel = level;
+    }
 
     public boolean getThereIsSaved() { return this.thereIsSaved; }
     public void setThereIsSaved(boolean isSaved) { this.thereIsSaved = isSaved; }
@@ -137,8 +136,8 @@ public class User implements Comparable<User>, Serializable{
     }
     public void setNum_maze_games_played(int Whatever){this.num_maze_games_played = Whatever;}
     public int getNum_maze_games_played(){ return this.num_maze_games_played; }
-    public void setLast_played_level(int level){this.last_played_level = level; }
-    public int getLast_played_level(){return this.last_played_level;}
+    public void setLastPlayedLevel(int level){this.last_played_level = level; }
+    public int getLastPlayedLevel(){return this.last_played_level;}
     public void setLoad_moles_stats(String stats){load_moles_stats = stats;}
     public String getLoad_moles_stats(){return this.load_moles_stats;}*/
 }
