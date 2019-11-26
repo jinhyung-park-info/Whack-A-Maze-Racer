@@ -8,27 +8,30 @@ import java.util.ArrayList;
 public abstract class GameConstants {
     public static int limiter = 0;
     public static final String USERMANAGER = "UserManager";
+    public static final int usernameLength = 8;
     public static final int molePassingScore = 5;
     public static final int moleDefaultDuration = 2400;
     public static final int TotalMazeGames = 2;
     public static final int MazeWallThickness = 4;
     public static final int NumberOfMazeCollectibles = 3;
-    //2 for user and 6 for the games
-    public static final int TotalNumOfStastics = 8;
-    public static final int NumPeopleOnScoreBoard = 4;
+    //3 for user and 6 for the games
+    public static final int TOTAL_NUM_OF_STATISTICS = 9;
+    public static final int NumPeopleOnScoreBoard = 5;
     public static final String NameGame1 = "Whack-A-Mole";
     public static final String NameGame2 = "TypeRacer";
     public static final String NameGame3 = "Maze";
     public static final String MoleHit = "MoleHit";
     public static final String MoleStats = "MoleStats";
-    public static final String MoleScore = "MoleScore";
-    public static final String MoleHigh = "MoleHigh";
+    public static final String MoleScore = "MoleScore"; //this is key for updating overall score
+    public static final String MoleHigh = "MoleHigh"; //this is key for moleAllTimeHigh
     public static final String MoleAllTimeHigh = "MoleAllTimeHigh";
     public static final String NumMazeGamesPlayed = "NumMazeGamesPlayed";
     public static final String TypeRacerStreak = "TypeRacerStreak";
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";
+    public static final String[] validGiftCodes = new String[]{"207", "lindsey", "paul"};
     public static final String[] OptionsForScoreBoard = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected","TypeRacerStreak"};
+    public static final String purchase = "purchase"; //this is key used for in game purchase
     public static final String[] WhackAMoleStatistics = new String[]{MoleStats, MoleHit, MoleAllTimeHigh};
     public static final String[]  TypeRacerStatistics = new String[]{TypeRacerStreak};
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};

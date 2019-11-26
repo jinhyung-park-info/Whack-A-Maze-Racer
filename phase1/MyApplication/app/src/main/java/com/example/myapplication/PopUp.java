@@ -42,9 +42,9 @@ public class PopUp extends Activity {
         String molesHit = "Moles Hit: " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit);
         molesHitText.setText(molesHit);
 
-        EditText levelButton =  findViewById(R.id.level);
-        String level = "Last Played Level: " + user.getLastPlayedLevel();
-        levelButton.setText(level);
+        EditText currencyText =  findViewById(R.id.currency);
+        String currency = "Gems Remaining: " + user.getCurrency();
+        currencyText.setText(currency);
 
         EditText streakText =  findViewById(R.id.streak);
         String streak = "TypeRacer Streak: " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
@@ -59,7 +59,11 @@ public class PopUp extends Activity {
         userManager = newManager;
     }
 
-    public void close(View view){
-        finish();
+    public void buyCurrency(View view){
+
+        Intent intent = new Intent(this, InGamePurchaseActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
     }
 }
+

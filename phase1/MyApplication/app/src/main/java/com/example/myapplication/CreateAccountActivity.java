@@ -36,6 +36,9 @@ public class CreateAccountActivity extends AppCompatActivity {
             editText_2.setError("Username already exists");
             return false;
         }
+        if (username.length() > GameConstants.usernameLength) {
+            editText_2.setError("Usernames cannot be longer than " + GameConstants.usernameLength + " long");
+        }
         if(username.length() == 0){
             editText_2.setError("Please enter Text");
             return false;
