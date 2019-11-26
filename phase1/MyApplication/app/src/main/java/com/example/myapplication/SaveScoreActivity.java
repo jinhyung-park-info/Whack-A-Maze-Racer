@@ -12,6 +12,7 @@ import com.example.myapplication.WhackAMole.MoleActivity;
 public class SaveScoreActivity extends AppCompatActivity {
 
   int moleScore;
+  int moleHigh;
   UserManager userManager;
   User user;
 
@@ -22,6 +23,7 @@ public class SaveScoreActivity extends AppCompatActivity {
 
     Intent intent = getIntent();
     moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
+    moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
     UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
     if (user_1 != null) {
       setUserManager(user_1);
@@ -36,6 +38,7 @@ public class SaveScoreActivity extends AppCompatActivity {
   public void save(View view) {
     user.setSaveToScoreBoard(true);
     user.setOverallScore(user.getOverallScore() + moleScore);
+    user.setStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh, moleHigh);
     userManager.updateStatistics(this, user);
     Intent intent = new Intent(this, GameActivity.class);
     intent.putExtra(GameConstants.USERMANAGER, userManager);
