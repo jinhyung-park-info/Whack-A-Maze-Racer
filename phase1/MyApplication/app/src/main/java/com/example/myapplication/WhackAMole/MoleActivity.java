@@ -140,6 +140,8 @@ public class MoleActivity extends AppCompatActivity {
     user.setStatistic(GameConstants.NameGame1, GameConstants.MoleHit, CurrMolesHit + molesHit);
     molesHit = 0;
     user.setLast_played_level(0);
+    int highScore = (int) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh);
+    user.setStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh, Math.max(this.wamView.wamManager.score, highScore));
     writeMoleStats();
     Intent intent = new Intent(this, SaveScoreActivity.class);
     intent.putExtra(GameConstants.USERMANAGER, userManager);
