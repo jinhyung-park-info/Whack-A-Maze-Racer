@@ -4,6 +4,7 @@ package com.example.myapplication.TypeRacer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -20,8 +21,6 @@ import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,22 +29,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 public class TypeRacer extends AppCompatActivity {
 
-    Map<String, TextView> textViewMap;
-    ArrayList<String> questions = new ArrayList<>();
-
+    TextView question, score, streak, life, scoreTitle, streakTitle, lifeTitle, countDownTitle, sec;
+    ArrayList<Question> questions = new ArrayList<>();
     private int questionNumber = 0;
     EditText answer;
 
     // 3 statistics
     private int countScore, countStreak, countLife;
 
+    // time related variables
+    private TextView countDown;
     long startTime, endTime;
     private static final long COUNTDOWN_IN_MILLS = 30000;
     private long timeLeftInMillis;
@@ -68,35 +66,23 @@ public class TypeRacer extends AppCompatActivity {
             setUserManager(user_1);
             user = user_1.getUser();
 
-            getTextViews();
-            backGroundColor = intent.getExtras().getInt("backGroundColorKey");
-            textColor = intent.getExtras().getInt("textColorKey");
-            countLife = intent.getExtras().getInt("lives");
-            parameterDifficulty = intent.getIntExtra("difficulty", 5);
+            if (!user.getThereIsSaved()) {
+                backGroundColor = intent.getExtras().getInt("backGroundColorKey");
+                textColor = intent.getExtras().getInt("textColorKey");
+                getTexts();
+                countLife = intent.getExtras().getInt("lives");
+                parameterDifficulty = intent.getIntExtra("difficulty", 5);
 
-
-            // User setUp
-            // initialize 3 statistics
-            countScore = 0;
-            countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
-            textViewMap.get("score").setText("" + countScore);
-            textViewMap.get("streak").setText("" + countStreak);
-
-
-
-
-
-
-            setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
-            showNextQuestion();
-            prepareForScreenUpdate();
-
+                setCustomization(this.backGroundColor, this.textColor, this.countLife, parameterDifficulty);
+                showNextQuestion();
+                checkIfCorrect();
+            }
         }
     }
+    
+    private void checkIfCorrect() {
 
-    private void prepareForScreenUpdate() {
-
-        Button doneBtn = (Button) findViewById(R.id.doneButton);
+        Button doneBtn = findViewById(R.id.doneButton);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,38 +113,38 @@ public class TypeRacer extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        FileOutputStream fos = null;
-        // File file = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
-        try {
-            fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
-            try {
-
-                fos.write(this.timerRunning.toString().getBytes());
-                fos.write("\n".getBytes());
-
-                fos.write(textViewMap.get("countDown").getText().toString().getBytes());
-                fos.write("\n".getBytes());
-
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
-
-                user.setThereIsSaved(true);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
+            FileOutputStream fos = null;
+            // File file = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
                 try {
-                    fos.close();
-                } catch (IOException e) {
+                    fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
+                    try {
+
+                        fos.write(this.timerRunning.toString().getBytes());
+                        fos.write("\n".getBytes());
+
+                        fos.write(this.countDown.getText().toString().getBytes());
+                        fos.write("\n".getBytes());
+
+                        if (countDownTimer != null) {
+                            countDownTimer.cancel();
+                        }
+
+                        user.setThereIsSaved(true);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
+                } finally {
+                    if (fos != null) {
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
-            }
-        }
 
     }
 
@@ -168,6 +154,10 @@ public class TypeRacer extends AppCompatActivity {
         super.onResume();
 
         Intent intent = getIntent();
+        /*final User user_1 = (User) intent.getSerializableExtra(USER);
+        if (user_1 != null) {
+            setUser(user_1);
+        }*/
 
         if (user.getThereIsSaved()) {
             FileInputStream fis = null;
@@ -176,11 +166,7 @@ public class TypeRacer extends AppCompatActivity {
                 InputStreamReader isr = new InputStreamReader(fis);
                 BufferedReader rd = new BufferedReader(isr);
 
-                if (!Boolean.valueOf(rd.readLine())) {
-                    this.timerRunning = false;
-                } else {
-                    this.timerRunning = true;
-                }
+                this.timerRunning = Boolean.valueOf(rd.readLine());
 
                 int time = Integer.parseInt(rd.readLine());
 
@@ -190,21 +176,22 @@ public class TypeRacer extends AppCompatActivity {
                         new CountDownTimer(time * 1000, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
-                                textViewMap.get("countDown").setText(Long.toString(millisUntilFinished / 1000));
+                                countDown.setText(Long.toString(millisUntilFinished / 1000));
                             }
 
                             @Override
                             public void onFinish() {
                                 updateStatistics(false);
-                                textViewMap.get("countDown").setText("0");
+                                countDown.setText("0");
                                 showNextQuestion();
                                 timerRunning = false;
                             }
                         }.start();
 
+
                 manageTime();
 
-                Button doneBtn = (Button)findViewById(R.id.doneButton);
+                Button doneBtn = findViewById(R.id.doneButton);
                 doneBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -245,84 +232,86 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
+    private void getTexts() {
+        question = findViewById(R.id.questionTextView);
+        answer = findViewById(R.id.editText2);
+        countDown = findViewById(R.id.countDownTextView);
+        score = findViewById(R.id.scoreTextView);
+        streak = findViewById(R.id.streakTextView);
+        life = findViewById(R.id.lifeTextView);
+        scoreTitle = findViewById(R.id.scoreTitleTextView);
+        streakTitle = findViewById(R.id.streakTitleTextView);
+        lifeTitle = findViewById(R.id.lifeTitleTextView);
+        countDownTitle = findViewById(R.id.countDownTitleTextView);
+        sec = findViewById(R.id.secTextView);
 
-    private void getTextViews() {
-        textViewMap = new HashMap<>();
-
-        TextView scoreTitle = findViewById(R.id.scoreTitleTextView);
-        textViewMap.put("scoreTitle", scoreTitle);
-
-        TextView streakTitle = findViewById(R.id.streakTitleTextView);
-        textViewMap.put("streakTitle", streakTitle);
-
-        TextView lifeTitle = findViewById(R.id.lifeTitleTextView);
-        textViewMap.put("lifeTitle", lifeTitle);
-
-        TextView countDownTitle = findViewById(R.id.countDownTitleTextView);
-        textViewMap.put("countDownTitle", countDownTitle);
-
-        TextView sec = findViewById(R.id.secTextView);
-        textViewMap.put("sec", sec);
-
-        TextView score = findViewById(R.id.scoreTextView);
-        textViewMap.put("score", score);
-
-        TextView streak = findViewById(R.id.streakTextView);
-        textViewMap.put("streak", streak);
-
-        TextView life = findViewById(R.id.lifeTextView);
-        textViewMap.put("life", life);
-
-        TextView question = findViewById(R.id.questionTextView);
-        textViewMap.put("question", question);
-
-        TextView countDown = findViewById(R.id.countDownTextView);
-        textViewMap.put("countDown", countDown);
-
-        answer = findViewById(R.id.answerEditText);
     }
 
-    private void setCustomization(int backGroundColor, int textColor, int lives, int diffi) {
+    public void setCustomization(int backGroundColor, int textColor, int lives, int diffi) {
 
-        // 1. Set up the background color as <backGroundColor>.
+        //User setUp
+
+        if (!user.getThereIsSaved()) {
+            // initialize 3 statistics
+            countScore = 0;
+            countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
+            score.setText("" + countScore);
+            streak.setText("" + countStreak);
+            life.setText("" + lives);
+        }
+        question.setTextColor(textColor);
+        answer.setTextColor(textColor);
+        countDown.setTextColor(textColor);
+        score.setTextColor(textColor);
+        streak.setTextColor(textColor);
+        life.setTextColor(textColor);
+        scoreTitle.setTextColor(textColor);
+        streakTitle.setTextColor(textColor);
+        lifeTitle.setTextColor(textColor);
+        countDownTitle.setTextColor(textColor);
+        sec.setTextColor(textColor);
+
+        //set up the background color.
         View view = this.getWindow().getDecorView();
         view.setBackgroundColor(backGroundColor);
 
-        // 2. Set up all the color of the text with <textColor>
-        setAllTextColor(textViewMap, textColor);
-        answer.setTextColor(textColor);
+        if (!user.getThereIsSaved()) {
+            //set up the difficulty.
 
-        // 3. Set the number of lives
-        textViewMap.get("life").setText("" + lives);
-
-        // 4. Create questions according to the difficulty
-        for (int i = 0; i < 5; i++){
-            createQuestion(diffi);
+            //generate a list of questions
+            QuestionFactory questionFactory = new QuestionFactory();
+            for (int i = 0; i < 5; i++){
+                double x = Math.random();
+                if(x > 0.4){
+                    Question q = questionFactory.getQuestion("RegularQuestion");
+                    questions.add(q);
+                }
+                else{
+                    Question q = questionFactory.getQuestion("GoldenQuestion");
+                    questions.add(q);
+                }
+            }
         }
 
     }
 
-    private void setAllTextColor(Map<String, TextView> map, int textColor) {
-        for (Map.Entry<String, TextView> entry : map.entrySet()) {
-            entry.getValue().setTextColor(textColor);
-        }
-    }
+    //public void createQuestion(String questionType){
+       // if(questionType=="RegularQuestion"){
+            //Question q = new RegularQuestion();
+          //  questions.add(q);
+        //}
+      //  if(questionType == "GoldenQuestion"){
+          //  Question q = new GoldenQuestion();
+          //  questions.add(q);
+      //  }
+    //}
 
-
-    public void createQuestion(int d){
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < d; i++){
-            sb.append((char) ThreadLocalRandom.current().nextInt(32, 126+1));
-        }
-        String q = sb.toString();
-        questions.add(q);
-    }
 
     // shows next question, ends if all questions completed
     private void showNextQuestion() {
         if (questionNumber < questions.size()) {
-            textViewMap.get("countDown").setText("30");
-            textViewMap.get("question").setText(questions.get(questionNumber));
+            countDown.setText("30");
+            question.setText(questions.get(questionNumber).createQuestion(parameterDifficulty));
             answer.setText("");
             answer.setEnabled(true);
             manageTime();
@@ -332,6 +321,7 @@ public class TypeRacer extends AppCompatActivity {
             //user.setStreaks(countStreak);
             user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
             userManager.updateStatistics(this, user);
+            textColor = Color.BLACK;
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(GameConstants.USERMANAGER, userManager);
             goToEndGame.putExtra("finalScore", "" + countScore);
@@ -344,7 +334,9 @@ public class TypeRacer extends AppCompatActivity {
         answer.addTextChangedListener(
                 new TextWatcher() {
                     @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -359,13 +351,13 @@ public class TypeRacer extends AppCompatActivity {
                                     new CountDownTimer(COUNTDOWN_IN_MILLS, 1000) {
                                         @Override
                                         public void onTick(long millisUntilFinished) {
-                                            textViewMap.get("countDown").setText(Long.toString(millisUntilFinished / 1000));
+                                            countDown.setText(Long.toString(millisUntilFinished / 1000));
                                         }
 
                                         @Override
                                         public void onFinish() {
                                             updateStatistics(false);
-                                            textViewMap.get("countDown").setText("0");
+                                            countDown.setText("0");
                                             showNextQuestion();
                                             timerRunning = false;
                                         }
@@ -373,30 +365,35 @@ public class TypeRacer extends AppCompatActivity {
                         }
                     }
 
+
                     @Override
-                    public void afterTextChanged(Editable s) {}
+                    public void afterTextChanged(Editable s) {
+
+                    }
+
                 });
     }
 
     public boolean userIsCorrect() {
         String response = answer.getText().toString();
-        return response.equals(textViewMap.get("question").getText().toString());
+        return response.equals(question.getText().toString());
     }
 
     // method called to update the statistic.
     public void updateStatistics(boolean isCorrect){
         if (isCorrect) {
-            countScore++;
+            int p = questions.get(questionNumber).returnPoint();
+            countScore = countScore + p;
             countStreak++;
-            textViewMap.get("score").setText("" + countScore);
-            textViewMap.get("streak").setText("" + countStreak);
+            score.setText("" + countScore);
+            streak.setText("" + countStreak);
         } else {
             countStreak = 0;
             countLife--;
 
             if (countLife > 0) {
-                textViewMap.get("streak").setText("" + countStreak);
-                textViewMap.get("life").setText("" + countLife);
+                streak.setText("" + countStreak);
+                life.setText("" + countLife);
             } else {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
                 //user.setStreaks(countStreak);
@@ -407,5 +404,6 @@ public class TypeRacer extends AppCompatActivity {
             }
         }
     }
+
 
 }
