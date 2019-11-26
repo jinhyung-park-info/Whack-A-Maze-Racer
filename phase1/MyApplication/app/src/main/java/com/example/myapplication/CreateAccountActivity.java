@@ -63,7 +63,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         return true;
     }
     public void DoneButton(View view){
-        EditText editText_2 =  findViewById(R.id.editText2);
+        EditText editText_2 =  findViewById(R.id.answerEditText);
         EditText editText_3 =  findViewById(R.id.editText3);
         String username = editText_2.getText().toString();
         String password = editText_3.getText().toString();

@@ -26,7 +26,7 @@
             app:layout_constraintVertical_bias="0.25" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/answerEditText"
             android:layout_width="333dp"
             android:layout_height="42dp"
             android:layout_marginTop="28dp"
@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.696"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editText2"
+            app:layout_constraintTop_toTopOf="@+id/answerEditText"
             app:layout_constraintVertical_bias="0.199" />
 
         <TextView
@@ -147,7 +147,7 @@
             app:layout_constraintEnd_toStartOf="@+id/countDownTextView"
             app:layout_constraintHorizontal_bias="0.682"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editText2"
+            app:layout_constraintTop_toTopOf="@+id/answerEditText"
             app:layout_constraintVertical_bias="0.197" />
 
         <TextView
@@ -162,7 +162,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.228"
             app:layout_constraintStart_toEndOf="@+id/countDownTextView"
-            app:layout_constraintTop_toTopOf="@+id/editText2"
+            app:layout_constraintTop_toTopOf="@+id/answerEditText"
             app:layout_constraintVertical_bias="0.198" />
 
         <Button
