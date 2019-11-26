@@ -185,7 +185,7 @@ public class TypeRacer extends AppCompatActivity {
 
                         String response = answer.getText().toString();
                         //start counting
-                        if (response.length() == 1 || user.getThereIsSaved()) {
+                        if (response.length() == 1) {
 
                             if (timerRunning) return;
                             timerRunning = true;
@@ -248,11 +248,11 @@ public class TypeRacer extends AppCompatActivity {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (countDownTimer != null) countDownTimer.cancel();
+                timerRunning = false;
 
                 //goes to next question if response is correct
                 if (userIsCorrect()) {
-                    if (countDownTimer != null) countDownTimer.cancel();
-                    timerRunning = false;
                     answer.setEnabled(false);
                     answer.clearFocus();
                     updateStatistics(true);
@@ -285,8 +285,6 @@ public class TypeRacer extends AppCompatActivity {
                     countDownTimer.cancel();
                 }
 
-                user.setThereIsSaved(true);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -309,23 +307,22 @@ public class TypeRacer extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         Intent intent = getIntent();
-        if (user.getThereIsSaved()) {
-            FileInputStream fis = null;
-            try {
-                fis = getApplicationContext().openFileInput(user.getEmail() + "_typeracer.txt");
-                InputStreamReader isr = new InputStreamReader(fis);
-                BufferedReader rd = new BufferedReader(isr);
+        FileInputStream fis = null;
+        try {
+            fis = getApplicationContext().openFileInput(user.getEmail() + "_typeracer.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader rd = new BufferedReader(isr);
 
-                if (!Boolean.valueOf(rd.readLine())) {
-                    this.timerRunning = false;
-                } else {
-                    this.timerRunning = true;
-                }
+            if (!Boolean.valueOf(rd.readLine())) {
+                this.timerRunning = false;
+            } else {
+                this.timerRunning = true;
+            }
 
-                int time = Integer.parseInt(rd.readLine());
+            int time = Integer.parseInt(rd.readLine());
 
-                timerRunning = true;
-                countDownTimer =
+            timerRunning = true;
+            countDownTimer =
                         new CountDownTimer(time * 1000, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
@@ -341,47 +338,24 @@ public class TypeRacer extends AppCompatActivity {
                             }
                         }.start();
 
-                manageTime();
+            prepareForScreenUpdate();
 
-                Button doneBtn = (Button)findViewById(R.id.doneButton);
-                doneBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+            File newFile = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
+            newFile.delete();
 
-                        //goes to next question if response is correct
-                        if (userIsCorrect()) {
-                            if (countDownTimer != null) countDownTimer.cancel();
-                            timerRunning = false;
-                            answer.setEnabled(false);
-                            answer.clearFocus();
-                            updateStatistics(true);
-                            showNextQuestion();
-                        } else {
-                            updateStatistics(false);
-                            showNextQuestion();
-                        }
-                    }
-                });
-
-                user.setThereIsSaved(false);
-                File newFile = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
-                newFile.delete();
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fis != null) {
-                    try {
-                        fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
+
     }
-
-
 }
