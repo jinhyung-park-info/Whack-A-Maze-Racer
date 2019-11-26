@@ -72,7 +72,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     molePic = Bitmap.createScaledBitmap(molePic, 250, 250, true);
 
     genericMole = BitmapFactory.decodeResource(res, R.drawable.mole);
-    genericMole = Bitmap.createScaledBitmap(molePic, 250, 250, true);
+    genericMole = Bitmap.createScaledBitmap(genericMole, 250, 250, true);
 
     molePic2 = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
     molePic2 = Bitmap.createScaledBitmap(molePic2, 250, 250, true);

@@ -252,7 +252,8 @@ public class UserManager implements Serializable {
                             + ", " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak)
                             + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed)
                             + ", "  +  user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit)
-                            + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats) + "\n";
+                            + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats)
+                            + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh) + "\n";
                     sb.append(new_text);
                 } else {
                     sb.append(text).append("\n");
@@ -309,14 +310,16 @@ public class UserManager implements Serializable {
         int indexOfForthComma = line.indexOf(",", indexOfThirdComma + 1);
         int indexOfFifthComma = line.indexOf(",", indexOfForthComma + 1);
         int indexOfSixthComma = line.indexOf(",", indexOfFifthComma + 1);
+        int indexOfSeventhComma = line.indexOf(",", indexOfSixthComma + 1);
         int lastPlayedLevel = Integer.parseInt(line.substring(indexOfFirstComma + 2, indexOfSecondComma));
         int overallScore = Integer.parseInt(line.substring(indexOfSecondComma + 2, indexOfThirdComma));
         int streaks = Integer.parseInt(line.substring(indexOfThirdComma + 2, indexOfForthComma));
         int numMazeGame = Integer.parseInt(line.substring(indexOfForthComma + 2, indexOfFifthComma));
         int moleHit = Integer.parseInt(line.substring(indexOfFifthComma + 2, indexOfSixthComma));
-        String loadMolesStats = line.substring(indexOfSixthComma + 2);
+        String loadMolesStats = line.substring(indexOfSixthComma + 2, indexOfSeventhComma);
+        int MoleAllTimeHigh = Integer.parseInt(line.substring(indexOfSeventhComma + 2));
         Object[] typeRacer = new Object[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak, streaks};
-        Object[] whackAMole = new Object[]{GameConstants.NameGame1, GameConstants.MoleStats, loadMolesStats, GameConstants.MoleHit, moleHit};
+        Object[] whackAMole = new Object[]{GameConstants.NameGame1, GameConstants.MoleStats, loadMolesStats, GameConstants.MoleHit, moleHit, GameConstants.MoleAllTimeHigh, MoleAllTimeHigh};
         Object[] maze = new Object[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed, numMazeGame};
         ArrayList<Object[]> arrayOfGameStats = new ArrayList<>();
         arrayOfGameStats.add(typeRacer);

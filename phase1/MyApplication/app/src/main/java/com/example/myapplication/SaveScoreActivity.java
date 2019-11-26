@@ -20,7 +20,7 @@ public class SaveScoreActivity extends AppCompatActivity {
 
     Intent intent = getIntent();
     moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
-      moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
+    moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
     UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
     if (user_1 != null) {
       setUserManager(user_1);
@@ -33,9 +33,8 @@ public class SaveScoreActivity extends AppCompatActivity {
   }
 
   public void save(View view) {
-    user.setSavedToScoreBoard(true);
     user.setOverallScore(user.getOverallScore() + moleScore);
-      user.setStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh, moleHigh);
+    user.setStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh, moleHigh);
     userManager.updateStatistics(this, user);
     Intent intent = new Intent(this, GameActivity.class);
     intent.putExtra(GameConstants.USERMANAGER, userManager);
@@ -43,8 +42,6 @@ public class SaveScoreActivity extends AppCompatActivity {
   }
 
   public void notSave(View view) {
-    user.setSavedToScoreBoard(false);
-    userManager.updateStatistics(this, user);
     Intent intent = new Intent(this, GameActivity.class);
     intent.putExtra(GameConstants.USERMANAGER, userManager);
     startActivity(intent);
