@@ -108,9 +108,6 @@ public class User implements Comparable<User>, Serializable{
         this.lastPlayedLevel = level;
     }
 
-    public boolean getThereIsSaved() { return this.thereIsSaved; }
-    public void setThereIsSaved(boolean isSaved) { this.thereIsSaved = isSaved; }
-
     @Override
     public int compareTo(User user) {
         if(this.getOverallScore() < user.getOverallScore()){

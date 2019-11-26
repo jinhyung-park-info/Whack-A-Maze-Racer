@@ -156,7 +156,7 @@ public class UserManager implements Serializable {
             fos = context.openFileOutput(MainActivity.Stats_file, mode);
             try {
                 fos.write(username.getBytes());
-                String s = new String(new char[GameConstants.TotalNumOfStastics]).replace(
+                String s = new String(new char[GameConstants.TOTAL_NUM_OF_STATISTICS]).replace(
                         "\0", ", 0");
                 fos.write(s.getBytes());
                 fos.write("\n".getBytes());
@@ -398,7 +398,7 @@ public class UserManager implements Serializable {
 
             while ((text = br.readLine()) != null) {
                 int numCommas = countOccurrences(text, ',');
-                if (numCommas != GameConstants.TotalNumOfStastics) {
+                if (numCommas != GameConstants.TOTAL_NUM_OF_STATISTICS) {
                     int b = 0;
                     int y = 0;
                     for (int i = 0; i <= text.length(); i++) {
