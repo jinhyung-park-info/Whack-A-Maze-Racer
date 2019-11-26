@@ -67,174 +67,30 @@ public class TypeRacer extends AppCompatActivity {
             user = user_1.getUser();
 
             getTextViews();
+
+            // initialize 3 statistics
+            countScore = 0;
+            textViewMap.get("score").setText("" + countScore);
+
+            countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
+            textViewMap.get("streak").setText("" + countStreak);
+
+            countLife = intent.getExtras().getInt("lives");
+
             int backGroundColor = intent.getExtras().getInt("backGroundColorKey");
             int textColor = intent.getExtras().getInt("textColorKey");
             int parameterDifficulty = intent.getIntExtra("difficulty", 5);
-            countLife = intent.getExtras().getInt("lives");
 
-            // User setUp
-            // initialize 3 statistics
-            countScore = 0;
-            countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
-            textViewMap.get("score").setText("" + countScore);
-            textViewMap.get("streak").setText("" + countStreak);
-
-
-            setCustomization(backGroundColor, textColor, this.countLife, parameterDifficulty);
+            setCustomization(backGroundColor, textColor, countLife, parameterDifficulty);
             showNextQuestion();
             prepareForScreenUpdate();
 
         }
     }
 
-    private void prepareForScreenUpdate() {
-
-        Button doneBtn = (Button) findViewById(R.id.doneButton);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //goes to next question if response is correct
-                if (userIsCorrect()) {
-                    if (countDownTimer != null) countDownTimer.cancel();
-                    timerRunning = false;
-                    answer.setEnabled(false);
-                    answer.clearFocus();
-                    updateStatistics(true);
-                    showNextQuestion();
-                } else {
-                    updateStatistics(false);
-                    showNextQuestion();
-                }
-
-
-            }
-        });
-    }
-
     private void setUserManager(UserManager newManager){
         userManager = newManager;
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        FileOutputStream fos = null;
-        // File file = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
-        try {
-            fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
-            try {
-
-                fos.write(this.timerRunning.toString().getBytes());
-                fos.write("\n".getBytes());
-
-                fos.write(textViewMap.get("countDown").getText().toString().getBytes());
-                fos.write("\n".getBytes());
-
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
-
-                user.setThereIsSaved(true);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        Intent intent = getIntent();
-
-        if (user.getThereIsSaved()) {
-            FileInputStream fis = null;
-            try {
-                fis = getApplicationContext().openFileInput(user.getEmail() + "_typeracer.txt");
-                InputStreamReader isr = new InputStreamReader(fis);
-                BufferedReader rd = new BufferedReader(isr);
-
-                if (!Boolean.valueOf(rd.readLine())) {
-                    this.timerRunning = false;
-                } else {
-                    this.timerRunning = true;
-                }
-
-                int time = Integer.parseInt(rd.readLine());
-
-                timerRunning = true;
-                countDownTimer =
-                        new CountDownTimer(time * 1000, 1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                                textViewMap.get("countDown").setText(Long.toString(millisUntilFinished / 1000));
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                updateStatistics(false);
-                                textViewMap.get("countDown").setText("0");
-                                showNextQuestion();
-                                timerRunning = false;
-                            }
-                        }.start();
-
-                manageTime();
-
-                Button doneBtn = (Button)findViewById(R.id.doneButton);
-                doneBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        //goes to next question if response is correct
-                        if (userIsCorrect()) {
-                            if (countDownTimer != null) countDownTimer.cancel();
-                            timerRunning = false;
-                            answer.setEnabled(false);
-                            answer.clearFocus();
-                            updateStatistics(true);
-                            showNextQuestion();
-                        } else {
-                            updateStatistics(false);
-                            showNextQuestion();
-                        }
-                    }
-                });
-
-                user.setThereIsSaved(false);
-                File newFile = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
-                newFile.delete();
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fis != null) {
-                    try {
-                        fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    }
-
 
     private void getTextViews() {
         textViewMap = new HashMap<>();
@@ -385,5 +241,147 @@ public class TypeRacer extends AppCompatActivity {
             }
         }
     }
+
+    private void prepareForScreenUpdate() {
+
+        Button doneBtn = (Button) findViewById(R.id.doneButton);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //goes to next question if response is correct
+                if (userIsCorrect()) {
+                    if (countDownTimer != null) countDownTimer.cancel();
+                    timerRunning = false;
+                    answer.setEnabled(false);
+                    answer.clearFocus();
+                    updateStatistics(true);
+                    showNextQuestion();
+                } else {
+                    updateStatistics(false);
+                    showNextQuestion();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        FileOutputStream fos = null;
+        // File file = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
+        try {
+            fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
+            try {
+
+                fos.write(this.timerRunning.toString().getBytes());
+                fos.write("\n".getBytes());
+
+                fos.write(textViewMap.get("countDown").getText().toString().getBytes());
+                fos.write("\n".getBytes());
+
+                if (countDownTimer != null) {
+                    countDownTimer.cancel();
+                }
+
+                user.setThereIsSaved(true);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        if (user.getThereIsSaved()) {
+            FileInputStream fis = null;
+            try {
+                fis = getApplicationContext().openFileInput(user.getEmail() + "_typeracer.txt");
+                InputStreamReader isr = new InputStreamReader(fis);
+                BufferedReader rd = new BufferedReader(isr);
+
+                if (!Boolean.valueOf(rd.readLine())) {
+                    this.timerRunning = false;
+                } else {
+                    this.timerRunning = true;
+                }
+
+                int time = Integer.parseInt(rd.readLine());
+
+                timerRunning = true;
+                countDownTimer =
+                        new CountDownTimer(time * 1000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                textViewMap.get("countDown").setText(Long.toString(millisUntilFinished / 1000));
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                updateStatistics(false);
+                                textViewMap.get("countDown").setText("0");
+                                showNextQuestion();
+                                timerRunning = false;
+                            }
+                        }.start();
+
+                manageTime();
+
+                Button doneBtn = (Button)findViewById(R.id.doneButton);
+                doneBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //goes to next question if response is correct
+                        if (userIsCorrect()) {
+                            if (countDownTimer != null) countDownTimer.cancel();
+                            timerRunning = false;
+                            answer.setEnabled(false);
+                            answer.clearFocus();
+                            updateStatistics(true);
+                            showNextQuestion();
+                        } else {
+                            updateStatistics(false);
+                            showNextQuestion();
+                        }
+                    }
+                });
+
+                user.setThereIsSaved(false);
+                File newFile = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
+                newFile.delete();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
 
 }
