@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.myapplication.GameActivity;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
+import com.example.myapplication.SaveScoreActivity;
 import com.example.myapplication.UserManager;
 
 import java.io.File;
@@ -164,7 +165,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         Button button = findViewById(R.id.button8);
         if (passed) {
             passed = false;
-            Intent intent = new Intent(this, GameActivity.class);
+            Intent intent = new Intent(this, SaveScoreActivity.class);
             intent.putExtra(GameConstants.USERMANAGER, usermanager);
             startActivity(intent);
         } else

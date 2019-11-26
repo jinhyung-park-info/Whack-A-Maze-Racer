@@ -61,6 +61,12 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    load(user);
+  }
+
+  @Override
   public void onBackPressed() {
     setContentView(R.layout.activity_mole);
     reset();
