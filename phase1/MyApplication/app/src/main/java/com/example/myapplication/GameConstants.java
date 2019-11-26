@@ -13,8 +13,8 @@ public abstract class GameConstants {
     public static final int TotalMazeGames = 2;
     public static final int MazeWallThickness = 4;
     public static final int NumberOfMazeCollectibles = 3;
-    //2 for user and 4 for the games
-    public static final int TotalNumOfStastics = 7;
+    //2 for user and 6 for the games
+    public static final int TotalNumOfStastics = 8;
     public static final int NumPeopleOnScoreBoard = 4;
     public static final String NameGame1 = "Whack-A-Mole";
     public static final String NameGame2 = "TypeRacer";

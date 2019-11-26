@@ -251,6 +251,7 @@ public class UserManager implements Serializable {
                     String new_text = other_username + ", " + user.getLastPlayedLevel() + ", "  + user.getOverallScore()
                             + ", " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak)
                             + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed)
+                            + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze)
                             + ", "  +  user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit)
                             + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats)
                             + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh) + "\n";
@@ -311,16 +312,18 @@ public class UserManager implements Serializable {
         int indexOfFifthComma = line.indexOf(",", indexOfForthComma + 1);
         int indexOfSixthComma = line.indexOf(",", indexOfFifthComma + 1);
         int indexOfSeventhComma = line.indexOf(",", indexOfSixthComma + 1);
+        int indexOfEightComma = line.indexOf(",", indexOfSeventhComma + 1);
         int lastPlayedLevel = Integer.parseInt(line.substring(indexOfFirstComma + 2, indexOfSecondComma));
         int overallScore = Integer.parseInt(line.substring(indexOfSecondComma + 2, indexOfThirdComma));
         int streaks = Integer.parseInt(line.substring(indexOfThirdComma + 2, indexOfForthComma));
         int numMazeGame = Integer.parseInt(line.substring(indexOfForthComma + 2, indexOfFifthComma));
-        int moleHit = Integer.parseInt(line.substring(indexOfFifthComma + 2, indexOfSixthComma));
-        String loadMolesStats = line.substring(indexOfSixthComma + 2, indexOfSeventhComma);
-        int MoleAllTimeHigh = Integer.parseInt(line.substring(indexOfSeventhComma + 2));
+        int numMazeItemsCollected = Integer.parseInt(line.substring(indexOfFifthComma + 2, indexOfSixthComma));
+        int moleHit = Integer.parseInt(line.substring(indexOfSixthComma + 2, indexOfSeventhComma));
+        String loadMolesStats = line.substring(indexOfSeventhComma + 2, indexOfEightComma);
+        int MoleAllTimeHigh = Integer.parseInt(line.substring(indexOfEightComma + 2));
         Object[] typeRacer = new Object[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak, streaks};
         Object[] whackAMole = new Object[]{GameConstants.NameGame1, GameConstants.MoleStats, loadMolesStats, GameConstants.MoleHit, moleHit, GameConstants.MoleAllTimeHigh, MoleAllTimeHigh};
-        Object[] maze = new Object[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed, numMazeGame};
+        Object[] maze = new Object[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed, numMazeGame, GameConstants.NumCollectiblesCollectedMaze, numMazeItemsCollected};
         ArrayList<Object[]> arrayOfGameStats = new ArrayList<>();
         arrayOfGameStats.add(typeRacer);
         arrayOfGameStats.add(maze);
