@@ -39,6 +39,7 @@ public class InGamePurchaseActivity extends AppCompatActivity {
 
     public void buyCurrency(View view){
         user.setCurrency(user.getCurrency() + 50);
+        userManager.updateStatistics(this, user);
 
         TextView currencyText =  findViewById(R.id.numGems);
         String currency = "Gems Remaining: " + user.getCurrency();
@@ -46,6 +47,7 @@ public class InGamePurchaseActivity extends AppCompatActivity {
     }
 
     public void close(View view){
+
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
