@@ -30,6 +30,8 @@ public class GameActivity extends AppCompatActivity {
             setUserManager(userManager1);
         }
     }
+
+
     private void setUserManager(UserManager usermanage){
         userManager = usermanage;
     }
@@ -78,6 +80,13 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(intent3);
                 break;
         }
+    }
+
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void Logout(View view){

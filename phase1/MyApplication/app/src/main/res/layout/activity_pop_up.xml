@@ -8,13 +8,13 @@
     tools:context=".PopUp">
 
     <Button
-        android:id="@+id/exit"
+        android:id="@+id/purchase"
         android:layout_width="167dp"
         android:layout_height="85dp"
         android:layout_marginStart="69dp"
         android:layout_marginEnd="185dp"
-        android:onClick="close"
-        android:text="Close"
+        android:onClick="buyCurrency"
+        android:text="Buy Gems"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,12 +49,12 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/level"
-        app:layout_constraintStart_toStartOf="@+id/level"
+        app:layout_constraintBottom_toTopOf="@+id/currency"
+        app:layout_constraintStart_toStartOf="@+id/currency"
         app:layout_constraintTop_toBottomOf="@+id/molesHit" />
 
     <EditText
-        android:id="@+id/level"
+        android:id="@+id/currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -70,8 +70,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/exit"
-        app:layout_constraintStart_toStartOf="@+id/exit"
-        app:layout_constraintTop_toBottomOf="@+id/level" />
+        app:layout_constraintBottom_toTopOf="@+id/purchase"
+        app:layout_constraintStart_toStartOf="@+id/purchase"
+        app:layout_constraintTop_toBottomOf="@+id/currency" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

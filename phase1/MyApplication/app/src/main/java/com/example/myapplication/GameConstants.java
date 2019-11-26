@@ -21,14 +21,15 @@ public abstract class GameConstants {
     public static final String NameGame3 = "Maze";
     public static final String MoleHit = "MoleHit";
     public static final String MoleStats = "MoleStats";
-    public static final String MoleScore = "MoleScore";
-    public static final String MoleHigh = "MoleHigh";
+    public static final String MoleScore = "MoleScore"; //this is key for updating overall score
+    public static final String MoleHigh = "MoleHigh"; //this is key for moleAllTimeHigh
     public static final String MoleAllTimeHigh = "MoleAllTimeHigh";
     public static final String NumMazeGamesPlayed = "NumMazeGamesPlayed";
     public static final String TypeRacerStreak = "TypeRacerStreak";
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";
     public static final String[] OptionsForScoreBoard = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected","TypeRacerStreak"};
+    public static final String purchase = "purchase"; //this is key used for in game purchase
     public static final String[] WhackAMoleStatistics = new String[]{MoleStats, MoleHit, MoleAllTimeHigh};
     public static final String[]  TypeRacerStatistics = new String[]{TypeRacerStreak};
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
