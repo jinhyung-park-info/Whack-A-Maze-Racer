@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -139,6 +140,20 @@ public class MoleActivity extends AppCompatActivity {
     wamView.thread_active = true;
     setContentView(wamView);
     wamView.gameStatus = "inGame";
+  }
+
+  public void powerPlay(View view) {
+    Button powerPlayButton = findViewById(R.id.powerPlay);
+    if(user.getCurrency() >= GameConstants.molePowerPlayCost) {
+      user.setCurrency(user.getCurrency() - GameConstants.molePowerPlayCost);
+      this.score = 10;
+      wamView = new WamView(this);
+      wamView.thread_active = true;
+      setContentView(wamView);
+      wamView.gameStatus = "inGame";
+    }else{
+      powerPlayButton.setError("Not Enough Gems!");
+    }
   }
 
   public void conclude() {

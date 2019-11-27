@@ -45,6 +45,7 @@ public abstract class GameConstants {
     public static final String MoleScore = "MoleScore"; //this is key for updating overall score
     public static final String MoleHigh = "MoleHigh"; //this is key for moleAllTimeHigh
     public static final String MoleAllTimeHigh = "MoleAllTimeHigh";
+    public static final int molePowerPlayCost = 10;
     public static final String NumMazeGamesPlayed = "NumMazeGamesPlayed";
     public static final String TypeRacerStreak = "TypeRacerStreak";
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";
