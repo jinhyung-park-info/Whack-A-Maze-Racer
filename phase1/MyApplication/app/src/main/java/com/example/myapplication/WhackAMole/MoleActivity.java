@@ -69,11 +69,9 @@ public class MoleActivity extends AppCompatActivity {
 
   @Override
   public void onBackPressed() {
-    setContentView(R.layout.activity_mole);
-    reset();
-    if(wamView != null){
-    wamView.thread_active = false;
-    }
+    Intent intent = new Intent(this, MoleInstructionActivity.class);
+    intent.putExtra(GameConstants.USERMANAGER, userManager);
+    startActivity(intent);
   }
 
   private void setUserManager(UserManager newManager){
@@ -146,6 +144,7 @@ public class MoleActivity extends AppCompatActivity {
     Button powerPlayButton = findViewById(R.id.powerPlay);
     if(user.getCurrency() >= GameConstants.molePowerPlayCost) {
       user.setCurrency(user.getCurrency() - GameConstants.molePowerPlayCost);
+      writeMoleStats();
       this.score = GameConstants.powerPlayPoint;
       wamView = new WamView(this);
       wamView.thread_active = true;
