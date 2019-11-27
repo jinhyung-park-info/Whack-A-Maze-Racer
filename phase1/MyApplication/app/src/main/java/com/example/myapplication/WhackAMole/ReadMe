@@ -11,3 +11,8 @@ Codes in this package are inspired, learnt, recreated, and modified from the fol
 
 4) FishTank Project
     -The idea of having a manger class storing collection of objects of the game which call their respective draw method to draw them on canvas.
+
+
+Some notes regarding playing Whack a Mole:
+
+1) User statistics would not be updated if user does not complete a game (i.e. force exit using back button or shutting down the phone)
