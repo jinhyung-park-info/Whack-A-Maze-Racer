@@ -13,8 +13,16 @@ public abstract class GameConstants {
     public static final int usernameLength = 8;
 
     // Whack-A-Mole Game Constants
-    public static final int molePassingScore = 5;
+    public static final int moleDefaultLives = 5;
+    public static final int moleDefaultHolesX = 2;
+    public static final int moleDefaultHolesY = 2;
     public static final int moleDefaultDuration = 2400;
+    public static final int molePowerPlayCost = 10;
+    public static final int powerPlayPoint = 10;
+    public static final int moleEasyLives = 10;
+    public static final int moleNormalLives = 5;
+    public static final int moleDifficultLives = 3;
+    public static final int moleHardcoreLives = 1;
 
     // TypeRacer Game Constants
     public static final int numOfQuestions = 5;
@@ -45,7 +53,6 @@ public abstract class GameConstants {
     public static final String MoleScore = "MoleScore"; //this is key for updating overall score
     public static final String MoleHigh = "MoleHigh"; //this is key for moleAllTimeHigh
     public static final String MoleAllTimeHigh = "MoleAllTimeHigh";
-    public static final int molePowerPlayCost = 10;
     public static final String NumMazeGamesPlayed = "NumMazeGamesPlayed";
     public static final String TypeRacerStreak = "TypeRacerStreak";
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";

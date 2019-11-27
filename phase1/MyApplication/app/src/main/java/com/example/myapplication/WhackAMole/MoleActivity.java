@@ -85,16 +85,16 @@ public class MoleActivity extends AppCompatActivity {
     if (((RadioButton) view).isChecked()) {
       switch (view.getId()) {
         case R.id.hardcore:
-          numLives = 1;
+          numLives = GameConstants.moleHardcoreLives;
           break;
         case R.id.difficult:
-          numLives = 3;
+          numLives = GameConstants.moleDifficultLives;
           break;
         case R.id.noraml:
-          numLives = 5;
+          numLives = GameConstants.moleNormalLives;
           break;
         case R.id.easy:
-          numLives = 10;
+          numLives = GameConstants.moleEasyLives;
           break;
         case R.id.c1:
           numColumns = 1;
@@ -146,7 +146,7 @@ public class MoleActivity extends AppCompatActivity {
     Button powerPlayButton = findViewById(R.id.powerPlay);
     if(user.getCurrency() >= GameConstants.molePowerPlayCost) {
       user.setCurrency(user.getCurrency() - GameConstants.molePowerPlayCost);
-      this.score = 10;
+      this.score = GameConstants.powerPlayPoint;
       wamView = new WamView(this);
       wamView.thread_active = true;
       setContentView(wamView);
@@ -173,9 +173,9 @@ public class MoleActivity extends AppCompatActivity {
 
   // Used to reset customization to default after restarting game.
   public void reset() {
-    numLives = 5;
-    numRows = 2;
-    numColumns = 2;
+    numLives = GameConstants.moleDefaultLives;
+    numRows = GameConstants.moleDefaultHolesY;
+    numColumns = GameConstants.moleDefaultHolesX;
     score = 0;
     backgroundID = R.drawable.game_background;
   }
