@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,20 +35,58 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
             ArrayOfUsers.add(userManager.getUser());
         }
 
+       /* InitializeTextViews arr = new InitializeTextViews(this);
+        ArrayOfTextView = arr.getArrayOfTextViews(this);*/
+
         TextView FirstUserName = findViewById(R.id.FirstUserName);
         TextView SecondUserName = findViewById(R.id.SecondUserName);
         TextView ThirdUserName = findViewById(R.id.ThirdUserName);
         TextView FourthUserName = findViewById(R.id.FourthUserName);
         TextView FifthUserName = findViewById(R.id.FifthUserName);
+        TextView SixthUserName = findViewById(R.id.SixthUserName);
+        TextView SeventhUserName = findViewById(R.id.SeventhUserName);
+        TextView EighthUserName = findViewById(R.id.EighthUserName);
+        TextView NinthUserName = findViewById(R.id.NinthUserName);
+        TextView TenthUserName = findViewById(R.id.TenthUserName);
+        TextView EleventhUserName = findViewById(R.id.EleventhUserName);
+        TextView TwelfthUserName = findViewById(R.id.TwelfthUserName);
+        TextView ThirteenUserName = findViewById(R.id.ThirteenUserName);
+        TextView FourteenUserName = findViewById(R.id.FourteenUserName);
+        TextView FifteenUserName = findViewById(R.id.FifteenUserName);
+        TextView SixteenUserName = findViewById(R.id.SixteenUserName);
+        TextView SeventeenUserName = findViewById(R.id.SeventeenUserName);
+        TextView EighteenUserName = findViewById(R.id.EighteenUserName);
+        TextView NineteenUserName = findViewById(R.id.NineteenUserName);
+        TextView TwentyUserName = findViewById(R.id.TwentyUserName);
         TextView FirstUserStat = findViewById(R.id.FirstUserStat);
         TextView SecondUserStat = findViewById(R.id.SecondUserStat);
         TextView ThirdUserStat = findViewById(R.id.ThirdUserStat);
         TextView FourthUserStat = findViewById(R.id.FourthUserStat);
         TextView FifthUserStat = findViewById(R.id.FifthUserStat);
+        TextView SixthUserStat = findViewById(R.id.SixthUserStat);
+        TextView SeventhUserStat = findViewById(R.id.SeventhUserStat);
+        TextView EighthUserStat = findViewById(R.id.EighthUserStat);
+        TextView NinthUserStat = findViewById(R.id.NinthUserStat);
+        TextView TenthUserStat = findViewById(R.id.TenthUserStat);
+        TextView EleventhUserStat = findViewById(R.id.EleventhUserStat);
+        TextView TwelfthUserStat = findViewById(R.id.TwelfthUserStat);
+        TextView ThirteenUserStat = findViewById(R.id.ThirteenUserStat);
+        TextView FourteenUserStat = findViewById(R.id.FourteenUserStat);
+        TextView FifteenUserStat = findViewById(R.id.FifteenUserStat);
+        TextView SixteenUserStat = findViewById(R.id.SixteenUserStat);
+        TextView SeventeenUserStat = findViewById(R.id.SeventeenUserStat);
+        TextView EighteenUserStat = findViewById(R.id.EighteenUserStat);
+        TextView NineteenUserStat = findViewById(R.id.NineteenUserStat);
+        TextView TwentyUserStat = findViewById(R.id.TwentyUserStat);
         ArrayOfTextView = new TextView[]{FirstUserName, FirstUserStat, SecondUserName,
                 SecondUserStat, ThirdUserName, ThirdUserStat, FourthUserName, FourthUserStat,
-                FifthUserName, FifthUserStat};
-
+                FifthUserName, FifthUserStat, SixthUserName, SixthUserStat, SeventhUserName,
+                SeventhUserStat, EighthUserName, EighthUserStat, NinthUserName, NinthUserStat,
+                TenthUserName, TenthUserStat, EleventhUserName, EleventhUserStat, TwelfthUserName,
+                TwelfthUserStat, ThirteenUserName, ThirteenUserStat, FourteenUserName, FourteenUserStat,
+                FifteenUserName, FifteenUserStat, SixteenUserName, SixteenUserStat, SeventeenUserName,
+                SeventeenUserStat, EighteenUserName, EighteenUserStat, NineteenUserName, NineteenUserStat,
+                TwentyUserName, TwentyUserStat};
 
         Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -128,6 +167,17 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
             numbering += 1;
             i += 2;
         }
+
+        setupRemainingTextViews(i, numbering);
+    }
+
+    private void setupRemainingTextViews(int i, int numbering) {
+        int remainingNumbers = numbering;
+        for (int n = i; n < ArrayOfTextView.length; n += 2) {
+            String text = remainingNumbers + ".";
+            ArrayOfTextView[n].setText(text);
+            remainingNumbers += 1;
+        }
     }
 
     private String[] getAttributesForSorting(String sortingChooser) {
@@ -152,3 +202,67 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         startActivity(intent);
     }
 }
+
+/*class InitializeTextViews extends ViewScoreBoardActivity{
+
+    private Context context;
+
+    InitializeTextViews(Context context1){
+        this.context = context1;
+    }
+
+    public  TextView[] getArrayOfTextViews(Context context){
+        TextView[] ArrayOfTextView;
+        TextView FirstUserName = findViewById(R.id.FirstUserName);
+        TextView SecondUserName = findViewById(R.id.SecondUserName);
+        TextView ThirdUserName = findViewById(R.id.ThirdUserName);
+        TextView FourthUserName = findViewById(R.id.FourthUserName);
+        TextView FifthUserName = findViewById(R.id.FifthUserName);
+        TextView SixthUserName = findViewById(R.id.SixthUserName);
+        TextView SeventhUserName = findViewById(R.id.SeventhUserName);
+        TextView EighthUserName = findViewById(R.id.EighthUserName);
+        TextView NinthUserName = findViewById(R.id.NinthUserName);
+        TextView TenthUserName = findViewById(R.id.TenthUserName);
+        TextView EleventhUserName = findViewById(R.id.EleventhUserName);
+        TextView TwelfthUserName = findViewById(R.id.TwelfthUserName);
+        TextView ThirteenUserName = findViewById(R.id.ThirteenUserName);
+        TextView FourteenUserName = findViewById(R.id.FourteenUserName);
+        TextView FifteenUserName = findViewById(R.id.FifteenUserName);
+        TextView SixteenUserName = findViewById(R.id.SixteenUserName);
+        TextView SeventeenUserName = findViewById(R.id.SeventeenUserName);
+        TextView EighteenUserName = findViewById(R.id.EighteenUserName);
+        TextView NineteenUserName = findViewById(R.id.NineteenUserName);
+        TextView TwentyUserName = findViewById(R.id.TwentyUserName);
+        TextView FirstUserStat = findViewById(R.id.FirstUserStat);
+        TextView SecondUserStat = findViewById(R.id.SecondUserStat);
+        TextView ThirdUserStat = findViewById(R.id.ThirdUserStat);
+        TextView FourthUserStat = findViewById(R.id.FourthUserStat);
+        TextView FifthUserStat = findViewById(R.id.FifthUserStat);
+        TextView SixthUserStat = findViewById(R.id.SixthUserStat);
+        TextView SeventhUserStat = findViewById(R.id.SeventhUserStat);
+        TextView EighthUserStat = findViewById(R.id.EighthUserStat);
+        TextView NinthUserStat = findViewById(R.id.NinthUserStat);
+        TextView TenthUserStat = findViewById(R.id.TenthUserStat);
+        TextView EleventhUserStat = findViewById(R.id.EleventhUserStat);
+        TextView TwelfthUserStat = findViewById(R.id.TwelfthUserStat);
+        TextView ThirteenUserStat = findViewById(R.id.ThirteenUserStat);
+        TextView FourteenUserStat = findViewById(R.id.FourteenUserStat);
+        TextView FifteenUserStat = findViewById(R.id.FifteenUserStat);
+        TextView SixteenUserStat = findViewById(R.id.SixteenUserStat);
+        TextView SeventeenUserStat = findViewById(R.id.SeventeenUserStat);
+        TextView EighteenUserStat = findViewById(R.id.EighteenUserStat);
+        TextView NineteenUserStat = findViewById(R.id.NineteenUserStat);
+        TextView TwentyUserStat = findViewById(R.id.TwentyUserStat);
+        ArrayOfTextView = new TextView[]{FirstUserName, FirstUserStat, SecondUserName,
+                SecondUserStat, ThirdUserName, ThirdUserStat, FourthUserName, FourthUserStat,
+                FifthUserName, FifthUserStat, SixthUserName, SixthUserStat, SeventhUserName,
+                SeventhUserStat, EighthUserName, EighthUserStat, NinthUserName, NinthUserStat,
+                TenthUserName, TenthUserStat, EleventhUserName, EleventhUserStat, TwelfthUserName,
+                TwelfthUserStat, ThirteenUserName, ThirteenUserStat,  FourteenUserName, FourteenUserStat,
+                FifteenUserName, FifteenUserStat, SixteenUserName, SixteenUserStat, SeventeenUserName,
+                SeventeenUserStat, EighteenUserName, EighteenUserStat, NineteenUserName, NineteenUserStat,
+                TwentyUserName, TwentyUserStat};
+        return ArrayOfTextView;
+    }
+
+}*/
