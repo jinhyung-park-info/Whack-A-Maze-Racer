@@ -4,6 +4,7 @@ package com.example.myapplication.TypeRacer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -48,7 +49,7 @@ public class TypeRacer extends AppCompatActivity {
     private int countScore, countStreak, countLife;
 
     // Time related Attributes
-    private static final long COUNTDOWN_IN_MILLS = 30000;
+    private static final long COUNTDOWN_IN_MILLS = GameConstants.timeLimitInMills;
     private CountDownTimer countDownTimer;
     private Boolean timerRunning = false;
 
@@ -75,13 +76,12 @@ public class TypeRacer extends AppCompatActivity {
             countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
             textViewMap.get("streak").setText("" + countStreak);
 
-            countLife = intent.getExtras().getInt("lives");
+            countLife = intent.getExtras().getInt("lives", GameConstants.maxLife);
+            int backGroundColor = intent.getExtras().getInt("backGroundColorKey", GameConstants.backGroundDefault);
+            int textColor = intent.getExtras().getInt("textColorKey", GameConstants.textColorDefault);
+            int difficulty = intent.getExtras().getInt("difficulty", GameConstants.difficultyDefault);
 
-            int backGroundColor = intent.getExtras().getInt("backGroundColorKey");
-            int textColor = intent.getExtras().getInt("textColorKey");
-            int parameterDifficulty = intent.getIntExtra("difficulty", 5);
-
-            setCustomization(backGroundColor, textColor, countLife, parameterDifficulty);
+            setCustomization(backGroundColor, textColor, countLife, difficulty);
             showNextQuestion();
             prepareForScreenUpdate();
 
@@ -128,7 +128,7 @@ public class TypeRacer extends AppCompatActivity {
         answer = findViewById(R.id.answerEditText);
     }
 
-    private void setCustomization(int backGroundColor, int textColor, int lives, int diffi) {
+    private void setCustomization(int backGroundColor, int textColor, int lives, int difficulty) {
 
         // 1. Set up the background color as <backGroundColor>.
         View view = this.getWindow().getDecorView();
@@ -142,7 +142,7 @@ public class TypeRacer extends AppCompatActivity {
         textViewMap.get("life").setText("" + lives);
 
         // 4. Create questions according to the difficulty
-        questionFactory = new QuestionFactory(diffi);
+        questionFactory = new QuestionFactory(difficulty);
         questions = questionFactory.createQuestionSet();
     }
 
@@ -155,7 +155,7 @@ public class TypeRacer extends AppCompatActivity {
     // shows next question, ends if all questions completed
     private void showNextQuestion() {
         if (questionNumber < questions.size()) {
-            textViewMap.get("countDown").setText("30");
+            textViewMap.get("countDown").setText("" + (int) GameConstants.timeLimitInMills / 1000);
             textViewMap.get("question").setText(questions.get(questionNumber).getQuestionContent());
             answer.setText("");
             answer.setEnabled(true);

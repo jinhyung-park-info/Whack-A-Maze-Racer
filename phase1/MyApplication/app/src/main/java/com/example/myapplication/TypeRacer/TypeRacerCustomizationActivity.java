@@ -15,17 +15,21 @@ import com.example.myapplication.UserManager;
 public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
     static boolean passed;
-    static int numLives = 5;
-    static int backGround = Color.WHITE;
-    static int d = 5;
-    static int textColor = Color.BLACK;
+    static int numLives, backGround, difficulty, textColor;
     private UserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer_customization);
+
+        // Set Default Values.
         passed = false;
+        numLives = GameConstants.maxLife;
+        backGround = GameConstants.backGroundDefault;
+        difficulty = GameConstants.difficultyDefault;
+        textColor = GameConstants.textColorDefault;
+
         Intent intent = getIntent();
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
@@ -46,20 +50,20 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.hard:
                 if (checked) {
-                    d = 30;
-                    numLives = 1;
+                    difficulty = GameConstants.difficultyDefault * 6;
+                    numLives = GameConstants.minLife;
                 }
                 break;
             case R.id.normal:
                 if (checked) {
-                    d = 15;
-                    numLives = 3;
+                    difficulty = GameConstants.difficultyDefault * 3;
+                    numLives = (GameConstants.maxLife + GameConstants.minLife) / 2;
                 }
                 break;
             case R.id.easy:
                 if (checked) {
-                    d = 5;
-                    numLives = 5;
+                    difficulty = GameConstants.difficultyDefault;
+                    numLives = GameConstants.maxLife;
                 }
                 break;
             case R.id.textColorBlack:
@@ -97,7 +101,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
     public void playL2(View view) {
         Intent intent = new Intent(this, typeRacerInstruction.class);
         intent.putExtra("backGroundColorKey", backGround);
-        intent.putExtra("difficulty", d);
+        intent.putExtra("difficulty", difficulty);
         intent.putExtra("textColorKey", textColor);
         intent.putExtra("lives", numLives);
         intent.putExtra(GameConstants.USERMANAGER, userManager);

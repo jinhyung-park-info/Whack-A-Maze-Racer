@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
+
 import com.example.myapplication.TypeRacer.TypeRacer;
 
 import java.lang.reflect.Array;
@@ -9,12 +11,30 @@ public abstract class GameConstants {
     public static int limiter = 0;
     public static final String USERMANAGER = "UserManager";
     public static final int usernameLength = 8;
+
+    // Whack-A-Mole Game Constants
     public static final int molePassingScore = 5;
     public static final int moleDefaultDuration = 2400;
+
+    // TypeRacer Game Constants
+    public static final int numOfQuestions = 5;
+    public static final double goldenQuestionFrequency = 0.4;
+    public static final int regularQuestionPoint = 1;
+    public static final int goldenQuestionPoint = 5;
+    public static final long timeLimitInMills = 30000;
+    public static final int backGroundDefault = Color.WHITE;
+    public static final int textColorDefault = Color.BLACK;
+    public static final int difficultyDefault = 5;
+    public static final int minLife = 1;
+    public static final int maxLife = 5;
+
+
+    // Maze Game Constants
     public static final int TotalMazeGames = 2;
     public static final int MazeWallThickness = 4;
     public static final int NumberOfMazeCollectibles = 3;
-    //3 for user and 6 for the games
+
+    // 3 for user and 6 for the games
     public static final int TOTAL_NUM_OF_STATISTICS = 9;
     public static final int NumPeopleOnScoreBoard = 5;
     public static final String NameGame1 = "Whack-A-Mole";
