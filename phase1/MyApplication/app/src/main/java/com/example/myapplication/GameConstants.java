@@ -37,6 +37,10 @@ public abstract class GameConstants {
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
     public static String[] GameNames = new String[]{NameGame1, NameGame2, NameGame3};
 
+    public static enum Direction {
+        UP, DOWN, LEFT, RIGHT
+    }
+
     public static String[] getArrayOfStatistics(String GameName){
         switch (GameName){
             case NameGame1:

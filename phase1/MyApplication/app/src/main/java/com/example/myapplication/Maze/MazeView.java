@@ -21,14 +21,6 @@ import java.util.Arrays;
 
 public class MazeView extends View {
 
-    private static final String TAG = "MazeView";
-
-    /**
-     * the directions the player could move in
-     */
-    private enum Direction {
-        UP, DOWN, LEFT, RIGHT
-    }
 
     /**
      * a 2d array that holds the cell objects
@@ -225,7 +217,7 @@ public class MazeView extends View {
         return randCoordinates;
     }
 
-    private void movePlayer(Direction direction) {
+    private void movePlayer(GameConstants.Direction direction) {
         switch (direction) {
             case UP:
                 if (!player.hasTopWall()) {
@@ -298,8 +290,6 @@ public class MazeView extends View {
 
                 collectiblesToRemove.add(c); //directly removing objects will mess up the loop
 
-                System.out.println(userInMaze.getStatistic(GameConstants.NameGame3,
-                        GameConstants.NumCollectiblesCollectedMaze) + " " + userInMaze.getOverallScore());
             }
         }
 
@@ -465,19 +455,19 @@ public class MazeView extends View {
                     //move in x direction (left or right)
                     if (differenceX > 0) {
                         //move to the right
-                        movePlayer(Direction.RIGHT);
+                        movePlayer(GameConstants.Direction.RIGHT);
                     } else {
                         //move to the left
-                        movePlayer(Direction.LEFT);
+                        movePlayer(GameConstants.Direction.LEFT);
                     }
                 } else {
                     //move in y direction (up or down)
                     if (differenceY > 0) {
                         //move down
-                        movePlayer(Direction.DOWN);
+                        movePlayer(GameConstants.Direction.DOWN);
                     } else {
                         //move up
-                        movePlayer(Direction.UP);
+                        movePlayer(GameConstants.Direction.UP);
                     }
                 }
             }
