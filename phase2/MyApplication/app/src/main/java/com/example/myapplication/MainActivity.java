@@ -12,8 +12,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private UserManager userManager;
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-    //public static final String USER = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
