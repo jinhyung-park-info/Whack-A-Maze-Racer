@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SetAndUpdate {
+public class SetAndUpdate implements Serializable {
     /**
      * Set the statistics of the user in the file
      *

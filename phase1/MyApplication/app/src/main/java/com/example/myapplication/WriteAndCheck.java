@@ -9,12 +9,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_APPEND;
 import static android.content.Context.MODE_PRIVATE;
 
-public class WriteAndCheck {
+public class WriteAndCheck implements Serializable {
     ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password) {
         InputStream fis = null;
         ArrayList<Boolean> arr = new ArrayList<Boolean>();

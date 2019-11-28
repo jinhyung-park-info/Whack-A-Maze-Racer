@@ -140,5 +140,84 @@ public class UserManager implements Serializable {
         return arr;
     }
 
+    /**
+     * Add a statistic at a specific place for previous accounts.
+     *
+     * @param context  of the device
+     * @param position in the line of the statistic to be added
+     * @param numTimes the number of times a statistic will be added
+     */
+    public void addStatisticAtSpecificPlaceForPreviousAccounts(Context context, int position, int numTimes) {
+        FileInputStream fis = null;
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            fis = context.openFileInput(MainActivity.Stats_file);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                int numCommas = GameConstants.countOccurrences(text, ',');
+                if (numCommas != GameConstants.TOTAL_NUM_OF_STATISTICS) {
+                    int b = 0;
+                    int y = 0;
+                    for (int i = 0; i <= text.length(); i++) {
+                        if (b == position - 1) {
+                            y = i - 1;
+                            break;
+                        }
+                        if (text.charAt(i) == ',') {
+                            b += 1;
+                        }
+                    }
+                    int indexComma = y;
+                    String firstHalf = text.substring(0, y);
+                    String secondHalf = text.substring(y);
+                    String middle = new String(new char[numTimes]).replace(
+                            "\0", ", 0");
+                    String newText = firstHalf + middle + secondHalf;
+                    sb.append("\n");
+                    sb.append(newText);
+                } else {
+                    sb.append(text).append("\n");
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        // write the new string with the replaced line OVER the same file
+        FileOutputStream fileOut = null;
+        try {
+            fileOut = context.openFileOutput(MainActivity.Stats_file, MODE_PRIVATE);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            if (fileOut != null)
+                fileOut.write(sb.toString().getBytes());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            if (fileOut != null)
+                fileOut.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
 
 }
