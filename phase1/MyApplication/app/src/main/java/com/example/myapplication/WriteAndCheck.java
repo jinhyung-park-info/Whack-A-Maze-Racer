@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import static android.content.Context.MODE_APPEND;
 import static android.content.Context.MODE_PRIVATE;
 
-public class WriteAndCheck extends UserManager {
+public class WriteAndCheck {
     ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password) {
         InputStream fis = null;
         ArrayList<Boolean> arr = new ArrayList<Boolean>();
