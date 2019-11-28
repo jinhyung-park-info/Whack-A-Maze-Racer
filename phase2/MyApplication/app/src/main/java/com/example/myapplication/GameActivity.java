@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
+import com.example.myapplication.UserInfo.UserManager;
 import com.example.myapplication.WhackAMole.MoleActivity;
 
 import java.io.File;

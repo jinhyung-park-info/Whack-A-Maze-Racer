@@ -7,15 +7,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.example.myapplication.GameActivity;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.SaveScoreActivity;
-import com.example.myapplication.UserManager;
+import com.example.myapplication.UserInfo.UserManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;

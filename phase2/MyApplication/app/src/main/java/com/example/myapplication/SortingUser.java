@@ -1,13 +1,10 @@
 package com.example.myapplication;
 
-import android.content.Intent;
-import android.util.Log;
-
-import androidx.annotation.Nullable;
+import com.example.myapplication.UserInfo.IUser;
 
 import java.util.Comparator;
 
-public class SortingUser implements Comparator<User> {
+public class SortingUser implements Comparator<IUser> {
     private String GameName;
     private String Statistic;
 
@@ -17,7 +14,7 @@ public class SortingUser implements Comparator<User> {
     }
 
     @Override
-    public int compare(User user, User t1) {
+    public int compare(IUser user, IUser t1) {
         if (user.getStatistic(GameName, Statistic) instanceof Integer) {
             int ValueOfUser = (int) user.getStatistic(GameName, Statistic);
             int ValueOfT1 = (int) t1.getStatistic(GameName, Statistic);

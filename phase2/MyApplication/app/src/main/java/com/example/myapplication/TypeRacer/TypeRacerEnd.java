@@ -10,11 +10,8 @@ import android.widget.TextView;
 
 import com.example.myapplication.GameActivity;
 import com.example.myapplication.GameConstants;
-import com.example.myapplication.Maze.MazeCustomizationActivity;
-import com.example.myapplication.Maze.MazeInstructionsActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.User;
-import com.example.myapplication.UserManager;
+import com.example.myapplication.UserInfo.UserManager;
 
 public class TypeRacerEnd extends AppCompatActivity {
     private UserManager userManager;

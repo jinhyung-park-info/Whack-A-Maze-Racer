@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.UserManager;
+
 public class SaveScoreActivity extends AppCompatActivity {
 
   int moleScore = 0;
   int moleHigh = 0;
   private String incomingGame;
   UserManager userManager;
-  User user;
+  IUser user;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

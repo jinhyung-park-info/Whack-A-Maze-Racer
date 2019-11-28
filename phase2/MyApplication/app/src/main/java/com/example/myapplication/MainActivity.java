@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.User;
+import com.example.myapplication.UserInfo.UserManager;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         String username = editText_user.getText().toString();
         String password = editText_pass.getText().toString();
         if (validate(username, password, editText_user, editText_pass)){
-            User user = new User(username);
+            IUser user = new User(username);
             user.setPassword(password);
             //userManager = new UserManager(user);
             /*if (GameConstants.limiter == 0) {
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             //}
             userManager.setStatistics(getApplicationContext(), user);
             userManager.setUser(user);
-            System.out.println(user.getMap());
+            //System.out.println(user.getMap());
             intent.putExtra(GameConstants.USERMANAGER, userManager);
             startActivity(intent);
         }

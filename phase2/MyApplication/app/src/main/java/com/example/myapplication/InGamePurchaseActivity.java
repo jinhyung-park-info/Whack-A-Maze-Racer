@@ -8,13 +8,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.UserManager;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class InGamePurchaseActivity extends AppCompatActivity {
 
     UserManager userManager;
-    User user;
+    IUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

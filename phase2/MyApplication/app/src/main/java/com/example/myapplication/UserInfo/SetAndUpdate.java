@@ -1,6 +1,9 @@
-package com.example.myapplication;
+package com.example.myapplication.UserInfo;
 
 import android.content.Context;
+
+import com.example.myapplication.GameConstants;
+import com.example.myapplication.UserInfo.IUser;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -11,7 +14,6 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -23,7 +25,7 @@ public class SetAndUpdate implements Serializable {
      * @param context of the device
      * @param user
      */
-    void setStatistics(Context context, User user) {
+    void setStatistics(Context context, IUser user) {
         FileInputStream fis = null;
         try {
             fis = context.openFileInput(GameConstants.USER_STATS_FILE);
@@ -60,7 +62,7 @@ public class SetAndUpdate implements Serializable {
      * @param context of the device
      * @param user
      */
-    public void updateStatistics(Context context, User user) {
+    public void updateStatistics(Context context, IUser user) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 
@@ -121,7 +123,7 @@ public class SetAndUpdate implements Serializable {
         }
     }
 
-    private String makeLine(String username, User user) {
+    private String makeLine(String username, IUser user) {
         String line = username + ", " + user.getLastPlayedLevel() + ", " + user.getOverallScore()
                 + ", " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak)
                 + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed)
@@ -140,7 +142,7 @@ public class SetAndUpdate implements Serializable {
      * @param user
      * @return the updated user
      */
-    void helper(String line, User user) {
+    void helper(String line, IUser user) {
         String cleanLine = line.replaceAll("\\s", "");
         int numCommas = GameConstants.countOccurrences(cleanLine, ',');
         String[] userAndGameStats = cleanLine.split(",", numCommas + 1);
@@ -161,7 +163,7 @@ public class SetAndUpdate implements Serializable {
                 numMazeGame, GameConstants.NumCollectiblesCollectedMaze, numMazeItemsCollected};
         List<Object[]> ListOfGameStats = Arrays.asList(typeRacer, whackAMole, maze);
         ArrayList<Object[]> arrayOfGameStats = new ArrayList<>(ListOfGameStats);
-        user.setStatisticsInMap(arrayOfGameStats);
+        user.setStatisticsInDataStructure(arrayOfGameStats);
         user.setLastPlayedLevel(lastPlayedLevel);
         user.setOverallScore(overallScore);
         user.setCurrency(gemsRemaining);

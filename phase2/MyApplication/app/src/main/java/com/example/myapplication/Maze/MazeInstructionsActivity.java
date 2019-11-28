@@ -8,8 +8,7 @@ import android.view.View;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
-import com.example.myapplication.User;
-import com.example.myapplication.UserManager;
+import com.example.myapplication.UserInfo.UserManager;
 
 public class MazeInstructionsActivity extends AppCompatActivity {
 

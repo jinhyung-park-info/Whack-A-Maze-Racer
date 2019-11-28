@@ -13,8 +13,8 @@ import android.view.View;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
-import com.example.myapplication.User;
-import com.example.myapplication.UserManager;
+import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,7 +112,7 @@ public class MazeView extends View {
      */
 
     private UserManager userManager;
-    private User userInMaze;
+    private IUser userInMaze;
     private int gamesPlayed = 0;
     private Context contexts;
 

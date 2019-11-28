@@ -1,6 +1,8 @@
-package com.example.myapplication;
+package com.example.myapplication.UserInfo;
 
 import android.content.Context;
+
+import com.example.myapplication.GameConstants;
 
 import java.io.BufferedReader;
 import java.io.File;

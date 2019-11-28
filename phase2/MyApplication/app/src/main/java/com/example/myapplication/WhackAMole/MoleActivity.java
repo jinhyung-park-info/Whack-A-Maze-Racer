@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.SaveScoreActivity;
-import com.example.myapplication.User;
-import com.example.myapplication.UserManager;
+import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.UserManager;
 
 public class MoleActivity extends AppCompatActivity {
   int numLives;
@@ -25,7 +25,7 @@ public class MoleActivity extends AppCompatActivity {
   public static boolean loaded;
 
   UserManager userManager;
-  User user;
+  IUser user;
   private WamView wamView;
 
   protected void onCreate(Bundle savedInstanceState) {
@@ -184,7 +184,7 @@ public class MoleActivity extends AppCompatActivity {
     userManager.updateStatistics(getApplicationContext(), user);
   }
 
-  public void load(User user) {
+  public void load(IUser user) {
     String load = (String) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats);
     String[] stats = load.split(" ");
     int lifeCount = Integer.parseInt(stats[0]);

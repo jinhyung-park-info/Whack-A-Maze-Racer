@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +22,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
     private UserManager userManager;
     private String[] arr = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected", "TypeRacerStreak", "Mole All Time High"};
-    private List<User> ArrayOfUsers;
+    private List<IUser> ArrayOfUsers;
     private  TextView[] ArrayOfTextView;
 
     @Override
@@ -108,7 +110,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         TextView Statistic = findViewById(R.id.StatisticName);
         //String header = "     Username" + "          " + text;
         //Header.setText("Username");
-        List<User> cloneOfUsers = new ArrayList<>(ArrayOfUsers);
+        List<IUser> cloneOfUsers = new ArrayList<>(ArrayOfUsers);
         Statistic.setText(text);
         setupScoreBoard(text, cloneOfUsers);
     }
@@ -118,10 +120,10 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
 
     }
 
-    public void setupScoreBoard(String SortingChooser, List<User> clone) {
+    public void setupScoreBoard(String SortingChooser, List<IUser> clone) {
         if(SortingChooser.equals("Overall Score")){
             Collections.sort(clone);
-            List<User> ArrayUser;
+            List<IUser> ArrayUser;
             if (GameConstants.NumPeopleOnScoreBoard >= clone.size()) {
                 ArrayUser = clone;
             }else{
@@ -132,7 +134,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
             String[] Attributes = getAttributesForSorting(SortingChooser);
             String GameName = Attributes[0];
             String Statistic = Attributes[1];
-            List<User> ArrayUser;
+            List<IUser> ArrayUser;
             Collections.sort(clone, new SortingUser(GameName, Statistic));
             if (GameConstants.NumPeopleOnScoreBoard >= clone.size()) {
                 ArrayUser = clone;
@@ -144,11 +146,11 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         }
     }
 
-    private void setupTextViews(List<User> arrayUsers, TextView[] arrayOfTextView, String GameName,
+    private void setupTextViews(List<IUser> arrayUsers, TextView[] arrayOfTextView, String GameName,
                                 String Statistic) {
         int i = 0;
         int numbering = 1;
-        for(User user: arrayUsers){
+        for(IUser user: arrayUsers){
             //TextView textViewObject = arrayOfTextView[i];
             if (GameName == null) {
                 //String text = "   " + (i + 1) + ". " + user.getEmail() + "                " + user.getOverallScore();

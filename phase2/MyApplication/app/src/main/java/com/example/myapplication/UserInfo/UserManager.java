@@ -1,9 +1,10 @@
-package com.example.myapplication;
+package com.example.myapplication.UserInfo;
 
 import android.content.Context;
 
+import com.example.myapplication.GameConstants;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,9 +14,6 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_APPEND;
-import static android.content.Context.MODE_PRIVATE;
-
 public class UserManager implements Serializable {
 
     private WriteAndCheck writeAndCheck;
@@ -24,14 +22,14 @@ public class UserManager implements Serializable {
     /**
      * The user this class manages
      */
-    private User user;
+    private IUser user;
 
     /**
      * Gets the user this class manages
      *
      * @return user
      */
-    public User getUser() {
+    public IUser getUser() {
         return user;
     }
 
@@ -39,11 +37,11 @@ public class UserManager implements Serializable {
      * Set the user this class manages
      * @param user
      */
-    public void setUser(User user) {
+    public void setUser(IUser user) {
         this.user = user;
     }
 
-    UserManager() {
+    public UserManager() {
         this.writeAndCheck = new WriteAndCheck();
         this.setAndUpdate = new SetAndUpdate();
     }
@@ -56,7 +54,7 @@ public class UserManager implements Serializable {
      * @param password of the user
      * @return username password combo is valid?
      */
-    ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password){
+    public ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password){
         return writeAndCheck.checkUsernameAndPassword(context, username, password);
     }
 
@@ -68,7 +66,7 @@ public class UserManager implements Serializable {
      * @param password of the user
      */
     //assuming alphanumeric characters only
-    void writeUsernameAndPass(Context context, FileOutputStream fos, String username, String password) {
+    public void writeUsernameAndPass(Context context, FileOutputStream fos, String username, String password) {
         writeAndCheck.writeUsernameAndPass(context, fos, username, password);
     }
 
@@ -79,7 +77,7 @@ public class UserManager implements Serializable {
      * @param fos file output stream
      * @param username of the user
      */
-    void writeUsernameAndStatistics(Context context, FileOutputStream fos, String username) {
+    public void writeUsernameAndStatistics(Context context, FileOutputStream fos, String username) {
         writeAndCheck.writeUsernameAndStatistics(context, fos, username);
     }
 
@@ -89,7 +87,7 @@ public class UserManager implements Serializable {
      * @param context of the device
      * @param user
      */
-    void setStatistics(Context context, User user){
+    public void setStatistics(Context context, IUser user){
         setAndUpdate.setStatistics(context, user);
     }
 
@@ -99,14 +97,14 @@ public class UserManager implements Serializable {
      * @param context of the device
      * @param user
      */
-    public  void updateStatistics(Context context, User user) {
+    public  void updateStatistics(Context context, IUser user) {
         setAndUpdate.updateStatistics(context, user);
 
     }
 
-    public ArrayList<User> getListOfAllUsers(Context context, User user){
+    public ArrayList<IUser> getListOfAllUsers(Context context, IUser user){
         InputStream fis = null;
-        ArrayList<User> arr = new ArrayList<>();
+        ArrayList<IUser> arr = new ArrayList<>();
         try {
             fis = context.openFileInput(GameConstants.USER_STATS_FILE);
             InputStreamReader isr = new InputStreamReader(fis);
@@ -118,7 +116,7 @@ public class UserManager implements Serializable {
                 String username = text.substring(0, index_of_comma);
                 if (user.getEmail().equals(username)){
                 }else{
-                    User NewUser = new User(username);
+                    IUser NewUser = new User(username);
                     new SetAndUpdate().helper(text, NewUser);
                     arr.add(NewUser);
                 }
