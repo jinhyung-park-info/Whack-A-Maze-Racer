@@ -52,7 +52,9 @@ public class UserManager implements Serializable {
      * @param context  of this device
      * @param username of the user
      * @param password of the user
-     * @return username password combo is valid?
+     * @return an ArrayList with the first two values being a boolean with the first value representing
+     * weather or not the username is in the file, and the second also being a boolean representing
+     * weather or not the password is correct.
      */
     public ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password){
         return writeAndCheck.checkUsernameAndPassword(context, username, password);
@@ -117,7 +119,7 @@ public class UserManager implements Serializable {
                 if (user.getEmail().equals(username)){
                 }else{
                     IUser NewUser = new User(username);
-                    new SetAndUpdate().helper(text, NewUser);
+                    setAndUpdate.helper(text, NewUser);
                     arr.add(NewUser);
                 }
             }
@@ -197,6 +199,39 @@ public class UserManager implements Serializable {
         }
         // write the new string with the replaced line OVER the same file
         setAndUpdate.writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
+    }
+
+    public Object getPasswordFromFile(Context context, String username){
+        InputStream fis = null;
+        try {
+            fis = context.openFileInput(GameConstants.USER_FILE);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                int index_of_comma = text.indexOf(",");
+                String other_username = text.substring(0, index_of_comma);
+                if (username.equals(other_username)) {
+                    int index_of_space = text.indexOf(" ");
+                    return text.substring(index_of_space + 1);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 
 

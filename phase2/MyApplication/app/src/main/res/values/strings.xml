@@ -52,4 +52,19 @@
     <string name="ChooseStatistic">Choose a Statistic:</string>
     <string name="Username">Username</string>
     <string name="BuyGems">Buy Gems</string>
+    <string name="ForgetPassword">Forgot Password?</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="PasswordDisplay">Your Password will be displayed here after clicking done</string>
+    <string name="BackToLogin">Back to Login</string>
+    <string name="CreditCard">Enter credit card number (no space)</string>
+    <string name="CVV">Enter your cvv</string>
+    <string name="ExpirationDate">Enter expiration date (mm/yy)</string>
 </resources>

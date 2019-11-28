@@ -103,8 +103,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    public void exit_application(View view){
+    public void exitApplication(View view){
         moveTaskToBack(true);
+    }
+
+    public void forgotPassword(View view){
+        Intent intent = new Intent(this, ForgotPassword.class);
+        startActivity(intent);
     }
 
 }

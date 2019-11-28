@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.SortingUser;
 import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.ArrayList;
