@@ -11,6 +11,8 @@ public abstract class GameConstants {
     public static int limiter = 0;
     public static final String USERMANAGER = "UserManager";
     public static final int usernameLength = 8;
+    public static final String USER_STATS_FILE = "user_stats.txt";
+    public static final String USER_FILE = "user_data.txt";
 
     // Whack-A-Mole Game Constants
     public static final int moleDefaultLives = 5;

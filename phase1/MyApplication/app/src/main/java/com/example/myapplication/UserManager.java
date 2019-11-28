@@ -108,7 +108,7 @@ public class UserManager implements Serializable {
         InputStream fis = null;
         ArrayList<User> arr = new ArrayList<>();
         try {
-            fis = context.openFileInput(MainActivity.Stats_file);
+            fis = context.openFileInput(GameConstants.USER_STATS_FILE);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -144,15 +144,15 @@ public class UserManager implements Serializable {
      * Add a statistic at a specific place for previous accounts.
      *
      * @param context  of the device
-     * @param position in the line of the statistic to be added
+     * @param position in the line for the statistic to be added
      * @param numTimes the number of times a statistic will be added
      */
-    public void addStatisticAtSpecificPlaceForPreviousAccounts(Context context, int position, int numTimes) {
+    public void addStatisticForPreviousAccounts(Context context, int position, int numTimes) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 
         try {
-            fis = context.openFileInput(MainActivity.Stats_file);
+            fis = context.openFileInput(GameConstants.USER_STATS_FILE);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -198,25 +198,7 @@ public class UserManager implements Serializable {
             }
         }
         // write the new string with the replaced line OVER the same file
-        FileOutputStream fileOut = null;
-        try {
-            fileOut = context.openFileOutput(MainActivity.Stats_file, MODE_PRIVATE);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            if (fileOut != null)
-                fileOut.write(sb.toString().getBytes());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            if (fileOut != null)
-                fileOut.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
+        setAndUpdate.writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
     }
 
 

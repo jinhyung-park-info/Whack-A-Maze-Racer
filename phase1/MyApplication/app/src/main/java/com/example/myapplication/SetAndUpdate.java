@@ -26,7 +26,7 @@ public class SetAndUpdate implements Serializable {
     void setStatistics(Context context, User user) {
         FileInputStream fis = null;
         try {
-            fis = context.openFileInput(MainActivity.Stats_file);
+            fis = context.openFileInput(GameConstants.USER_STATS_FILE);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -65,7 +65,7 @@ public class SetAndUpdate implements Serializable {
         StringBuilder sb = new StringBuilder();
 
         try {
-            fis = context.openFileInput(MainActivity.Stats_file);
+            fis = context.openFileInput(GameConstants.USER_STATS_FILE);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -96,9 +96,14 @@ public class SetAndUpdate implements Serializable {
         }
 
         // write the new string with the replaced line OVER the same file
+        writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
+
+    }
+
+    public void writeStringToFile(Context context, StringBuilder sb, String FileName) {
         FileOutputStream fileOut = null;
         try {
-            fileOut = context.openFileOutput(MainActivity.Stats_file, MODE_PRIVATE);
+            fileOut = context.openFileOutput(FileName, MODE_PRIVATE);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -114,7 +119,6 @@ public class SetAndUpdate implements Serializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 
     private String makeLine(String username, User user) {

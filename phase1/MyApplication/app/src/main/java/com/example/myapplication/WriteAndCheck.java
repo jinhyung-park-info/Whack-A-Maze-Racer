@@ -20,7 +20,7 @@ public class WriteAndCheck implements Serializable {
         InputStream fis = null;
         ArrayList<Boolean> arr = new ArrayList<Boolean>();
         try {
-            fis = context.openFileInput(MainActivity.FILE_NAME);
+            fis = context.openFileInput(GameConstants.USER_FILE);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -72,7 +72,7 @@ public class WriteAndCheck implements Serializable {
     private void writeUsernameAndPassHelper(Context context, FileOutputStream fos, String username,
                                             String password, int mode) {
         try {
-            fos = context.openFileOutput(MainActivity.FILE_NAME, mode);
+            fos = context.openFileOutput(GameConstants.USER_FILE, mode);
             try {
                 fos.write(username.getBytes());
                 fos.write(", ".getBytes());
@@ -104,7 +104,7 @@ public class WriteAndCheck implements Serializable {
      */
     //assuming alphanumeric characters only
     void writeUsernameAndPass(Context context, FileOutputStream fos, String username, String password) {
-        File file = new File(context.getFilesDir(), MainActivity.FILE_NAME);
+        File file = new File(context.getFilesDir(), GameConstants.USER_FILE);
         if (file.exists()) {
             writeUsernameAndPassHelper(context, fos, username, password, MODE_APPEND);
         } else { //file does not exist make one and write to it
@@ -122,7 +122,7 @@ public class WriteAndCheck implements Serializable {
      */
     private void writeUsernameAndStatisticsHelper(Context context, FileOutputStream fos, String username, int mode) {
         try {
-            fos = context.openFileOutput(MainActivity.Stats_file, mode);
+            fos = context.openFileOutput(GameConstants.USER_STATS_FILE, mode);
             try {
                 fos.write(username.getBytes());
                 String s = new String(new char[GameConstants.TOTAL_NUM_OF_STATISTICS]).replace(
@@ -153,7 +153,7 @@ public class WriteAndCheck implements Serializable {
      * @param username of the user
      */
     void writeUsernameAndStatistics(Context context, FileOutputStream fos, String username) {
-        File file = new File(context.getFilesDir(), MainActivity.Stats_file);
+        File file = new File(context.getFilesDir(), GameConstants.USER_STATS_FILE);
         if (file.exists()) {
             writeUsernameAndStatisticsHelper(context, fos, username, MODE_APPEND);
         } else { //file does not exist make one and write to it

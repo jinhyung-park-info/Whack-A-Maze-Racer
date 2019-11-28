@@ -437,15 +437,14 @@ public class MazeView extends View {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            float x = event.getX();
-            float y = event.getY();
+            /*float x = event.getX();
+            float y = event.getY();*/
 
-            //0.5 is a double so we must use 0.5f which represents a float
             float playerCentreX = horizontalMargin + (player.getCol() + 0.5f) * cellSize;
             float playerCentreY = verticalMargin + (player.getRow() + 0.5f) * cellSize;
 
-            float differenceX = x - playerCentreX;
-            float differenceY = y - playerCentreY;
+            float differenceX = event.getX() - playerCentreX;
+            float differenceY = event.getY() - playerCentreY;
 
             float absDifferenceX = Math.abs(differenceX);
             float absDifferenceY = Math.abs(differenceY);
