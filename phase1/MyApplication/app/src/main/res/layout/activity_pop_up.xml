@@ -30,31 +30,36 @@
                 android:id="@+id/overall"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/molesHit"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/mazeCompleted"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/streak"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/currency"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/purchase"

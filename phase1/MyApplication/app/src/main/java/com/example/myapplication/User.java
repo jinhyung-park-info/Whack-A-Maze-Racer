@@ -3,6 +3,7 @@ package com.example.myapplication;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class User implements Comparable<User>, Serializable{
     private String email;
