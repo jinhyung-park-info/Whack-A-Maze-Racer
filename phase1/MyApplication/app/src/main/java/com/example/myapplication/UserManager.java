@@ -18,6 +18,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class UserManager implements Serializable {
 
+    private WriteAndCheck writeAndCheck;
+    private SetAndUpdate setAndUpdate;
+
     /**
      * The user this class manages
      */
@@ -40,6 +43,11 @@ public class UserManager implements Serializable {
         this.user = user;
     }
 
+    UserManager() {
+        this.writeAndCheck = new WriteAndCheck();
+        this.setAndUpdate = new SetAndUpdate();
+    }
+
     /**
      * Verifies if the given username and password combination is valid
      *
@@ -49,7 +57,7 @@ public class UserManager implements Serializable {
      * @return username password combo is valid?
      */
     ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password){
-        return new WriteAndCheck().checkUsernameAndPassword(context, username, password);
+        return writeAndCheck.checkUsernameAndPassword(context, username, password);
     }
 
     /**
@@ -61,7 +69,7 @@ public class UserManager implements Serializable {
      */
     //assuming alphanumeric characters only
     void writeUsernameAndPass(Context context, FileOutputStream fos, String username, String password) {
-        new WriteAndCheck().writeUsernameAndPass(context, fos, username, password);
+        writeAndCheck.writeUsernameAndPass(context, fos, username, password);
     }
 
     /**
@@ -72,7 +80,7 @@ public class UserManager implements Serializable {
      * @param username of the user
      */
     void writeUsernameAndStatistics(Context context, FileOutputStream fos, String username) {
-        new WriteAndCheck().writeUsernameAndStatistics(context, fos, username);
+        writeAndCheck.writeUsernameAndStatistics(context, fos, username);
     }
 
     /**
@@ -82,7 +90,7 @@ public class UserManager implements Serializable {
      * @param user
      */
     void setStatistics(Context context, User user){
-        new SetAndUpdate().setStatistics(context, user);
+        setAndUpdate.setStatistics(context, user);
     }
 
     /**
@@ -92,7 +100,7 @@ public class UserManager implements Serializable {
      * @param user
      */
     public  void updateStatistics(Context context, User user) {
-        new SetAndUpdate().updateStatistics(context, user);
+        setAndUpdate.updateStatistics(context, user);
 
     }
 
