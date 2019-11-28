@@ -1,6 +1,6 @@
 package com.example.myapplication.WhackAMole;
 
-public class PaulMole extends Mole{
+class PaulMole extends Mole{
 
     PaulMole(Hole hole){
         super(hole);

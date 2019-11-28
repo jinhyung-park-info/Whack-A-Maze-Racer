@@ -92,12 +92,6 @@ class Mole {
     return state;
   }
 
-  void reset() {
-    y = height;
-    state = Movement.STANDBY;
-    speed = WamView.screenHeight / 300;
-  }
-
   Rect getTouchRect() {
     return new Rect((int) x, (int) y, (int) width, (int) height);
   }

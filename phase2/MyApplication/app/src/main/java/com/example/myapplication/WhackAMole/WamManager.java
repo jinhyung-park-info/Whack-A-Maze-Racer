@@ -1,6 +1,5 @@
 package com.example.myapplication.WhackAMole;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -23,7 +22,6 @@ class WamManager implements Runnable{
   private Rect holeRect;
   int score;
   private boolean keepRunning;
-  private Thread thread;
   private int duration;
   private MoleFactory moleFactory = new MoleFactory();
 
@@ -110,11 +108,11 @@ class WamManager implements Runnable{
       moleList.add(moleFactory.createMole("paul", hole));
     }
     keepRunning = true;
-    thread = new Thread(this);
+    Thread thread = new Thread(this);
     thread.start();
   }
 
-  void randomMole() {
+  private void randomMole() {
     Random random = new Random();
     int num = random.nextInt(moleList.size());
     Mole mole = moleList.get(num);
@@ -138,11 +136,11 @@ class WamManager implements Runnable{
       long start_time, end_time;
       start_time = System.currentTimeMillis();
       randomMole();
-      if (score >= 10) {
-        duration = 600;
+      if (score >= GameConstants.moleSecondSpeedUp) {
+        duration = GameConstants.moleSecondSpeed;
         Mole.setSpeed(WamView.screenHeight / 200);
-      } else if (score >= 5) {
-        duration = 1500;
+      } else if (score >= GameConstants.moleFirstSpeedUp) {
+        duration = GameConstants.moleFirstSpeed;
         Mole.setSpeed(WamView.screenHeight / 240);
       }
       end_time = System.currentTimeMillis();

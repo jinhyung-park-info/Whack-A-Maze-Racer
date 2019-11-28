@@ -1,7 +1,7 @@
 package com.example.myapplication.WhackAMole;
 
-public class MoleFactory {
-    public Mole createMole(String moleType, Hole hole){
+class MoleFactory {
+    Mole createMole(String moleType, Hole hole){
         if(moleType.equalsIgnoreCase("lindsey")){
             return new LindseyMole(hole);
         }else if(moleType.equalsIgnoreCase("paul")){

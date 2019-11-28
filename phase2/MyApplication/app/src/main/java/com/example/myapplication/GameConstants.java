@@ -25,6 +25,10 @@ public abstract class GameConstants {
     public static final int moleNormalLives = 5;
     public static final int moleDifficultLives = 3;
     public static final int moleHardcoreLives = 1;
+    public static final int moleFirstSpeedUp = 10;
+    public static final int moleSecondSpeedUp = 20;
+    public static final int moleFirstSpeed = 1500;
+    public static final int moleSecondSpeed = 600;
 
     // TypeRacer Game Constants
     public static final int numOfQuestions = 5;

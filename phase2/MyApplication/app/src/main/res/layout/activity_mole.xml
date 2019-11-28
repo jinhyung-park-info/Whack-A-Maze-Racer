@@ -251,17 +251,26 @@
 
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/pp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="36dp"
+        android:text=" Start with 10 points \n   (Costs 10 gems)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerPlay" />
+
     <Button
         android:id="@+id/powerPlay"
         android:layout_width="130dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="86dp"
         android:onClick="powerPlay"
         android:text="Power Play"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Button"
+        app:layout_constraintStart_toStartOf="@+id/pp"
         app:layout_constraintTop_toTopOf="@+id/Button" />
 
 
