@@ -1,6 +1,5 @@
-package com.example.myapplication;
+package com.example.myapplication.UserInfo;
 
-import com.example.myapplication.UserInfo.IUser;
 
 import java.util.Comparator;
 
@@ -8,7 +7,7 @@ public class SortingUser implements Comparator<IUser> {
     private String GameName;
     private String Statistic;
 
-    SortingUser(String gameName, String statistic) {
+    public SortingUser(String gameName, String statistic) {
         this.GameName = gameName;
         this.Statistic = statistic;
     }
