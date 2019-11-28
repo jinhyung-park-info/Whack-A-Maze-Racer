@@ -11,10 +11,14 @@ import android.widget.TextView;
 import com.example.myapplication.GameActivity;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
+import com.example.myapplication.SaveScoreActivity;
+import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;
 
 public class TypeRacerEnd extends AppCompatActivity {
     private UserManager userManager;
+    private IUser user;
+    private int streak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,7 @@ public class TypeRacerEnd extends AppCompatActivity {
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null){
             setUserManager(user_1);
+            user = userManager.getUser();
         }
 
         TextView finalScore = findViewById(R.id.finalScoreTextView);
@@ -34,8 +39,13 @@ public class TypeRacerEnd extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                streak = 0;
+                int racerStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
+                user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, racerStreak + streak);
+                Intent intent = new Intent(getApplicationContext(), SaveScoreActivity.class);
                 intent.putExtra(GameConstants.USERMANAGER, userManager);
+                intent.putExtra(GameConstants.TypeRacerStreak, racerStreak);
+                intent.putExtra(GameConstants.gameName, GameConstants.racerName);
                 startActivity(intent);
             }
         });

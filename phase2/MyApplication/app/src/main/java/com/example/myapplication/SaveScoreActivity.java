@@ -11,6 +11,7 @@ import com.example.myapplication.UserInfo.UserManager;
 
 public class SaveScoreActivity extends AppCompatActivity {
 
+  int racerStreak = 0;
   int moleScore = 0;
   int moleHigh = 0;
   private String incomingGame;
@@ -29,7 +30,9 @@ public class SaveScoreActivity extends AppCompatActivity {
       moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
       moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
     }else if(incomingGame.equals(GameConstants.mazeName)){}
-    else if(incomingGame.equals(GameConstants.racerName)){}
+    else if(incomingGame.equals(GameConstants.racerName)){
+      racerStreak = (int) intent.getSerializableExtra(GameConstants.TypeRacerStreak);
+    }
 
     //if from MazeCustomizationActivity
     UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
