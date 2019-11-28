@@ -85,4 +85,21 @@ public abstract class GameConstants {
         return new String[]{};
     }
 
+    /**
+     * Count the occurences of a character in a line
+     *
+     * @param line
+     * @param character
+     * @return
+     */
+    public static int countOccurrences(String line, char character) {
+        int count = 0;
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == character) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }

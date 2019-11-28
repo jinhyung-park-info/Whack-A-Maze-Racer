@@ -15,7 +15,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SetAndUpdate extends UserManager {
+public class SetAndUpdate {
     /**
      * Set the statistics of the user in the file
      *
@@ -137,7 +137,7 @@ public class SetAndUpdate extends UserManager {
      */
     void helper(String line, User user) {
         String cleanLine = line.replaceAll("\\s", "");
-        int numCommas = countOccurrences(cleanLine, ',');
+        int numCommas = GameConstants.countOccurrences(cleanLine, ',');
         String[] userAndGameStats = cleanLine.split(",", numCommas + 1);
         int lastPlayedLevel = Integer.parseInt(userAndGameStats[1]);
         int overallScore = Integer.parseInt(userAndGameStats[2]);
