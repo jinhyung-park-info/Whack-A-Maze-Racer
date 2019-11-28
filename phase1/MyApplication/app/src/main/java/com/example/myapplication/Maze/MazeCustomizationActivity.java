@@ -162,11 +162,11 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     public void finish_button(View view) {
-        Button button = findViewById(R.id.button8);
         if (passed) {
             passed = false;
             Intent intent = new Intent(this, SaveScoreActivity.class);
             intent.putExtra(GameConstants.USERMANAGER, usermanager);
+            intent.putExtra(GameConstants.gameName, GameConstants.mazeName);
             startActivity(intent);
         } else
             Toast.makeText(getApplicationContext(), "Please pass this level first",

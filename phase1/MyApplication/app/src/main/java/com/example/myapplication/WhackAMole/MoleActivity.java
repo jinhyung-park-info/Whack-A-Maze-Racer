@@ -166,6 +166,7 @@ public class MoleActivity extends AppCompatActivity {
     intent.putExtra(GameConstants.USERMANAGER, userManager);
     intent.putExtra(GameConstants.MoleScore, this.wamView.wamManager.score);
     intent.putExtra(GameConstants.MoleHigh, moleHigh);
+    intent.putExtra(GameConstants.gameName, GameConstants.moleName);
     startActivity(intent);
 
   }

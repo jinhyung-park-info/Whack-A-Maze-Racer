@@ -10,6 +10,7 @@ public class SaveScoreActivity extends AppCompatActivity {
 
   int moleScore = 0;
   int moleHigh = 0;
+  private String incomingGame;
   UserManager userManager;
   User user;
 
@@ -19,11 +20,13 @@ public class SaveScoreActivity extends AppCompatActivity {
     setContentView(R.layout.activity_save_score);
 
     Intent intent = getIntent();
+    incomingGame = (String) intent.getSerializableExtra(GameConstants.gameName);
     //if from MoleActivity
-    if(intent.getSerializableExtra(GameConstants.MoleScore) != null) {
+    if(incomingGame.equals(GameConstants.moleName)) {
       moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
       moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
-    }
+    }else if(incomingGame.equals(GameConstants.mazeName)){}
+    else if(incomingGame.equals(GameConstants.racerName)){}
 
     //if from MazeCustomizationActivity
     UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);

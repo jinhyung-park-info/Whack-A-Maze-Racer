@@ -43,6 +43,10 @@ public abstract class GameConstants {
     public static final int NumberOfMazeCollectibles = 3;
 
     // 3 for user and 6 for the games
+    public static final String gameName = "name";
+    public static final String moleName = "mole";
+    public static final String racerName = "racer";
+    public static final String mazeName = "maze";
     public static final int TOTAL_NUM_OF_STATISTICS = 9;
     public static final int NumPeopleOnScoreBoard = 5;
     public static final String NameGame1 = "Whack-A-Mole";
