@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".TypeRacer.typeRacerInstruction">
+
+    <Button
+        android:id="@+id/StartTypeRacer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="68dp"
+        android:onClick="playTypeRacer"
+        android:text="Start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TR7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Score: Earns 1 point for every correct answer for Regular Question, and 5 points for Golden Question. The number of Golden Questions are determined randomly."
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/StartTypeRacer"
+        app:layout_constraintStart_toStartOf="@+id/TR6"
+        app:layout_constraintTop_toBottomOf="@+id/TR6" />
+
+    <TextView
+        android:id="@+id/TR6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Streak: Consecutive correctness (+1).                                       Resets to 0 when incorrect answer typed"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/TR7"
+        app:layout_constraintStart_toStartOf="@+id/TR2"
+        app:layout_constraintTop_toBottomOf="@+id/TR2" />
+
+    <TextView
+        android:id="@+id/TR2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Goal: Complete all 5 questions"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/TR6"
+        app:layout_constraintStart_toStartOf="@+id/TR4"
+        app:layout_constraintTop_toBottomOf="@+id/TR4" />
+
+    <TextView
+        android:id="@+id/TR4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Life: Loses one life for every incorrect answer"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/TR2"
+        app:layout_constraintStart_toStartOf="@+id/TR3"
+        app:layout_constraintTop_toBottomOf="@+id/TR3" />
+
+    <TextView
+        android:id="@+id/TR3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Click the done button if you finish typing"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/TR4"
+        app:layout_constraintStart_toStartOf="@+id/TR5"
+        app:layout_constraintTop_toBottomOf="@+id/TR5" />
+
+    <TextView
+        android:id="@+id/TR5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="- Type the given text"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/TR3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TR" />
+
+    <TextView
+        android:id="@+id/TR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:text="Type Racer Instructions"
+        android:textSize="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
