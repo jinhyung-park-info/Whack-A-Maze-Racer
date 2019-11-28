@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.myapplication.UserInfo.LoginPresenter;
 import com.example.myapplication.UserInfo.UserManager;
 
 import java.io.FileOutputStream;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class CreateAccountActivity extends AppCompatActivity {
 
     private UserManager userManager;
+    private LoginPresenter loginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,54 +28,21 @@ public class CreateAccountActivity extends AppCompatActivity {
         if (user_1 != null){
             setUserManager(user_1);
         }
+       loginPresenter = new LoginPresenter();
 
     }
 
-    private void setUserManager(UserManager newManager){
-        userManager = newManager;
+    private void setUserManager(UserManager usermanager){
+        userManager = usermanager;
     }
 
-    public boolean validate_2(String username, String password, EditText editText_2, EditText editText_3){
-        ArrayList<Boolean> arr = userManager.checkUsernameAndPassword(getApplicationContext(), username, password);
-        if(arr.get(0)){
-            editText_2.setError("Username already exists");
-            return false;
-        }
-        if (username.length() > GameConstants.usernameLength) {
-            editText_2.setError("Usernames cannot be longer than " + GameConstants.usernameLength + " long");
-        }
-        if(username.length() == 0){
-            editText_2.setError("Please enter Text");
-            return false;
-        }
-        if(password.length() == 0){
-            editText_3.setError("Please enter Text");
-            return false;
-        }
-        if(username.contains(" ")){
-            editText_2.setError("Spaces are not allowed in username and passwords");
-            return false;
-        }
-        if(username.contains(",")){
-            editText_2.setError("Commas are not allowed in username and passwords");
-            return false;
-        }
-        if(password.contains(" ")){
-            editText_3.setError("Spaces are not allowed in username and passwords");
-            return false;
-        }
-        if(password.contains(",")){
-            editText_3.setError("Commas are not allowed in username and passwords");
-            return false;
-        }
-        return true;
-    }
     public void DoneButton(View view){
-        EditText editText_2 =  findViewById(R.id.answerEditText);
-        EditText editText_3 =  findViewById(R.id.editText3);
-        String username = editText_2.getText().toString();
-        String password = editText_3.getText().toString();
-        if(validate_2(username, password, editText_2, editText_3)){
+        EditText editTextUsername =  findViewById(R.id.answerEditText);
+        EditText editTextPassword =  findViewById(R.id.editText3);
+        String username = editTextUsername.getText().toString();
+        String password = editTextPassword.getText().toString();
+        if(loginPresenter.validateCredentialsForAccountCreation(getApplicationContext(), username,
+                password, editTextUsername, editTextPassword)) {
             FileOutputStream fos = null;
             userManager.writeUsernameAndPass(getApplicationContext(), fos, username, password);
             fos = null;

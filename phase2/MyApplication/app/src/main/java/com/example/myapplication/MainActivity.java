@@ -7,21 +7,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.myapplication.UserInfo.ILoginView;
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.LoginPresenter;
 import com.example.myapplication.UserInfo.User;
 import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ILoginView {
 
     private UserManager userManager;
+    private LoginPresenter loginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         userManager = new UserManager();
+        loginPresenter = new LoginPresenter();
+        System.out.println(getApplicationContext().getFilesDir());
+
     }
 
     public void createAccount(View view){
@@ -31,74 +37,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    boolean validate(String username, String password, EditText editText_user ,EditText editText_pass){
-        if(username.length() == 0 && password.length() == 0) {
-            editText_user.setError("Please enter text");
-            editText_pass.setError("Please enter text;");
-            return false;
-        }
-        if (username.length() > GameConstants.usernameLength) {
-            editText_user.setError("Usernames cannot be longer than " + GameConstants.usernameLength + " long");
-        }
-        if(username.length() == 0){
-            editText_user.setError("Please enter text");
-            return false;
-        }
-        if(password.length() == 0){
-            editText_pass.setError("Please enter text");
-            return false;
-        }
-        if(username.contains(" ")){
-            editText_user.setError("Space is not allowed in username and passwords");
-            return false;
-        }
-        if(username.contains(",")){
-            editText_user.setError("Commas are not allowed in username and passwords");
-            return false;
-        }
-        if(password.contains(" ")){
-            editText_pass.setError("Space is not allowed in username and passwords");
-            return false;
-        }
-        if(password.contains(",")){
-            editText_pass.setError("Commas are not allowed in username and passwords");
-            return false;
-        }
-        ArrayList<Boolean> validation = userManager.checkUsernameAndPassword(getApplicationContext(), username, password);
-        if (validation.get(0)){
-            if(!(validation.get(1))){
-                editText_pass.setError("Incorrect Password");
-                return false;
-            }
-        }else{
-            editText_user.setError("Username does not exist");
-            return false;
-        }
-        return true;
-    }
-
 
     public void LoginButton(View view){
         Intent intent = new Intent(this, GameActivity.class);
-        EditText editText_user = findViewById(R.id.editText1);
-        EditText editText_pass = findViewById(R.id.editText);
-        String username = editText_user.getText().toString();
-        String password = editText_pass.getText().toString();
-        if (validate(username, password, editText_user, editText_pass)){
-            IUser user = new User(username);
+        EditText editTextUser = findViewById(R.id.editText1);
+        EditText editTextPass = findViewById(R.id.editText);
+        String username = editTextUser.getText().toString();
+        String password = editTextPass.getText().toString();
+        if (loginPresenter.validateCredentialsForLogin(getApplicationContext(), username, password,
+                editTextUser, editTextPass)){
+            /*IUser user = new User(username);
             user.setPassword(password);
-            //userManager = new UserManager(user);
-            /*if (GameConstants.limiter == 0) {
-                GameConstants.limiter = 1;
-                //userManager.addStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
-            }*/
-            //if (GameConstants.limiter == 0) {
-            //GameConstants.limiter = 1;
-            //userManager.AddStatisticAtSpecificPlaceForPreviousAccounts(getApplicationContext(), 3, 1);
-            //}
             userManager.setStatistics(getApplicationContext(), user);
-            userManager.setUser(user);
+            userManager.setUser(user);*/
             //System.out.println(user.getMap());
+            onLoginSuccess(username, password);
             intent.putExtra(GameConstants.USERMANAGER, userManager);
             startActivity(intent);
         }
@@ -112,4 +65,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onLoginSuccess(String username, String password) {
+        IUser user = new User(username);
+        user.setPassword(password);
+        userManager.setStatistics(getApplicationContext(), user);
+        userManager.setUser(user);
+    }
 }
