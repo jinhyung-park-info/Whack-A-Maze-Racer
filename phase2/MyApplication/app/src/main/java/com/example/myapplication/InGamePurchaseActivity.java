@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InGamePurchaseActivity extends AppCompatActivity {
 
@@ -45,14 +45,31 @@ public class InGamePurchaseActivity extends AppCompatActivity {
 
     public void buyCurrency(View view){
 
-        EditText codeText =  findViewById(R.id.code);
-        String code = codeText.getText().toString();
+        EditText ccText =  findViewById(R.id.cc);
+        String ccNum = ccText.getText().toString();
 
-        List<String> list = Arrays.asList(GameConstants.validGiftCodes);
-        if (list.contains(code)) {
+        EditText cvvText =  findViewById(R.id.cvv);
+        String cvvNum = cvvText.getText().toString();
+
+        EditText expText =  findViewById(R.id.exp);
+        String expNum = expText.getText().toString();
+
+
+        Pattern ccPattern = Pattern.compile("^[0-9]{16}$");
+        Matcher ccMatcher = ccPattern.matcher(ccNum);
+
+        Pattern cvvPattern = Pattern.compile("^[0-9]{3}$");
+        Matcher cvvMatcher = cvvPattern.matcher(cvvNum);
+
+        Pattern expPattern = Pattern.compile("^[0-9]{2}/[0-9]{2}$");
+        Matcher expMatcher = expPattern.matcher(expNum);
+
+        if (ccMatcher.matches() && cvvMatcher.matches() && expMatcher.matches()) {
             user.setCurrency(user.getCurrency() + 50);
             userManager.updateStatistics(this, user);
-      }
+        }else{
+            ccText.setError("Invalid Credit Card/Expiration Date/Cvv !");
+        }
         TextView currencyText =  findViewById(R.id.numGems);
         String currency = "Gems Remaining: " + user.getCurrency();
         currencyText.setText(currency);
