@@ -110,6 +110,7 @@ public class MazeView extends View {
     private MazeCreation mazeCreation;
 
     private Bitmap collectibleBitmap;
+    private Bitmap gemCollectibleBitmap;
     private Bitmap playerBitmap;
     private Resources res = this.getResources();
 
@@ -142,6 +143,7 @@ public class MazeView extends View {
         collectiblesEnabled = true;
         collectibles = new ArrayList<Collectible>();
         collectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.a_plus);
+        gemCollectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.gem);
         collectiblePaint = new Paint();
         collectiblePaint.setColor(Color.LTGRAY);
 
@@ -188,8 +190,13 @@ public class MazeView extends View {
         exit = cells[cols - 1][rows - 1];
 
         for (int i = 0; i < GameConstants.NumberOfMazeCollectibles; i++) {
+            double randCollectibleType = Math.random();
             int[] coordinates = generateRandomCoordinates();
-            collectibles.add(new Collectible(coordinates[0], coordinates[1]));
+
+            if (randCollectibleType < 0.6)
+                collectibles.add(new GemCollectible(coordinates[0], coordinates[1], gemCollectibleBitmap));
+            else
+                collectibles.add(new Collectible(coordinates[0], coordinates[1], collectibleBitmap));
         }
     }
 
@@ -263,17 +270,8 @@ public class MazeView extends View {
 
         for (Collectible c : collectibles) {
             if (player.getCol() == c.getCol() && player.getRow() == c.getRow()) {
-                //increment number of collectibles collected by 1
-                int newNumCollectiblesCollected = (int) userInMaze.getStatistic(GameConstants.NameGame3,
-                        GameConstants.NumCollectiblesCollectedMaze) + 1;
-                userInMaze.setStatistic(GameConstants.NameGame3,
-                        GameConstants.NumCollectiblesCollectedMaze, newNumCollectiblesCollected);
-
-                int newScore = userInMaze.getOverallScore() + c.getPoints();
-                userInMaze.setOverallScore(newScore);
-
+                c.handleCollection(userInMaze);
                 collectiblesToRemove.add(c);
-
             }
         }
 
@@ -432,7 +430,8 @@ public class MazeView extends View {
             if (collectiblesEnabled) {
                 //draw collectibles
                 for (Collectible c : collectibles) {
-                    canvas.drawBitmap(collectibleBitmap,
+                    canvas.drawBitmap(c.resizeBitmap((int) Math.floor(cellSize * 0.8),
+                            (int) Math.floor(cellSize * 0.8)),
                             c.getCol() * cellSize + margin,
                             c.getRow() * cellSize + margin, collectiblePaint);
                 }
@@ -449,6 +448,9 @@ public class MazeView extends View {
                 (int) Math.floor(cellSize * 0.8),
                 (int) Math.floor(cellSize * 0.8), true);
         playerBitmap = Bitmap.createScaledBitmap(playerBitmap,
+                (int) Math.floor(cellSize * 0.8),
+                (int) Math.floor(cellSize * 0.8), true);
+        gemCollectibleBitmap = Bitmap.createScaledBitmap(gemCollectibleBitmap,
                 (int) Math.floor(cellSize * 0.8),
                 (int) Math.floor(cellSize * 0.8), true);
     }

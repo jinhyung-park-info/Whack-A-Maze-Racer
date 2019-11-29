@@ -15,6 +15,9 @@ public abstract class GameConstants {
     public static final String USER_STATS_FILE = "user_stats.txt";
     public static final String USER_FILE = "user_data.txt";
 
+    //In-app purchase Constants
+    public static final int pointsFromCollectingGem = 10;
+
     // Whack-A-Mole Game Constants
     public static final int moleDefaultLives = 5;
     public static final int moleDefaultHolesX = 2;
@@ -77,7 +80,7 @@ public abstract class GameConstants {
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
     public static String[] GameNames = new String[]{NameGame1, NameGame2, NameGame3};
 
-    public static enum Direction {
+    public enum Direction {
         UP, DOWN, LEFT, RIGHT
     }
 

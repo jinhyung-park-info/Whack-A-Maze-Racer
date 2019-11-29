@@ -183,6 +183,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        usermanager.updateStatistics(getApplicationContext(), usermanager.getUser());
         if (startedMaze) {
             ArrayList<StringBuilder> savedMaze = mazeLoader.saveMaze();
             FileOutputStream fos = null;
