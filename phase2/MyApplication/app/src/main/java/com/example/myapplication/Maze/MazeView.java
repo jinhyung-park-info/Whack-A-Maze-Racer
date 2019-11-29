@@ -263,18 +263,16 @@ public class MazeView extends View {
 
         for (Collectible c : collectibles) {
             if (player.getCol() == c.getCol() && player.getRow() == c.getRow()) {
-                int newNumCollectiblesCollected;
-                int newScore;
-
-                newNumCollectiblesCollected = (int) userInMaze.getStatistic(GameConstants.NameGame3,
+                //increment number of collectibles collected by 1
+                int newNumCollectiblesCollected = (int) userInMaze.getStatistic(GameConstants.NameGame3,
                         GameConstants.NumCollectiblesCollectedMaze) + 1;
                 userInMaze.setStatistic(GameConstants.NameGame3,
                         GameConstants.NumCollectiblesCollectedMaze, newNumCollectiblesCollected);
 
-                newScore = userInMaze.getOverallScore() + c.getPoints();
+                int newScore = userInMaze.getOverallScore() + c.getPoints();
                 userInMaze.setOverallScore(newScore);
 
-                collectiblesToRemove.add(c); //directly removing objects will mess up the loop
+                collectiblesToRemove.add(c);
 
             }
         }

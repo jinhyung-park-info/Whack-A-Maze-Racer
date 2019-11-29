@@ -158,9 +158,6 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     private void setupMaze() {
         maze = mazeLoader.startNewMaze(bgColour, difficulty, playerType);
-        //maze = new MazeView(this, bgColour, difficulty,
-                //playerType, usermanager);
-
         setContentView(maze);
         startedMaze = true;
     }
@@ -228,8 +225,14 @@ public class MazeCustomizationActivity extends AppCompatActivity {
                 }
                 input.close();
                 maze = mazeLoader.loadMaze(savedMaze, maze);
+
+                if (maze == null)
+                    setupMaze();
+                else
+                    setContentView(maze);
+
                 mazeFile.delete();
-                setContentView(maze);
+
             } catch (FileNotFoundException e) {
                 Log.e(TAG, "Maze file not found on resume");
             }

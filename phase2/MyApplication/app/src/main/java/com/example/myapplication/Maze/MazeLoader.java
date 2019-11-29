@@ -81,6 +81,9 @@ class MazeLoader implements Loadable {
      */
     public MazeView loadMaze(ArrayList<StringBuilder> savedMaze, MazeView maze) {
         this.mazeView = maze;
+        if (savedMaze.size() == 0) {
+            return null;
+        }
         int cols = Integer.parseInt(savedMaze.get(3).toString());
         int rows = Integer.parseInt(savedMaze.get(2).toString());
 
