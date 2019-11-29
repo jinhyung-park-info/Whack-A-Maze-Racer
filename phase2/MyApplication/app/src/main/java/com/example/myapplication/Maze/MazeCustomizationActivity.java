@@ -36,7 +36,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     /**
      * difficulty of the maze. by default this is normal
      */
-    private String difficulty = "Normal";
+    private GameConstants.Difficulty difficulty = GameConstants.Difficulty.NORMAL;
 
     /**
      * the player type. by default this is lindsey, which is represented by 0. Paul is 1
@@ -126,15 +126,15 @@ public class MazeCustomizationActivity extends AppCompatActivity {
                 break;
             case R.id.radioButtonHard:
                 if (checked)
-                    difficulty = "Hard";
+                    difficulty = GameConstants.Difficulty.HARD;
                 break;
             case R.id.radioButtonNormal:
                 if (checked)
-                    difficulty = "Normal";
+                    difficulty = GameConstants.Difficulty.NORMAL;
                 break;
             case R.id.radioButtonEasy:
                 if (checked)
-                    difficulty = "Easy";
+                    difficulty = GameConstants.Difficulty.EASY;
                 break;
             case R.id.radioButtonChar1:
                 if (checked)
@@ -243,7 +243,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     public void reset() {
        bgColour = Color.GREEN;
-       difficulty = "Normal";
+        difficulty = GameConstants.Difficulty.NORMAL;
        playerType = 0;
     }
 }

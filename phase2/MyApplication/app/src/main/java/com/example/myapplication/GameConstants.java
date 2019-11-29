@@ -59,6 +59,12 @@ public abstract class GameConstants {
     public static final int IndexOfPlayerColInFile = 5;
     public static final int IndexOfPlayerRowInFile = 4;
     public static final int StartingIndexOfMazeMapInFile = 6;
+    public static final int RowsForEasyMaze = 7;
+    public static final int ColsForEasyMaze = 5;
+    public static final int RowsForNormalMaze = 11;
+    public static final int ColsForNormalMaze = 7;
+    public static final int RowsForHardMaze = 15;
+    public static final int ColsForHardMaze = 12;
     public static final String loadMaze = "LoadMaze";
 
     // 3 stats for user and 6 stats for the games
@@ -89,6 +95,10 @@ public abstract class GameConstants {
 
     public enum Direction {
         UP, DOWN, LEFT, RIGHT
+    }
+
+    public enum Difficulty {
+        EASY, NORMAL, HARD
     }
 
     public static String[] getArrayOfStatistics(String GameName){

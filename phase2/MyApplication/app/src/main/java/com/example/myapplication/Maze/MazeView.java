@@ -114,7 +114,7 @@ public class MazeView extends View {
     private Bitmap playerBitmap;
     private Resources res = this.getResources();
 
-    public MazeView(Context context, int bgColour, String difficulty,
+    public MazeView(Context context, int bgColour, GameConstants.Difficulty difficulty,
                     int playerType, UserManager user_1) {
         super(context);
         contexts = context;
@@ -163,16 +163,20 @@ public class MazeView extends View {
         this.playerType = playerType;
     }
 
-    public void setDifficulty(String difficulty) {
-        if (difficulty.equals("Easy")) {
-            rows = 7;
-            cols = 5;
-        } else if (difficulty.equals("Normal")) {
-            rows = 11;
-            cols = 7;
-        } else if (difficulty.equals("Hard")) {
-            rows = 15;
-            cols = 12;
+    public void setDifficulty(GameConstants.Difficulty difficulty) {
+        switch (difficulty) {
+            case EASY:
+                rows = GameConstants.RowsForEasyMaze;
+                cols = GameConstants.ColsForEasyMaze;
+                break;
+            case NORMAL:
+                rows = GameConstants.RowsForNormalMaze;
+                cols = GameConstants.ColsForNormalMaze;
+                break;
+            case HARD:
+                rows = GameConstants.RowsForHardMaze;
+                cols = GameConstants.ColsForHardMaze;
+                break;
         }
     }
 

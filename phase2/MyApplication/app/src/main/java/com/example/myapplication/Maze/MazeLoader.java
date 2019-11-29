@@ -14,7 +14,7 @@ interface Loadable {
 
     MazeView loadMaze(ArrayList<StringBuilder> savedMaze, MazeView maze);
 
-    MazeView startNewMaze(int bgColour, String difficulty, int playerType);
+    MazeView startNewMaze(int bgColour, GameConstants.Difficulty difficulty, int playerType);
 
 }
 
@@ -126,7 +126,7 @@ class MazeLoader implements Loadable {
     }
 
     @Override
-    public MazeView startNewMaze(int bgColour, String difficulty, int playerType) {
+    public MazeView startNewMaze(int bgColour, GameConstants.Difficulty difficulty, int playerType) {
         this.mazeView = new MazeView(context, bgColour, difficulty, playerType, userManager);
         return mazeView;
     }
