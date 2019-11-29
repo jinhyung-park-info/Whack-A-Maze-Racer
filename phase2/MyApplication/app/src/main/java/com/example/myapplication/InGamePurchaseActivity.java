@@ -61,12 +61,13 @@ public class InGamePurchaseActivity extends AppCompatActivity {
         Pattern cvvPattern = Pattern.compile("^[0-9]{3}$");
         Matcher cvvMatcher = cvvPattern.matcher(cvvNum);
 
-        Pattern expPattern = Pattern.compile("^[0-9]{2}/[0-9]{2}$");
+        Pattern expPattern = Pattern.compile("^(0[1-9]|1[0-2])/[0-9]{2}$");
         Matcher expMatcher = expPattern.matcher(expNum);
 
         if (ccMatcher.matches() && cvvMatcher.matches() && expMatcher.matches()) {
             user.setCurrency(user.getCurrency() + 50);
             userManager.updateStatistics(this, user);
+            ccText.setError(null);
         }else{
             ccText.setError("Invalid Credit Card/Expiration Date/Cvv !");
         }
