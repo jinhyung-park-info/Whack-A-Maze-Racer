@@ -102,15 +102,6 @@ public class MazeView extends View {
      */
     private boolean collectiblesEnabled;
 
-    /**
-     * the thickness of the lines representing the walls
-     */
-    //private static final float WALL_THICKNESS = 4;
-
-    /**
-     * Random number generator used when generating the maze
-     */
-
     private UserManager userManager;
     private User userInMaze;
     private int gamesPlayed = 0;
@@ -121,7 +112,6 @@ public class MazeView extends View {
     private Bitmap collectibleBitmap;
     private Bitmap playerBitmap;
     private Resources res = this.getResources();
-
 
     public MazeView(Context context, int bgColour, String difficulty,
                     int playerType, UserManager user_1) {
@@ -159,8 +149,6 @@ public class MazeView extends View {
             playerBitmap = BitmapFactory.decodeResource(res, R.drawable.lindsey_mole);
         else
             playerBitmap = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
-
-        //setupPaintObjects(wallPaint, playerPaint, exitPaint);
 
         createMaze();
     }
@@ -278,13 +266,11 @@ public class MazeView extends View {
                 int newNumCollectiblesCollected;
                 int newScore;
 
-                //update num of collectibles collected
                 newNumCollectiblesCollected = (int) userInMaze.getStatistic(GameConstants.NameGame3,
                         GameConstants.NumCollectiblesCollectedMaze) + 1;
                 userInMaze.setStatistic(GameConstants.NameGame3,
                         GameConstants.NumCollectiblesCollectedMaze, newNumCollectiblesCollected);
 
-                //update score
                 newScore = userInMaze.getOverallScore() + c.getPoints();
                 userInMaze.setOverallScore(newScore);
 
@@ -299,136 +285,28 @@ public class MazeView extends View {
     }
 
     /**
-     * Returns a Array List String Builder representation of this maze. See readMe.txt for details
-     *
-     * @return saved maze
-     */
-    public ArrayList<StringBuilder> saveMaze() {
-        //initialize arraylist to store lines of text to represent the maze
-        ArrayList<StringBuilder> savedMaze = new ArrayList<>();
-        //set the first index of arraylist to the colour of the maze
-        savedMaze.add(new StringBuilder(Integer.toString(bgColour)));
-        //set second index of arraylist to the player's type
-        savedMaze.add(new StringBuilder(Integer.toString(playerType)));
-        //set third index of arraylist to the # of rows in maze
-        savedMaze.add(new StringBuilder(Integer.toString(rows)));
-        //set fourth index of arraylist to the # of cols in maze
-        savedMaze.add(new StringBuilder(Integer.toString(cols)));
-        //set fifth index of arraylist to row of player
-        savedMaze.add(new StringBuilder(Integer.toString(player.getRow())));
-        //set sixth index of arraylsist to col of player
-        savedMaze.add(new StringBuilder(Integer.toString(player.getCol())));
-        //for each row in the 2d array of cells
-        for (int i = 0; i <= cols - 1; i++) {
-            //initialize a stringbuilder
-            StringBuilder currColString = new StringBuilder();
-            //for each cell in the current col
-            for (Cell c : cells[i]) {
-                //if left wall is true
-                if (c.hasLeftWall())
-                    //append 1
-                    currColString.append(1);
-                else
-                    //append 0
-                    currColString.append(0);
-                //if top wall is true
-                if (c.hasTopWall())
-                    //append 1
-                    currColString.append(1);
-                else
-                    //append 0
-                    currColString.append(0);
-                //if right wall is true
-                if (c.hasRightWall())
-                    //append 1
-                    currColString.append(1);
-                else
-                    //append 0
-                    currColString.append(0);
-                //if bottom wall is true
-                if (c.hasBottomWall())
-                    //append 1
-                    currColString.append(1);
-                else
-                    //append 0
-                    currColString.append(0);
-                //append space
-                currColString.append(" ");
-
-            }
-            //add stringbuilder to arraylist
-            savedMaze.add(currColString);
-        }
-        //System.out.println(savedMaze);
-        return savedMaze;
-    }
-
-    /**
      * Loads the maze from an ArrayList StringBuilder representation of the maze. See readMe.txt
      * for details
-     *
-     * @param savedMaze the maze to be loaded
      */
-    public void loadMaze(ArrayList<StringBuilder> savedMaze) {
+    public void setupOldMaze(int cols, int rows, int bgColour, int playerType, int playerCol,
+                             int playerRow, Cell[][] cells) {
         //leaving and returning to the maze scares away the collectibles
         collectiblesEnabled = false;
-        //reinitialize 2d array of cells with rows as index 2 in arraylist and columns at the index 3 in arraylist
-        cols = Integer.parseInt(savedMaze.get(3).toString());
-        rows = Integer.parseInt(savedMaze.get(2).toString());
-        cells = new Cell[cols][rows];
-        System.out.println(cols);
-        System.out.println(rows);
-        //set the background colour to index 0 in the arraylist
-        bgColour = Integer.parseInt(savedMaze.get(0).toString());
-        //set the player's colour to index 1 in the arraylist
-        playerType = Integer.parseInt(savedMaze.get(1).toString());
-        int playerCol = Integer.parseInt(savedMaze.get(5).toString());
-        int playerRow = Integer.parseInt(savedMaze.get(4).toString());
-        //for i from 0 to # of cols - 1
-        for (int i = 0; i <= cols - 1; i++) {
-            //take the ith index (plus 6) of the arraylist, convert the stringbuilder to a string and split that string by spaces
-            String[] currColCells = savedMaze.get(i + 6).toString().trim().split(" ");
-            System.out.println(Arrays.toString(currColCells));
-            //in this splitted string, for each index j
-            for (int j = 0; j <= rows - 1; j++) {
-                String currCell = currColCells[j].trim();
-                //initialize a new cell with col = i, row = j
-                cells[i][j] = new Cell(i, j);
-                //if the char in location 0 is 0
-                if (currCell.charAt(0) == '0')
-                    //set left wall in cell to false
-                    cells[i][j].setLeftWall(false);
-                //if the char in location 1 is 0
-                if (currCell.charAt(1) == '0')
-                    //set top wall in cell to false
-                    cells[i][j].setTopWall(false);
-                //if the char in location 2 is 0
-                if (currCell.charAt(2) == '0')
-                    //set right wall in cell to false
-                    cells[i][j].setRightWall(false);
-                //if the char in location 3 is 0
-                if (currCell.charAt(3) == '0')
-                    //set bottom wall in cell to false
-                    cells[i][j].setBottomWall(false);
-            }
-        }
 
-        //let player equal the cell in the 2d array at 0,0
-        player = cells[playerCol][playerRow];
-        //let exit equal the cell in the 2d array at col - 1, row - 1
-        exit = cells[cols - 1][rows - 1];
+        this.cells = cells;
+        player = this.cells[playerCol][playerRow];
+        exit = this.cells[cols - 1][rows - 1];
 
         //redraw maze
         invalidate();
-
     }
 
     /**
-    https://codetheory.in/android-ontouchevent-ontouchlistener-motionevent-to-detect-common-gestures/
-    https://developer.android.com/training/graphics/opengl/touch#java
-    https://www.youtube.com/watch?v=SYoN-OvdZ3M part1-4 regarding onTouchEvent
-    all of these links were used to help us understand onTouch and how we can implement onTouch in
-    our own game properly.
+     * https://codetheory.in/android-ontouchevent-ontouchlistener-motionevent-to-detect-common-gestures/
+     * https://developer.android.com/training/graphics/opengl/touch#java
+     * https://www.youtube.com/watch?v=SYoN-OvdZ3M part1-4 regarding onTouchEvent
+     * all of these links were used to help us understand onTouch and how we can implement onTouch in
+     * our own game properly.
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -577,6 +455,37 @@ public class MazeView extends View {
                 (int) Math.floor(cellSize * 0.8), true);
     }
 
+    public void setSpecificCell(int i, int j, Cell cell) {
+        cells[i][j] = cell;
+    }
+
+    public Cell getSpecificCell(int i, int j) {
+        return cells[i][j];
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getBgColour() {
+        return bgColour;
+    }
+
+    public int getPlayerType() {
+        return playerType;
+    }
+
+    public Cell[][] getCells() {
+        return cells;
+    }
+
+    public Cell getPlayer() {
+        return player;
+    }
 }
 
 

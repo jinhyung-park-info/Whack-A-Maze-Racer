@@ -49,9 +49,10 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     static boolean passed = false;
 
-    private MazeView maze;
+    MazeView maze;
 
     private String mazeSaveStateFileName;
+    private MazeLoader mazeLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
         mazeSaveStateFileName = usermanager.getUser().getEmail() + "_maze_save_state.txt";
         startedMaze = false;
+        mazeLoader = new MazeLoader(getApplicationContext(), usermanager);
 
         //if they clicked start game instead of load game and properly went through each level
         if (usermanager.getUser().getLastPlayedLevel() != 3) {
@@ -154,14 +156,12 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     private void setupMaze() {
-        maze = new MazeView(this, bgColour, difficulty,
-                playerType, usermanager);
-
+        maze = mazeLoader.startNewMaze(bgColour, difficulty, playerType);
         setContentView(maze);
         startedMaze = true;
     }
 
-    public void finish_button(View view) {
+    public void finishButton(View view) {
         if (passed) {
             passed = false;
             Intent intent = new Intent(this, SaveScoreActivity.class);
@@ -183,16 +183,13 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (startedMaze) {
-            System.out.println("Writing save state file for maze");
-            //save maze.saveMaze() to an ArrayList of StringBuilders
-            ArrayList<StringBuilder> savedMaze = maze.saveMaze();
+            ArrayList<StringBuilder> savedMaze = mazeLoader.saveMaze();
             FileOutputStream fos = null;
             //overwrites or creates new file
             try {
                 fos = getApplicationContext().openFileOutput(mazeSaveStateFileName, MODE_PRIVATE);
                 try {
                     for (StringBuilder s : savedMaze) {
-                        //write the stringbuilder to the file, appending a newline character
                         fos.write(s.toString().getBytes());
                         fos.write("\n".getBytes());
                     }
@@ -217,22 +214,18 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (startedMaze) {
-            //initialize an arraylist of stringbuilders
             ArrayList<StringBuilder> savedMaze = new ArrayList<>();
             //open the file [username]_maze_save_state.txt
             File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
             try {
                 Scanner input = new Scanner(mazeFile);
-                //for each line the file
                 while (input.hasNextLine()) {
-                    //trim and convert the line to a stringbuilder and append to arraylist
                     savedMaze.add(new StringBuilder(input.nextLine().trim()));
                 }
-                //close file
                 input.close();
-                //send this ArrayList to maze.loadMaze()
-                maze.loadMaze(savedMaze);
+                maze = mazeLoader.loadMaze(savedMaze, maze);
                 mazeFile.delete();
+                setContentView(maze);
             } catch (FileNotFoundException e) {
                 Log.e(TAG, "Maze file not found on resume");
             }
