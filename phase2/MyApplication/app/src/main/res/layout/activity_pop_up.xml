@@ -41,7 +41,21 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/moleAllTimeHigh"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/mazeCompleted"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/numMazeItems"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:textSize="20sp"

@@ -141,13 +141,14 @@ public class UserManager implements Serializable {
     }
 
     /**
-     * Add a statistic at a specific place for previous accounts.
+     * Add a statistic at a specific place for all accounts when applicable.
      *
      * @param context  of the device
      * @param position in the line for the statistic to be added
      * @param numTimes the number of times a statistic will be added
+     * @return true if all accounts were updated or false if otherwise;
      */
-    public void addStatisticForPreviousAccounts(Context context, int position, int numTimes) {
+    public boolean addStatForAllAccounts(Context context, int position, int numTimes) {
         FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 
@@ -159,26 +160,38 @@ public class UserManager implements Serializable {
 
             while ((text = br.readLine()) != null) {
                 int numCommas = GameConstants.countOccurrences(text, ',');
-                if (numCommas != GameConstants.TOTAL_NUM_OF_STATISTICS) {
-                    int b = 0;
-                    int y = 0;
-                    for (int i = 0; i <= text.length(); i++) {
-                        if (b == position - 1) {
-                            y = i - 1;
-                            break;
+                if (numCommas != GameConstants.TOTAL_NUM_OF_STATISTICS - 1) {
+                    if(position > GameConstants.TOTAL_NUM_OF_STATISTICS + 1 || position <= 0){
+                        return false;
+                    }else if (position == GameConstants.TOTAL_NUM_OF_STATISTICS + 1){
+                        String newStats = new String(new char[numTimes])
+                                .replace("\0", ", 0");
+                        String newText = text + newStats + "\n";
+                        sb.append(newText);
+                    }else if(position == 1) {
+                        String newStats = new String(new char[numTimes])
+                                .replace("\0", ", 0");
+                        String newText = newStats + text + "\n";
+                        sb.append(newText);
+                    }else{
+                        int getToStat = 0;
+                        int indexOfCommaBeforeStat = 0;
+                        for (int i = 0; i <= text.length(); i++) {
+                            if (getToStat == position - 1) {
+                                indexOfCommaBeforeStat = i - 1;
+                                break;
+                            }
+                            if (text.charAt(i) == ',') {
+                                getToStat += 1;
+                            }
                         }
-                        if (text.charAt(i) == ',') {
-                            b += 1;
-                        }
+                        String firstHalf = text.substring(0, indexOfCommaBeforeStat);
+                        String secondHalf = text.substring(indexOfCommaBeforeStat);
+                        String middle = new String(new char[numTimes]).replace(
+                                "\0", ", 0");
+                        String newText = firstHalf + middle + secondHalf + "\n";
+                        sb.append(newText);
                     }
-                    int indexComma = y;
-                    String firstHalf = text.substring(0, y);
-                    String secondHalf = text.substring(y);
-                    String middle = new String(new char[numTimes]).replace(
-                            "\0", ", 0");
-                    String newText = firstHalf + middle + secondHalf;
-                    sb.append("\n");
-                    sb.append(newText);
                 } else {
                     sb.append(text).append("\n");
                 }
@@ -199,7 +212,9 @@ public class UserManager implements Serializable {
         }
         // write the new string with the replaced line OVER the same file
         setAndUpdate.writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
+        return true;
     }
+
 
     public Object getPasswordFromFile(Context context, String username){
         InputStream fis = null;
@@ -231,7 +246,7 @@ public class UserManager implements Serializable {
                 }
             }
         }
-        return false;
+        return null;
     }
 
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".InGamePurchaseActivity">
 
     <EditText
@@ -34,8 +35,8 @@
 
     <EditText
         android:id="@+id/cc"
-        android:layout_width="295dp"
-        android:layout_height="47dp"
+        android:layout_width="308dp"
+        android:layout_height="46dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/CreditCard"

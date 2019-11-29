@@ -67,4 +67,6 @@
     <string name="CreditCard">Enter credit card number (no space)</string>
     <string name="CVV">Enter your cvv</string>
     <string name="ExpirationDate">Enter expiration date (mm/yy)</string>
+    <string name="ChangePass">Change Password</string>
+    <string name="AccountInfoButton">Account Info/Setting</string>
 </resources>

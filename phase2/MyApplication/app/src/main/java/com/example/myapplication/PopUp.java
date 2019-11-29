@@ -53,6 +53,16 @@ public class PopUp extends Activity {
         TextView overallText = findViewById(R.id.overall);
         String overall = " Overall Score: " + user.getOverallScore();
         overallText.setText(overall);
+
+        TextView moleAllTimeHigh = findViewById(R.id.moleAllTimeHigh);
+        String moleHigh = " Mole All Time High: " + user.getStatistic(GameConstants.NameGame1,
+                GameConstants.MoleAllTimeHigh);
+        moleAllTimeHigh.setText(moleHigh);
+
+        TextView numMazeItems = findViewById(R.id.numMazeItems);
+        String mazeItemsCollected = " Num maze items collected: " +
+                user.getStatistic(GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze);
+        numMazeItems.setText(mazeItemsCollected);
     }
 
     private void setUserManager(UserManager newManager){

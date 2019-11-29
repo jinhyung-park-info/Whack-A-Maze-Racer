@@ -96,47 +96,40 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
+        if (! checked){
+            return;
+        }
 
         // Check which radio button was clicked
         switch (view.getId()) {
             case R.id.radioButtonGreen:
-                if (checked)
                     bgColour = Color.GREEN;
                 break;
             case R.id.radioButtonBlue:
-                if (checked)
                     bgColour = Color.BLUE;
                 break;
             case R.id.radioButtonRed:
-                if (checked)
                     bgColour = Color.RED;
                 break;
             case R.id.radioButtonYellow:
-                if (checked)
                     bgColour = Color.YELLOW;
                 break;
             case R.id.radioButtonWhite:
-                if (checked)
                     bgColour = Color.WHITE;
                 break;
             case R.id.radioButtonHard:
-                if (checked)
                     difficulty = "Hard";
                 break;
             case R.id.radioButtonNormal:
-                if (checked)
                     difficulty = "Normal";
                 break;
             case R.id.radioButtonEasy:
-                if (checked)
                     difficulty = "Easy";
                 break;
             case R.id.radioButtonChar1:
-                if (checked)
                     playerType = 0;
                 break;
             case R.id.radioButtonCharTwo:
-                if (checked)
                     playerType = 1;
                 break;
         }
