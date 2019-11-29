@@ -52,6 +52,13 @@ public abstract class GameConstants {
     public static final int MazeWallThickness = 4;
     public static final int NumberOfMazeCollectibles = 3;
     public static final int PointsForACollectible = 10;
+    public static final int IndexOfColsInFile = 3;
+    public static final int IndexOfRowsInFile = 2;
+    public static final int IndexOfBgColorInFile = 0;
+    public static final int IndexOfPlayerTypeInFile = 1;
+    public static final int IndexOfPlayerColInFile = 5;
+    public static final int IndexOfPlayerRowInFile = 4;
+    public static final int StartingIndexOfMazeMapInFile = 6;
     public static final String loadMaze = "LoadMaze";
 
     // 3 stats for user and 6 stats for the games

@@ -2,6 +2,7 @@ package com.example.myapplication.Maze;
 
 import android.content.Context;
 
+import com.example.myapplication.GameConstants;
 import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.ArrayList;
@@ -84,20 +85,21 @@ class MazeLoader implements Loadable {
         if (savedMaze.size() == 0) {
             return null;
         }
-        int cols = Integer.parseInt(savedMaze.get(3).toString());
-        int rows = Integer.parseInt(savedMaze.get(2).toString());
+        int cols = Integer.parseInt(savedMaze.get(GameConstants.IndexOfColsInFile).toString());
+        int rows = Integer.parseInt(savedMaze.get(GameConstants.IndexOfRowsInFile).toString());
 
-        int bgColour = Integer.parseInt(savedMaze.get(0).toString());
-        int playerType = Integer.parseInt(savedMaze.get(1).toString());
+        int bgColour = Integer.parseInt(savedMaze.get(GameConstants.IndexOfBgColorInFile).toString());
+        int playerType = Integer.parseInt(savedMaze.get(GameConstants.IndexOfPlayerTypeInFile).toString());
 
 
-        int playerCol = Integer.parseInt(savedMaze.get(5).toString());
-        int playerRow = Integer.parseInt(savedMaze.get(4).toString());
+        int playerCol = Integer.parseInt(savedMaze.get(GameConstants.IndexOfPlayerColInFile).toString());
+        int playerRow = Integer.parseInt(savedMaze.get(GameConstants.IndexOfPlayerRowInFile).toString());
 
         Cell[][] cells = new Cell[cols][rows];
 
         for (int i = 0; i <= cols - 1; i++) {
-            String[] currColCells = savedMaze.get(i + 6).toString().trim().split(" ");
+            String[] currColCells = savedMaze.get(i +
+                    GameConstants.StartingIndexOfMazeMapInFile).toString().trim().split(" ");
             System.out.println(Arrays.toString(currColCells));
             for (int j = 0; j <= rows - 1; j++) {
                 String currCell = currColCells[j].trim();
