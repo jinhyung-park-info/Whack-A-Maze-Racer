@@ -18,6 +18,8 @@ import static android.content.Context.MODE_APPEND;
 import static android.content.Context.MODE_PRIVATE;
 
 public class WriteAndCheck implements Serializable {
+    //first index will be true if username exists in file and false otherwise, second index will
+    // will be true if password was correct
     ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password) {
         InputStream fis = null;
         ArrayList<Boolean> arr = new ArrayList<Boolean>();

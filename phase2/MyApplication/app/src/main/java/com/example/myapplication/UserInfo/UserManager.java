@@ -225,9 +225,9 @@ public class UserManager implements Serializable {
             String text;
 
             while ((text = br.readLine()) != null) {
-                int index_of_comma = text.indexOf(",");
-                String other_username = text.substring(0, index_of_comma);
-                if (username.equals(other_username)) {
+                int indexOfComma = text.indexOf(",");
+                String otherUsername = text.substring(0, indexOfComma);
+                if (username.equals(otherUsername)) {
                     int index_of_space = text.indexOf(" ");
                     return text.substring(index_of_space + 1);
                 }
@@ -247,6 +247,40 @@ public class UserManager implements Serializable {
             }
         }
         return null;
+    }
+
+    public void removeUserFromFile(Context context, String username){
+        InputStream fis = null;
+        try {
+            fis = context.openFileInput(GameConstants.USER_FILE);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                int index_of_comma = text.indexOf(",");
+                String other_username = text.substring(0, index_of_comma);
+                if (username.equals(other_username)) {
+                    int index_of_space = text.indexOf(" ");
+                    //return text.substring(index_of_space + 1);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        //return null;
     }
 
 

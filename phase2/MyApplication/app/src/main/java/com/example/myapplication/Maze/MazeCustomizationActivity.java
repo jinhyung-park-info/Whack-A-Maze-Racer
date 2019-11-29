@@ -68,6 +68,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         mazeSaveStateFileName = usermanager.getUser().getEmail() + "_maze_save_state.txt";
         startedMaze = false;
         mazeLoader = new MazeLoader(getApplicationContext(), usermanager);
+        //usermanager.getUser().setLastPlayedLevel(3);
 
         //if they clicked start game instead of load game and properly went through each level
         if (usermanager.getUser().getLastPlayedLevel() != 3) {
@@ -81,7 +82,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         }
 
         System.out.println(usermanager.getUser().getLastPlayedLevel());
-        usermanager.getUser().setLastPlayedLevel(3);
+        //usermanager.getUser().setLastPlayedLevel(3);
         System.out.println(usermanager.getUser().getLastPlayedLevel());
         usermanager.updateStatistics(getApplicationContext(), usermanager.getUser());
         reset();
@@ -157,6 +158,9 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     private void setupMaze() {
         maze = mazeLoader.startNewMaze(bgColour, difficulty, playerType);
+        //maze = new MazeView(this, bgColour, difficulty,
+                //playerType, usermanager);
+
         setContentView(maze);
         startedMaze = true;
     }
