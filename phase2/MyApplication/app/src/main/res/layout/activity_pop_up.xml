@@ -12,7 +12,6 @@
         style="@android:style/Widget.ScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="32dp"
         android:fadeScrollbars="false"
         android:scrollbarSize="4dp"
         android:scrollbarThumbVertical="@drawable/scrollbar"
