@@ -12,8 +12,9 @@
         style="@android:style/Widget.ScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbarSize="4dp"
+        android:layout_marginBottom="32dp"
         android:fadeScrollbars="false"
+        android:scrollbarSize="4dp"
         android:scrollbarThumbVertical="@drawable/scrollbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +79,7 @@
             <Button
                 android:id="@+id/purchase"
                 android:layout_width="131dp"
-                android:layout_height="79dp"
+                android:layout_height="80dp"
 
                 android:onClick="buyCurrency"
                 android:text="@string/BuyGems" />
