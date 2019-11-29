@@ -6,7 +6,7 @@ import java.util.Stack;
 
 
 interface MazeMaker{
-   Cell[][] MakeMaze(Cell[][] cells, int cols, int rows);
+   Cell[][] makeMaze(Cell[][] cells, int cols, int rows);
 }
 
 public class MazeCreation implements MazeMaker{
@@ -18,7 +18,7 @@ public class MazeCreation implements MazeMaker{
      * @param currentCell
      * @return neighbourCell
      */
-    private Cell getNeighbour(Cell currentCell, Cell[][] cells, int cols, int rows) {
+    private Cell getRandomNeighbour(Cell currentCell, Cell[][] cells, int numCols, int numRows) {
         //check for unvisited neighbours
         ArrayList<Cell> neighbours = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class MazeCreation implements MazeMaker{
             }
         }
         //right neighbour
-        if (currentCell.getCol() < cols - 1) {
+        if (currentCell.getCol() < numCols - 1) {
             if (!cells[currentCell.getCol() + 1][currentCell.getRow()].wasVisited()) {
                 neighbours.add(cells[currentCell.getCol() + 1][currentCell.getRow()]);
             }
@@ -41,15 +41,15 @@ public class MazeCreation implements MazeMaker{
             }
         }
         //bottom neighbour
-        if (currentCell.getRow() < rows - 1) {
+        if (currentCell.getRow() < numRows - 1) {
             if (!cells[currentCell.getCol()][currentCell.getRow() + 1].wasVisited()) {
                 neighbours.add(cells[currentCell.getCol()][currentCell.getRow() + 1]);
             }
         }
 
         if (neighbours.size() > 0) {
-            Random Ran = new Random();
-            int chosenNeighbourIndex = Ran.nextInt(neighbours.size());
+            Random ran = new Random();
+            int chosenNeighbourIndex = ran.nextInt(neighbours.size());
             return neighbours.get(chosenNeighbourIndex);
         } else {
             return null;
@@ -65,23 +65,23 @@ public class MazeCreation implements MazeMaker{
     private void removeWall(Cell current, Cell next) {
         //next cell is above current
         if (current.getCol() == next.getCol() && current.getRow() == next.getRow() + 1) {
-            current.setTopWall(false);
-            next.setBottomWall(false);
+            current.setHasTopWall(false);
+            next.setHasBottomWall(false);
         }
         //next cell is below current
         else if (current.getCol() == next.getCol() && current.getRow() == next.getRow() - 1) {
-            current.setBottomWall(false);
-            next.setTopWall(false);
+            current.setHasBottomWall(false);
+            next.setHasTopWall(false);
         }
         //next cell is to the left of current
         else if (current.getCol() == next.getCol() + 1 && current.getRow() == next.getRow()) {
-            current.setLeftWall(false);
-            next.setRightWall(false);
+            current.setHasLeftWall(false);
+            next.setHasRightWall(false);
         }
         //next cell is to the right of current
         else if (current.getCol() == next.getCol() - 1 && current.getRow() == next.getRow()) {
-            current.setRightWall(false);
-            next.setLeftWall(false);
+            current.setHasRightWall(false);
+            next.setHasLeftWall(false);
         }
 
 
@@ -96,7 +96,7 @@ public class MazeCreation implements MazeMaker{
      */
 
     @Override
-    public Cell[][] MakeMaze(Cell[][] cells, int cols, int rows) {
+    public Cell[][] makeMaze(Cell[][] cells, int cols, int rows) {
         //recursive backtracking algorithm for creating mazes
         Stack<Cell> stackVisitedCells = new Stack<>();
         Cell current, next;
@@ -112,7 +112,7 @@ public class MazeCreation implements MazeMaker{
 
         //do this until all cells have been visited
         do {
-            next = getNeighbour(current, cells, cols, rows);
+            next = getRandomNeighbour(current, cells, cols, rows);
 
             //this is done when we find a neighbouring cell
             if (next != null) {

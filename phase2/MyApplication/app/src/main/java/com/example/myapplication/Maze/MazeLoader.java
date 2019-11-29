@@ -101,16 +101,16 @@ class MazeLoader implements Loadable {
                 cells[i][j] = new Cell(i, j);
 
                 if (currCell.charAt(0) == '0')
-                    cells[i][j].setLeftWall(false);
+                    cells[i][j].setHasLeftWall(false);
 
                 if (currCell.charAt(1) == '0')
-                    cells[i][j].setTopWall(false);
+                    cells[i][j].setHasTopWall(false);
 
                 if (currCell.charAt(2) == '0')
-                    cells[i][j].setRightWall(false);
+                    cells[i][j].setHasRightWall(false);
 
                 if (currCell.charAt(3) == '0')
-                    cells[i][j].setBottomWall(false);
+                    cells[i][j].setHasBottomWall(false);
             }
         }
 

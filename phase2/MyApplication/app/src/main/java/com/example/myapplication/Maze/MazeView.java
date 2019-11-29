@@ -183,7 +183,7 @@ public class MazeView extends View {
      * create the maze
      */
     private void createMaze() {
-        cells = mazeCreation.MakeMaze(cells, cols, rows);
+        cells = mazeCreation.makeMaze(cells, cols, rows);
         player = cells[0][0];
         exit = cells[cols - 1][rows - 1];
 

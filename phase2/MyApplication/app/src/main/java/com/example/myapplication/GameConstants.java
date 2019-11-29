@@ -48,6 +48,7 @@ public abstract class GameConstants {
     public static final int TotalMazeGames = 2;
     public static final int MazeWallThickness = 4;
     public static final int NumberOfMazeCollectibles = 3;
+    public static final int PointsForACollectible = 10;
 
     // 3 stats for user and 6 stats for the games
     public static final int TOTAL_NUM_OF_STATISTICS = 9;

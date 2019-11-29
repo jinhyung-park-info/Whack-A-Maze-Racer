@@ -1,5 +1,7 @@
 package com.example.myapplication.Maze;
 
+import com.example.myapplication.GameConstants;
+
 /**
  * A collectible object in the maze game
  */
@@ -12,7 +14,7 @@ public class Collectible extends Cell {
 
     Collectible(int col, int row) {
         super(col, row);
-        points = 10;
+        points = GameConstants.PointsForACollectible;
     }
 
     public int getPoints() {

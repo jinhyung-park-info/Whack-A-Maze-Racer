@@ -69,7 +69,6 @@ public class LoginPresenter implements ILoginPresenter {
     }
 
 
-    @Override
     public boolean validateCredentialsForLogin(Context context, String username, String password, EditText editTextUser, EditText editTextPass) {
         if(validateChar(username, password, editTextUser, editTextPass)) {
             ArrayList<Boolean> validation = userManager.checkUsernameAndPassword(context, username, password);

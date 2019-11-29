@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
         setContentView(R.layout.activity_main);
         userManager = new UserManager();
         loginPresenter = new LoginPresenter();
-        System.out.println(getApplicationContext().getFilesDir());
 
     }
 

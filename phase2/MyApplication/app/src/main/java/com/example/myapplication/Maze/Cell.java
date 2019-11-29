@@ -1,100 +1,80 @@
 package com.example.myapplication.Maze;
 
 public class Cell {
-    /**
-     * whether this cell has a wall on the top or not
-     */
-    private boolean topWall = true;
+    private boolean hasTopWall = true;
 
-    /**
-     * whether this cell has a wall at the bottom or not
-     */
-    private boolean bottomWall = true;
+    private boolean hasBottomWall = true;
 
-    /**
-     * whether this cell has a wall on the left side or not
-     */
-    private boolean leftWall = true;
+    private boolean hasLeftWall = true;
 
-    /**
-     * whether this cell has a wall on the right side or not
-     */
-    private boolean rightWall = true;
+    private boolean hasRightWall = true;
 
-    /**
-     * tells us if this cell was "visited" by the imaginary
-     * person paving the path for the maze
-     */
     private boolean visited = false;
 
-    /**
-     * the column position of this cell
-     */
     private int col;
 
-    /**
-     * the row position of this cell
-     */
     private int row;
 
     Cell(int col, int row) {
-        this.col = col;
-        this.row = row;
+        if(col > 0 && row > 0){
+            this.col = col;
+            this.row = row;
+        }
     }
 
-    boolean hasTopWall() {
-        return topWall;
+    synchronized boolean hasTopWall() {
+            return hasTopWall;
     }
 
-    void setTopWall(boolean topWall) {
-        this.topWall = topWall;
+    synchronized void setHasTopWall(boolean hasTopWall) {
+        this.hasTopWall = hasTopWall;
     }
 
-    boolean hasBottomWall() {
-        return bottomWall;
+    synchronized boolean hasBottomWall() {
+        return hasBottomWall;
     }
 
-    void setBottomWall(boolean bottomWall) {
-        this.bottomWall = bottomWall;
+    synchronized void setHasBottomWall(boolean hasBottomWall) {
+        this.hasBottomWall = hasBottomWall;
     }
 
-    boolean hasLeftWall() {
-        return leftWall;
+    synchronized boolean hasLeftWall() {
+        return hasLeftWall;
     }
 
-    void setLeftWall(boolean leftWall) {
-        this.leftWall = leftWall;
+    synchronized void setHasLeftWall(boolean hasLeftWall) {
+        this.hasLeftWall = hasLeftWall;
     }
 
-    boolean hasRightWall() {
-        return rightWall;
+    synchronized boolean hasRightWall() {
+        return hasRightWall;
     }
 
-    void setRightWall(boolean rightWall) {
-        this.rightWall = rightWall;
+    synchronized void setHasRightWall(boolean hasRightWall) {
+        this.hasRightWall = hasRightWall;
     }
 
-    int getCol() {
+    synchronized int  getCol() {
         return col;
     }
 
-    void setCol(int col) {
+    synchronized void setCol(int col) {
         this.col = col;
     }
 
-    int getRow() {
+    synchronized int getRow() {
         return row;
     }
 
-    void setRow(int row) {
+    synchronized void setRow(int row) {
         this.row = row;
     }
 
-    boolean wasVisited() {
+    synchronized boolean wasVisited() {
         return visited;
     }
 
-    void setVisited(boolean visited) {
+    synchronized void setVisited(boolean visited) {
         this.visited = visited;
     }
 }
