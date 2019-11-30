@@ -49,7 +49,7 @@ public class ChangePassword extends AppCompatActivity {
                 user.setPassword(newPass);
                 user.setCurrency(user.getCurrency() - 100);
                 back(view);
-                userManager.updateStatistics(this, user);
+                userManager.setOrUpdateStatistics(this, user, GameConstants.update);
             }else{
                 Button button = findViewById(R.id.changePass);
                 button.setError("Insufficient Gems");
