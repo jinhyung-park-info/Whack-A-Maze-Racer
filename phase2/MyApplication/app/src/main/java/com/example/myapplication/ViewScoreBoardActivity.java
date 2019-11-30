@@ -56,11 +56,6 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         TextView ThirteenUserName = findViewById(R.id.ThirteenUserName);
         TextView FourteenUserName = findViewById(R.id.FourteenUserName);
         TextView FifteenUserName = findViewById(R.id.FifteenUserName);
-        TextView SixteenUserName = findViewById(R.id.SixteenUserName);
-        TextView SeventeenUserName = findViewById(R.id.SeventeenUserName);
-        TextView EighteenUserName = findViewById(R.id.EighteenUserName);
-        TextView NineteenUserName = findViewById(R.id.NineteenUserName);
-        TextView TwentyUserName = findViewById(R.id.TwentyUserName);
         TextView FirstUserStat = findViewById(R.id.FirstUserStat);
         TextView SecondUserStat = findViewById(R.id.SecondUserStat);
         TextView ThirdUserStat = findViewById(R.id.ThirdUserStat);
@@ -76,20 +71,13 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         TextView ThirteenUserStat = findViewById(R.id.ThirteenUserStat);
         TextView FourteenUserStat = findViewById(R.id.FourteenUserStat);
         TextView FifteenUserStat = findViewById(R.id.FifteenUserStat);
-        TextView SixteenUserStat = findViewById(R.id.SixteenUserStat);
-        TextView SeventeenUserStat = findViewById(R.id.SeventeenUserStat);
-        TextView EighteenUserStat = findViewById(R.id.EighteenUserStat);
-        TextView NineteenUserStat = findViewById(R.id.NineteenUserStat);
-        TextView TwentyUserStat = findViewById(R.id.TwentyUserStat);
         ArrayOfTextView = new TextView[]{FirstUserName, FirstUserStat, SecondUserName,
                 SecondUserStat, ThirdUserName, ThirdUserStat, FourthUserName, FourthUserStat,
                 FifthUserName, FifthUserStat, SixthUserName, SixthUserStat, SeventhUserName,
                 SeventhUserStat, EighthUserName, EighthUserStat, NinthUserName, NinthUserStat,
                 TenthUserName, TenthUserStat, EleventhUserName, EleventhUserStat, TwelfthUserName,
                 TwelfthUserStat, ThirteenUserName, ThirteenUserStat, FourteenUserName, FourteenUserStat,
-                FifteenUserName, FifteenUserStat, SixteenUserName, SixteenUserStat, SeventeenUserName,
-                SeventeenUserStat, EighteenUserName, EighteenUserStat, NineteenUserName, NineteenUserStat,
-                TwentyUserName, TwentyUserStat};
+                FifteenUserName, FifteenUserStat};
 
         Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

@@ -13,8 +13,6 @@ import com.example.myapplication.UserInfo.LoginPresenter;
 import com.example.myapplication.UserInfo.User;
 import com.example.myapplication.UserInfo.UserManager;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements ILoginView {
 
     private UserManager userManager;
@@ -26,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
         setContentView(R.layout.activity_main);
         userManager = new UserManager();
         loginPresenter = new LoginPresenter();
+
 
     }
 

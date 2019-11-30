@@ -3,16 +3,21 @@ package com.example.myapplication.TypeRacer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.myapplication.GameConstants;
@@ -157,6 +162,10 @@ public class TypeRacer extends AppCompatActivity {
         if (questionNumber < questions.size()) {
             textViewMap.get("countDown").setText("" + (int) GameConstants.timeLimitInMills / 1000);
             textViewMap.get("question").setText(questions.get(questionNumber).getQuestionContent());
+            //show message if the question is a golden question
+            if(questions.get(questionNumber) instanceof GoldenQuestion){
+                goldenQuestionMessage();
+            }
             answer.setText("");
             answer.setEnabled(true);
             manageTime();
@@ -358,4 +367,22 @@ public class TypeRacer extends AppCompatActivity {
         }
 
     }
+
+    //Show message for a golden question
+    public void goldenQuestionMessage() {
+        Context context = getApplicationContext();
+        CharSequence text = "Golden Question!";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+        LinearLayout toastLayout = (LinearLayout) toast.getView();
+        TextView toastTV = (TextView) toastLayout.getChildAt(0);
+        toastTV.setTextSize(33);
+
+        toast.show();
+
+
+    }
+
+
 }
