@@ -26,7 +26,7 @@ class WamManager implements Runnable{
   private MoleFactory moleFactory = new MoleFactory();
 
   private ArrayList<Hole> holeList;
-  ArrayList<Mole> moleList;
+  ArrayList<GenericMole> moleList;
 
   WamManager(
       Rect hole_r,
@@ -118,14 +118,14 @@ class WamManager implements Runnable{
   private void randomMole() {
     Random random = new Random();
     int num = random.nextInt(moleList.size());
-    Mole mole = moleList.get(num);
-    if (mole.getState() == Mole.Movement.STANDBY) {
-      mole.setState(Mole.Movement.UP);
+    GenericMole mole = moleList.get(num);
+    if (mole.getState() == GenericMole.Movement.STANDBY) {
+      mole.setState(GenericMole.Movement.UP);
     }
   }
 
   void move() {
-    for (Mole mole : this.moleList) {
+    for (GenericMole mole : this.moleList) {
       mole.move();
       if (mole.loseLife) {
         this.currentLives -= mole.lifeCount;
@@ -141,10 +141,10 @@ class WamManager implements Runnable{
       randomMole();
       if (score >= GameConstants.moleSecondSpeedUp) {
         duration = GameConstants.moleSecondSpeed;
-        Mole.setSpeed(WamView.screenHeight / 200);
+        GenericMole.setSpeed(WamView.screenHeight / 200);
       } else if (score >= GameConstants.moleFirstSpeedUp) {
         duration = GameConstants.moleFirstSpeed;
-        Mole.setSpeed(WamView.screenHeight / 240);
+        GenericMole.setSpeed(WamView.screenHeight / 240);
       }
       end_time = System.currentTimeMillis();
       if (end_time - start_time < duration) {

@@ -1,7 +1,6 @@
 package com.example.myapplication.WhackAMole;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,7 +14,6 @@ import android.view.SurfaceView;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
-import com.example.myapplication.SaveScoreActivity;
 
 /** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
@@ -178,10 +176,10 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     int x, y;
     x = (int) event.getX();
     y = (int) event.getY();
-    for (Mole mole : wc.moleList) {
+    for (GenericMole mole : wc.moleList) {
       Rect rect = mole.getTouchRect();
-      if (rect.contains(x, y) && mole.getState() != Mole.Movement.HIT && mole.getState() != Mole.Movement.STANDBY) {
-        mole.setState(Mole.Movement.HIT);
+      if (rect.contains(x, y) && mole.getState() != GenericMole.Movement.HIT && mole.getState() != GenericMole.Movement.STANDBY) {
+        mole.setState(GenericMole.Movement.HIT);
         this.wamManager.score = Math.max(0, this.wamManager.score + mole.value);
         this.activity.molesHit += 1;
         this.activity.user.setCurrency(this.activity.user.getCurrency() + mole.gemValue);

@@ -2,10 +2,15 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
-class LindseyMole extends Mole{
+class LindseyGenericMole extends GenericMole implements Mole{
 
-    LindseyMole(Hole hole){
+    LindseyGenericMole(Hole hole){
         super(hole);
+        setMoleProperties();
+    }
+
+    @Override
+    public void setMoleProperties() {
         this.molePic = WamView.molePic;
         this.value = GameConstants.doubleMoleValue;
         this.gemValue = GameConstants.nonGemMoleValue;

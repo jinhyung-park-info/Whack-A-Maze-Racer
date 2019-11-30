@@ -2,10 +2,15 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
-public class GemMole extends Mole {
+class GemGenericMole extends GenericMole {
 
-    GemMole(Hole hole){
+    GemGenericMole(Hole hole){
         super(hole);
+        setMoleProperties();
+    }
+
+    @Override
+    public void setMoleProperties() {
         this.molePic = WamView.molePic3;
         this.value = GameConstants.moleValue;
         this.gemValue = GameConstants.gemMoleValue;

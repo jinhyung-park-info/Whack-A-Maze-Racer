@@ -1,15 +1,15 @@
 package com.example.myapplication.WhackAMole;
 
 class MoleFactory {
-    Mole createMole(String moleType, Hole hole){
+    GenericMole createMole(String moleType, Hole hole){
         if(moleType.equalsIgnoreCase("lindsey")){
-            return new LindseyMole(hole);
+            return new LindseyGenericMole(hole);
         }else if(moleType.equalsIgnoreCase("paul")){
-            return new PaulMole(hole);
+            return new PaulGenericMole(hole);
         }else if(moleType.equalsIgnoreCase("generic")){
-            return new Mole(hole);
+            return new GenericMole(hole);
         }else if(moleType.equalsIgnoreCase("gem")){
-            return new GemMole(hole);
+            return new GemGenericMole(hole);
         }
         return null;
     }
