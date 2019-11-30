@@ -51,6 +51,7 @@ public class ChangePassword extends AppCompatActivity {
                 user.setCurrency(user.getCurrency() - 100);
                 back(view);
                 userManager.setOrUpdateStatistics(this, user, GameConstants.update);
+                userManager.getOrChangePassword(this, user.getEmail(), newPass, GameConstants.changePassword);
             }else{
                 Toast.makeText(getApplicationContext(), "Insufficient Gems"
                         , Toast.LENGTH_LONG).show();
