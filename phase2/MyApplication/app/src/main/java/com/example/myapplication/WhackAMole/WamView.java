@@ -24,7 +24,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private final MoleActivity activity = (MoleActivity) getContext();
   public String gameStatus = "inGame";
   public static int screenWidth, screenHeight;
-  public static Bitmap genericMole, molePic, molePic2, holePic, lifePic, scoreBoard;
+  public static Bitmap genericMole, molePic, molePic2, molePic3, holePic, lifePic, scoreBoard;
   private Bitmap background;
   private Canvas canvas;
   private Paint paint;
@@ -76,6 +76,9 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
 
     molePic2 = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
     molePic2 = Bitmap.createScaledBitmap(molePic2, 250, 250, true);
+
+    molePic3 = BitmapFactory.decodeResource(res, R.drawable.gem);
+    molePic3 = Bitmap.createScaledBitmap(molePic3, 250, 250, true);
 
     lifePic = BitmapFactory.decodeResource(res, R.drawable.life);
     lifePic = Bitmap.createScaledBitmap(lifePic, 150, 150, true);
@@ -181,6 +184,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         mole.setState(Mole.Movement.HIT);
         this.wamManager.score = Math.max(0, this.wamManager.score + mole.value);
         this.activity.molesHit += 1;
+        this.activity.user.setCurrency(this.activity.user.getCurrency() + mole.gemValue);
       }
     }
   }

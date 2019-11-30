@@ -104,8 +104,11 @@ class WamManager implements Runnable{
     // Add one mole for each hole into mole collection.
     for (Hole hole : holeList) {
       moleList.add(moleFactory.createMole("generic", hole));
+      moleList.add(moleFactory.createMole("generic", hole));
+      moleList.add(moleFactory.createMole("generic", hole));
       moleList.add(moleFactory.createMole("lindsey", hole));
       moleList.add(moleFactory.createMole("paul", hole));
+      moleList.add(moleFactory.createMole("gem", hole));
     }
     keepRunning = true;
     Thread thread = new Thread(this);

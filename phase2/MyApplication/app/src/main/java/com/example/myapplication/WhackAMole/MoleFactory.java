@@ -8,6 +8,8 @@ class MoleFactory {
             return new PaulMole(hole);
         }else if(moleType.equalsIgnoreCase("generic")){
             return new Mole(hole);
+        }else if(moleType.equalsIgnoreCase("gem")){
+            return new GemMole(hole);
         }
         return null;
     }

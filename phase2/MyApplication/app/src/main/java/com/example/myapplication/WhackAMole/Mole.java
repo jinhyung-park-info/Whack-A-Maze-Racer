@@ -23,11 +23,13 @@ class Mole {
   private float picLeft, width, picTop, height;
   boolean loseLife = false;
   int value;
+  int gemValue;
   int lifeCount;
 
   Mole(Hole hole) {
     this.molePic = WamView.genericMole;
     this.value = 1;
+    this.gemValue = 0;
     this.lifeCount = 1;
 
     molePicWidth = this.molePic.getWidth();

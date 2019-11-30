@@ -6,6 +6,7 @@ class PaulMole extends Mole{
         super(hole);
         this.molePic = WamView.molePic2;
         this.value = -1;
+        this.gemValue = 0;
         this.lifeCount = 0;
     }
 }
