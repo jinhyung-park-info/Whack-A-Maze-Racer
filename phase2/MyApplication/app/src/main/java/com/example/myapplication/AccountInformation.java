@@ -54,4 +54,10 @@ public class AccountInformation extends AppCompatActivity {
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
+
+    public void changePassword(View view){
+        Intent intent = new Intent(this, ChangePassword.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
 }
