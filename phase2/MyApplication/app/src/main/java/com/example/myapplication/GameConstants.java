@@ -80,7 +80,7 @@ public abstract class GameConstants {
     public static final String moleName = "mole";
     public static final String racerName = "racer";
     public static final String mazeName = "maze";
-    public static final int NumPeopleOnScoreBoard = 20;
+    public static final int NumPeopleOnScoreBoard = 15;
     public static final String NameGame1 = "Whack-A-Mole";
     public static final String NameGame2 = "TypeRacer";
     public static final String NameGame3 = "Maze";

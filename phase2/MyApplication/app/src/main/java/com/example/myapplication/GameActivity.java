@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
@@ -19,8 +20,6 @@ public class GameActivity extends AppCompatActivity {
 
     private UserManager userManager;
 
-    //private User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +29,9 @@ public class GameActivity extends AppCompatActivity {
         if (userManager1 != null){
             setUserManager(userManager1);
         }
+        TextView gemDisplay = findViewById(R.id.gemDisplay);
+        String text = "Gem: " + userManager.getUser().getCurrency();
+        gemDisplay.setText(text);
     }
 
 
@@ -60,7 +62,6 @@ public class GameActivity extends AppCompatActivity {
     public void resume(View view){
         switch (userManager.getUser().getLastPlayedLevel()) {
             case 0:
-                Button loadButton = findViewById(R.id.button4);
                 Toast.makeText(getApplicationContext(), "You have not played a game yet"
                         , Toast.LENGTH_LONG).show();
                 break;
@@ -103,6 +104,12 @@ public class GameActivity extends AppCompatActivity {
 
     public void ViewScoreBoard(View view){
         Intent intent = new Intent(this, ViewScoreBoardActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
+
+    public void buyGem(View view){
+        Intent intent = new Intent(this, InGamePurchaseActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;
@@ -49,10 +50,10 @@ public class ChangePassword extends AppCompatActivity {
                 user.setPassword(newPass);
                 user.setCurrency(user.getCurrency() - 100);
                 back(view);
-                userManager.updateStatistics(this, user);
+                userManager.setOrUpdateStatistics(this, user, GameConstants.update);
             }else{
-                Button button = findViewById(R.id.changePass);
-                button.setError("Insufficient Gems");
+                Toast.makeText(getApplicationContext(), "Insufficient Gems"
+                        , Toast.LENGTH_LONG).show();
             }
         }else newp.setError("Invalid Password");
     }
