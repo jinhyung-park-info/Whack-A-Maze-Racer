@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myapplication.GameConstants;
+import com.example.myapplication.PlayGamesActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.UserManager;
 
@@ -23,6 +24,13 @@ public class MoleInstructionActivity extends AppCompatActivity {
         if (user_1 != null){
             setUserManager(user_1);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PlayGamesActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
     }
 
     public void play_game(View v){

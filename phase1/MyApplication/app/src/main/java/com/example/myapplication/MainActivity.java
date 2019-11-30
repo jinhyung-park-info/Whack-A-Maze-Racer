@@ -13,9 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private UserManager userManager;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-    public static final  String  FILE_NAME = "user_data.txt";
-    public static final String USER = "user";
-    public static final String Stats_file = "user_stats.txt";
+    //public static final String USER = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

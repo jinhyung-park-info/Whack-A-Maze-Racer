@@ -11,8 +11,6 @@ import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.example.myapplication.UserManager;
 
-import static com.example.myapplication.MainActivity.USER;
-
 public class MazeInstructionsActivity extends AppCompatActivity {
 
     private  UserManager userManager;

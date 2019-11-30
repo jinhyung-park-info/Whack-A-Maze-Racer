@@ -51,4 +51,5 @@
     </string-array>
     <string name="ChooseStatistic">Choose a Statistic:</string>
     <string name="Username">Username</string>
+    <string name="BuyGems">Buy Gems</string>
 </resources>

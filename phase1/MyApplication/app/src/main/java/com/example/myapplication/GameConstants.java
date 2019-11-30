@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
+
 import com.example.myapplication.TypeRacer.TypeRacer;
 
 import java.lang.reflect.Array;
@@ -9,12 +11,44 @@ public abstract class GameConstants {
     public static int limiter = 0;
     public static final String USERMANAGER = "UserManager";
     public static final int usernameLength = 8;
-    public static final int molePassingScore = 5;
+    public static final String USER_STATS_FILE = "user_stats.txt";
+    public static final String USER_FILE = "user_data.txt";
+
+    // Whack-A-Mole Game Constants
+    public static final int moleDefaultLives = 5;
+    public static final int moleDefaultHolesX = 2;
+    public static final int moleDefaultHolesY = 2;
     public static final int moleDefaultDuration = 2400;
+    public static final int molePowerPlayCost = 10;
+    public static final int powerPlayPoint = 10;
+    public static final int moleEasyLives = 10;
+    public static final int moleNormalLives = 5;
+    public static final int moleDifficultLives = 3;
+    public static final int moleHardcoreLives = 1;
+
+    // TypeRacer Game Constants
+    public static final int numOfQuestions = 5;
+    public static final double goldenQuestionFrequency = 0.4;
+    public static final int regularQuestionPoint = 1;
+    public static final int goldenQuestionPoint = 5;
+    public static final long timeLimitInMills = 30000;
+    public static final int backGroundDefault = Color.WHITE;
+    public static final int textColorDefault = Color.BLACK;
+    public static final int difficultyDefault = 5;
+    public static final int minLife = 1;
+    public static final int maxLife = 5;
+
+
+    // Maze Game Constants
     public static final int TotalMazeGames = 2;
     public static final int MazeWallThickness = 4;
     public static final int NumberOfMazeCollectibles = 3;
-    //3 for user and 6 for the games
+
+    // 3 for user and 6 for the games
+    public static final String gameName = "name";
+    public static final String moleName = "mole";
+    public static final String racerName = "racer";
+    public static final String mazeName = "maze";
     public static final int TOTAL_NUM_OF_STATISTICS = 9;
     public static final int NumPeopleOnScoreBoard = 5;
     public static final String NameGame1 = "Whack-A-Mole";
@@ -37,6 +71,10 @@ public abstract class GameConstants {
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
     public static String[] GameNames = new String[]{NameGame1, NameGame2, NameGame3};
 
+    public static enum Direction {
+        UP, DOWN, LEFT, RIGHT
+    }
+
     public static String[] getArrayOfStatistics(String GameName){
         switch (GameName){
             case NameGame1:
@@ -47,6 +85,23 @@ public abstract class GameConstants {
                 return MazeStatistics;
         }
         return new String[]{};
+    }
+
+    /**
+     * Count the occurences of a character in a line
+     *
+     * @param line
+     * @param character
+     * @return
+     */
+    public static int countOccurrences(String line, char character) {
+        int count = 0;
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == character) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }

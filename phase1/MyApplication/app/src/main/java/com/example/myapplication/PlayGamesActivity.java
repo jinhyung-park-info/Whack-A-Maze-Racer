@@ -26,6 +26,13 @@ public class PlayGamesActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
+
     public void playMole(View v){
         //userManager.getUser().setLoad_moles_stats("0");
         userManager.getUser().setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, "0");

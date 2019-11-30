@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,11 +69,9 @@ public class MoleActivity extends AppCompatActivity {
 
   @Override
   public void onBackPressed() {
-    setContentView(R.layout.activity_mole);
-    reset();
-    if(wamView != null){
-    wamView.thread_active = false;
-    }
+    Intent intent = new Intent(this, MoleInstructionActivity.class);
+    intent.putExtra(GameConstants.USERMANAGER, userManager);
+    startActivity(intent);
   }
 
   private void setUserManager(UserManager newManager){
@@ -84,16 +83,16 @@ public class MoleActivity extends AppCompatActivity {
     if (((RadioButton) view).isChecked()) {
       switch (view.getId()) {
         case R.id.hardcore:
-          numLives = 1;
+          numLives = GameConstants.moleHardcoreLives;
           break;
         case R.id.difficult:
-          numLives = 3;
+          numLives = GameConstants.moleDifficultLives;
           break;
         case R.id.noraml:
-          numLives = 5;
+          numLives = GameConstants.moleNormalLives;
           break;
         case R.id.easy:
-          numLives = 10;
+          numLives = GameConstants.moleEasyLives;
           break;
         case R.id.c1:
           numColumns = 1;
@@ -141,6 +140,21 @@ public class MoleActivity extends AppCompatActivity {
     wamView.gameStatus = "inGame";
   }
 
+  public void powerPlay(View view) {
+    Button powerPlayButton = findViewById(R.id.powerPlay);
+    if(user.getCurrency() >= GameConstants.molePowerPlayCost) {
+      user.setCurrency(user.getCurrency() - GameConstants.molePowerPlayCost);
+      writeMoleStats();
+      this.score = GameConstants.powerPlayPoint;
+      wamView = new WamView(this);
+      wamView.thread_active = true;
+      setContentView(wamView);
+      wamView.gameStatus = "inGame";
+    }else{
+      powerPlayButton.setError("Not Enough Gems!");
+    }
+  }
+
   public void conclude() {
     int CurrMolesHit = (int) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit);
     user.setStatistic(GameConstants.NameGame1, GameConstants.MoleHit, CurrMolesHit + molesHit);
@@ -152,15 +166,16 @@ public class MoleActivity extends AppCompatActivity {
     intent.putExtra(GameConstants.USERMANAGER, userManager);
     intent.putExtra(GameConstants.MoleScore, this.wamView.wamManager.score);
     intent.putExtra(GameConstants.MoleHigh, moleHigh);
+    intent.putExtra(GameConstants.gameName, GameConstants.moleName);
     startActivity(intent);
 
   }
 
   // Used to reset customization to default after restarting game.
   public void reset() {
-    numLives = 5;
-    numRows = 2;
-    numColumns = 2;
+    numLives = GameConstants.moleDefaultLives;
+    numRows = GameConstants.moleDefaultHolesY;
+    numColumns = GameConstants.moleDefaultHolesX;
     score = 0;
     backgroundID = R.drawable.game_background;
   }
