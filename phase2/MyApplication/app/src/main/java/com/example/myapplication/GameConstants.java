@@ -97,6 +97,7 @@ public abstract class GameConstants {
     public static final String[]  TypeRacerStatistics = new String[]{TypeRacerStreak};
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
     public static String[] GameNames = new String[]{NameGame1, NameGame2, NameGame3};
+    public static final String change = "change"; //this is key for changePassword
 
     public enum Direction {
         UP, DOWN, LEFT, RIGHT
