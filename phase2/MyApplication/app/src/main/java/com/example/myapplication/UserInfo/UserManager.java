@@ -61,29 +61,6 @@ public class UserManager implements Serializable {
     }
 
     /**
-     * Writes a username and password to the file
-     * @param context of the device
-     * @param fos file output stream
-     * @param username of the user
-     * @param password of the user
-     */
-    //assuming alphanumeric characters only
-    public void writeUsernameAndPass(Context context, FileOutputStream fos, String username, String password) {
-        writeAndCheck.writeUsernameAndPass(context, fos, username, password);
-    }
-
-    /**
-     * Writes the statistics of a new user to the file.
-     *
-     * @param context of the device
-     * @param fos file output stream
-     * @param username of the user
-     */
-    public void writeUsernameAndStatistics(Context context, FileOutputStream fos, String username) {
-        writeAndCheck.writeUsernameAndStatistics(context, fos, username);
-    }
-
-    /**
      * Set the statistics of the user in the file
      *
      * @param context of the device
@@ -281,6 +258,10 @@ public class UserManager implements Serializable {
             }
         }
         //return null;
+    }
+
+    public void writeInfoToFile(Context context, String username, String password, String fileName){
+        writeAndCheck.writeInfoToFile(context, username, password, fileName);
     }
 
 

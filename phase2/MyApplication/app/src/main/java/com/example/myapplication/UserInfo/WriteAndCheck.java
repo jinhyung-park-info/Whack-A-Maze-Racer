@@ -64,24 +64,23 @@ public class WriteAndCheck implements Serializable {
         return arr;
     }
 
-    /**
-     * Helper method to write a username and password to the file
-     *
-     * @param context  of the device
-     * @param fos      file output stream
-     * @param username of the user
-     * @param password of the user
-     * @param mode     of interaction with file
-     */
-    private void writeUsernameAndPassHelper(Context context, FileOutputStream fos, String username,
-                                            String password, int mode) {
+    private void writeInfoToFileHelper(Context context, String username, String password, String fileName, int mode){
+        FileOutputStream fos = null;
         try {
-            fos = context.openFileOutput(GameConstants.USER_FILE, mode);
+            fos = context.openFileOutput(fileName, mode);
             try {
-                fos.write(username.getBytes());
-                fos.write(", ".getBytes());
-                fos.write(password.getBytes());
-                fos.write("\n".getBytes());
+                if(fileName.equals(GameConstants.USER_STATS_FILE)) {
+                    fos.write(username.getBytes());
+                    String s = new String(new char[GameConstants.TOTAL_NUM_OF_STATISTICS]).replace(
+                            "\0", ", 0");
+                    fos.write(s.getBytes());
+                    fos.write("\n".getBytes());
+                }else if(fileName.equals(GameConstants.USER_FILE)){
+                    fos.write(username.getBytes());
+                    fos.write(", ".getBytes());
+                    fos.write(password.getBytes());
+                    fos.write("\n".getBytes());
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -98,70 +97,12 @@ public class WriteAndCheck implements Serializable {
         }
     }
 
-    /**
-     * Writes a username and password to the file
-     *
-     * @param context  of the device
-     * @param fos      file output stream
-     * @param username of the user
-     * @param password of the user
-     */
-    //assuming alphanumeric characters only
-    void writeUsernameAndPass(Context context, FileOutputStream fos, String username, String password) {
-        File file = new File(context.getFilesDir(), GameConstants.USER_FILE);
+    public void writeInfoToFile(Context context, String username, String password, String fileName){
+        File file = new File(context.getFilesDir(),fileName);
         if (file.exists()) {
-            writeUsernameAndPassHelper(context, fos, username, password, MODE_APPEND);
+            writeInfoToFileHelper(context, username,password, fileName, MODE_APPEND);
         } else { //file does not exist make one and write to it
-            writeUsernameAndPassHelper(context, fos, username, password, MODE_PRIVATE);
-        }
-    }
-
-    /**
-     * Helper method to write statistics of a new user to the file
-     *
-     * @param context  of the device
-     * @param fos      file output stream
-     * @param username of the user
-     * @param mode     of interaction with file
-     */
-    private void writeUsernameAndStatisticsHelper(Context context, FileOutputStream fos, String username, int mode) {
-        try {
-            fos = context.openFileOutput(GameConstants.USER_STATS_FILE, mode);
-            try {
-                fos.write(username.getBytes());
-                String s = new String(new char[GameConstants.TOTAL_NUM_OF_STATISTICS]).replace(
-                        "\0", ", 0");
-                fos.write(s.getBytes());
-                fos.write("\n".getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    /**
-     * Writes the statistics of a new user to the file.
-     *
-     * @param context  of the device
-     * @param fos      file output stream
-     * @param username of the user
-     */
-    void writeUsernameAndStatistics(Context context, FileOutputStream fos, String username) {
-        File file = new File(context.getFilesDir(), GameConstants.USER_STATS_FILE);
-        if (file.exists()) {
-            writeUsernameAndStatisticsHelper(context, fos, username, MODE_APPEND);
-        } else { //file does not exist make one and write to it
-            writeUsernameAndStatisticsHelper(context, fos, username, MODE_PRIVATE);
+            writeInfoToFileHelper(context, username,password,fileName, MODE_PRIVATE);
         }
     }
 
