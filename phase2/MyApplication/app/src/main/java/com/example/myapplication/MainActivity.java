@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
     public void onLoginSuccess(String username, String password) {
         IUser user = new User(username);
         user.setPassword(password);
-        userManager.setStatistics(getApplicationContext(), user);
+        userManager.setOrUpdateStatistics(getApplicationContext(), user, GameConstants.set);
         userManager.setUser(user);
     }
 }

@@ -7,7 +7,6 @@ import com.example.myapplication.GameConstants;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -76,8 +75,8 @@ public class UserManager implements Serializable {
      * @param context of the device
      * @param user
      */
-    public  void updateStatistics(Context context, IUser user) {
-        setAndUpdate.updateStatistics(context, user);
+    public  void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate) {
+        setAndUpdate.setOrUpdateStatistics(context, user, setOrUpdate);
 
     }
 
@@ -96,7 +95,7 @@ public class UserManager implements Serializable {
                 if (user.getEmail().equals(username)){
                 }else{
                     IUser NewUser = new User(username);
-                    setAndUpdate.helper(text, NewUser);
+                    setAndUpdate.setInfoInLineToUser(text, NewUser);
                     arr.add(NewUser);
                 }
             }
@@ -263,6 +262,10 @@ public class UserManager implements Serializable {
     public void writeInfoToFile(Context context, String username, String password, String fileName){
         writeAndCheck.writeInfoToFile(context, username, password, fileName);
     }
+
+   /* public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate){
+        setAndUpdate.setOrUpdateStatistics(context, user, setOrUpdate);
+    }*/
 
 
 }

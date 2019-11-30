@@ -3,7 +3,6 @@ package com.example.myapplication.UserInfo;
 import android.content.Context;
 
 import com.example.myapplication.GameConstants;
-import com.example.myapplication.UserInfo.IUser;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -37,7 +36,7 @@ public class SetAndUpdate implements Serializable {
                 int index_of_first_comma = text.indexOf(",");
                 String other_username = text.substring(0, index_of_first_comma);
                 if (user.getEmail().equals(other_username)) {
-                    helper(text, user);
+                    setInfoInLineToUser(text, user);
                     break;
                 }
             }
@@ -102,6 +101,52 @@ public class SetAndUpdate implements Serializable {
 
     }
 
+    public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate){
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            BufferedReader br = openFileForReading(context, GameConstants.USER_STATS_FILE);
+            if(br == null){
+                return;
+            }
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                int indexOfFirstComma = text.indexOf(",");
+                String otherUsername = text.substring(0, indexOfFirstComma);
+                if (user.getEmail().equals(otherUsername)) {
+                    if(setOrUpdate.equals(GameConstants.update)) {
+                        String new_text = makeLine(otherUsername, user);
+                        sb.append(new_text);
+                    }else if(setOrUpdate.equals(GameConstants.set)){
+                        setInfoInLineToUser(text, user);
+                        return;
+                    }
+                } else {
+                    sb.append(text).append("\n");
+                }
+            }
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
+    }
+
+    private BufferedReader openFileForReading(Context context, String userStatsFile) {
+        try {
+            FileInputStream fis = context.openFileInput(GameConstants.USER_STATS_FILE);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            return br;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public void writeStringToFile(Context context, StringBuilder sb, String FileName) {
         FileOutputStream fileOut = null;
         try {
@@ -142,7 +187,7 @@ public class SetAndUpdate implements Serializable {
      * @param user
      * @return the updated user
      */
-    void helper(String line, IUser user) {
+    void setInfoInLineToUser(String line, IUser user) {
         String cleanLine = line.replaceAll("\\s", "");
         int numCommas = GameConstants.countOccurrences(cleanLine, ',');
         String[] userAndGameStats = cleanLine.split(",", numCommas + 1);

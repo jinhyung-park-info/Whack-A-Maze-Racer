@@ -17,7 +17,6 @@ import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MazeView extends View {
 
@@ -295,7 +294,7 @@ public class MazeView extends View {
                 this.userInMaze.setStatistic(GameConstants.NameGame3,
                         GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + gamesPlayed);
                 this.userInMaze.setLastPlayedLevel(0);
-                userManager.updateStatistics(contexts, userInMaze);
+                userManager.setOrUpdateStatistics(contexts, userInMaze, GameConstants.update);
                 Activity activity = (MazeCustomizationActivity) contexts;
                 ((MazeCustomizationActivity) contexts).reset();
                 activity.setContentView(R.layout.activity_maze_customization);
