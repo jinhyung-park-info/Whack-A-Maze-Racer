@@ -70,16 +70,22 @@ public class WriteAndCheck implements Serializable {
             fos = context.openFileOutput(fileName, mode);
             try {
                 if(fileName.equals(GameConstants.USER_STATS_FILE)) {
-                    fos.write(username.getBytes());
+                    /*fos.write(username.getBytes());
                     String s = new String(new char[GameConstants.TOTAL_NUM_OF_STATISTICS]).replace(
                             "\0", ", 0");
                     fos.write(s.getBytes());
-                    fos.write("\n".getBytes());
+                    fos.write("\n".getBytes());*/
+                    String stat = new String(new char[GameConstants.TOTAL_NUM_OF_STATISTICS]).replace(
+                            "\0", ", 0");
+                    String text = username + stat + "\n";
+                    fos.write(text.getBytes());
                 }else if(fileName.equals(GameConstants.USER_FILE)){
-                    fos.write(username.getBytes());
+                    String text = username + ", " + password + "\n";
+                    /*fos.write(username.getBytes());
                     fos.write(", ".getBytes());
                     fos.write(password.getBytes());
-                    fos.write("\n".getBytes());
+                    fos.write("\n".getBytes());*/
+                    fos.write(text.getBytes());
                 }
             } catch (IOException e) {
                 e.printStackTrace();

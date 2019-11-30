@@ -5,24 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.example.myapplication.GameActivity;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.SaveScoreActivity;
 import com.example.myapplication.UserInfo.UserManager;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MazeCustomizationActivity extends AppCompatActivity {
 
@@ -52,7 +42,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     MazeView maze;
 
     private String mazeSaveStateFileName;
-    private MazeLoader mazeLoader;
+    //private MazeLoader mazeLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,28 +54,29 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         if (user_1 != null) {
             setUserManager(user_1);
         }
+        setContentView(R.layout.activity_maze_customization);
 
         mazeSaveStateFileName = usermanager.getUser().getEmail() + "_maze_save_state.txt";
         startedMaze = false;
-        mazeLoader = new MazeLoader(getApplicationContext(), usermanager);
+        //mazeLoader = new MazeLoader(getApplicationContext(), usermanager);
         //usermanager.getUser().setLastPlayedLevel(3);
 
         //if they clicked start game instead of load game and properly went through each level
-        if (usermanager.getUser().getLastPlayedLevel() != 3) {
+        /*if (usermanager.getUser().getLastPlayedLevel() != 3) {
             File mazeFile = new File(getApplicationContext().getFilesDir(), mazeSaveStateFileName);
             if (mazeFile.exists()) {
                 mazeFile.delete();
             }
             setContentView(R.layout.activity_maze_customization);
         } else {
-            startedMaze = true;
-            //setContentView(R.layout.activity_maze_customization);
-        }
+            //startedMaze = true;
+            setContentView(R.layout.activity_maze_customization);
+        }*/
 
         System.out.println(usermanager.getUser().getLastPlayedLevel());
         usermanager.getUser().setLastPlayedLevel(3);
         System.out.println(usermanager.getUser().getLastPlayedLevel());
-        usermanager.updateStatistics(getApplicationContext(), usermanager.getUser());
+        usermanager.setOrUpdateStatistics(getApplicationContext(), usermanager.getUser(), GameConstants.update);
         reset();
 
     }
@@ -158,7 +149,9 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     private void setupMaze() {
-        maze = mazeLoader.startNewMaze(bgColour, difficulty, playerType);
+        //maze = mazeLoader.startNewMaze(bgColour, difficulty, playerType);
+        //setContentView(maze);
+        maze = new MazeView(getApplicationContext(), bgColour, difficulty, playerType, usermanager);
         setContentView(maze);
         startedMaze = true;
     }
@@ -178,13 +171,13 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         }
     }
 
-    /**
+   /* *//**
      * Saves the maze when activity is interrupted, if the player already started playing the maze.
-     */
+     *//*
     @Override
     protected void onPause() {
         super.onPause();
-        usermanager.updateStatistics(getApplicationContext(), usermanager.getUser());
+        usermanager.setOrUpdateStatistics(getApplicationContext(), usermanager.getUser());
         if (startedMaze) {
             ArrayList<StringBuilder> savedMaze = mazeLoader.saveMaze();
             FileOutputStream fos = null;
@@ -229,11 +222,11 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
                 maze = new MazeView(getApplicationContext(), usermanager);
                 maze = mazeLoader.loadMaze(savedMaze, maze);
-                /*maze = maze.setupOldMaze(mazeAttributes.getCols(), mazeAttributes.getRows(),
+                *//*maze = maze.setupOldMaze(mazeAttributes.getCols(), mazeAttributes.getRows(),
                         mazeAttributes.getBgColour(), mazeAttributes.getPlayerType(),
                         mazeAttributes.getPlayerCol(), mazeAttributes.getPlayerRow(),
                         mazeAttributes.getCells());
-*/
+*//*
                 if (maze == null)
                     setContentView(R.layout.activity_maze_customization);
                 else
@@ -247,7 +240,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             }
 
         }
-    }
+    }*/
 
     public void reset() {
        bgColour = Color.GREEN;

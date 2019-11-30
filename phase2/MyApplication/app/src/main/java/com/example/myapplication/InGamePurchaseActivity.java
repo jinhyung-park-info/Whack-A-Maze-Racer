@@ -66,7 +66,7 @@ public class InGamePurchaseActivity extends AppCompatActivity {
 
         if (ccMatcher.matches() && cvvMatcher.matches() && expMatcher.matches()) {
             user.setCurrency(user.getCurrency() + 50);
-            userManager.updateStatistics(this, user);
+            userManager.setOrUpdateStatistics(this, user, GameConstants.update);
             ccText.setError(null);
         }else{
             ccText.setError("Invalid Credit Card/Expiration Date/Cvv !");

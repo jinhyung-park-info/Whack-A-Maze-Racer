@@ -35,7 +35,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         if (user_1 != null) {
             setUserManager(user_1);
             userManager.getUser().setLastPlayedLevel(2);
-            userManager.updateStatistics(this, userManager.getUser());
+            userManager.setOrUpdateStatistics(this, userManager.getUser(), GameConstants.update);
         }
     }
 
