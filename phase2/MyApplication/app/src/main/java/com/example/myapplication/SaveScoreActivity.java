@@ -48,6 +48,7 @@ public class SaveScoreActivity extends AppCompatActivity {
 
   public void save(View view) {
     user.setOverallScore(user.getOverallScore() + moleScore);
+    user.setOverallScore(user.getOverallScore() + racerStreak*10);
     moleHigh = Math.max(moleHigh, (int) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh));
     user.setStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh, moleHigh);
     userManager.updateStatistics(this, user);
