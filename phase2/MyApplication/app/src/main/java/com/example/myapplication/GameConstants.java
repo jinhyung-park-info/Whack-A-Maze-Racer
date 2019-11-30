@@ -14,6 +14,8 @@ public abstract class GameConstants {
     public static final int passwordLength = 6;
     public static final String USER_STATS_FILE = "user_stats.txt";
     public static final String USER_FILE = "user_data.txt";
+    public static final String update = "update";
+    public static final String set = "set";
 
     //In-app purchase Constants
     public static final int pointsFromCollectingGem = 10;

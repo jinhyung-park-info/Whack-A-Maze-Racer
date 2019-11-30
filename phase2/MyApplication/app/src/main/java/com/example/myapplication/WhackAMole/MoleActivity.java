@@ -181,7 +181,7 @@ public class MoleActivity extends AppCompatActivity {
   }
 
   public void writeMoleStats(){
-    userManager.updateStatistics(getApplicationContext(), user);
+    userManager.setOrUpdateStatistics(getApplicationContext(), user, GameConstants.update);
   }
 
   public void load(IUser user) {

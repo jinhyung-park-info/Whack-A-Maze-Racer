@@ -161,7 +161,7 @@ public class TypeRacer extends AppCompatActivity {
             user.setLastPlayedLevel(0);
             //user.setStreaks(countStreak);
             user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
-            userManager.updateStatistics(this, user);
+            userManager.setOrUpdateStatistics(this, user, GameConstants.update);
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(GameConstants.USERMANAGER, userManager);
             goToEndGame.putExtra("finalScore", "" + countScore);
@@ -231,7 +231,7 @@ public class TypeRacer extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
                 //user.setStreaks(countStreak);
                 user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
-                userManager.updateStatistics(this, user);
+                userManager.setOrUpdateStatistics(this, user, GameConstants.update);
                 intent.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent);
             }
