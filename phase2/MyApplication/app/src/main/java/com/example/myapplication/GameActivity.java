@@ -62,7 +62,6 @@ public class GameActivity extends AppCompatActivity {
     public void resume(View view){
         switch (userManager.getUser().getLastPlayedLevel()) {
             case 0:
-                Button loadButton = findViewById(R.id.button4);
                 Toast.makeText(getApplicationContext(), "You have not played a game yet"
                         , Toast.LENGTH_LONG).show();
                 break;
