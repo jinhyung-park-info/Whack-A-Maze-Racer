@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.example.myapplication.GameConstants;
+
 /** Obtained but significantly modified from source 2) */
 class Mole {
 
@@ -28,8 +30,8 @@ class Mole {
 
   Mole(Hole hole) {
     this.molePic = WamView.genericMole;
-    this.value = 1;
-    this.gemValue = 0;
+    this.value = GameConstants.moleValue;
+    this.gemValue = GameConstants.nonGemMoleValue;
     this.lifeCount = 1;
 
     molePicWidth = this.molePic.getWidth();
