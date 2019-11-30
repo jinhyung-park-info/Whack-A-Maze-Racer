@@ -43,7 +43,7 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void PlayGame(View view){
+    public void playGame(View view) {
         File file_type = new File(getApplicationContext().getFilesDir(),userManager.getUser().getEmail() + "_typeracer.txt");
         File file_maze = new File(getApplicationContext().getFilesDir(), userManager.getUser().getEmail() + "_maze_save_state.txt");
         if(file_type.exists()){

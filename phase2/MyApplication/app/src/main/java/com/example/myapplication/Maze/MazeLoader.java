@@ -119,6 +119,8 @@ class MazeLoader implements Loadable {
             }
         }
 
+        System.out.println(cols + " " + rows + " " + bgColour + " " + playerType + " " + playerCol + " " + playerRow);
+
         mazeView.setupOldMaze(cols, rows, bgColour, playerType, playerCol, playerRow, cells);
 
         return mazeView;

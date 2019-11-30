@@ -78,11 +78,12 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             }
             setContentView(R.layout.activity_maze_customization);
         } else {
-            setContentView(R.layout.activity_maze_customization);
+            startedMaze = true;
+            //setContentView(R.layout.activity_maze_customization);
         }
 
         System.out.println(usermanager.getUser().getLastPlayedLevel());
-        //usermanager.getUser().setLastPlayedLevel(3);
+        usermanager.getUser().setLastPlayedLevel(3);
         System.out.println(usermanager.getUser().getLastPlayedLevel());
         usermanager.updateStatistics(getApplicationContext(), usermanager.getUser());
         reset();
@@ -225,10 +226,16 @@ public class MazeCustomizationActivity extends AppCompatActivity {
                     savedMaze.add(new StringBuilder(input.nextLine().trim()));
                 }
                 input.close();
-                maze = mazeLoader.loadMaze(savedMaze, maze);
 
+                maze = new MazeView(getApplicationContext(), usermanager);
+                maze = mazeLoader.loadMaze(savedMaze, maze);
+                /*maze = maze.setupOldMaze(mazeAttributes.getCols(), mazeAttributes.getRows(),
+                        mazeAttributes.getBgColour(), mazeAttributes.getPlayerType(),
+                        mazeAttributes.getPlayerCol(), mazeAttributes.getPlayerRow(),
+                        mazeAttributes.getCells());
+*/
                 if (maze == null)
-                    setupMaze();
+                    setContentView(R.layout.activity_maze_customization);
                 else
                     setContentView(maze);
 
@@ -236,6 +243,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
             } catch (FileNotFoundException e) {
                 Log.e(TAG, "Maze file not found on resume");
+                setContentView(R.layout.activity_maze_customization);
             }
 
         }

@@ -153,6 +153,40 @@ public class MazeView extends View {
             playerBitmap = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
 
         createMaze();
+        distributeCollectibles();
+    }
+
+    public MazeView(Context context, UserManager user_1) {
+        super(context);
+        contexts = context;
+
+        this.userManager = user_1;
+        this.userInMaze = user_1.getUser();
+        mazeCreation = new MazeCreation();
+
+        wallPaint = new Paint();
+        wallPaint.setColor(Color.BLACK);
+        wallPaint.setStrokeWidth(GameConstants.MazeWallThickness);
+
+        //setup playerPaint
+        playerPaint = new Paint();
+        playerPaint.setColor(Color.MAGENTA);
+
+        //setup exitPaint
+        exitPaint = new Paint();
+        exitPaint.setColor(Color.BLACK);
+
+        collectiblesEnabled = true;
+        collectibles = new ArrayList<Collectible>();
+        collectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.a_plus);
+        gemCollectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.gem);
+        collectiblePaint = new Paint();
+        collectiblePaint.setColor(Color.LTGRAY);
+
+        if (playerType == 0)
+            playerBitmap = BitmapFactory.decodeResource(res, R.drawable.lindsey_mole);
+        else
+            playerBitmap = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
     }
 
     public void setBgColour(int bgColour) {
@@ -192,7 +226,9 @@ public class MazeView extends View {
         cells = mazeCreation.makeMaze(cells, cols, rows);
         player = cells[0][0];
         exit = cells[cols - 1][rows - 1];
+    }
 
+    private void distributeCollectibles() {
         for (int i = 0; i < GameConstants.NumberOfMazeCollectibles; i++) {
             double randCollectibleType = Math.random();
             int[] coordinates = generateRandomCoordinates();
@@ -292,6 +328,10 @@ public class MazeView extends View {
                              int playerRow, Cell[][] cells) {
         //leaving and returning to the maze scares away the collectibles
         collectiblesEnabled = false;
+        this.cols = cols;
+        this.rows = rows;
+        this.bgColour = bgColour;
+        this.playerType = playerType;
 
         this.cells = cells;
         player = this.cells[playerCol][playerRow];
