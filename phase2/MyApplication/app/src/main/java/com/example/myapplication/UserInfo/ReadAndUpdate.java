@@ -19,6 +19,14 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ReadAndUpdate implements Serializable {
 
+    /**
+     *
+     * @param context of the device
+     * @param user whose statistics need to be set or updated
+     * @param setOrUpdate the string which will decide if the statistics will be set or updated.The
+     *                    string should be one one of either the string "update" or "set".
+     */
+
     public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate) {
         StringBuilder sb = new StringBuilder();
 
@@ -34,7 +42,7 @@ public class ReadAndUpdate implements Serializable {
                 String otherUsername = text.substring(0, indexOfFirstComma);
                 if (user.getEmail().equals(otherUsername)) {
                     if (setOrUpdate.equals(GameConstants.update)) {
-                        String new_text = makeLine(otherUsername, user);
+                        String new_text = updateLine(user);
                         sb.append(new_text);
                     } else if (setOrUpdate.equals(GameConstants.set)) {
                         setInfoInLineToUser(text, user);
@@ -52,6 +60,13 @@ public class ReadAndUpdate implements Serializable {
         writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
     }
 
+    /**
+     *
+     * @param context of the device
+     * @param fileName the name of the file which needs to be opened for reading
+     * @return the buffered reader with the file input stream.
+     */
+
     BufferedReader openFileForReading(Context context, String fileName) {
         try {
             FileInputStream fis = context.openFileInput(fileName);
@@ -62,6 +77,13 @@ public class ReadAndUpdate implements Serializable {
         }
         return null;
     }
+
+    /**
+     *
+     * @param context of the device
+     * @param sb the string to write/overwrite the file
+     * @param FileName the name of the file which will have the contents of sb
+     */
 
 
     void writeStringToFile(Context context, StringBuilder sb, String FileName) {
@@ -74,8 +96,14 @@ public class ReadAndUpdate implements Serializable {
         }
     }
 
-    private String makeLine(String username, IUser user) {
-        return username + ", " + user.getLastPlayedLevel() + ", " + user.getOverallScore()
+    /**
+     *
+     * @param user with the updated statistics
+     * @return the new line to be stored in the file with the updated statistics
+     */
+
+    private String updateLine(IUser user) {
+        return user.getEmail() + ", " + user.getLastPlayedLevel() + ", " + user.getOverallScore()
                 + ", " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak)
                 + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed)
                 + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze)

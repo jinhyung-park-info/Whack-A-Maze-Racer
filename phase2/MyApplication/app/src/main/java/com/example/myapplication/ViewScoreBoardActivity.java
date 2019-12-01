@@ -95,11 +95,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
-        //Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_LONG).show();
-        //TextView Header = findViewById(R.id.HeaderUserName);
         TextView Statistic = findViewById(R.id.StatisticName);
-        //String header = "     Username" + "          " + text;
-        //Header.setText("Username");
         List<IUser> cloneOfUsers = new ArrayList<>(ArrayOfUsers);
         Statistic.setText(text);
         setupScoreBoard(text, cloneOfUsers);
@@ -141,17 +137,11 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         int i = 0;
         int numbering = 1;
         for (IUser user : arrayUsers) {
-            //TextView textViewObject = arrayOfTextView[i];
             if (GameName == null) {
-                //String text = "   " + (i + 1) + ". " + user.getEmail() + "                " + user.getOverallScore();
-                //textViewObject.setText(text);
                 String text = numbering + "." + user.getEmail();
                 arrayOfTextView[i].setText(text);
                 arrayOfTextView[i + 1].setText(String.valueOf(user.getOverallScore()));
             } else {
-                /*String text = "   " + (i + 1) + ". " + user.getEmail() + "                " +
-                        user.getStatistic(GameName, Statistic);
-                textViewObject.setText(text);*/
                 String text = numbering + "." + user.getEmail();
                 arrayOfTextView[i].setText(text);
                 arrayOfTextView[i + 1].setText(String.valueOf(user.getStatistic(GameName, Statistic)));

@@ -168,16 +168,14 @@ public class MazeView extends View {
         wallPaint.setColor(Color.BLACK);
         wallPaint.setStrokeWidth(GameConstants.MazeWallThickness);
 
-        //setup playerPaint
         playerPaint = new Paint();
         playerPaint.setColor(Color.MAGENTA);
 
-        //setup exitPaint
         exitPaint = new Paint();
         exitPaint.setColor(Color.BLACK);
 
         collectiblesEnabled = true;
-        collectibles = new ArrayList<Collectible>();
+        collectibles = new ArrayList<>();
         collectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.a_plus);
         gemCollectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.gem);
         collectiblePaint = new Paint();
@@ -284,8 +282,6 @@ public class MazeView extends View {
             checkCollectibles();
         }
 
-        //to update the positions on the screen, we have to call onDraw()
-        //invalidate() calls onDraw() as soon as possible
         invalidate();
     }
 
@@ -362,8 +358,6 @@ public class MazeView extends View {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            /*float x = event.getX();
-            float y = event.getY();*/
 
             float playerCentreX = horizontalMargin + (player.getCol() + 0.5f) * cellSize;
             float playerCentreY = verticalMargin + (player.getRow() + 0.5f) * cellSize;
@@ -376,26 +370,20 @@ public class MazeView extends View {
 
             if (absDifferenceX > cellSize || absDifferenceY > cellSize) {
                 if (absDifferenceX > absDifferenceY) {
-                    //move in x direction (left or right)
                     if (differenceX > 0) {
-                        //move to the right
                         movePlayer(GameConstants.Direction.RIGHT);
                     } else {
-                        //move to the left
                         movePlayer(GameConstants.Direction.LEFT);
                     }
                 } else {
-                    //move in y direction (up or down)
                     if (differenceY > 0) {
-                        //move down
                         movePlayer(GameConstants.Direction.DOWN);
                     } else {
-                        //move up
                         movePlayer(GameConstants.Direction.UP);
                     }
                 }
             }
-            return true; //event has been handled
+            return true;
         }
 
         return super.onTouchEvent(event);
@@ -415,19 +403,14 @@ public class MazeView extends View {
         //also since cells are squares, the size of a cell represents both the cell's height & width
 
         if (width / cols > height / rows) {
-            //adding 1 to the # of cols takes into account the space the margin takes up
             cellSize = height / (rows + 1);
         } else {
-            //adding 1 to the # of rows takes into account the space the margin takes up
             cellSize = width / (cols + 1);
         }
 
-        //the margins are half the size of a cell
         horizontalMargin = (width - cols * cellSize) / 2;
         verticalMargin = (height - rows * cellSize) / 2;
 
-        //moves the the top left corner of the canvas horizontalMargin units to the right
-        //and verticalMargin units down
         canvas.translate(horizontalMargin, verticalMargin);
 
         rescaleBitmaps();
@@ -464,29 +447,24 @@ public class MazeView extends View {
                 }
             }
 
-            //we will add this to the top left corner and subtract it from the bottom right corner
             float margin = cellSize / 10;
 
-            //draw the player
             canvas.drawBitmap(playerBitmap, player.getCol() * cellSize + margin,
                     player.getRow() * cellSize + margin, playerPaint);
 
-            //draw the exit
             canvas.drawRect(exit.getCol() * cellSize + margin,
                     exit.getRow() * cellSize + margin,
                     (exit.getCol() + 1) * cellSize - margin,
                     (exit.getRow() + 1) * cellSize - margin,
                     exitPaint);
 
-            if (collectiblesEnabled) {
-                //draw collectibles
+
                 for (Collectible c : collectibles) {
                     canvas.drawBitmap(c.resizeBitmap((int) Math.floor(cellSize * 0.8),
                             (int) Math.floor(cellSize * 0.8)),
                             c.getCol() * cellSize + margin,
                             c.getRow() * cellSize + margin, collectiblePaint);
                 }
-            }
         }
 
     }

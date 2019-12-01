@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,10 +50,14 @@ public class GameActivity extends AppCompatActivity {
         File file_type = new File(getApplicationContext().getFilesDir(),userManager.getUser().getEmail() + "_typeracer.txt");
         File file_maze = new File(getApplicationContext().getFilesDir(), userManager.getUser().getEmail() + "_maze_save_state.txt");
         if(file_type.exists()){
-            file_type.delete();
+            if(file_type.delete()){
+                Log.i("File", "delete the typeracer save file because new game was started");
+            }
         }
         if(file_maze.exists()){
-            file_maze.delete();
+            if(file_maze.delete()){
+                Log.i("File", "delete the maze save file because new game was started");
+            }
         }
         Intent intent = new Intent(this, PlayGamesActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
