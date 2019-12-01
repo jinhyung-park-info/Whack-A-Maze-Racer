@@ -36,8 +36,7 @@ public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver
 
         // register this observer
 
-
-        mData = TypeRacerData.getInstance();
+        mData = TypeRacerData.getInstance(getIntent().getExtras().getString("finalScore") + "/25");
         mData.registerObserver(this);
 
         TextView finalScore = findViewById(R.id.finalScoreTextView);

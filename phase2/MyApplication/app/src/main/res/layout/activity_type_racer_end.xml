@@ -58,7 +58,7 @@
         android:id="@+id/correctnessTV"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:text="0/5"
+        android:text="0/25"
         android:gravity="center"
         android:textColor="#FF0000"
         android:textSize="20sp"

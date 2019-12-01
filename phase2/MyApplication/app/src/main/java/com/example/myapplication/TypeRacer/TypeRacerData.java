@@ -1,48 +1,47 @@
 package com.example.myapplication.TypeRacer;
 
 
-import android.os.Handler;
-
 import java.util.ArrayList;
 
 public class TypeRacerData implements TypeRacerSubject {
-    private String correctness;
+    private String correctness="0/25";
     private static TypeRacerData INSTANCE = null;
 
     private ArrayList<TypeRacerObserver> dataObservers;
 
-    private TypeRacerData() {
+    private TypeRacerData(String c) {
         dataObservers = new ArrayList<>();
-        getNewDataFromRemote();
+        getNewDataFromRemote(c);
     }
 
     // Simulate network
-    private void getNewDataFromRemote() {
+    private void getNewDataFromRemote(String c) {
 //        final Handler handler = new Handler();
 //        handler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-                setUserData("1/5");
+                setCorrectness(c);
 //            }
 //        }, 10000);
     }
 
     // Creates a Singleton of the class
-    static TypeRacerData getInstance() {
+    static TypeRacerData getInstance(String c) {
 
-        INSTANCE = new TypeRacerData();
+        INSTANCE = new TypeRacerData(c);
         return INSTANCE;
     }
 
     @Override
     public void registerObserver(TypeRacerObserver dataObserver) {
 
-            dataObservers.add(dataObserver);
+        dataObservers.add(dataObserver);
+        notifyObservers();
     }
 
     @Override
-    public void removeObserver(TypeRacerObserver repositoryObserver) {
-        dataObservers.remove(repositoryObserver);
+    public void removeObserver(TypeRacerObserver dataObserver) {
+        dataObservers.remove(dataObserver);
     }
 
     @Override
@@ -52,8 +51,8 @@ public class TypeRacerData implements TypeRacerSubject {
         }
     }
 
-    private void setUserData(String c) {
+    private void setCorrectness(String c) {
         this.correctness= c;
-        notifyObservers();
+
     }
 }
