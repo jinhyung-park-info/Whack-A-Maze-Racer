@@ -58,17 +58,6 @@ public class UserManager implements Serializable {
     public ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password){
         return writeAndCheck.checkUsernameAndPassword(context, username, password);
     }
-
-    /**
-     * Set the statistics of the user in the file
-     *
-     * @param context of the device
-     * @param user
-     */
-    public void setStatistics(Context context, IUser user){
-        setAndUpdate.setStatistics(context, user);
-    }
-
     /**
      * Update the statistics of a user in the file
      *
@@ -84,9 +73,7 @@ public class UserManager implements Serializable {
         InputStream fis = null;
         ArrayList<IUser> arr = new ArrayList<>();
         try {
-            fis = context.openFileInput(GameConstants.USER_STATS_FILE);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+            BufferedReader br = setAndUpdate.openFileForReading(context, GameConstants.USER_STATS_FILE);
             String text;
 
             while ((text = br.readLine()) != null) {
@@ -129,9 +116,10 @@ public class UserManager implements Serializable {
         StringBuilder sb = new StringBuilder();
 
         try {
-            fis = context.openFileInput(GameConstants.USER_STATS_FILE);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+            BufferedReader br = setAndUpdate.openFileForReading(context, GameConstants.USER_STATS_FILE);
+            if(br == null){
+                return false;
+            }
             String text;
 
             while ((text = br.readLine()) != null) {
@@ -192,20 +180,27 @@ public class UserManager implements Serializable {
     }
 
 
-    public Object getPasswordFromFile(Context context, String username){
+    public Object getOrChangePassword(Context context, String username, String newPassword, String getOrChange){
         InputStream fis = null;
+        StringBuilder sb = new StringBuilder();
         try {
-            fis = context.openFileInput(GameConstants.USER_FILE);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
+            BufferedReader br = setAndUpdate.openFileForReading(context, GameConstants.USER_FILE);
             String text;
 
             while ((text = br.readLine()) != null) {
                 int indexOfComma = text.indexOf(",");
                 String otherUsername = text.substring(0, indexOfComma);
                 if (username.equals(otherUsername)) {
-                    int index_of_space = text.indexOf(" ");
-                    return text.substring(index_of_space + 1);
+                    int indexOfSpace = text.indexOf(" ");
+                    if(getOrChange.equals(GameConstants.getPassword)) {
+                        return text.substring(indexOfSpace + 1);
+                    }else if(getOrChange.equals(GameConstants.changePassword)){
+                        String newLine = otherUsername + ", " + newPassword + "\n";
+                        sb.append(newLine);
+
+                    }
+                }else{
+                    sb.append(text).append("\n");
                 }
             }
 
@@ -225,47 +220,11 @@ public class UserManager implements Serializable {
         return null;
     }
 
-    public void removeUserFromFile(Context context, String username){
-        InputStream fis = null;
-        try {
-            fis = context.openFileInput(GameConstants.USER_FILE);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                int index_of_comma = text.indexOf(",");
-                String other_username = text.substring(0, index_of_comma);
-                if (username.equals(other_username)) {
-                    int index_of_space = text.indexOf(" ");
-                    //return text.substring(index_of_space + 1);
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        //return null;
-    }
 
     public void writeInfoToFile(Context context, String username, String password, String fileName){
         writeAndCheck.writeInfoToFile(context, username, password, fileName);
     }
 
-   /* public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate){
-        setAndUpdate.setOrUpdateStatistics(context, user, setOrUpdate);
-    }*/
 
 
 }
