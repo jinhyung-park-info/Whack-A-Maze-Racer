@@ -151,7 +151,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     private void setupMaze() {
         //maze = mazeLoader.startNewMaze(bgColour, difficulty, playerType);
         //setContentView(maze);
-        maze = new MazeView(getApplicationContext(), bgColour, difficulty, playerType, usermanager);
+        maze = new MazeView(this, bgColour, difficulty, playerType, usermanager);
         setContentView(maze);
         startedMaze = true;
     }
