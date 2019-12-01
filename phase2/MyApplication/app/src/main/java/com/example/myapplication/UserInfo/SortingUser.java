@@ -3,6 +3,10 @@ package com.example.myapplication.UserInfo;
 
 import java.util.Comparator;
 
+/**
+ * This class will sort the user based on the user statistic only if the statistic is an int
+ */
+
 public class SortingUser implements Comparator<IUser> {
     private String GameName;
     private String Statistic;
