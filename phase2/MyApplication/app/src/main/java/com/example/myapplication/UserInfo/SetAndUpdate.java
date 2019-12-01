@@ -18,88 +18,6 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SetAndUpdate implements Serializable {
-    /**
-     * Set the statistics of the user in the file
-     *
-     * @param context of the device
-     * @param user
-     */
-    void setStatistics(Context context, IUser user) {
-        FileInputStream fis = null;
-        try {
-            fis = context.openFileInput(GameConstants.USER_STATS_FILE);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                int index_of_first_comma = text.indexOf(",");
-                String other_username = text.substring(0, index_of_first_comma);
-                if (user.getEmail().equals(other_username)) {
-                    setInfoInLineToUser(text, user);
-                    break;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    /**
-     * Update the statistics of a user in the file
-     *
-     * @param context of the device
-     * @param user
-     */
-    public void updateStatistics(Context context, IUser user) {
-        FileInputStream fis = null;
-        StringBuilder sb = new StringBuilder();
-
-        try {
-            fis = context.openFileInput(GameConstants.USER_STATS_FILE);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                int index_of_first_comma = text.indexOf(",");
-                String other_username = text.substring(0, index_of_first_comma);
-                if (user.getEmail().equals(other_username)) {
-                    String new_text = makeLine(other_username, user);
-                    sb.append(new_text);
-                } else {
-                    sb.append(text).append("\n");
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        // write the new string with the replaced line OVER the same file
-        writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
-
-    }
 
     public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate){
         StringBuilder sb = new StringBuilder();
@@ -134,9 +52,9 @@ public class SetAndUpdate implements Serializable {
         writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
     }
 
-    private BufferedReader openFileForReading(Context context, String userStatsFile) {
+    public BufferedReader openFileForReading(Context context, String fileName) {
         try {
-            FileInputStream fis = context.openFileInput(GameConstants.USER_STATS_FILE);
+            FileInputStream fis = context.openFileInput(fileName);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             return br;
@@ -148,21 +66,10 @@ public class SetAndUpdate implements Serializable {
 
 
     public void writeStringToFile(Context context, StringBuilder sb, String FileName) {
-        FileOutputStream fileOut = null;
         try {
-            fileOut = context.openFileOutput(FileName, MODE_PRIVATE);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            if (fileOut != null)
-                fileOut.write(sb.toString().getBytes());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            if (fileOut != null)
-                fileOut.close();
+            FileOutputStream fileOut = context.openFileOutput(FileName, MODE_PRIVATE);
+            fileOut.write(sb.toString().getBytes());
+            fileOut.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -212,6 +119,5 @@ public class SetAndUpdate implements Serializable {
         user.setLastPlayedLevel(lastPlayedLevel);
         user.setOverallScore(overallScore);
         user.setCurrency(gemsRemaining);
-        //return user;
     }
 }

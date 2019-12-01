@@ -21,8 +21,8 @@ public class ForgotPassword extends AppCompatActivity {
     public void PasswordCheck(View view){
         UserManager userManager = new UserManager();
         EditText username = findViewById(R.id.UsernameCheck);
-        Object validate = userManager.getPasswordFromFile(getApplicationContext(),
-                username.getText().toString());
+        Object validate = userManager.getOrChangePassword(getApplicationContext(),
+                username.getText().toString(), null, GameConstants.getPassword);
         if(validate instanceof String){
             TextView Password = findViewById(R.id.PasswordCheck);
             String text = "Your Password is: " + validate.toString();
