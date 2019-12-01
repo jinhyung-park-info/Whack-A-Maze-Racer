@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
 
     }
 
-    public void createAccount(View view){
+    public void createAccount(View view) {
         Intent intent = new Intent(this, CreateAccountActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
@@ -36,24 +36,25 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
     }
 
 
-    public void LoginButton(View view){
+    public void LoginButton(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         EditText editTextUser = findViewById(R.id.editText1);
         EditText editTextPass = findViewById(R.id.editText);
         String username = editTextUser.getText().toString();
         String password = editTextPass.getText().toString();
         if (loginPresenter.validateCredentialsForLogin(getApplicationContext(), username, password,
-                editTextUser, editTextPass)){
+                editTextUser, editTextPass)) {
             onLoginSuccess(username, password);
             intent.putExtra(GameConstants.USERMANAGER, userManager);
             startActivity(intent);
         }
     }
-    public void exitApplication(View view){
+
+    public void exitApplication(View view) {
         moveTaskToBack(true);
     }
 
-    public void forgotPassword(View view){
+    public void forgotPassword(View view) {
         Intent intent = new Intent(this, ForgotPassword.class);
         startActivity(intent);
     }

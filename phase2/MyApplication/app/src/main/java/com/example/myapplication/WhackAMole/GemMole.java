@@ -9,7 +9,7 @@ import com.example.myapplication.GameConstants;
 
 class GemMole extends Mole {
 
-    GemMole(Hole hole){
+    GemMole(Hole hole) {
         super(hole);
     }
 

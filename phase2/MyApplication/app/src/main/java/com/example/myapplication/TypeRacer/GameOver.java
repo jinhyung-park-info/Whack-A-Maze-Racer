@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.TypeRacer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.myapplication.GameConstants;
+import com.example.myapplication.R;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.UserInfo.UserManager;
 

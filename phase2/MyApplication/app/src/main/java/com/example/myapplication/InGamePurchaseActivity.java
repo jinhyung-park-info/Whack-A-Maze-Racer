@@ -39,19 +39,19 @@ public class InGamePurchaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager){
+    private void setUserManager(UserManager newManager) {
         userManager = newManager;
     }
 
-    public void buyCurrency(View view){
+    public void buyCurrency(View view) {
 
-        EditText ccText =  findViewById(R.id.cc);
+        EditText ccText = findViewById(R.id.cc);
         String ccNum = ccText.getText().toString();
 
-        EditText cvvText =  findViewById(R.id.cvv);
+        EditText cvvText = findViewById(R.id.cvv);
         String cvvNum = cvvText.getText().toString();
 
-        EditText expText =  findViewById(R.id.exp);
+        EditText expText = findViewById(R.id.exp);
         String expNum = expText.getText().toString();
 
 
@@ -68,15 +68,15 @@ public class InGamePurchaseActivity extends AppCompatActivity {
             user.setCurrency(user.getCurrency() + 50);
             userManager.setOrUpdateStatistics(this, user, GameConstants.update);
             ccText.setError(null);
-        }else{
+        } else {
             ccText.setError("Invalid Credit Card/Expiration Date/Cvv !");
         }
-        TextView currencyText =  findViewById(R.id.numGems);
+        TextView currencyText = findViewById(R.id.numGems);
         String currency = "Gems Remaining: " + user.getCurrency();
         currencyText.setText(currency);
     }
 
-    public void close(View view){
+    public void close(View view) {
 
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);

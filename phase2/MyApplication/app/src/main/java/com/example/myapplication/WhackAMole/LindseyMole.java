@@ -9,7 +9,7 @@ import com.example.myapplication.GameConstants;
 
 class LindseyMole extends Mole {
 
-    LindseyMole(Hole hole){
+    LindseyMole(Hole hole) {
         super(hole);
     }
 

@@ -8,7 +8,7 @@ import com.example.myapplication.GameConstants;
 
 class PaulMole extends Mole {
 
-    PaulMole(Hole hole){
+    PaulMole(Hole hole) {
         super(hole);
     }
 

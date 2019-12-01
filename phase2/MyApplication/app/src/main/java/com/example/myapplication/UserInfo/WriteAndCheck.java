@@ -6,6 +6,7 @@ import com.example.myapplication.GameConstants;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,20 +18,18 @@ import java.util.ArrayList;
 import static android.content.Context.MODE_APPEND;
 import static android.content.Context.MODE_PRIVATE;
 
-public class WriteAndCheck implements Serializable {
+class WriteAndCheck implements Serializable {
     /**
-     *
-     * @param context of the device
+     * @param context  of the device
      * @param username entered by the user
      * @param password entered by the user
      * @return an Arraylist consisting of 2 boolean values, with the first index representing weather
      * or not the username is in the file and the second index representing the password
      */
     ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password) {
-        InputStream fis = null;
-        ArrayList<Boolean> arr = new ArrayList<Boolean>();
+        ArrayList<Boolean> arr = new ArrayList<>();
         try {
-            fis = context.openFileInput(GameConstants.USER_FILE);
+            FileInputStream fis = context.openFileInput(GameConstants.USER_FILE);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -63,59 +62,42 @@ public class WriteAndCheck implements Serializable {
         return arr;
     }
 
-    private void writeInfoToFileHelper(Context context, String username, String password, String fileName, int mode){
-        FileOutputStream fos = null;
+    private void writeInfoToFileHelper(Context context, String username, String password, String fileName, int mode) {
         try {
-            fos = context.openFileOutput(fileName, mode);
+            FileOutputStream fos = context.openFileOutput(fileName, mode);
             try {
-                if(fileName.equals(GameConstants.USER_STATS_FILE)) {
-                    /*fos.write(username.getBytes());
-                    String s = new String(new char[GameConstants.TOTAL_NUM_OF_STATISTICS]).replace(
-                            "\0", ", 0");
-                    fos.write(s.getBytes());
-                    fos.write("\n".getBytes());*/
+                if (fileName.equals(GameConstants.USER_STATS_FILE)) {
                     String stat = new String(new char[GameConstants.TOTAL_NUM_OF_STATISTICS]).replace(
                             "\0", ", 0");
                     String text = username + stat + "\n";
                     fos.write(text.getBytes());
-                }else if(fileName.equals(GameConstants.USER_FILE)){
+                    fos.close();
+                } else if (fileName.equals(GameConstants.USER_FILE)) {
                     String text = username + ", " + password + "\n";
-                    /*fos.write(username.getBytes());
-                    fos.write(", ".getBytes());
-                    fos.write(password.getBytes());
-                    fos.write("\n".getBytes());*/
                     fos.write(text.getBytes());
+                    fos.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
     /**
-     *
-     * @param context of the device
+     * @param context  of the device
      * @param username of the user
      * @param password of the user
      * @param fileName name of the file in which the relevant information needs to be added
      */
 
-    public void writeInfoToFile(Context context, String username, String password, String fileName){
-        File file = new File(context.getFilesDir(),fileName);
+    void writeInfoToFile(Context context, String username, String password, String fileName) {
+        File file = new File(context.getFilesDir(), fileName);
         if (file.exists()) {
-            writeInfoToFileHelper(context, username,password, fileName, MODE_APPEND);
+            writeInfoToFileHelper(context, username, password, fileName, MODE_APPEND);
         } else { //file does not exist make one and write to it
-            writeInfoToFileHelper(context, username,password,fileName, MODE_PRIVATE);
+            writeInfoToFileHelper(context, username, password, fileName, MODE_PRIVATE);
         }
     }
 

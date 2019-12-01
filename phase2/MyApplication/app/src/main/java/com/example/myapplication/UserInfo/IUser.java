@@ -1,10 +1,6 @@
 package com.example.myapplication.UserInfo;
 
-import com.example.myapplication.GameConstants;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public interface IUser extends Comparable<IUser> {
 

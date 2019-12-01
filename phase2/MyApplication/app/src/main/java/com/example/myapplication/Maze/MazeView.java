@@ -229,6 +229,9 @@ public class MazeView extends View {
     }
 
     private void distributeCollectibles() {
+        if (!collectibles.isEmpty())
+            collectibles = new ArrayList<>();
+
         for (int i = 0; i < GameConstants.NumberOfMazeCollectibles; i++) {
             double randCollectibleType = Math.random();
             int[] coordinates = generateRandomCoordinates();
@@ -290,6 +293,9 @@ public class MazeView extends View {
         if (player == exit && gamesPlayed < GameConstants.TotalMazeGames) {
             gamesPlayed += 1;
             createMaze();
+            if (collectiblesEnabled)
+                distributeCollectibles();
+
             if (gamesPlayed >= GameConstants.TotalMazeGames) {
                 int CurrGamesPlayed = (int) userInMaze.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed);
                 this.userInMaze.setStatistic(GameConstants.NameGame3,
