@@ -6,9 +6,10 @@ import com.example.myapplication.GameConstants;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class HandleAllAccounts {
+public class HandleAllAccounts implements Serializable {
 
     private ReadAndUpdate readAndUpdate = new ReadAndUpdate();
 

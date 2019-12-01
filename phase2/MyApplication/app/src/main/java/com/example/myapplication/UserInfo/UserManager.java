@@ -43,6 +43,7 @@ public class UserManager implements Serializable {
     public UserManager() {
         this.writeAndCheck = new WriteAndCheck();
         this.readAndUpdate = new ReadAndUpdate();
+        this.handleAllAccounts = new HandleAllAccounts();
     }
 
     /**
