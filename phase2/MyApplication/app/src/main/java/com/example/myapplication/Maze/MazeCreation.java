@@ -12,11 +12,12 @@ interface MazeMaker{
 public class MazeCreation implements MazeMaker{
 
     /**
-     * Returns a neighbouring cell of the given cell. If there is more than one neighbour,
-     * returns a random neighbour.
      *
-     * @param currentCell
-     * @return neighbourCell
+     * @param currentCell is the current cell
+     * @param cells is the 2D array of cells
+     * @param numCols is the total num of Columns
+     * @param numRows is the total num of rows
+     * @return a random cell neighbour of the current cell
      */
     private Cell getRandomNeighbour(Cell currentCell, Cell[][] cells, int numCols, int numRows) {
         //check for unvisited neighbours

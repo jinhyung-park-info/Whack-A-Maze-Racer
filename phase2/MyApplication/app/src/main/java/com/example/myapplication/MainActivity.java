@@ -44,11 +44,6 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
         String password = editTextPass.getText().toString();
         if (loginPresenter.validateCredentialsForLogin(getApplicationContext(), username, password,
                 editTextUser, editTextPass)){
-            /*IUser user = new User(username);
-            user.setPassword(password);
-            userManager.setStatistics(getApplicationContext(), user);
-            userManager.setUser(user);*/
-            //System.out.println(user.getMap());
             onLoginSuccess(username, password);
             intent.putExtra(GameConstants.USERMANAGER, userManager);
             startActivity(intent);

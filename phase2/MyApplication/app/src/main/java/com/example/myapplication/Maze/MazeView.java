@@ -1,5 +1,6 @@
 package com.example.myapplication.Maze;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -347,6 +348,7 @@ public class MazeView extends View {
      * all of these links were used to help us understand onTouch and how we can implement onTouch in
      * our own game properly.
      */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 

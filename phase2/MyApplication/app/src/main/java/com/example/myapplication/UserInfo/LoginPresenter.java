@@ -17,45 +17,6 @@ public class LoginPresenter implements ILoginPresenter {
         this.userManager = new UserManager();
     }
 
-   /* private boolean validateChar(String username, String password, EditText editTextUser,
-                                 EditText editTextPass) {
-        if (username.length() > GameConstants.usernameLength) {
-            editTextUser.setError("Usernames cannot be longer than " + GameConstants.usernameLength
-                    + " characters");
-            return false;
-        }
-        if (password.length() > GameConstants.passwordLength) {
-            editTextPass.setError("Passwords cannot be longer than " + GameConstants.passwordLength
-                    + " characters");
-            return false;
-        }
-        if (username.length() == 0) {
-            editTextUser.setError("Please enter Text");
-            return false;
-        }
-        if (password.length() == 0) {
-            editTextPass.setError("Please enter Text");
-            return false;
-        }
-        if (username.contains(" ")) {
-            editTextUser.setError("Spaces are not allowed in username and passwords");
-            return false;
-        }
-        if (username.contains(",")) {
-            editTextUser.setError("Commas are not allowed in username and passwords");
-            return false;
-        }
-        if (password.contains(" ")) {
-            editTextPass.setError("Spaces are not allowed in username and passwords");
-            return false;
-        }
-        if (password.contains(",")) {
-            editTextPass.setError("Commas are not allowed in username and passwords");
-            return false;
-        }
-        return true;
-    }*/
-
     public boolean validateCredentialsForAccountCreation(Context context, String username, String password,
                                                          EditText editTextUser, EditText editTextPass) {
         //if (validateChar(username, password, editTextUser, editTextPass)) {
@@ -97,7 +58,7 @@ public class LoginPresenter implements ILoginPresenter {
      * @return true if the text entered by the user is correct and false otherwise
      */
 
-    public boolean checkText(EditText editText){
+    private boolean checkText(EditText editText){
         String check = editText.getText().toString();
         Pattern newPattern = Pattern.compile("^[a-zA-Z0-9]+$");
         Matcher newMatcher = newPattern.matcher(check);

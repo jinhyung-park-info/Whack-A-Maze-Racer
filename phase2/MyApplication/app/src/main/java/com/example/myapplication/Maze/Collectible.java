@@ -1,12 +1,9 @@
 package com.example.myapplication.Maze;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.UserInfo.IUser;
-import com.example.myapplication.UserInfo.User;
-import com.example.myapplication.UserInfo.UserManager;
 
 /**
  * A collectible object in the maze game
