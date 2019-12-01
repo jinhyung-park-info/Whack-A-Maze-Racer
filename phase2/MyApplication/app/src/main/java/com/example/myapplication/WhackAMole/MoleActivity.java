@@ -186,7 +186,7 @@ public class MoleActivity extends AppCompatActivity {
 
     public void load(IUser user) {
         String load = (String) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats);
-        String[] stats = load.split(" ");
+        String[] stats = load.split("-");
         int lifeCount = Integer.parseInt(stats[0]);
         if (lifeCount > 0) {
             this.score = Integer.parseInt(stats[3]);

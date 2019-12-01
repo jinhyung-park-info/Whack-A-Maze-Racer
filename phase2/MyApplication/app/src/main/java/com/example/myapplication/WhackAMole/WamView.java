@@ -156,13 +156,13 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     private void update() {
         upload_moles_stats(
                 wamManager.currentLives
-                        + " "
+                        + "-"
                         + wamManager.holesX
-                        + " "
+                        + "-"
                         + wamManager.holesY
-                        + " "
+                        + "-"
                         + wamManager.score
-                        + " "
+                        + "-"
                         + activity.backgroundID);
         switch (gameStatus) {
             case "inGame":
