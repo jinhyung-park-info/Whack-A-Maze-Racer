@@ -2,16 +2,8 @@ package com.example.myapplication;
 
 import android.graphics.Color;
 
-import com.example.myapplication.TypeRacer.TypeRacer;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public abstract class GameConstants {
-    public static int limiter = 0;
     public static final String USERMANAGER = "UserManager";
-    public static final int usernameLength = 8;
-    public static final int passwordLength = 6;
     public static final String USER_STATS_FILE = "user_stats.txt";
     public static final String USER_FILE = "user_data.txt";
     public static final String update = "update";
@@ -94,14 +86,10 @@ public abstract class GameConstants {
     public static final String NumMazeGamesPlayed = "NumMazeGamesPlayed";
     public static final String TypeRacerStreak = "TypeRacerStreak";
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";
-    public static final String[] validGiftCodes = new String[]{"207", "lindsey", "paul"};
-    public static final String[] OptionsForScoreBoard = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
-            "Num MazeItems Collected","TypeRacerStreak"};
     public static final String[] WhackAMoleStatistics = new String[]{MoleStats, MoleHit, MoleAllTimeHigh};
     public static final String[]  TypeRacerStatistics = new String[]{TypeRacerStreak};
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
     public static String[] GameNames = new String[]{NameGame1, NameGame2, NameGame3};
-    public static final String change = "change"; //this is key for changePassword
 
     public enum Direction {
         UP, DOWN, LEFT, RIGHT
@@ -123,13 +111,6 @@ public abstract class GameConstants {
         return new String[]{};
     }
 
-    /**
-     * Count the occurences of a character in a line
-     *
-     * @param line
-     * @param character
-     * @return
-     */
     public static int countOccurrences(String line, char character) {
         int count = 0;
         for (int i = 0; i < line.length(); i++) {

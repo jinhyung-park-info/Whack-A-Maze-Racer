@@ -22,7 +22,7 @@ public class PlayGamesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_games);
         Intent intent = getIntent();
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUserManager(user_1);
         }
     }
@@ -34,7 +34,7 @@ public class PlayGamesActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void playMole(View v){
+    public void playMole(View v) {
         //userManager.getUser().setLoad_moles_stats("0");
         userManager.getUser().setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, "0");
         userManager.setOrUpdateStatistics(this, userManager.getUser(), GameConstants.update);
@@ -44,23 +44,23 @@ public class PlayGamesActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void playTypeRacer(View view){
+    public void playTypeRacer(View view) {
         Intent intent = new Intent(this, TypeRacerCustomizationActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
-    public void playMaze(View view){
+    public void playMaze(View view) {
         Intent intent = new Intent(this, MazeInstructionsActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager){
+    private void setUserManager(UserManager newManager) {
         userManager = newManager;
     }
 
-    public void GoBack(View view){
+    public void GoBack(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);

@@ -65,4 +65,11 @@ public class ChangePassword extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, AccountInformation.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
+
 }

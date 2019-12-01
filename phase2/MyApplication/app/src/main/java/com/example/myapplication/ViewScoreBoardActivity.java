@@ -21,10 +21,10 @@ import java.util.List;
 public class ViewScoreBoardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private UserManager userManager;
-    private String[] arr = new String[]{"Overall Score" ,"Moles Hit", "Num MazeGames Played",
+    private String[] arr = new String[]{"Overall Score", "Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected", "TypeRacerStreak", "Mole All Time High"};
     private List<IUser> ArrayOfUsers;
-    private  TextView[] ArrayOfTextView;
+    private TextView[] ArrayOfTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         setContentView(R.layout.activity_view_score_board);
         Intent intent = getIntent();
         UserManager userManager1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (userManager1 != null){
+        if (userManager1 != null) {
             setUserManager(userManager1);
             ArrayOfUsers = userManager.getListOfAllUsers(getApplicationContext(), userManager.getUser());
             ArrayOfUsers.add(userManager.getUser());
@@ -87,7 +87,8 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         spinner.setOnItemSelectedListener(this);
         //setupScoreBoard(ArrayOfUsers, "Overall Score");
     }
-    private void setUserManager(UserManager usermanager){
+
+    private void setUserManager(UserManager usermanager) {
         userManager = usermanager;
     }
 
@@ -110,16 +111,16 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
     }
 
     public void setupScoreBoard(String SortingChooser, List<IUser> clone) {
-        if(SortingChooser.equals("Overall Score")){
+        if (SortingChooser.equals("Overall Score")) {
             Collections.sort(clone);
             List<IUser> ArrayUser;
             if (GameConstants.NumPeopleOnScoreBoard >= clone.size()) {
                 ArrayUser = clone;
-            }else{
+            } else {
                 ArrayUser = clone.subList(0, GameConstants.NumPeopleOnScoreBoard);
             }
             setupTextViews(ArrayUser, ArrayOfTextView, null, null);
-        }else{
+        } else {
             String[] Attributes = getAttributesForSorting(SortingChooser);
             String GameName = Attributes[0];
             String Statistic = Attributes[1];
@@ -127,7 +128,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
             Collections.sort(clone, new SortingUser(GameName, Statistic));
             if (GameConstants.NumPeopleOnScoreBoard >= clone.size()) {
                 ArrayUser = clone;
-            }else{
+            } else {
                 ArrayUser = clone.subList(0, GameConstants.NumPeopleOnScoreBoard);
             }
             setupTextViews(ArrayUser, ArrayOfTextView, GameName, Statistic);
@@ -139,7 +140,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
                                 String Statistic) {
         int i = 0;
         int numbering = 1;
-        for(IUser user: arrayUsers){
+        for (IUser user : arrayUsers) {
             //TextView textViewObject = arrayOfTextView[i];
             if (GameName == null) {
                 //String text = "   " + (i + 1) + ". " + user.getEmail() + "                " + user.getOverallScore();
@@ -147,7 +148,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
                 String text = numbering + "." + user.getEmail();
                 arrayOfTextView[i].setText(text);
                 arrayOfTextView[i + 1].setText(String.valueOf(user.getOverallScore()));
-            }else{
+            } else {
                 /*String text = "   " + (i + 1) + ". " + user.getEmail() + "                " +
                         user.getStatistic(GameName, Statistic);
                 textViewObject.setText(text);*/
@@ -172,7 +173,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
     }
 
     private String[] getAttributesForSorting(String sortingChooser) {
-        switch (sortingChooser){
+        switch (sortingChooser) {
             case "Moles Hit":
                 return new String[]{GameConstants.NameGame1, GameConstants.MoleHit};
             case "Num MazeGames Played":
@@ -187,73 +188,17 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         return new String[]{};
     }
 
-    public void GoBackToMainMenu(View view){
+    public void GoBackToMainMenu(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 }
 
-/*class InitializeTextViews extends ViewScoreBoardActivity{
-
-    private Context context;
-
-    InitializeTextViews(Context context1){
-        this.context = context1;
-    }
-
-    public  TextView[] getArrayOfTextViews(Context context){
-        TextView[] ArrayOfTextView;
-        TextView FirstUserName = findViewById(R.id.FirstUserName);
-        TextView SecondUserName = findViewById(R.id.SecondUserName);
-        TextView ThirdUserName = findViewById(R.id.ThirdUserName);
-        TextView FourthUserName = findViewById(R.id.FourthUserName);
-        TextView FifthUserName = findViewById(R.id.FifthUserName);
-        TextView SixthUserName = findViewById(R.id.SixthUserName);
-        TextView SeventhUserName = findViewById(R.id.SeventhUserName);
-        TextView EighthUserName = findViewById(R.id.EighthUserName);
-        TextView NinthUserName = findViewById(R.id.NinthUserName);
-        TextView TenthUserName = findViewById(R.id.TenthUserName);
-        TextView EleventhUserName = findViewById(R.id.EleventhUserName);
-        TextView TwelfthUserName = findViewById(R.id.TwelfthUserName);
-        TextView ThirteenUserName = findViewById(R.id.ThirteenUserName);
-        TextView FourteenUserName = findViewById(R.id.FourteenUserName);
-        TextView FifteenUserName = findViewById(R.id.FifteenUserName);
-        TextView SixteenUserName = findViewById(R.id.SixteenUserName);
-        TextView SeventeenUserName = findViewById(R.id.SeventeenUserName);
-        TextView EighteenUserName = findViewById(R.id.EighteenUserName);
-        TextView NineteenUserName = findViewById(R.id.NineteenUserName);
-        TextView TwentyUserName = findViewById(R.id.TwentyUserName);
-        TextView FirstUserStat = findViewById(R.id.FirstUserStat);
-        TextView SecondUserStat = findViewById(R.id.SecondUserStat);
-        TextView ThirdUserStat = findViewById(R.id.ThirdUserStat);
-        TextView FourthUserStat = findViewById(R.id.FourthUserStat);
-        TextView FifthUserStat = findViewById(R.id.FifthUserStat);
-        TextView SixthUserStat = findViewById(R.id.SixthUserStat);
-        TextView SeventhUserStat = findViewById(R.id.SeventhUserStat);
-        TextView EighthUserStat = findViewById(R.id.EighthUserStat);
-        TextView NinthUserStat = findViewById(R.id.NinthUserStat);
-        TextView TenthUserStat = findViewById(R.id.TenthUserStat);
-        TextView EleventhUserStat = findViewById(R.id.EleventhUserStat);
-        TextView TwelfthUserStat = findViewById(R.id.TwelfthUserStat);
-        TextView ThirteenUserStat = findViewById(R.id.ThirteenUserStat);
-        TextView FourteenUserStat = findViewById(R.id.FourteenUserStat);
-        TextView FifteenUserStat = findViewById(R.id.FifteenUserStat);
-        TextView SixteenUserStat = findViewById(R.id.SixteenUserStat);
-        TextView SeventeenUserStat = findViewById(R.id.SeventeenUserStat);
-        TextView EighteenUserStat = findViewById(R.id.EighteenUserStat);
-        TextView NineteenUserStat = findViewById(R.id.NineteenUserStat);
-        TextView TwentyUserStat = findViewById(R.id.TwentyUserStat);
-        ArrayOfTextView = new TextView[]{FirstUserName, FirstUserStat, SecondUserName,
-                SecondUserStat, ThirdUserName, ThirdUserStat, FourthUserName, FourthUserStat,
-                FifthUserName, FifthUserStat, SixthUserName, SixthUserStat, SeventhUserName,
-                SeventhUserStat, EighthUserName, EighthUserStat, NinthUserName, NinthUserStat,
-                TenthUserName, TenthUserStat, EleventhUserName, EleventhUserStat, TwelfthUserName,
-                TwelfthUserStat, ThirteenUserName, ThirteenUserStat,  FourteenUserName, FourteenUserStat,
-                FifteenUserName, FifteenUserStat, SixteenUserName, SixteenUserStat, SeventeenUserName,
-                SeventeenUserStat, EighteenUserName, EighteenUserStat, NineteenUserName, NineteenUserStat,
-                TwentyUserName, TwentyUserStat};
-        return ArrayOfTextView;
-    }
-
-}*/

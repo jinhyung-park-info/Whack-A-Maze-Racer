@@ -30,14 +30,14 @@ public class AccountInformation extends AppCompatActivity {
 
         Intent intent = getIntent();
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUserManager(user_1);
         }
 
         displayUsernameAndPassword();
     }
 
-    private void setUserManager(UserManager UserManager){
+    private void setUserManager(UserManager UserManager) {
         userManager = UserManager;
     }
 
@@ -49,13 +49,20 @@ public class AccountInformation extends AppCompatActivity {
         EditTextPassword.setText(pass);
     }
 
-    public void goBackToMain(View view){
+    public void goBackToMain(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
-    public void changePassword(View view){
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
+
+    public void changePassword(View view) {
         Intent intent = new Intent(this, ChangePassword.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);

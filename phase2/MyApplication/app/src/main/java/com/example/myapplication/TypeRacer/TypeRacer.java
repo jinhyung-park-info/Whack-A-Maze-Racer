@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 
 import com.example.myapplication.GameConstants;
-import com.example.myapplication.GameOver;
 import com.example.myapplication.R;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;

@@ -28,7 +28,7 @@
             android:label="Type Racer Instructions"/>
         <activity android:name=".WhackAMole.MoleInstructionActivity"
             android:label="Whack A Mole Instructions"/>
-        <activity android:name=".GameOver" />
+        <activity android:name=".TypeRacer.GameOver" />
         <activity
             android:name=".PopUp"
             android:theme="@style/AppTheme.Popup"

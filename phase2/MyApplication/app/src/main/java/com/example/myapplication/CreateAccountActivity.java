@@ -43,10 +43,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         String password = editTextPassword.getText().toString();
         if(loginPresenter.validateCredentialsForAccountCreation(getApplicationContext(), username,
                 password, editTextUsername, editTextPassword)) {
-            /*FileOutputStream fos = null;
-            userManager.writeUsernameAndPass(getApplicationContext(), fos, username, password);
-            fos = null;
-            userManager.writeUsernameAndStatistics(getApplicationContext(), fos, username);*/
             userManager.writeInfoToFile(getApplicationContext(), username, password, GameConstants.USER_FILE);
             userManager.writeInfoToFile(getApplicationContext(), username, password, GameConstants.USER_STATS_FILE);
             finish();

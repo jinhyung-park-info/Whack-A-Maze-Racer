@@ -22,7 +22,7 @@ public class PopUp extends Activity {
 
         Intent intent = getIntent();
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUserManager(user_1);
             user = userManager.getUser();
         }
@@ -65,11 +65,18 @@ public class PopUp extends Activity {
         numMazeItems.setText(mazeItemsCollected);
     }
 
-    private void setUserManager(UserManager newManager){
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
+
+    private void setUserManager(UserManager newManager) {
         userManager = newManager;
     }
 
-    public void buyCurrency(View view){
+    public void buyCurrency(View view) {
 
         Intent intent = new Intent(this, InGamePurchaseActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
