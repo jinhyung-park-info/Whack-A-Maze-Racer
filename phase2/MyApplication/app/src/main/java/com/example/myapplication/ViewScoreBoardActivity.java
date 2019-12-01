@@ -38,9 +38,6 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
             ArrayOfUsers.add(userManager.getUser());
         }
 
-       /* InitializeTextViews arr = new InitializeTextViews(this);
-        ArrayOfTextView = arr.getArrayOfTextViews(this);*/
-
         TextView FirstUserName = findViewById(R.id.FirstUserName);
         TextView SecondUserName = findViewById(R.id.SecondUserName);
         TextView ThirdUserName = findViewById(R.id.ThirdUserName);
@@ -85,7 +82,6 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-        //setupScoreBoard(ArrayOfUsers, "Overall Score");
     }
 
     private void setUserManager(UserManager usermanager) {
@@ -96,6 +92,8 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
         TextView Statistic = findViewById(R.id.StatisticName);
+        //pass a clone into the setupScoreBoard function so as to not modify the original ArrayOfUsers
+        // and pass the same list of all users every time a new option is selected
         List<IUser> cloneOfUsers = new ArrayList<>(ArrayOfUsers);
         Statistic.setText(text);
         setupScoreBoard(text, cloneOfUsers);

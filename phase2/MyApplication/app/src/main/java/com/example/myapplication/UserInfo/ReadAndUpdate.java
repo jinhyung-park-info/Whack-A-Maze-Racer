@@ -23,8 +23,9 @@ public class ReadAndUpdate implements Serializable {
      *
      * @param context of the device
      * @param user whose statistics need to be set or updated
-     * @param setOrUpdate the string which will decide if the statistics will be set or updated.The
-     *                    string should be one one of either the string "update" or "set".
+     * @param setOrUpdate the string which will decide if the statistics will be set from the file or
+     *                   updated to the file. The string should be one one of either the
+     *                   string "update" or "set".
      */
 
     public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate) {
@@ -64,7 +65,7 @@ public class ReadAndUpdate implements Serializable {
      *
      * @param context of the device
      * @param fileName the name of the file which needs to be opened for reading
-     * @return the buffered reader with the file input stream.
+     * @return the buffered reader with the file input stream to read over the file.
      */
 
     BufferedReader openFileForReading(Context context, String fileName) {
@@ -140,7 +141,7 @@ public class ReadAndUpdate implements Serializable {
                 numMazeGame, GameConstants.NumCollectiblesCollectedMaze, numMazeItemsCollected};
         List<Object[]> ListOfGameStats = Arrays.asList(typeRacer, whackAMole, maze);
         ArrayList<Object[]> arrayOfGameStats = new ArrayList<>(ListOfGameStats);
-        user.setStatisticsInDataStructure(arrayOfGameStats);
+        user.setStatisticsInMap(arrayOfGameStats);
         user.setLastPlayedLevel(lastPlayedLevel);
         user.setOverallScore(overallScore);
         user.setCurrency(gemsRemaining);

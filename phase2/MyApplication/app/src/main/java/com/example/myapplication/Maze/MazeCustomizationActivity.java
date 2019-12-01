@@ -35,13 +35,10 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     private UserManager usermanager;
 
-    private boolean startedMaze;
-
     static boolean passed = false;
 
     MazeView maze;
 
-    private String mazeSaveStateFileName;
     //private MazeLoader mazeLoader;
 
     @Override
@@ -50,14 +47,13 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        System.out.println(user_1 == null);
         if (user_1 != null) {
             setUserManager(user_1);
         }
         setContentView(R.layout.activity_maze_customization);
 
-        mazeSaveStateFileName = usermanager.getUser().getEmail() + "_maze_save_state.txt";
-        startedMaze = false;
+        /*mazeSaveStateFileName = usermanager.getUser().getEmail() + "_maze_save_state.txt";
+        startedMaze = false;*/
         //mazeLoader = new MazeLoader(getApplicationContext(), usermanager);
         //usermanager.getUser().setLastPlayedLevel(3);
 
@@ -72,10 +68,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             //startedMaze = true;
             setContentView(R.layout.activity_maze_customization);
         }*/
-
-        System.out.println(usermanager.getUser().getLastPlayedLevel());
         usermanager.getUser().setLastPlayedLevel(3);
-        System.out.println(usermanager.getUser().getLastPlayedLevel());
         usermanager.setOrUpdateStatistics(getApplicationContext(), usermanager.getUser(), GameConstants.update);
         reset();
 
@@ -93,47 +86,39 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
+        if(!(checked)){
+            return;
+        }
 
-        // Check which radio button was clicked
         switch (view.getId()) {
             case R.id.radioButtonGreen:
-                if (checked)
                     bgColour = Color.GREEN;
                 break;
             case R.id.radioButtonBlue:
-                if (checked)
                     bgColour = Color.BLUE;
                 break;
             case R.id.radioButtonRed:
-                if (checked)
                     bgColour = Color.RED;
                 break;
             case R.id.radioButtonYellow:
-                if (checked)
                     bgColour = Color.YELLOW;
                 break;
             case R.id.radioButtonWhite:
-                if (checked)
                     bgColour = Color.WHITE;
                 break;
             case R.id.radioButtonHard:
-                if (checked)
                     difficulty = GameConstants.Difficulty.HARD;
                 break;
             case R.id.radioButtonNormal:
-                if (checked)
                     difficulty = GameConstants.Difficulty.NORMAL;
                 break;
             case R.id.radioButtonEasy:
-                if (checked)
                     difficulty = GameConstants.Difficulty.EASY;
                 break;
             case R.id.radioButtonChar1:
-                if (checked)
                     playerType = 0;
                 break;
             case R.id.radioButtonCharTwo:
-                if (checked)
                     playerType = 1;
                 break;
         }
@@ -153,7 +138,6 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         //setContentView(maze);
         maze = new MazeView(this, bgColour, difficulty, playerType, usermanager);
         setContentView(maze);
-        startedMaze = true;
     }
 
     public void finishButton(View view) {

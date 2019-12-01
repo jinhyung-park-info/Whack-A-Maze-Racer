@@ -35,8 +35,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    private void setUserManager(UserManager usermanage){
-        userManager = usermanage;
+    private void setUserManager(UserManager usermanager){
+        userManager = usermanager;
     }
 
     public void view_stats(View view){
@@ -50,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
         File file_maze = new File(getApplicationContext().getFilesDir(), userManager.getUser().getEmail() + "_maze_save_state.txt");
         if(file_type.exists()){
             if(file_type.delete()){
-                Log.i("File", "delete the typeracer save file because new game was started");
+                Log.i("File", "deleted the typeracer save file because new game was started");
             }
         }
         if(file_maze.exists()){

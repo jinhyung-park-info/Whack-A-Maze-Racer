@@ -326,7 +326,7 @@ public class MazeView extends View {
      * Loads the maze from an ArrayList StringBuilder representation of the maze. See readMe.txt
      * for details
      */
-    public void setupOldMaze(int cols, int rows, int bgColour, int playerType, int playerCol,
+   /* public void setupOldMaze(int cols, int rows, int bgColour, int playerType, int playerCol,
                              int playerRow, Cell[][] cells) {
         //leaving and returning to the maze scares away the collectibles
         collectiblesEnabled = false;
@@ -341,7 +341,7 @@ public class MazeView extends View {
 
         //redraw maze
         invalidate();
-    }
+    }*/
 
     /**
      * https://codetheory.in/android-ontouchevent-ontouchlistener-motionevent-to-detect-common-gestures/

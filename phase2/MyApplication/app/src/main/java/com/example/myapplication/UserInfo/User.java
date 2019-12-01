@@ -60,7 +60,7 @@ public class User implements Serializable, IUser {
             return map;
         }
 
-        private void setStatisticsHelper(Object[] arr) {
+        private void setStatisticsInMapHelper(Object[] arr) {
             String gameName = (String) arr[0];
             for(int i = 1; i <= arr.length; i++){
                 if(i % 2 == 1 && i + 1 <= arr.length){
@@ -75,9 +75,9 @@ public class User implements Serializable, IUser {
             }
         }
 
-        public void setStatisticsInDataStructure(ArrayList<Object[]> arrayOfGameStats) {
+        public void setStatisticsInMap(ArrayList<Object[]> arrayOfGameStats) {
             for (Object[] arr : arrayOfGameStats) {
-                setStatisticsHelper(arr);
+                setStatisticsInMapHelper(arr);
             }
         }
 
@@ -93,8 +93,7 @@ public class User implements Serializable, IUser {
             if (map.get(gameName) != null) {
                 HashMap<String, Object> statisticMap = map.get(gameName);
                 assert statisticMap != null;
-
-                    return statisticMap.get(statisticName);
+                return statisticMap.get(statisticName);
             }
             return null;
         }

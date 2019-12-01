@@ -18,7 +18,7 @@ public interface IUser extends Comparable<IUser> {
 
     Object getStatistic(String gameName, String statisticName);
 
-    void setStatisticsInDataStructure(ArrayList<Object[]> arrayOfGameStats);
+    void setStatisticsInMap(ArrayList<Object[]> arrayOfGameStats);
 
     void setLastPlayedLevel(int level);
 
