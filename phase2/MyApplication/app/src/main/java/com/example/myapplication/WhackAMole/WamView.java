@@ -15,7 +15,6 @@ import android.view.SurfaceView;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 
-/** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
   private Resources res = this.getResources();
@@ -27,7 +26,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private Canvas canvas;
   private Paint paint;
   private SurfaceHolder holder;
-  boolean thread_active;
+  boolean thread_active; // If true, thread will continue to draw on Canvas.
   private String endScore;
   private String end_message1;
   private String end_message2;

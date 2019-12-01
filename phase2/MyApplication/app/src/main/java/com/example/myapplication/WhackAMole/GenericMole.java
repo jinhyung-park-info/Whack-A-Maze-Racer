@@ -2,9 +2,13 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
-class genericMole extends Mole{
+/**
+ * A generic mole that grants point to user when hit, and deducts life when missed.
+ */
 
-    genericMole(Hole hole){
+class GenericMole extends Mole{
+
+    GenericMole(Hole hole){
         super(hole);
     }
 

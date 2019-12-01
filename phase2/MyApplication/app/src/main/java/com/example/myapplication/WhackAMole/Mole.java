@@ -8,7 +8,7 @@ import android.graphics.Rect;
 import com.example.myapplication.GameConstants;
 
 /**
- *
+ * Creature that comes out of holes that are to be hit.
  */
 
 abstract class Mole {

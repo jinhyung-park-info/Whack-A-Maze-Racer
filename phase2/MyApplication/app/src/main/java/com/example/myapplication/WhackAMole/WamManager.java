@@ -9,7 +9,10 @@ import com.example.myapplication.GameConstants;
 import java.util.ArrayList;
 import java.util.Random;
 
-/** Inspired by FishTank Project */
+/**
+ * A manager that stores holes and mole and decides how moles behave in the game.
+ */
+
 class WamManager implements Runnable{
 
   private int numLives;
@@ -21,7 +24,7 @@ class WamManager implements Runnable{
   private int holeDeploymentWidth, holeDeploymentHeight;
   private Rect holeRect;
   int score;
-  private boolean keepRunning;
+  private boolean keepRunning; //If true, thread will continue to select moles to appear on screen.
   private int duration;
   private MoleFactory moleFactory = new MoleFactory();
 
@@ -115,6 +118,9 @@ class WamManager implements Runnable{
     thread.start();
   }
 
+  /**
+   * Select random mole to appear on its respective hole
+   */
   private void randomMole() {
     Random random = new Random();
     int num = random.nextInt(moleList.size());

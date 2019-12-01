@@ -2,6 +2,11 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
+
+/**
+ * A mole that grants user gems when hit.
+ */
+
 class GemMole extends Mole {
 
     GemMole(Hole hole){

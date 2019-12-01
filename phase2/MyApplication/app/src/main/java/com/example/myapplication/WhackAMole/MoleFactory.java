@@ -1,7 +1,7 @@
 package com.example.myapplication.WhackAMole;
 
 /**
- * factory that makes different types of Moles
+ * A factory that makes different types of Moles
  */
 
 class MoleFactory {
@@ -11,7 +11,7 @@ class MoleFactory {
         }else if(moleType.equalsIgnoreCase("paul")){
             return new PaulMole(hole);
         }else if(moleType.equalsIgnoreCase("generic")){
-            return new genericMole(hole);
+            return new GenericMole(hole);
         }else if(moleType.equalsIgnoreCase("gem")){
             return new GemMole(hole);
         }

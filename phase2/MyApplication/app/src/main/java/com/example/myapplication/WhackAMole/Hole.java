@@ -4,7 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-/** Obtained but significantly modified from source 2) */
+/**
+ * A hole where moles appear.
+ */
+
 class Hole {
   private Bitmap hole_bmp;
   private float x, y, holeWidth, holeHeight;

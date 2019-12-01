@@ -2,6 +2,10 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
+/**
+ * A Mole that looks like professor Gries. If you hit it, you lose a point instead.
+ */
+
 class PaulMole extends Mole {
 
     PaulMole(Hole hole){
