@@ -19,12 +19,12 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ReadAndUpdate implements Serializable {
 
-    public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate){
+    public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate) {
         StringBuilder sb = new StringBuilder();
 
         try {
             BufferedReader br = openFileForReading(context, GameConstants.USER_STATS_FILE);
-            if(br == null){
+            if (br == null) {
                 return;
             }
             String text;
@@ -33,10 +33,10 @@ public class ReadAndUpdate implements Serializable {
                 int indexOfFirstComma = text.indexOf(",");
                 String otherUsername = text.substring(0, indexOfFirstComma);
                 if (user.getEmail().equals(otherUsername)) {
-                    if(setOrUpdate.equals(GameConstants.update)) {
+                    if (setOrUpdate.equals(GameConstants.update)) {
                         String new_text = makeLine(otherUsername, user);
                         sb.append(new_text);
-                    }else if(setOrUpdate.equals(GameConstants.set)){
+                    } else if (setOrUpdate.equals(GameConstants.set)) {
                         setInfoInLineToUser(text, user);
                         return;
                     }
@@ -45,19 +45,18 @@ public class ReadAndUpdate implements Serializable {
                 }
             }
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
     }
 
-    public BufferedReader openFileForReading(Context context, String fileName) {
+    BufferedReader openFileForReading(Context context, String fileName) {
         try {
             FileInputStream fis = context.openFileInput(fileName);
             InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            return br;
+            return new BufferedReader(isr);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -65,7 +64,7 @@ public class ReadAndUpdate implements Serializable {
     }
 
 
-    public void writeStringToFile(Context context, StringBuilder sb, String FileName) {
+    void writeStringToFile(Context context, StringBuilder sb, String FileName) {
         try {
             FileOutputStream fileOut = context.openFileOutput(FileName, MODE_PRIVATE);
             fileOut.write(sb.toString().getBytes());
@@ -76,7 +75,7 @@ public class ReadAndUpdate implements Serializable {
     }
 
     private String makeLine(String username, IUser user) {
-        String line = username + ", " + user.getLastPlayedLevel() + ", " + user.getOverallScore()
+        return username + ", " + user.getLastPlayedLevel() + ", " + user.getOverallScore()
                 + ", " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak)
                 + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed)
                 + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze)
@@ -84,15 +83,13 @@ public class ReadAndUpdate implements Serializable {
                 + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats)
                 + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh)
                 + ", " + user.getCurrency() + "\n";
-        return line;
     }
 
     /**
      * Helper method to transfer the user statistics in the file to the user object
      *
      * @param line in the file
-     * @param user
-     * @return the updated user
+     * @param user whose information needs to be updated
      */
     void setInfoInLineToUser(String line, IUser user) {
         String cleanLine = line.replaceAll("\\s", "");
@@ -122,15 +119,15 @@ public class ReadAndUpdate implements Serializable {
     }
 
     /**
-     * @param context of the device
-     * @param username of the user
+     * @param context     of the device
+     * @param username    of the user
      * @param newPassword to be changed
      * @param getOrChange the string which will tell the method if you want to return the password
      *                    or change the password
      * @return the password or return true if the password was successfully changed
      */
 
-    public Object getOrChangePassword(Context context, String username, String newPassword, String getOrChange){
+    Object getOrChangePassword(Context context, String username, String newPassword, String getOrChange) {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = openFileForReading(context, GameConstants.USER_FILE);
@@ -141,14 +138,14 @@ public class ReadAndUpdate implements Serializable {
                 String otherUsername = text.substring(0, indexOfComma);
                 if (username.equals(otherUsername)) {
                     int indexOfSpace = text.indexOf(" ");
-                    if(getOrChange.equals(GameConstants.getPassword)) {
+                    if (getOrChange.equals(GameConstants.getPassword)) {
                         return text.substring(indexOfSpace + 1);
-                    }else if(getOrChange.equals(GameConstants.changePassword)){
+                    } else if (getOrChange.equals(GameConstants.changePassword)) {
                         String newLine = otherUsername + ", " + newPassword + "\n";
                         sb.append(newLine);
 
                     }
-                }else{
+                } else {
                     sb.append(text).append("\n");
                 }
             }

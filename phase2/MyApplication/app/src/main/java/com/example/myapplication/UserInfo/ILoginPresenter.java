@@ -5,7 +5,8 @@ import android.widget.EditText;
 
 public interface ILoginPresenter {
     boolean validateCredentialsForAccountCreation(Context context, String username, String password, EditText editTextUser,
-                                EditText editTextPass);
+                                                  EditText editTextPass);
+
     boolean validateCredentialsForLogin(Context context, String username, String password, EditText editTextUser,
                                         EditText editTextPass);
 

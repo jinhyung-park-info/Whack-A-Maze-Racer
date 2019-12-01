@@ -18,17 +18,15 @@ public class SortingUser implements Comparator<IUser> {
 
     @Override
     public int compare(IUser user, IUser t1) {
-        if (user.getStatistic(GameName, Statistic) instanceof Integer) {
-            int ValueOfUser = (int) user.getStatistic(GameName, Statistic);
-            int ValueOfT1 = (int) t1.getStatistic(GameName, Statistic);
-            if (ValueOfUser < ValueOfT1) {
-                return 1;
-            } else if (ValueOfUser > ValueOfT1) {
-                return -1;
-            }
-            return 0;
-        } else {
-            return Integer.parseInt(null);
+
+        int ValueOfUser = (int) user.getStatistic(GameName, Statistic);
+        int ValueOfT1 = (int) t1.getStatistic(GameName, Statistic);
+        if (ValueOfUser < ValueOfT1) {
+            return 1;
+        } else if (ValueOfUser > ValueOfT1) {
+            return -1;
         }
+        return 0;
+
     }
 }
