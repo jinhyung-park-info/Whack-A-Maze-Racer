@@ -6,7 +6,6 @@ class GemMole extends Mole {
 
     GemMole(Hole hole){
         super(hole);
-        setMoleProperties();
     }
 
     @Override
