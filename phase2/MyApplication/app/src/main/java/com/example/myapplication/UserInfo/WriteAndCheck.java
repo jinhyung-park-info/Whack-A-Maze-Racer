@@ -51,19 +51,12 @@ public class WriteAndCheck implements Serializable {
                     }
                 }
             }
+            fis.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         arr.add(false);
         arr.add(false);
@@ -108,6 +101,14 @@ public class WriteAndCheck implements Serializable {
             }
         }
     }
+
+    /**
+     *
+     * @param context of the device
+     * @param username of the user
+     * @param password of the user
+     * @param fileName name of the file in which the relevant information needs to be added
+     */
 
     public void writeInfoToFile(Context context, String username, String password, String fileName){
         File file = new File(context.getFilesDir(),fileName);

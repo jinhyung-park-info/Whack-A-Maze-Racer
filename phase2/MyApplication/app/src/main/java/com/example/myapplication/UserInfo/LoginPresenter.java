@@ -59,7 +59,7 @@ public class LoginPresenter implements ILoginPresenter {
     public boolean validateCredentialsForAccountCreation(Context context, String username, String password,
                                                          EditText editTextUser, EditText editTextPass) {
         //if (validateChar(username, password, editTextUser, editTextPass)) {
-        if(checkText(username, editTextUser) && checkText(password, editTextPass)){
+        if(checkText(editTextUser) && checkText(editTextPass)){
             ArrayList<Boolean> arr = userManager.checkUsernameAndPassword(context, username, password);
             if (arr.get(0)) {
                 editTextUser.setError("Username already exists");
@@ -74,7 +74,7 @@ public class LoginPresenter implements ILoginPresenter {
 
     public boolean validateCredentialsForLogin(Context context, String username, String password, EditText editTextUser, EditText editTextPass) {
         //if(validateChar(username, password, editTextUser, editTextPass)) {
-        if(checkText(username, editTextUser) && checkText(password, editTextPass)){
+        if(checkText(editTextUser) && checkText(editTextPass)){
             ArrayList<Boolean> validation = userManager.checkUsernameAndPassword(context, username, password);
             if (validation.get(0)) {
                 if (!(validation.get(1))) {
@@ -91,7 +91,13 @@ public class LoginPresenter implements ILoginPresenter {
         return true;
     }
 
-    public boolean checkText(String text, EditText editText){
+    /**
+     *
+     * @param editText which contains the text to be checked
+     * @return true if the text entered by the user is correct and false otherwise
+     */
+
+    public boolean checkText(EditText editText){
         String check = editText.getText().toString();
         Pattern newPattern = Pattern.compile("^[a-zA-Z0-9]+$");
         Matcher newMatcher = newPattern.matcher(check);
