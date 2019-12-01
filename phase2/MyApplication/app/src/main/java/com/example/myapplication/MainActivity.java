@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
     }
 
     public void forgotPassword(View view) {
-        Intent intent = new Intent(this, ForgotPassword.class);
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 

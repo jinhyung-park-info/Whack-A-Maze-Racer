@@ -10,11 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChangePassword"
+        <activity android:name=".ChangePasswordActivity"
             android:label="Change Password"></activity>
-        <activity android:name=".AccountInformation"
+        <activity android:name=".AccountInformationActivity"
             android:label="Account Information"/>
-        <activity android:name=".ForgotPassword"
+        <activity android:name=".ForgotPasswordActivity"
             android:label="Forgot Password"/>
         <activity android:name=".InGamePurchaseActivity"
             android:label="Purchase Gems"/>
@@ -30,7 +30,7 @@
             android:label="Whack A Mole Instructions"/>
         <activity android:name=".TypeRacer.GameOver" />
         <activity
-            android:name=".PopUp"
+            android:name=".ViewStatisticsPopUpActivity"
             android:theme="@style/AppTheme.Popup"
             android:label="User Stats"/>
         <activity android:name=".TypeRacer.TypeRacerCustomizationActivity"

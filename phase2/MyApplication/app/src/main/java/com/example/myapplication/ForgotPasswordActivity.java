@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.UserManager;
 
-public class ForgotPassword extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
