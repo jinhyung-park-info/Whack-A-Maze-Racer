@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void view_stats(View view){
-        Intent intent = new Intent(this, PopUp.class);
+        Intent intent = new Intent(this, ViewStatisticsPopUpActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
@@ -102,7 +101,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void ViewAccountInfo(View view){
-        Intent intent = new Intent(this, AccountInformation.class);
+        Intent intent = new Intent(this, AccountInformationActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }

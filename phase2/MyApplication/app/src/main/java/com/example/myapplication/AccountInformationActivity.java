@@ -5,16 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;
 
-
-import java.awt.font.TextAttribute;
-
-public class AccountInformation extends AppCompatActivity {
+public class AccountInformationActivity extends AppCompatActivity {
 
     private TextView EditTextUsername;
     private TextView EditTextPassword;
@@ -63,7 +59,7 @@ public class AccountInformation extends AppCompatActivity {
     }
 
     public void changePassword(View view) {
-        Intent intent = new Intent(this, ChangePassword.class);
+        Intent intent = new Intent(this, ChangePasswordActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }

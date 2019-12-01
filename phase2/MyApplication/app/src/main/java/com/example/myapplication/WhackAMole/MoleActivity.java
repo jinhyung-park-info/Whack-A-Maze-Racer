@@ -41,7 +41,6 @@ public class MoleActivity extends AppCompatActivity {
         writeMoleStats();
         reset();
 
-        //if (loaded && !user.getLoad_moles_stats().equals("0")) {
         if (loaded && !user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats).equals("0")) {
             load(user);
         } else {
@@ -171,7 +170,10 @@ public class MoleActivity extends AppCompatActivity {
 
     }
 
-    // Used to reset customization to default after restarting game.
+    /**
+     * Reset customizations to default.
+     */
+
     public void reset() {
         numLives = GameConstants.moleDefaultLives;
         numRows = GameConstants.moleDefaultHolesY;
@@ -179,6 +181,10 @@ public class MoleActivity extends AppCompatActivity {
         score = 0;
         backgroundID = R.drawable.game_background;
     }
+
+    /**
+     * Write current user statistics to txt for storage.
+     */
 
     public void writeMoleStats() {
         userManager.setOrUpdateStatistics(getApplicationContext(), user, GameConstants.update);

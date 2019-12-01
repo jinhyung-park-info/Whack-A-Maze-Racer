@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;
 
-public class PopUp extends Activity {
+public class ViewStatisticsPopUpActivity extends Activity {
 
     private UserManager userManager;
     private IUser user;
