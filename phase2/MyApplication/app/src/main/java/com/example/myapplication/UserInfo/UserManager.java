@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -33,7 +33,8 @@ public class UserManager implements Serializable {
 
     /**
      * Set the user this class manages
-     * @param user
+     *
+     * @param user that is managed
      */
     public void setUser(IUser user) {
         this.user = user;
@@ -54,29 +55,28 @@ public class UserManager implements Serializable {
      * weather or not the username is in the file, and the second also being a boolean representing
      * weather or not the password is correct.
      */
-    public ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password){
+    ArrayList<Boolean> checkUsernameAndPassword(Context context, String username, String password) {
         return writeAndCheck.checkUsernameAndPassword(context, username, password);
     }
+
     /**
      * Update the statistics of a user in the file
      *
      * @param context of the device
-     * @param user
+     * @param user    that is managed
      */
-    public  void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate) {
+    public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate) {
         setAndUpdate.setOrUpdateStatistics(context, user, setOrUpdate);
 
     }
 
     /**
-     *
      * @param context of the device
-     * @param user the current user which will not be in the ArrayList
+     * @param user    the current user which will not be in the ArrayList
      * @return a list of all the users present in the file except the current user playing the game.
      */
 
-    public ArrayList<IUser> getListOfAllUsers(Context context, IUser user){
-        InputStream fis = null;
+    public ArrayList<IUser> getListOfAllUsers(Context context, IUser user) {
         ArrayList<IUser> arr = new ArrayList<>();
         try {
             BufferedReader br = setAndUpdate.openFileForReading(context, GameConstants.USER_STATS_FILE);
@@ -85,8 +85,7 @@ public class UserManager implements Serializable {
             while ((text = br.readLine()) != null) {
                 int index_of_comma = text.indexOf(",");
                 String username = text.substring(0, index_of_comma);
-                if (user.getEmail().equals(username)){
-                }else{
+                if (!user.getEmail().equals(username)) {
                     IUser NewUser = new User(username);
                     setAndUpdate.setInfoInLineToUser(text, NewUser);
                     arr.add(NewUser);
@@ -97,14 +96,6 @@ public class UserManager implements Serializable {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return arr;
     }
@@ -118,12 +109,11 @@ public class UserManager implements Serializable {
      * @return true if all accounts were updated or false if otherwise;
      */
     public boolean addStatForAllAccounts(Context context, int position, int numTimes) {
-        FileInputStream fis = null;
         StringBuilder sb = new StringBuilder();
 
         try {
             BufferedReader br = setAndUpdate.openFileForReading(context, GameConstants.USER_STATS_FILE);
-            if(br == null){
+            if (br == null) {
                 return false;
             }
             String text;
@@ -131,19 +121,19 @@ public class UserManager implements Serializable {
             while ((text = br.readLine()) != null) {
                 int numCommas = GameConstants.countOccurrences(text, ',');
                 if (numCommas != GameConstants.TOTAL_NUM_OF_STATISTICS - 1) {
-                    if(position > GameConstants.TOTAL_NUM_OF_STATISTICS + 1 || position <= 0){
+                    if (position > GameConstants.TOTAL_NUM_OF_STATISTICS + 1 || position <= 0) {
                         return false;
-                    }else if (position == GameConstants.TOTAL_NUM_OF_STATISTICS + 1){
+                    } else if (position == GameConstants.TOTAL_NUM_OF_STATISTICS + 1) {
                         String newStats = new String(new char[numTimes])
                                 .replace("\0", ", 0");
                         String newText = text + newStats + "\n";
                         sb.append(newText);
-                    }else if(position == 1) {
+                    } else if (position == 1) {
                         String newStats = new String(new char[numTimes])
                                 .replace("\0", ", 0");
                         String newText = newStats + text + "\n";
                         sb.append(newText);
-                    }else{
+                    } else {
                         int getToStat = 0;
                         int indexOfCommaBeforeStat = 0;
                         for (int i = 0; i <= text.length(); i++) {
@@ -171,14 +161,6 @@ public class UserManager implements Serializable {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         // write the new string with the replaced line OVER the same file
         setAndUpdate.writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
@@ -187,24 +169,22 @@ public class UserManager implements Serializable {
 
 
     /**
-     *
-     * @param context of the device
-     * @param username of the user
+     * @param context     of the device
+     * @param username    of the user
      * @param newPassword to be changed
      * @param getOrChange the string which will tell the method if you want to return the password
      *                    or change the password
      * @return the password or return true if the password was successfully changed
      */
 
-    public Object getOrChangePassword(Context context, String username, String newPassword, String getOrChange){
+    public Object getOrChangePassword(Context context, String username, String newPassword, String getOrChange) {
         return setAndUpdate.getOrChangePassword(context, username, newPassword, getOrChange);
     }
 
 
-    public void writeInfoToFile(Context context, String username, String password, String fileName){
+    public void writeInfoToFile(Context context, String username, String password, String fileName) {
         writeAndCheck.writeInfoToFile(context, username, password, fileName);
     }
-
 
 
 }

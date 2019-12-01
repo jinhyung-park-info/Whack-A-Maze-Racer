@@ -20,7 +20,7 @@ public class User implements Serializable, IUser {
             this.email = Email;
             map = new HashMap<>();
             for (String gameName : GameConstants.GameNames) {
-                HashMap<String, Object> statistics = new HashMap<String, Object>();
+                HashMap<String, Object> statistics = new HashMap<>();
                 for (String statisticsOfGame : GameConstants.getArrayOfStatistics(gameName)) {
                         statistics.put(statisticsOfGame, 0);
                 }
@@ -84,16 +84,17 @@ public class User implements Serializable, IUser {
         public void setStatistic(String gameName, String statisticName, Object statistic) {
             if (map.get(gameName) != null) {
                 HashMap<String, Object> statisticMap = map.get(gameName);
-                if (statisticMap.get(statisticName) != null) statisticMap.put(statisticName, statistic);
+                assert statisticMap != null;
+                statisticMap.put(statisticName, statistic);
             }
         }
 
         public Object getStatistic(String gameName, String statisticName) {
             if (map.get(gameName) != null) {
                 HashMap<String, Object> statisticMap = map.get(gameName);
-                if (statisticMap.get(statisticName) != null) {
+                assert statisticMap != null;
+
                     return statisticMap.get(statisticName);
-                }
             }
             return null;
         }
@@ -105,18 +106,11 @@ public class User implements Serializable, IUser {
         public void setLastPlayedLevel(int level) {
             this.lastPlayedLevel = level;
         }
-/*
-        @Override
-        public int compareTo(User user) {
-            if(this.getOverallScore() < user.getOverallScore()){
-                return 1;
-            }else if(this.getOverallScore() > user.getOverallScore()){
-                return -1;
-            }else{
-                return 0;
-            }
-        }*/
 
+
+    /**
+     * Return compare result in descending order
+     */
     @Override
     public int compareTo(IUser iUser) {
         if(this.getOverallScore() < iUser.getOverallScore()){
