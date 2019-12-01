@@ -2,11 +2,10 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
-class LindseyGenericMole extends GenericMole implements Mole{
+class LindseyMole extends Mole {
 
-    LindseyGenericMole(Hole hole){
+    LindseyMole(Hole hole){
         super(hole);
-        setMoleProperties();
     }
 
     @Override

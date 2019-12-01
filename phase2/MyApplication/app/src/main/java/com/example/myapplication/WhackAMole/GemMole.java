@@ -2,9 +2,9 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
-class GemGenericMole extends GenericMole {
+class GemMole extends Mole {
 
-    GemGenericMole(Hole hole){
+    GemMole(Hole hole){
         super(hole);
         setMoleProperties();
     }

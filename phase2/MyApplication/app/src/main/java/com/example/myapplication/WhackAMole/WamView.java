@@ -176,10 +176,10 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     int x, y;
     x = (int) event.getX();
     y = (int) event.getY();
-    for (GenericMole mole : wc.moleList) {
+    for (Mole mole : wc.moleList) {
       Rect rect = mole.getTouchRect();
-      if (rect.contains(x, y) && mole.getState() != GenericMole.Movement.HIT && mole.getState() != GenericMole.Movement.STANDBY) {
-        mole.setState(GenericMole.Movement.HIT);
+      if (rect.contains(x, y) && mole.getState() != Mole.Movement.HIT && mole.getState() != Mole.Movement.STANDBY) {
+        mole.setState(Mole.Movement.HIT);
         this.wamManager.score = Math.max(0, this.wamManager.score + mole.value);
         this.activity.molesHit += 1;
         this.activity.user.setCurrency(this.activity.user.getCurrency() + mole.gemValue);
