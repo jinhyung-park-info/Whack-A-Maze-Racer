@@ -1,63 +1,59 @@
 package com.example.myapplication.TypeRacer;
 
 
+import android.os.Handler;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class TypeRacerData implements TypeRacerSubject {
-    private int scores;
-    private int streaks;
-    private int lives;
-    private ArrayList<TypeRacerObserver> observerList;
+    private String correctness;
+    private static TypeRacerData INSTANCE = null;
 
-    public TypeRacerData() {
-        observerList = new ArrayList<TypeRacerObserver>();
+    private ArrayList<TypeRacerObserver> dataObservers;
+
+    private TypeRacerData() {
+        dataObservers = new ArrayList<>();
+        getNewDataFromRemote();
+    }
+
+    // Simulate network
+    private void getNewDataFromRemote() {
+//        final Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+                setUserData("1/5");
+//            }
+//        }, 10000);
+    }
+
+    // Creates a Singleton of the class
+    static TypeRacerData getInstance() {
+
+        INSTANCE = new TypeRacerData();
+        return INSTANCE;
     }
 
     @Override
-    public void registerObserver(TypeRacerObserver o) {
-        observerList.add(o);
+    public void registerObserver(TypeRacerObserver dataObserver) {
+
+            dataObservers.add(dataObserver);
     }
 
     @Override
-    public void unregisterObserver(TypeRacerObserver o) {
-        observerList.remove(observerList.indexOf(o));
+    public void removeObserver(TypeRacerObserver repositoryObserver) {
+        dataObservers.remove(repositoryObserver);
     }
 
     @Override
-    public void notifyObservers()
-    {
-        for (Iterator<TypeRacerObserver> it =
-             observerList.iterator(); it.hasNext();)
-        {
-            TypeRacerObserver o = it.next();
-            o.update(scores,streaks,lives);
+    public void notifyObservers() {
+        for (TypeRacerObserver observer: dataObservers) {
+            observer.onUserDataChanged(correctness);
         }
     }
 
-    private int getScores(){return 1;}
-
-    private int getLatestStreaks()
-    {
-        // return 2 for simplicity
-        return 2;
-    }
-
-    private int getLatestLives()
-    {
-        // return 90 for simplicity
-        return 10;
-    }
-
-    // This method is used update displays
-    // when data changes
-    public void dataChanged()
-    {
-        //get latest data
-        scores = getScores();
-        streaks = getLatestStreaks();
-        lives = getLatestLives();
-
+    private void setUserData(String c) {
+        this.correctness= c;
         notifyObservers();
     }
 }

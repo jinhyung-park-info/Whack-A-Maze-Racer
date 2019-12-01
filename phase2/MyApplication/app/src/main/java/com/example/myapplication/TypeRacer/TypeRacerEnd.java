@@ -8,22 +8,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.myapplication.GameActivity;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.SaveScoreActivity;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;
 
-public class TypeRacerEnd extends AppCompatActivity {
+public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver {
     private UserManager userManager;
     private IUser user;
     private int streak;
+
+    private TypeRacerData mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer_end);
+
 
         Intent intent = getIntent();
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
@@ -31,6 +33,12 @@ public class TypeRacerEnd extends AppCompatActivity {
             setUserManager(user_1);
             user = userManager.getUser();
         }
+
+        // register this observer
+
+
+        mData = TypeRacerData.getInstance();
+        mData.registerObserver(this);
 
         TextView finalScore = findViewById(R.id.finalScoreTextView);
         finalScore.setText(getIntent().getExtras().getString("finalScore"));
@@ -53,5 +61,18 @@ public class TypeRacerEnd extends AppCompatActivity {
     }
     private void setUserManager(UserManager newManager){
         userManager = newManager;
+    }
+
+    @Override
+    public void onUserDataChanged(String c) {
+        setContentView(R.layout.activity_type_racer_end);
+        TextView correct = findViewById(R.id.correctnessTV);
+        correct.setText(c);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mData.removeObserver(this);
     }
 }

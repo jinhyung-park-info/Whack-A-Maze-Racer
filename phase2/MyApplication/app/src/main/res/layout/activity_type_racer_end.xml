@@ -13,9 +13,10 @@
         android:text="Go to next Game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.673" />
+        app:layout_constraintVertical_bias="0.677" />
 
     <TextView
         android:id="@+id/messageTextView"
@@ -52,4 +53,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/messageTwoTextView" />
+
+    <TextView
+        android:id="@+id/correctnessTV"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="0/5"
+        android:gravity="center"
+        android:textColor="#FF0000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finalScoreTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
