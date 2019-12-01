@@ -6,9 +6,9 @@ import com.example.myapplication.GameConstants;
  * A generic mole that grants point to user when hit, and deducts life when missed.
  */
 
-class GenericMole extends Mole{
+class GenericMole extends Mole {
 
-    GenericMole(Hole hole){
+    GenericMole(Hole hole) {
         super(hole);
     }
 

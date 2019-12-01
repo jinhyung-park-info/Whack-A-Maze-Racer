@@ -14,6 +14,7 @@ import com.example.myapplication.UserInfo.UserManager;
 public class MoleInstructionActivity extends AppCompatActivity {
 
     private UserManager userManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +22,7 @@ public class MoleInstructionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUserManager(user_1);
         }
     }
@@ -33,7 +34,7 @@ public class MoleInstructionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void play_game(View v){
+    public void play_game(View v) {
         //userManager.getUser().setLoad_moles_stats("0");
         userManager.getUser().setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, "0");
         userManager.setOrUpdateStatistics(this, userManager.getUser(), GameConstants.update);
@@ -42,7 +43,7 @@ public class MoleInstructionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager){
+    private void setUserManager(UserManager newManager) {
         userManager = newManager;
     }
 }

@@ -9,34 +9,34 @@ import android.graphics.Paint;
  */
 
 class Hole {
-  private Bitmap hole_bmp;
-  private float x, y, holeWidth, holeHeight;
+    private Bitmap hole_bmp;
+    private float x, y, holeWidth, holeHeight;
 
-  Hole(int x, int y, Bitmap hole_bmp) {
-    this.x = x;
-    this.y = y;
-    this.hole_bmp = hole_bmp;
-    holeWidth = hole_bmp.getWidth();
-    holeHeight = hole_bmp.getHeight();
-  }
+    Hole(int x, int y, Bitmap hole_bmp) {
+        this.x = x;
+        this.y = y;
+        this.hole_bmp = hole_bmp;
+        holeWidth = hole_bmp.getWidth();
+        holeHeight = hole_bmp.getHeight();
+    }
 
-  void draw(Canvas canvas, Paint paint) {
-    canvas.drawBitmap(hole_bmp, x, y, paint);
-  }
+    void draw(Canvas canvas, Paint paint) {
+        canvas.drawBitmap(hole_bmp, x, y, paint);
+    }
 
-  float getX() {
-    return x;
-  }
+    float getX() {
+        return x;
+    }
 
-  float getY() {
-    return y;
-  }
+    float getY() {
+        return y;
+    }
 
-  float getHoleWidth() {
-    return holeWidth;
-  }
+    float getHoleWidth() {
+        return holeWidth;
+    }
 
-  float getHoleHeight() {
-    return holeHeight;
-  }
+    float getHoleHeight() {
+        return holeHeight;
+    }
 }
