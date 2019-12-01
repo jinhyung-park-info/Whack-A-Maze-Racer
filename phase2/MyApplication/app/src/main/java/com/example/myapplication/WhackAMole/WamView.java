@@ -1,5 +1,6 @@
 package com.example.myapplication.WhackAMole;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -137,6 +138,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     }
 
     // Obtained but significantly modified from source 2).
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (gameStatus) {
