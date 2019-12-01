@@ -30,6 +30,9 @@ public class InGamePurchaseActivity extends AppCompatActivity {
             setUserManager(user_1);
             user = userManager.getUser();
         }
+        TextView numGems = findViewById(R.id.numGems);
+        String text = "Your Balance: " + userManager.getUser().getCurrency();
+        numGems.setText(text);
     }
 
     @Override

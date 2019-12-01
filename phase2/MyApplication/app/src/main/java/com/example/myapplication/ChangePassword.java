@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.UserInfo.IUser;
@@ -29,6 +30,9 @@ public class ChangePassword extends AppCompatActivity {
             setUserManager(user_1);
             user = userManager.getUser();
         }
+        TextView gemDisplay = findViewById(R.id.gemDisplay);
+        String text = "Gem: " + userManager.getUser().getCurrency();
+        gemDisplay.setText(text);
     }
 
     private void setUserManager(UserManager newManager){
@@ -61,6 +65,12 @@ public class ChangePassword extends AppCompatActivity {
 
     public void back(View view){
         Intent intent = new Intent(this, AccountInformation.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
+    }
+
+    public void buyGem(View view){
+        Intent intent = new Intent(this, InGamePurchaseActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }

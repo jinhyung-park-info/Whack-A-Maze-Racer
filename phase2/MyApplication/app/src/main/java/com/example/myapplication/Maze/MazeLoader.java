@@ -8,7 +8,8 @@ import com.example.myapplication.UserInfo.UserManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-interface Loadable {
+interface
+Loadable {
 
     ArrayList<StringBuilder> saveMaze();
 
