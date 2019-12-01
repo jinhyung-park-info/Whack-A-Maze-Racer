@@ -10,6 +10,8 @@ import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.UserInfo.UserManager;
 
+import java.util.Objects;
+
 public class typeRacerInstruction extends AppCompatActivity {
 
     private UserManager userManager;
@@ -29,7 +31,7 @@ public class typeRacerInstruction extends AppCompatActivity {
 
     public void playTypeRacer(View v){
         Intent intent = new Intent(this, TypeRacer.class);
-        intent.putExtra("backGroundColorKey", getIntent().getExtras().getInt("backGroundColorKey"));
+        intent.putExtra("backGroundColorKey", Objects.requireNonNull(getIntent().getExtras()).getInt("backGroundColorKey"));
         intent.putExtra("textColorKey", getIntent().getExtras().getInt("textColorKey"));
         intent.putExtra("difficulty", getIntent().getExtras().getInt("difficulty"));
         intent.putExtra("lives", getIntent().getExtras().getInt("lives"));

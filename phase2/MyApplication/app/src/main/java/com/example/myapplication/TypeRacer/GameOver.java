@@ -27,7 +27,7 @@ public class GameOver extends AppCompatActivity {
             setUser(user_1);
         }
 
-        Button goBackButton = (Button) findViewById(R.id.goBackBtn);
+        Button goBackButton = findViewById(R.id.goBackBtn);
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

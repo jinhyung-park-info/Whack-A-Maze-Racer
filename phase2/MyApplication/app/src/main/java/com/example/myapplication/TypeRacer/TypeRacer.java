@@ -3,15 +3,20 @@ package com.example.myapplication.TypeRacer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.myapplication.GameConstants;
@@ -29,13 +34,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class TypeRacer extends AppCompatActivity {
 
     // Screen Display related attributes
     private Map<String, TextView> textViewMap;
-    private QuestionFactory questionFactory;
     private ArrayList<Question> questions;
     private int questionNumber = 0;
     private EditText answer;
@@ -52,6 +57,7 @@ public class TypeRacer extends AppCompatActivity {
     private IUser user;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +72,12 @@ public class TypeRacer extends AppCompatActivity {
 
             // initialize 3 statistics
             countScore = 0;
-            textViewMap.get("score").setText("" + countScore);
+            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("score"))).setText("" + countScore);
 
             countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
-            textViewMap.get("streak").setText("" + countStreak);
+            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("streak"))).setText("" + countStreak);
 
-            countLife = intent.getExtras().getInt("lives", GameConstants.maxLife);
+            countLife = Objects.requireNonNull(intent.getExtras()).getInt("lives", GameConstants.maxLife);
             int backGroundColor = intent.getExtras().getInt("backGroundColorKey", GameConstants.backGroundDefault);
             int textColor = intent.getExtras().getInt("textColorKey", GameConstants.textColorDefault);
             int difficulty = intent.getExtras().getInt("difficulty", GameConstants.difficultyDefault);
@@ -123,6 +129,7 @@ public class TypeRacer extends AppCompatActivity {
         answer = findViewById(R.id.answerEditText);
     }
 
+    @SuppressLint("SetTextI18n")
     private void setCustomization(int backGroundColor, int textColor, int lives, int difficulty) {
 
         // 1. Set up the background color as <backGroundColor>.
@@ -134,10 +141,10 @@ public class TypeRacer extends AppCompatActivity {
         answer.setTextColor(textColor);
 
         // 3. Set the number of lives
-        textViewMap.get("life").setText("" + lives);
+        Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("life"))).setText("" + lives);
 
         // 4. Create questions according to the difficulty
-        questionFactory = new QuestionFactory(difficulty);
+        QuestionFactory questionFactory = new QuestionFactory(difficulty);
         questions = questionFactory.createQuestionSet();
     }
 
@@ -148,10 +155,14 @@ public class TypeRacer extends AppCompatActivity {
     }
 
     // shows next question, ends if all questions completed
+    @SuppressLint("SetTextI18n")
     private void showNextQuestion() {
         if (questionNumber < questions.size()) {
-            textViewMap.get("countDown").setText("" + (int) GameConstants.timeLimitInMills / 1000);
-            textViewMap.get("question").setText(questions.get(questionNumber).getQuestionContent());
+            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("countDown"))).setText("" + (int) GameConstants.timeLimitInMills / 1000);
+            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("question"))).setText(questions.get(questionNumber).getQuestionContent());
+            if(questions.get(questionNumber) instanceof GoldenQuestion){
+                goldenQuestionMessage();
+            }
             answer.setText("");
             answer.setEnabled(true);
             manageTime();
@@ -186,15 +197,16 @@ public class TypeRacer extends AppCompatActivity {
                             timerRunning = true;
                             countDownTimer =
                                     new CountDownTimer(COUNTDOWN_IN_MILLS, 1000) {
+                                        @SuppressLint("SetTextI18n")
                                         @Override
                                         public void onTick(long millisUntilFinished) {
-                                            textViewMap.get("countDown").setText(Long.toString(millisUntilFinished / 1000));
+                                            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("countDown"))).setText(Long.toString(millisUntilFinished / 1000));
                                         }
 
                                         @Override
                                         public void onFinish() {
                                             updateStatistics(false);
-                                            textViewMap.get("countDown").setText("0");
+                                            Objects.requireNonNull(textViewMap.get("countDown")).setText("0");
                                             showNextQuestion();
                                             timerRunning = false;
                                         }
@@ -209,23 +221,24 @@ public class TypeRacer extends AppCompatActivity {
 
     public boolean userIsCorrect() {
         String response = answer.getText().toString();
-        return response.equals(textViewMap.get("question").getText().toString());
+        return response.equals(Objects.requireNonNull(textViewMap.get("question")).getText().toString());
     }
 
     // method called to update the statistic.
+    @SuppressLint("SetTextI18n")
     public void updateStatistics(boolean isCorrect){
         if (isCorrect) {
             countScore = countScore + questions.get(questionNumber - 1).getPoint();
             countStreak++;
-            textViewMap.get("score").setText("" + countScore);
-            textViewMap.get("streak").setText("" + countStreak);
+            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("score"))).setText(""+countScore);
+            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("streak"))).setText("" + countStreak);
         } else {
             countStreak = 0;
             countLife--;
 
             if (countLife > 0) {
-                textViewMap.get("streak").setText("" + countStreak);
-                textViewMap.get("life").setText("" + countLife);
+                Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("streak"))).setText("" + countStreak);
+                Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("life"))).setText("" + countLife);
             } else {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
                 //user.setStreaks(countStreak);
@@ -239,7 +252,7 @@ public class TypeRacer extends AppCompatActivity {
 
     private void prepareForScreenUpdate() {
 
-        Button doneBtn = (Button) findViewById(R.id.doneButton);
+        Button doneBtn = findViewById(R.id.doneButton);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -273,7 +286,7 @@ public class TypeRacer extends AppCompatActivity {
                 fos.write(this.timerRunning.toString().getBytes());
                 fos.write("\n".getBytes());
 
-                fos.write(textViewMap.get("countDown").getText().toString().getBytes());
+                fos.write(Objects.requireNonNull(textViewMap.get("countDown")).getText().toString().getBytes());
                 fos.write("\n".getBytes());
 
                 if (countDownTimer != null) {
@@ -308,26 +321,23 @@ public class TypeRacer extends AppCompatActivity {
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader rd = new BufferedReader(isr);
 
-            if (!Boolean.valueOf(rd.readLine())) {
-                this.timerRunning = false;
-            } else {
-                this.timerRunning = true;
-            }
+            this.timerRunning = Boolean.valueOf(rd.readLine());
 
             int time = Integer.parseInt(rd.readLine());
 
             timerRunning = true;
             countDownTimer =
                         new CountDownTimer(time * 1000, 1000) {
+                            @SuppressLint("SetTextI18n")
                             @Override
                             public void onTick(long millisUntilFinished) {
-                                textViewMap.get("countDown").setText(Long.toString(millisUntilFinished / 1000));
+                                Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("countDown"))).setText(Long.toString(millisUntilFinished / 1000));
                             }
 
                             @Override
                             public void onFinish() {
                                 updateStatistics(false);
-                                textViewMap.get("countDown").setText("0");
+                                Objects.requireNonNull(textViewMap.get("countDown")).setText("0");
                                 showNextQuestion();
                                 timerRunning = false;
                             }
@@ -338,8 +348,6 @@ public class TypeRacer extends AppCompatActivity {
             File newFile = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
             newFile.delete();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -351,6 +359,19 @@ public class TypeRacer extends AppCompatActivity {
                 }
             }
         }
+
+    }
+
+    public void goldenQuestionMessage(){
+        Context context = getApplicationContext();
+        CharSequence text = "Golden Question";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context,text,duration);
+        toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+        LinearLayout toastLayout = (LinearLayout) toast.getView();
+        TextView toastTV = (TextView) toastLayout.getChildAt(0);
+        toastTV.setTextSize(33);
+        toast.show();
 
     }
 }
