@@ -15,7 +15,7 @@ import android.view.View;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.UserInfo.IUser;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.IUserManager;
 
 import java.util.ArrayList;
 
@@ -90,7 +90,7 @@ public class MazeView extends View {
     /**
      * the background colour of the maze
      */
-    private int bgColour;
+    private int backgroundColour;
 
     /**
      * the type of the player. by default, this is 0 which represents lindsey. 1 is paul
@@ -102,41 +102,39 @@ public class MazeView extends View {
      */
     private boolean collectiblesEnabled;
 
-    private UserManager userManager;
+    private IUserManager userManager;
     private IUser userInMaze;
     private int gamesPlayed = 0;
     private Context contexts;
 
-    private MazeCreation mazeCreation;
+    private MazeMaker mazeMaker;
 
     private Bitmap collectibleBitmap;
     private Bitmap gemCollectibleBitmap;
     private Bitmap playerBitmap;
     private Resources res = this.getResources();
 
-    public MazeView(Context context, int bgColour, GameConstants.Difficulty difficulty,
-                    int playerType, UserManager user_1) {
+    public MazeView(Context context, int backgroundColour, GameConstants.Difficulty difficulty,
+                    int playerType, IUserManager user_1) {
         super(context);
         contexts = context;
 
         setDifficulty(difficulty);
         cells = new Cell[cols][rows];
 
-        this.bgColour = bgColour;
+        this.backgroundColour = backgroundColour;
         this.playerType = playerType;
         this.userManager = user_1;
         this.userInMaze = user_1.getUser();
-        mazeCreation = new MazeCreation();
+        mazeMaker = new MazeCreation();
 
         wallPaint = new Paint();
         wallPaint.setColor(Color.BLACK);
         wallPaint.setStrokeWidth(GameConstants.MazeWallThickness);
 
-        //setup playerPaint
         playerPaint = new Paint();
         playerPaint.setColor(Color.MAGENTA);
 
-        //setup exitPaint
         exitPaint = new Paint();
         exitPaint.setColor(Color.BLACK);
 
@@ -156,13 +154,13 @@ public class MazeView extends View {
         distributeCollectibles();
     }
 
-    public MazeView(Context context, UserManager user_1) {
+    /*public MazeView(Context context, UserManager user_1) {
         super(context);
         contexts = context;
 
         this.userManager = user_1;
         this.userInMaze = user_1.getUser();
-        mazeCreation = new MazeCreation();
+        mazeMaker = new MazeCreation();
 
         wallPaint = new Paint();
         wallPaint.setColor(Color.BLACK);
@@ -185,10 +183,10 @@ public class MazeView extends View {
             playerBitmap = BitmapFactory.decodeResource(res, R.drawable.lindsey_mole);
         else
             playerBitmap = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
-    }
+    }*/
 
-    public void setBgColour(int bgColour) {
-        this.bgColour = bgColour;
+    public void setBackgroundColour(int backgroundColour) {
+        this.backgroundColour = backgroundColour;
     }
 
     public void setPlayerType(int playerType) {
@@ -221,7 +219,7 @@ public class MazeView extends View {
      * create the maze
      */
     private void createMaze() {
-        cells = mazeCreation.makeMaze(cells, cols, rows);
+        cells = mazeMaker.makeMaze(cells, cols, rows);
         player = cells[0][0];
         exit = cells[cols - 1][rows - 1];
     }
@@ -234,6 +232,7 @@ public class MazeView extends View {
             double randCollectibleType = Math.random();
             int[] coordinates = generateRandomCoordinates();
 
+            //60% of the time make a gemCollectible
             if (randCollectibleType < 0.6)
                 collectibles.add(new GemCollectible(coordinates[0], coordinates[1], gemCollectibleBitmap));
             else
@@ -246,8 +245,8 @@ public class MazeView extends View {
 
         while ((randCoordinates[0] == 0 && randCoordinates[1] == 0) ||
                 (randCoordinates[0] == cols - 1 && randCoordinates[1] == rows - 1)) {
-            randCoordinates[0] = (int) (Math.random() * (cols)); //setting rand col
-            randCoordinates[1] = (int) (Math.random() * (rows)); //setting rand row
+            randCoordinates[0] = (int) (Math.random() * (cols));
+            randCoordinates[1] = (int) (Math.random() * (rows));
         }
 
         return randCoordinates;
@@ -323,27 +322,6 @@ public class MazeView extends View {
     }
 
     /**
-     * Loads the maze from an ArrayList StringBuilder representation of the maze. See readMe.txt
-     * for details
-     */
-   /* public void setupOldMaze(int cols, int rows, int bgColour, int playerType, int playerCol,
-                             int playerRow, Cell[][] cells) {
-        //leaving and returning to the maze scares away the collectibles
-        collectiblesEnabled = false;
-        this.cols = cols;
-        this.rows = rows;
-        this.bgColour = bgColour;
-        this.playerType = playerType;
-
-        this.cells = cells;
-        player = this.cells[playerCol][playerRow];
-        exit = this.cells[cols - 1][rows - 1];
-
-        //redraw maze
-        invalidate();
-    }*/
-
-    /**
      * https://codetheory.in/android-ontouchevent-ontouchlistener-motionevent-to-detect-common-gestures/
      * https://developer.android.com/training/graphics/opengl/touch#java
      * https://www.youtube.com/watch?v=SYoN-OvdZ3M part1-4 regarding onTouchEvent
@@ -354,7 +332,6 @@ public class MazeView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        //check for this and then we'll be able to check for ACTION_MOVE events
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -392,15 +369,10 @@ public class MazeView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //new_canvas = canvas;
-        canvas.drawColor(bgColour);
+        canvas.drawColor(backgroundColour);
 
         int width = getWidth();
         int height = getHeight();
-
-        //we are making the margins the length of half a cell, so collectively they take up
-        //the space of one cell. so we have to create our maze within this limited space.
-        //also since cells are squares, the size of a cell represents both the cell's height & width
 
         if (width / cols > height / rows) {
             cellSize = height / (rows + 1);
@@ -500,8 +472,8 @@ public class MazeView extends View {
         return rows;
     }
 
-    public int getBgColour() {
-        return bgColour;
+    public int getBackgroundColour() {
+        return backgroundColour;
     }
 
     public int getPlayerType() {

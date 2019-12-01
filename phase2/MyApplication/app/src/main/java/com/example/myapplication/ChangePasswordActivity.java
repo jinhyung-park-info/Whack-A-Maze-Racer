@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.regex.Matcher;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class ChangePasswordActivity extends AppCompatActivity {
     IUser user;
-    UserManager userManager;
+    IUserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 user.setCurrency(user.getCurrency() - 100);
                 back(view);
                 userManager.setOrUpdateStatistics(this, user, GameConstants.update);
-                userManager.getOrChangePassword(this, user.getEmail(), newPass, GameConstants.changePassword);
+                UserManager newUserManager = new UserManager();
+                newUserManager.getOrChangePassword(this, user, newPass, GameConstants.changePassword);
             }else{
                 Toast.makeText(getApplicationContext(), "Insufficient Gems"
                         , Toast.LENGTH_LONG).show();

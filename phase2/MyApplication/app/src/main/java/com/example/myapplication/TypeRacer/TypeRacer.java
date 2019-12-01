@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.UserManager;
 
 import java.io.BufferedReader;
@@ -53,7 +54,7 @@ public class TypeRacer extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private Boolean timerRunning = false;
 
-    private UserManager userManager;
+    private IUserManager userManager;
     private IUser user;
 
 
@@ -63,7 +64,7 @@ public class TypeRacer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_racer);
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
             user = user_1.getUser();
@@ -89,7 +90,7 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
-    private void setUserManager(UserManager newManager){
+    private void setUserManager(IUserManager newManager){
         userManager = newManager;
     }
 

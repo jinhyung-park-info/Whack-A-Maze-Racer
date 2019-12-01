@@ -12,12 +12,13 @@ import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.SaveScoreActivity;
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.Objects;
 
 public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver {
-    private UserManager userManager;
+    private IUserManager userManager;
     private IUser user;
     private int streak;
 
@@ -30,7 +31,7 @@ public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver
 
 
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null){
             setUserManager(user_1);
             user = userManager.getUser();
@@ -60,7 +61,7 @@ public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver
         });
 
     }
-    private void setUserManager(UserManager newManager){
+    private void setUserManager(IUserManager newManager){
         userManager = newManager;
     }
 

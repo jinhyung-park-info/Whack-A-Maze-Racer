@@ -10,13 +10,14 @@ import android.widget.RadioButton;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.UserManager;
 
 public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
     static boolean passed;
     static int numLives, backGround, difficulty, textColor;
-    private UserManager userManager;
+    private IUserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         textColor = GameConstants.textColorDefault;
 
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
             userManager.getUser().setLastPlayedLevel(GameConstants.typeRacerLevel);
@@ -39,7 +40,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         }
     }
 
-    private void setUserManager(UserManager newManager){
+    private void setUserManager(IUserManager newManager){
         userManager = newManager;
     }
 

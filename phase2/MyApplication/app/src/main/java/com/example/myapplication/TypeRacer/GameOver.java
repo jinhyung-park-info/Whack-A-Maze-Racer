@@ -10,11 +10,12 @@ import android.widget.Button;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.UserManager;
 
 public class GameOver extends AppCompatActivity {
 
-    private UserManager userManager;
+    private IUserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class GameOver extends AppCompatActivity {
         setContentView(R.layout.activity_game_over);
 
         Intent previous = getIntent();
-        UserManager user_1 = (UserManager) previous.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) previous.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null){
             setUser(user_1);
         }
@@ -39,7 +40,7 @@ public class GameOver extends AppCompatActivity {
 
     }
 
-    private void setUser(UserManager new_user){
+    private void setUser(IUserManager new_user){
         userManager = new_user;
     }
 }

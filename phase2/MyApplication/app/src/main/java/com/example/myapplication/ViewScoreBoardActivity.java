@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.SortingUser;
 import com.example.myapplication.UserInfo.UserManager;
 
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class ViewScoreBoardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private UserManager userManager;
+    private IUserManager userManager;
     private String[] arr = new String[]{"Overall Score", "Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected", "TypeRacerStreak", "Mole All Time High"};
     private List<IUser> ArrayOfUsers;
@@ -31,12 +32,14 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_score_board);
         Intent intent = getIntent();
-        UserManager userManager1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager userManager1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (userManager1 != null) {
+            UserManager newUserManager = new UserManager();
             setUserManager(userManager1);
-            ArrayOfUsers = userManager.getListOfAllUsers(getApplicationContext(), userManager.getUser());
+            ArrayOfUsers = newUserManager.getListOfAllUsers(getApplicationContext(), userManager.getUser());
             ArrayOfUsers.add(userManager.getUser());
         }
+
 
         TextView FirstUserName = findViewById(R.id.FirstUserName);
         TextView SecondUserName = findViewById(R.id.SecondUserName);
@@ -84,7 +87,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         spinner.setOnItemSelectedListener(this);
     }
 
-    private void setUserManager(UserManager usermanager) {
+    private void setUserManager(IUserManager usermanager) {
         userManager = usermanager;
     }
 

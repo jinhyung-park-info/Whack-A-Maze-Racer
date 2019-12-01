@@ -13,6 +13,7 @@ import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.SaveScoreActivity;
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.UserManager;
 
 public class MoleActivity extends AppCompatActivity {
@@ -24,7 +25,7 @@ public class MoleActivity extends AppCompatActivity {
     int score = 0;
     public static boolean loaded;
 
-    UserManager userManager;
+    IUserManager userManager;
     IUser user;
     private WamView wamView;
 
@@ -32,7 +33,7 @@ public class MoleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
             user = userManager.getUser();
@@ -73,7 +74,7 @@ public class MoleActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager) {
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 

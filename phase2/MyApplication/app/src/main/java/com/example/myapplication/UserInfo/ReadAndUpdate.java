@@ -149,14 +149,14 @@ public class ReadAndUpdate implements Serializable {
 
     /**
      * @param context     of the device
-     * @param username    of the user
+     * @param user which is the current user
      * @param newPassword to be changed
      * @param getOrChange the string which will tell the method if you want to return the password
      *                    or change the password
      * @return the password or return true if the password was successfully changed
      */
 
-    Object getOrChangePassword(Context context, String username, String newPassword, String getOrChange) {
+    Object getOrChangePassword(Context context, IUser user, String newPassword, String getOrChange) {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = openFileForReading(context, GameConstants.USER_FILE);
@@ -165,7 +165,7 @@ public class ReadAndUpdate implements Serializable {
             while ((text = br.readLine()) != null) {
                 int indexOfComma = text.indexOf(",");
                 String otherUsername = text.substring(0, indexOfComma);
-                if (username.equals(otherUsername)) {
+                if (user.getEmail().equals(otherUsername)) {
                     int indexOfSpace = text.indexOf(" ");
                     if (getOrChange.equals(GameConstants.getPassword)) {
                         return text.substring(indexOfSpace + 1);

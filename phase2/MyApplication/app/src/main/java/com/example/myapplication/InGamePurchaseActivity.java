@@ -9,14 +9,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.IUser;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.IUserManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InGamePurchaseActivity extends AppCompatActivity {
 
-    UserManager userManager;
+    IUserManager userManager;
     IUser user;
 
     @Override
@@ -25,7 +25,7 @@ public class InGamePurchaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_in_game_purchase);
 
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
             user = userManager.getUser();
@@ -42,7 +42,7 @@ public class InGamePurchaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager) {
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 

@@ -9,13 +9,14 @@ import android.widget.EditText;
 
 import com.example.myapplication.UserInfo.ILoginView;
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.LoginPresenter;
 import com.example.myapplication.UserInfo.User;
 import com.example.myapplication.UserInfo.UserManager;
 
 public class MainActivity extends AppCompatActivity implements ILoginView {
 
-    private UserManager userManager;
+    private IUserManager userManager;
     private LoginPresenter loginPresenter;
 
     @Override

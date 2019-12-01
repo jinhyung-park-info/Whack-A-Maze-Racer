@@ -8,13 +8,13 @@ import android.view.View;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.IUserManager;
 
 import java.util.Objects;
 
 public class typeRacerInstruction extends AppCompatActivity {
 
-    private UserManager userManager;
+    private IUserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class typeRacerInstruction extends AppCompatActivity {
         setContentView(R.layout.activity_type_racer_instruction);
 
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null){
             setUserManager(user_1);
         }
@@ -39,7 +39,7 @@ public class typeRacerInstruction extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager){
+    private void setUserManager(IUserManager newManager){
         userManager = newManager;
     }
 }

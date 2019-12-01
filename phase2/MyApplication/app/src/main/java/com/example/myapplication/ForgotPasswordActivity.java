@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.User;
 import com.example.myapplication.UserInfo.UserManager;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
@@ -21,8 +23,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     public void PasswordCheck(View view){
         UserManager userManager = new UserManager();
         EditText username = findViewById(R.id.UsernameCheck);
+        IUser user = new User(username.getText().toString());
         Object validate = userManager.getOrChangePassword(getApplicationContext(),
-                username.getText().toString(), null, GameConstants.getPassword);
+                user, null, GameConstants.getPassword);
         if(validate instanceof String){
             TextView Password = findViewById(R.id.PasswordCheck);
             String text = "Your Password is: " + validate.toString();

@@ -11,21 +11,21 @@ import android.widget.Toast;
 
 import com.example.myapplication.Maze.MazeCustomizationActivity;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.WhackAMole.MoleActivity;
 
 import java.io.File;
 
 public class GameActivity extends AppCompatActivity {
 
-    private UserManager userManager;
+    private IUserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
-        UserManager userManager1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager userManager1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (userManager1 != null){
             setUserManager(userManager1);
         }
@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    private void setUserManager(UserManager usermanager){
+    private void setUserManager(IUserManager usermanager){
         userManager = usermanager;
     }
 

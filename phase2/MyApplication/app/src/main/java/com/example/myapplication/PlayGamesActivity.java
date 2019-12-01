@@ -8,20 +8,20 @@ import android.view.View;
 
 import com.example.myapplication.Maze.MazeInstructionsActivity;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.UserManager;
 import com.example.myapplication.WhackAMole.MoleInstructionActivity;
 
 public class PlayGamesActivity extends AppCompatActivity {
 
-    private UserManager userManager;
-    //private User user;
+    private IUserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_games);
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
         }
@@ -56,7 +56,7 @@ public class PlayGamesActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager) {
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 
@@ -65,23 +65,4 @@ public class PlayGamesActivity extends AppCompatActivity {
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
-
-    /*@Override
-    protected void onDestroy() {
-        System.out.println("OnDestroy");
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onPause(){
-        System.out.println("OnPause");
-        super.onPause();
-
-    }
-
-    @Override
-    protected void onStop(){
-        System.out.println("OnStop");
-        super.onStop();
-    }*/
 }

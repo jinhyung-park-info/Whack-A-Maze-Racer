@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myapplication.UserInfo.IUser;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.IUserManager;
 
 public class SaveScoreActivity extends AppCompatActivity {
 
@@ -15,7 +15,7 @@ public class SaveScoreActivity extends AppCompatActivity {
     int moleScore = 0;
     int moleHigh = 0;
     private String incomingGame;
-    UserManager userManager;
+    IUserManager userManager;
     IUser user;
 
     @Override
@@ -35,14 +35,14 @@ public class SaveScoreActivity extends AppCompatActivity {
         }
 
         //if from MazeCustomizationActivity
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
             user = userManager.getUser();
         }
     }
 
-    private void setUserManager(UserManager newManager) {
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 

@@ -8,13 +8,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.IUser;
+import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.UserManager;
 
 public class AccountInformationActivity extends AppCompatActivity {
 
     private TextView EditTextUsername;
     private TextView EditTextPassword;
-    private UserManager userManager;
+    private IUserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class AccountInformationActivity extends AppCompatActivity {
         displayUsernameAndPassword();
     }
 
-    private void setUserManager(UserManager UserManager) {
+    private void setUserManager(IUserManager UserManager) {
         userManager = UserManager;
     }
 

@@ -9,11 +9,11 @@ import android.view.View;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.PlayGamesActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.IUserManager;
 
 public class MoleInstructionActivity extends AppCompatActivity {
 
-    private UserManager userManager;
+    private IUserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class MoleInstructionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mole_instruction);
 
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
         }
@@ -43,7 +43,7 @@ public class MoleInstructionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager) {
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 }

@@ -41,7 +41,7 @@ class MazeLoader implements Loadable {
     @Override
     public ArrayList<StringBuilder> saveMaze() {
         ArrayList<StringBuilder> savedMaze = new ArrayList<>();
-        savedMaze.add(new StringBuilder(Integer.toString(mazeView.getBgColour())));
+        savedMaze.add(new StringBuilder(Integer.toString(mazeView.getBackgroundColour())));
         savedMaze.add(new StringBuilder(Integer.toString(mazeView.getPlayerType())));
         savedMaze.add(new StringBuilder(Integer.toString(mazeView.getRows())));
         savedMaze.add(new StringBuilder(Integer.toString(mazeView.getCols())));
