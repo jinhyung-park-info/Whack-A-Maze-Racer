@@ -192,6 +192,10 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
         }
     }
 
+    /**
+     * Update the current user's statistics to match stats
+     * @param stats to be updated
+     */
     private void upload_moles_stats(String stats) {
         this.activity.user.setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, stats);
     }
