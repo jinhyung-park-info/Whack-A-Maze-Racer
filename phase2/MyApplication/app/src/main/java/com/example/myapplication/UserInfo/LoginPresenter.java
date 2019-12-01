@@ -6,6 +6,8 @@ import android.widget.EditText;
 import com.example.myapplication.GameConstants;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginPresenter implements ILoginPresenter {
 
@@ -15,7 +17,7 @@ public class LoginPresenter implements ILoginPresenter {
         this.userManager = new UserManager();
     }
 
-    private boolean validateChar(String username, String password, EditText editTextUser,
+   /* private boolean validateChar(String username, String password, EditText editTextUser,
                                  EditText editTextPass) {
         if (username.length() > GameConstants.usernameLength) {
             editTextUser.setError("Usernames cannot be longer than " + GameConstants.usernameLength
@@ -52,11 +54,12 @@ public class LoginPresenter implements ILoginPresenter {
             return false;
         }
         return true;
-    }
+    }*/
 
     public boolean validateCredentialsForAccountCreation(Context context, String username, String password,
                                                          EditText editTextUser, EditText editTextPass) {
-        if (validateChar(username, password, editTextUser, editTextPass)) {
+        //if (validateChar(username, password, editTextUser, editTextPass)) {
+        if(checkText(editTextUser) && checkText(editTextPass)){
             ArrayList<Boolean> arr = userManager.checkUsernameAndPassword(context, username, password);
             if (arr.get(0)) {
                 editTextUser.setError("Username already exists");
@@ -70,7 +73,8 @@ public class LoginPresenter implements ILoginPresenter {
 
 
     public boolean validateCredentialsForLogin(Context context, String username, String password, EditText editTextUser, EditText editTextPass) {
-        if(validateChar(username, password, editTextUser, editTextPass)) {
+        //if(validateChar(username, password, editTextUser, editTextPass)) {
+        if(checkText(editTextUser) && checkText(editTextPass)){
             ArrayList<Boolean> validation = userManager.checkUsernameAndPassword(context, username, password);
             if (validation.get(0)) {
                 if (!(validation.get(1))) {
@@ -85,5 +89,23 @@ public class LoginPresenter implements ILoginPresenter {
             return false;
         }
         return true;
+    }
+
+    /**
+     *
+     * @param editText which contains the text to be checked
+     * @return true if the text entered by the user is correct and false otherwise
+     */
+
+    public boolean checkText(EditText editText){
+        String check = editText.getText().toString();
+        Pattern newPattern = Pattern.compile("^[a-zA-Z0-9]+$");
+        Matcher newMatcher = newPattern.matcher(check);
+        if(newMatcher.matches()){
+            return true;
+        }else{
+            editText.setError("Only alphanumeric characters are allowed");
+            return false;
+        }
     }
 }

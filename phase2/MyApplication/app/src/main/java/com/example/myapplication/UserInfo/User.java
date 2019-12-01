@@ -22,11 +22,7 @@ public class User implements Serializable, IUser {
             for (String gameName : GameConstants.GameNames) {
                 HashMap<String, Object> statistics = new HashMap<String, Object>();
                 for (String statisticsOfGame : GameConstants.getArrayOfStatistics(gameName)) {
-                    /*if (statisticsOfGame.equals(GameConstants.MoleStats)) {
-                        statistics.put(statisticsOfGame, " ");
-                    }else {*/
                         statistics.put(statisticsOfGame, 0);
-                    //}
                 }
                 map.put(gameName, statistics);
             }

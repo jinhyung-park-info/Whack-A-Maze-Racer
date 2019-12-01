@@ -2,11 +2,14 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
-class PaulGenericMole extends GenericMole {
+/**
+ * A Mole that looks like professor Gries. If you hit it, you lose a point instead.
+ */
 
-    PaulGenericMole(Hole hole){
+class PaulMole extends Mole {
+
+    PaulMole(Hole hole){
         super(hole);
-        setMoleProperties();
     }
 
     @Override

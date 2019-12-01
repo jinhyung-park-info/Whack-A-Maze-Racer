@@ -15,7 +15,6 @@ import android.view.SurfaceView;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 
-/** Inspired by FishTank Project. */
 public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
   private Resources res = this.getResources();
@@ -27,7 +26,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
   private Canvas canvas;
   private Paint paint;
   private SurfaceHolder holder;
-  boolean thread_active;
+  boolean thread_active; // If true, thread will continue to draw on Canvas.
   private String endScore;
   private String end_message1;
   private String end_message2;
@@ -176,10 +175,10 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
     int x, y;
     x = (int) event.getX();
     y = (int) event.getY();
-    for (GenericMole mole : wc.moleList) {
+    for (Mole mole : wc.moleList) {
       Rect rect = mole.getTouchRect();
-      if (rect.contains(x, y) && mole.getState() != GenericMole.Movement.HIT && mole.getState() != GenericMole.Movement.STANDBY) {
-        mole.setState(GenericMole.Movement.HIT);
+      if (rect.contains(x, y) && mole.getState() != Mole.Movement.HIT && mole.getState() != Mole.Movement.STANDBY) {
+        mole.setState(Mole.Movement.HIT);
         this.wamManager.score = Math.max(0, this.wamManager.score + mole.value);
         this.activity.molesHit += 1;
         this.activity.user.setCurrency(this.activity.user.getCurrency() + mole.gemValue);

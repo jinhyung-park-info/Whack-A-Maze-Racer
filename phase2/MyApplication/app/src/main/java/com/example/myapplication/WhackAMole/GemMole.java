@@ -2,11 +2,15 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
-class GemGenericMole extends GenericMole {
 
-    GemGenericMole(Hole hole){
+/**
+ * A mole that grants user gems when hit.
+ */
+
+class GemMole extends Mole {
+
+    GemMole(Hole hole){
         super(hole);
-        setMoleProperties();
     }
 
     @Override

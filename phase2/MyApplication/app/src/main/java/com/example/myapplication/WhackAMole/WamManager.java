@@ -9,7 +9,10 @@ import com.example.myapplication.GameConstants;
 import java.util.ArrayList;
 import java.util.Random;
 
-/** Inspired by FishTank Project */
+/**
+ * A manager that stores holes and mole and decides how moles behave in the game.
+ */
+
 class WamManager implements Runnable{
 
   private int numLives;
@@ -21,12 +24,12 @@ class WamManager implements Runnable{
   private int holeDeploymentWidth, holeDeploymentHeight;
   private Rect holeRect;
   int score;
-  private boolean keepRunning;
+  private boolean keepRunning; //If true, thread will continue to select moles to appear on screen.
   private int duration;
   private MoleFactory moleFactory = new MoleFactory();
 
   private ArrayList<Hole> holeList;
-  ArrayList<GenericMole> moleList;
+  ArrayList<Mole> moleList;
 
   WamManager(
       Rect hole_r,
@@ -115,17 +118,20 @@ class WamManager implements Runnable{
     thread.start();
   }
 
+  /**
+   * Select random mole to appear on its respective hole
+   */
   private void randomMole() {
     Random random = new Random();
     int num = random.nextInt(moleList.size());
-    GenericMole mole = moleList.get(num);
-    if (mole.getState() == GenericMole.Movement.STANDBY) {
-      mole.setState(GenericMole.Movement.UP);
+    Mole mole = moleList.get(num);
+    if (mole.getState() == Mole.Movement.STANDBY) {
+      mole.setState(Mole.Movement.UP);
     }
   }
 
   void move() {
-    for (GenericMole mole : this.moleList) {
+    for (Mole mole : this.moleList) {
       mole.move();
       if (mole.loseLife) {
         this.currentLives -= mole.lifeCount;
@@ -141,10 +147,10 @@ class WamManager implements Runnable{
       randomMole();
       if (score >= GameConstants.moleSecondSpeedUp) {
         duration = GameConstants.moleSecondSpeed;
-        GenericMole.setSpeed(WamView.screenHeight / 200);
+        Mole.setSpeed(WamView.screenHeight / 200);
       } else if (score >= GameConstants.moleFirstSpeedUp) {
         duration = GameConstants.moleFirstSpeed;
-        GenericMole.setSpeed(WamView.screenHeight / 240);
+        Mole.setSpeed(WamView.screenHeight / 240);
       }
       end_time = System.currentTimeMillis();
       if (end_time - start_time < duration) {

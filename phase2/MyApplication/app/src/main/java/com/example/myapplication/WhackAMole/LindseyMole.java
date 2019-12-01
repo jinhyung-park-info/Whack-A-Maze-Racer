@@ -2,11 +2,15 @@ package com.example.myapplication.WhackAMole;
 
 import com.example.myapplication.GameConstants;
 
-class LindseyGenericMole extends GenericMole implements Mole{
 
-    LindseyGenericMole(Hole hole){
+/**
+ * A mole that looks like professor Shorser. She is so nice that it grants extra points when hit.
+ */
+
+class LindseyMole extends Mole {
+
+    LindseyMole(Hole hole){
         super(hole);
-        setMoleProperties();
     }
 
     @Override
