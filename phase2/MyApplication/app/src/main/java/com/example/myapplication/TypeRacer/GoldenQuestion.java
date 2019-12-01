@@ -4,9 +4,9 @@ import com.example.myapplication.GameConstants;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GoldenQuestion extends Question {
+class GoldenQuestion extends Question {
 
-    public GoldenQuestion() {
+    GoldenQuestion() {
         this.point = GameConstants.goldenQuestionPoint;
     }
 

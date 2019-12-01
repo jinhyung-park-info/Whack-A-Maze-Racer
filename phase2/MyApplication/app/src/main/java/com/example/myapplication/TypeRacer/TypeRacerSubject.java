@@ -1,7 +1,7 @@
 package com.example.myapplication.TypeRacer;
 
 public interface TypeRacerSubject {
-    public void registerObserver(TypeRacerObserver o);
-    public void removeObserver(TypeRacerObserver o);
-    public void notifyObservers();
+    void registerObserver(TypeRacerObserver o);
+    void removeObserver(TypeRacerObserver o);
+    void notifyObservers();
 }

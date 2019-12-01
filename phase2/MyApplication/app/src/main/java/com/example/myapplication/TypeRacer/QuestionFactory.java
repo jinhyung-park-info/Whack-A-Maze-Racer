@@ -5,15 +5,15 @@ import com.example.myapplication.GameConstants;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class QuestionFactory {
+class QuestionFactory {
 
-    int difficulty;
+    private int difficulty;
 
-    public QuestionFactory(int d) {
+    QuestionFactory(int d) {
         this.difficulty = d;
     }
 
-    public ArrayList<Question> createQuestionSet() {
+    ArrayList<Question> createQuestionSet() {
         ArrayList<Question> questionSet = new ArrayList<>();
         for (int i = 0; i < GameConstants.numOfQuestions; i++) {
             double x = Math.random();

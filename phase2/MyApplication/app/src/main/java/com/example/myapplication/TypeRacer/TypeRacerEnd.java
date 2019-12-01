@@ -14,6 +14,8 @@ import com.example.myapplication.SaveScoreActivity;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.UserManager;
 
+import java.util.Objects;
+
 public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver {
     private UserManager userManager;
     private IUser user;
@@ -36,13 +38,13 @@ public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver
 
         // register this observer
 
-        mData = TypeRacerData.getInstance(getIntent().getExtras().getString("finalScore") + "/25");
+        mData = TypeRacerData.getInstance(Objects.requireNonNull(getIntent().getExtras()).getString("finalScore") + "/25");
         mData.registerObserver(this);
 
         TextView finalScore = findViewById(R.id.finalScoreTextView);
         finalScore.setText(getIntent().getExtras().getString("finalScore"));
 
-        Button nextButton = (Button) findViewById(R.id.nextButton);
+        Button nextButton = findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
