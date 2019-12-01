@@ -163,15 +163,15 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
     private String[] getAttributesForSorting(String sortingChooser) {
         switch (sortingChooser) {
             case "Moles Hit":
-                return new String[]{GameConstants.NameGame1, GameConstants.MoleHit};
+                return new String[]{GameConstants.WHACK_A_MOLE, GameConstants.MoleHit};
             case "Num MazeGames Played":
-                return new String[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed};
+                return new String[]{GameConstants.MAZE, GameConstants.NumMazeGamesPlayed};
             case "Num MazeItems Collected":
-                return new String[]{GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze};
+                return new String[]{GameConstants.MAZE, GameConstants.NumCollectiblesCollectedMaze};
             case "TypeRacerStreak":
-                return new String[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak};
+                return new String[]{GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak};
             case "Mole All Time High":
-                return new String[]{GameConstants.NameGame1, GameConstants.MoleAllTimeHigh};
+                return new String[]{GameConstants.WHACK_A_MOLE, GameConstants.MoleAllTimeHigh};
         }
         return new String[]{};
     }

@@ -293,8 +293,8 @@ public class MazeView extends View {
                 distributeCollectibles();
 
             if (gamesPlayed >= GameConstants.TotalMazeGames) {
-                int CurrGamesPlayed = (int) userInMaze.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed);
-                this.userInMaze.setStatistic(GameConstants.NameGame3,
+                int CurrGamesPlayed = (int) userInMaze.getStatistic(GameConstants.MAZE, GameConstants.NumMazeGamesPlayed);
+                this.userInMaze.setStatistic(GameConstants.MAZE,
                         GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + gamesPlayed);
                 this.userInMaze.setLastPlayedLevel(0);
                 userManager.setOrUpdateStatistics(contexts, userInMaze, GameConstants.update);

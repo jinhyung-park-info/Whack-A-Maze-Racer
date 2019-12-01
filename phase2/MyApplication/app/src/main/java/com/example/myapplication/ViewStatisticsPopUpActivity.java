@@ -35,11 +35,11 @@ public class ViewStatisticsPopUpActivity extends Activity {
         getWindow().setLayout((int) (width * 0.8), (int) (height * 0.7));
 
         TextView mazeCompletedText = findViewById(R.id.mazeCompleted);
-        String to_show = " maze games played: " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed);
+        String to_show = " maze games played: " + user.getStatistic(GameConstants.MAZE, GameConstants.NumMazeGamesPlayed);
         mazeCompletedText.setText(to_show);
 
         TextView molesHitText = findViewById(R.id.molesHit);
-        String molesHit = " Moles Hit: " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit);
+        String molesHit = " Moles Hit: " + user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleHit);
         molesHitText.setText(molesHit);
 
         TextView currencyText = findViewById(R.id.currency);
@@ -47,7 +47,7 @@ public class ViewStatisticsPopUpActivity extends Activity {
         currencyText.setText(currency);
 
         TextView streakText = findViewById(R.id.streak);
-        String streak = " TypeRacer Streak: " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
+        String streak = " TypeRacer Streak: " + user.getStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak);
         streakText.setText(streak);
 
         TextView overallText = findViewById(R.id.overall);
@@ -55,13 +55,13 @@ public class ViewStatisticsPopUpActivity extends Activity {
         overallText.setText(overall);
 
         TextView moleAllTimeHigh = findViewById(R.id.moleAllTimeHigh);
-        String moleHigh = " Mole All Time High: " + user.getStatistic(GameConstants.NameGame1,
+        String moleHigh = " Mole All Time High: " + user.getStatistic(GameConstants.WHACK_A_MOLE,
                 GameConstants.MoleAllTimeHigh);
         moleAllTimeHigh.setText(moleHigh);
 
         TextView numMazeItems = findViewById(R.id.numMazeItems);
         String mazeItemsCollected = " Num maze items collected: " +
-                user.getStatistic(GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze);
+                user.getStatistic(GameConstants.MAZE, GameConstants.NumCollectiblesCollectedMaze);
         numMazeItems.setText(mazeItemsCollected);
     }
 

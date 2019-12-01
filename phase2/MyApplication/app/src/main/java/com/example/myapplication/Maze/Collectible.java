@@ -30,9 +30,9 @@ public class Collectible extends Cell {
 
     public void handleCollection(IUser userInMaze) {
         //increment number of collectibles collected by 1
-        int newNumCollectiblesCollected = (int) userInMaze.getStatistic(GameConstants.NameGame3,
+        int newNumCollectiblesCollected = (int) userInMaze.getStatistic(GameConstants.MAZE,
                 GameConstants.NumCollectiblesCollectedMaze) + 1;
-        userInMaze.setStatistic(GameConstants.NameGame3,
+        userInMaze.setStatistic(GameConstants.MAZE,
                 GameConstants.NumCollectiblesCollectedMaze, newNumCollectiblesCollected);
 
         int newScore = userInMaze.getOverallScore() + points;

@@ -197,7 +197,7 @@ public class WamView extends SurfaceView implements SurfaceHolder.Callback, Runn
      * @param stats to be updated
      */
     private void upload_moles_stats(String stats) {
-        this.activity.user.setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, stats);
+        this.activity.user.setStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats, stats);
     }
 
     // Inspired by source 3).

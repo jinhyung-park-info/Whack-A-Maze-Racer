@@ -41,7 +41,7 @@ public class MoleActivity extends AppCompatActivity {
         writeMoleStats();
         reset();
 
-        if (loaded && !user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats).equals("0")) {
+        if (loaded && !user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats).equals("0")) {
             load(user);
         } else {
             setContentView(R.layout.activity_mole);
@@ -155,10 +155,10 @@ public class MoleActivity extends AppCompatActivity {
     }
 
     public void conclude() {
-        int CurrMolesHit = (int) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit);
-        user.setStatistic(GameConstants.NameGame1, GameConstants.MoleHit, CurrMolesHit + molesHit);
+        int CurrMolesHit = (int) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleHit);
+        user.setStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleHit, CurrMolesHit + molesHit);
         molesHit = 0;
-        int moleHigh = Math.max(wamView.wamManager.score, (int) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh));
+        int moleHigh = Math.max(wamView.wamManager.score, (int) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleAllTimeHigh));
         user.setLastPlayedLevel(0);
         writeMoleStats();
         Intent intent = new Intent(this, SaveScoreActivity.class);
@@ -191,7 +191,7 @@ public class MoleActivity extends AppCompatActivity {
     }
 
     public void load(IUser user) {
-        String load = (String) user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats);
+        String load = (String) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats);
         String[] stats = load.split("-");
         int lifeCount = Integer.parseInt(stats[0]);
         if (lifeCount > 0) {
@@ -204,7 +204,7 @@ public class MoleActivity extends AppCompatActivity {
             setContentView(wamView);
         }
         loaded = false;
-        user.setStatistic(GameConstants.NameGame1, GameConstants.MoleStats, "0");
+        user.setStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats, "0");
         writeMoleStats();
 
     }

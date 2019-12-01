@@ -74,7 +74,7 @@ public class TypeRacer extends AppCompatActivity {
             countScore = 0;
             Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("score"))).setText("" + countScore);
 
-            countStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
+            countStreak = (int) user.getStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak);
             Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("streak"))).setText("" + countStreak);
 
             countLife = Objects.requireNonNull(intent.getExtras()).getInt("lives", GameConstants.maxLife);
@@ -170,7 +170,7 @@ public class TypeRacer extends AppCompatActivity {
         } else {
             user.setLastPlayedLevel(0);
             //user.setStreaks(countStreak);
-            user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
+            user.setStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak, countStreak);
             userManager.setOrUpdateStatistics(this, user, GameConstants.update);
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
             goToEndGame.putExtra(GameConstants.USERMANAGER, userManager);
@@ -242,7 +242,7 @@ public class TypeRacer extends AppCompatActivity {
             } else {
                 Intent intent = new Intent(getApplicationContext(), GameOver.class);
                 //user.setStreaks(countStreak);
-                user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, countStreak);
+                user.setStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak, countStreak);
                 userManager.setOrUpdateStatistics(this, user, GameConstants.update);
                 intent.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent);

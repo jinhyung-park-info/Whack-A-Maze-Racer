@@ -105,12 +105,12 @@ public class ReadAndUpdate implements Serializable {
 
     private String updateLine(IUser user) {
         return user.getEmail() + ", " + user.getLastPlayedLevel() + ", " + user.getOverallScore()
-                + ", " + user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak)
-                + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed)
-                + ", " + user.getStatistic(GameConstants.NameGame3, GameConstants.NumCollectiblesCollectedMaze)
-                + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleHit)
-                + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleStats)
-                + ", " + user.getStatistic(GameConstants.NameGame1, GameConstants.MoleAllTimeHigh)
+                + ", " + user.getStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak)
+                + ", " + user.getStatistic(GameConstants.MAZE, GameConstants.NumMazeGamesPlayed)
+                + ", " + user.getStatistic(GameConstants.MAZE, GameConstants.NumCollectiblesCollectedMaze)
+                + ", " + user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleHit)
+                + ", " + user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats)
+                + ", " + user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleAllTimeHigh)
                 + ", " + user.getCurrency() + "\n";
     }
 
@@ -134,10 +134,10 @@ public class ReadAndUpdate implements Serializable {
         int MoleAllTimeHigh = Integer.parseInt(userAndGameStats[8]);
         int gemsRemaining = Integer.parseInt(userAndGameStats[9]);
 
-        Object[] typeRacer = new Object[]{GameConstants.NameGame2, GameConstants.TypeRacerStreak, streaks};
-        Object[] whackAMole = new Object[]{GameConstants.NameGame1, GameConstants.MoleStats,
+        Object[] typeRacer = new Object[]{GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak, streaks};
+        Object[] whackAMole = new Object[]{GameConstants.WHACK_A_MOLE, GameConstants.MoleStats,
                 loadMolesStats, GameConstants.MoleHit, moleHit, GameConstants.MoleAllTimeHigh, MoleAllTimeHigh};
-        Object[] maze = new Object[]{GameConstants.NameGame3, GameConstants.NumMazeGamesPlayed,
+        Object[] maze = new Object[]{GameConstants.MAZE, GameConstants.NumMazeGamesPlayed,
                 numMazeGame, GameConstants.NumCollectiblesCollectedMaze, numMazeItemsCollected};
         List<Object[]> ListOfGameStats = Arrays.asList(typeRacer, whackAMole, maze);
         ArrayList<Object[]> arrayOfGameStats = new ArrayList<>(ListOfGameStats);

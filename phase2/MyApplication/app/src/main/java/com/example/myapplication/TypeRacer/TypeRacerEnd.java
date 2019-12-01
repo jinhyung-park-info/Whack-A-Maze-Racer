@@ -49,8 +49,8 @@ public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver
             @Override
             public void onClick(View v) {
                 streak = 0;
-                int racerStreak = (int) user.getStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak);
-                user.setStatistic(GameConstants.NameGame2, GameConstants.TypeRacerStreak, racerStreak + streak);
+                int racerStreak = (int) user.getStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak);
+                user.setStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak, racerStreak + streak);
                 Intent intent = new Intent(getApplicationContext(), SaveScoreActivity.class);
                 intent.putExtra(GameConstants.USERMANAGER, userManager);
                 intent.putExtra(GameConstants.TypeRacerStreak, racerStreak);

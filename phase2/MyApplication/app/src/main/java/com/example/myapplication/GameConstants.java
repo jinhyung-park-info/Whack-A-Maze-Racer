@@ -75,9 +75,9 @@ public abstract class GameConstants {
     public static final String racerName = "racer";
     public static final String mazeName = "maze";
     public static final int NumPeopleOnScoreBoard = 15;
-    public static final String NameGame1 = "Whack-A-Mole";
-    public static final String NameGame2 = "TypeRacer";
-    public static final String NameGame3 = "Maze";
+    public static final String WHACK_A_MOLE = "Whack-A-Mole";
+    public static final String TYPE_RACER = "TypeRacer";
+    public static final String MAZE = "Maze";
     public static final String MoleHit = "MoleHit";
     public static final String MoleStats = "MoleStats";
     public static final String MoleScore = "MoleScore"; //this is key for updating overall score
@@ -89,7 +89,7 @@ public abstract class GameConstants {
     public static final String[] WhackAMoleStatistics = new String[]{MoleStats, MoleHit, MoleAllTimeHigh};
     public static final String[]  TypeRacerStatistics = new String[]{TypeRacerStreak};
     public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
-    public static String[] GameNames = new String[]{NameGame1, NameGame2, NameGame3};
+    public static String[] GameNames = new String[]{WHACK_A_MOLE, TYPE_RACER, MAZE};
 
     public enum Direction {
         UP, DOWN, LEFT, RIGHT
@@ -101,11 +101,11 @@ public abstract class GameConstants {
 
     public static String[] getArrayOfStatistics(String GameName){
         switch (GameName){
-            case NameGame1:
+            case WHACK_A_MOLE:
                 return WhackAMoleStatistics;
-            case NameGame2:
+            case TYPE_RACER:
                 return TypeRacerStatistics;
-            case NameGame3:
+            case MAZE:
                 return MazeStatistics;
         }
         return new String[]{};
