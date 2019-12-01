@@ -17,7 +17,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SetAndUpdate implements Serializable {
+public class ReadAndUpdate implements Serializable {
 
     public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate){
         StringBuilder sb = new StringBuilder();
@@ -119,5 +119,44 @@ public class SetAndUpdate implements Serializable {
         user.setLastPlayedLevel(lastPlayedLevel);
         user.setOverallScore(overallScore);
         user.setCurrency(gemsRemaining);
+    }
+
+    /**
+     * @param context of the device
+     * @param username of the user
+     * @param newPassword to be changed
+     * @param getOrChange the string which will tell the method if you want to return the password
+     *                    or change the password
+     * @return the password or return true if the password was successfully changed
+     */
+
+    public Object getOrChangePassword(Context context, String username, String newPassword, String getOrChange){
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader br = openFileForReading(context, GameConstants.USER_FILE);
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                int indexOfComma = text.indexOf(",");
+                String otherUsername = text.substring(0, indexOfComma);
+                if (username.equals(otherUsername)) {
+                    int indexOfSpace = text.indexOf(" ");
+                    if(getOrChange.equals(GameConstants.getPassword)) {
+                        return text.substring(indexOfSpace + 1);
+                    }else if(getOrChange.equals(GameConstants.changePassword)){
+                        String newLine = otherUsername + ", " + newPassword + "\n";
+                        sb.append(newLine);
+
+                    }
+                }else{
+                    sb.append(text).append("\n");
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        writeStringToFile(context, sb, GameConstants.USER_FILE);
+        return true;
     }
 }

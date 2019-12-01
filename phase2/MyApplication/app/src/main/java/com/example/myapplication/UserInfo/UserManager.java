@@ -9,14 +9,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class UserManager implements Serializable {
 
     private WriteAndCheck writeAndCheck;
-    private SetAndUpdate setAndUpdate;
+    private ReadAndUpdate setAndUpdate;
 
     /**
      * The user this class manages
@@ -42,7 +41,7 @@ public class UserManager implements Serializable {
 
     public UserManager() {
         this.writeAndCheck = new WriteAndCheck();
-        this.setAndUpdate = new SetAndUpdate();
+        this.setAndUpdate = new ReadAndUpdate();
     }
 
     /**
@@ -68,6 +67,13 @@ public class UserManager implements Serializable {
         setAndUpdate.setOrUpdateStatistics(context, user, setOrUpdate);
 
     }
+
+    /**
+     *
+     * @param context of the device
+     * @param user the current user which will not be in the ArrayList
+     * @return a list of all the users present in the file except the current user playing the game.
+     */
 
     public ArrayList<IUser> getListOfAllUsers(Context context, IUser user){
         InputStream fis = null;
@@ -180,44 +186,18 @@ public class UserManager implements Serializable {
     }
 
 
+    /**
+     *
+     * @param context of the device
+     * @param username of the user
+     * @param newPassword to be changed
+     * @param getOrChange the string which will tell the method if you want to return the password
+     *                    or change the password
+     * @return the password or return true if the password was successfully changed
+     */
+
     public Object getOrChangePassword(Context context, String username, String newPassword, String getOrChange){
-        InputStream fis = null;
-        StringBuilder sb = new StringBuilder();
-        try {
-            BufferedReader br = setAndUpdate.openFileForReading(context, GameConstants.USER_FILE);
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                int indexOfComma = text.indexOf(",");
-                String otherUsername = text.substring(0, indexOfComma);
-                if (username.equals(otherUsername)) {
-                    int indexOfSpace = text.indexOf(" ");
-                    if(getOrChange.equals(GameConstants.getPassword)) {
-                        return text.substring(indexOfSpace + 1);
-                    }else if(getOrChange.equals(GameConstants.changePassword)){
-                        String newLine = otherUsername + ", " + newPassword + "\n";
-                        sb.append(newLine);
-
-                    }
-                }else{
-                    sb.append(text).append("\n");
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
+        return setAndUpdate.getOrChangePassword(context, username, newPassword, getOrChange);
     }
 
 

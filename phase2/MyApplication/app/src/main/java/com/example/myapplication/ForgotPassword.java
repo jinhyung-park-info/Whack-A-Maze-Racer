@@ -28,7 +28,7 @@ public class ForgotPassword extends AppCompatActivity {
             String text = "Your Password is: " + validate.toString();
             Password.setText(text);
         }else{
-            username.setError("Incorrect Username");
+            username.setError("Incorrect username was entered, only alphanumeric characters  are allowed");
         }
     }
 
