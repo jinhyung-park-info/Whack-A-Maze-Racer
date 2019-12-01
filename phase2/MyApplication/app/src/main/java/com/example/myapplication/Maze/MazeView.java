@@ -296,7 +296,7 @@ public class MazeView extends View {
                 int CurrGamesPlayed = (int) userInMaze.getStatistic(GameConstants.MAZE, GameConstants.NumMazeGamesPlayed);
                 this.userInMaze.setStatistic(GameConstants.MAZE,
                         GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + gamesPlayed);
-                this.userInMaze.setLastPlayedLevel(0);
+                this.userInMaze.setLastPlayedLevel(GameConstants.defaultLevel);
                 userManager.setOrUpdateStatistics(contexts, userInMaze, GameConstants.update);
                 Activity activity = (MazeCustomizationActivity) contexts;
                 ((MazeCustomizationActivity) contexts).reset();

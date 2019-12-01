@@ -65,26 +65,25 @@ public class GameActivity extends AppCompatActivity {
 
     public void resume(View view){
         switch (userManager.getUser().getLastPlayedLevel()) {
-            case 0:
-                Toast.makeText(getApplicationContext(), "You have not played a game yet"
-                        , Toast.LENGTH_LONG).show();
-                break;
-            case 1:
+            case GameConstants.whackAMoleLevel:
                 MoleActivity.loaded = true;
                 Intent intent = new Intent(this, MoleActivity.class);
                 intent.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent);
                 break;
-            case 2:
+            case GameConstants.typeRacerLevel:
                 Intent intent2 = new Intent(this, TypeRacerCustomizationActivity.class);
                 intent2.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent2);
                 break;
-            case 3:
+            case GameConstants.mazeLevel:
                 Intent intent3 = new Intent(this, MazeCustomizationActivity.class);
                 intent3.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent3);
                 break;
+            default:
+                Toast.makeText(getApplicationContext(), "You have not played a game yet"
+                        , Toast.LENGTH_LONG).show();
         }
     }
 

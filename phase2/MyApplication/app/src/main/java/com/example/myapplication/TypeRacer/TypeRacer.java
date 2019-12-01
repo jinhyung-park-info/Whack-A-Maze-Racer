@@ -168,7 +168,7 @@ public class TypeRacer extends AppCompatActivity {
             manageTime();
             questionNumber++;
         } else {
-            user.setLastPlayedLevel(0);
+            user.setLastPlayedLevel(GameConstants.defaultLevel);
             //user.setStreaks(countStreak);
             user.setStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak, countStreak);
             userManager.setOrUpdateStatistics(this, user, GameConstants.update);

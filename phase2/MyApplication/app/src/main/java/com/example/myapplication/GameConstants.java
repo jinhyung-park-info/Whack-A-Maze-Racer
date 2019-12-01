@@ -10,6 +10,7 @@ public abstract class GameConstants {
     public static final String set = "set";
     public static final String getPassword = "getPassword";
     public static final String changePassword = "changePassword";
+    public static final int defaultLevel = 0;
 
     //In-app purchase Constants
     public static final int pointsFromCollectingGem = 10;
@@ -34,6 +35,7 @@ public abstract class GameConstants {
     public static final int moleValue = 1;
     public static final int doubleMoleValue = 2;
     public static final int negativeMoleValue = -1;
+    public static final int whackAMoleLevel = 1;
 
     // TypeRacer Game Constants
     public static final int numOfQuestions = 5;
@@ -46,6 +48,7 @@ public abstract class GameConstants {
     public static final int difficultyDefault = 5;
     public static final int minLife = 1;
     public static final int maxLife = 5;
+    public static final int typeRacerLevel = 2;
 
 
     // Maze Game Constants
@@ -66,7 +69,7 @@ public abstract class GameConstants {
     public static final int ColsForNormalMaze = 7;
     public static final int RowsForHardMaze = 15;
     public static final int ColsForHardMaze = 12;
-    public static final String loadMaze = "LoadMaze";
+    public static final int mazeLevel = 3;
 
     // 3 stats for user and 6 stats for the games
     public static final int TOTAL_NUM_OF_STATISTICS = 9;

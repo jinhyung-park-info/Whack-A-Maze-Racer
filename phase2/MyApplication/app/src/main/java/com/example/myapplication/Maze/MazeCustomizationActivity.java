@@ -68,7 +68,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             //startedMaze = true;
             setContentView(R.layout.activity_maze_customization);
         }*/
-        usermanager.getUser().setLastPlayedLevel(3);
+        usermanager.getUser().setLastPlayedLevel(GameConstants.mazeLevel);
         usermanager.setOrUpdateStatistics(getApplicationContext(), usermanager.getUser(), GameConstants.update);
         reset();
 

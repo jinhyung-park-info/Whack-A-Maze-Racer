@@ -37,7 +37,7 @@ public class MoleActivity extends AppCompatActivity {
             setUserManager(user_1);
             user = userManager.getUser();
         }
-        user.setLastPlayedLevel(1);
+        user.setLastPlayedLevel(GameConstants.whackAMoleLevel);
         writeMoleStats();
         reset();
 
@@ -159,7 +159,7 @@ public class MoleActivity extends AppCompatActivity {
         user.setStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleHit, CurrMolesHit + molesHit);
         molesHit = 0;
         int moleHigh = Math.max(wamView.wamManager.score, (int) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleAllTimeHigh));
-        user.setLastPlayedLevel(0);
+        user.setLastPlayedLevel(GameConstants.defaultLevel);
         writeMoleStats();
         Intent intent = new Intent(this, SaveScoreActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
