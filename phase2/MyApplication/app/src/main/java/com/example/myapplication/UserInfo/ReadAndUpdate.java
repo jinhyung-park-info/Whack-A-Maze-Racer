@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.myapplication.GameConstants.openFileForReading;
+import static com.example.myapplication.GameConstants.writeStringToFile;
 
 public class ReadAndUpdate implements Serializable {
 
@@ -66,7 +68,7 @@ public class ReadAndUpdate implements Serializable {
      * @return the buffered reader with the file input stream to read over the file.
      */
 
-    BufferedReader openFileForReading(Context context, String fileName) {
+    /*BufferedReader openFileForReading(Context context, String fileName) {
         try {
             FileInputStream fis = context.openFileInput(fileName);
             InputStreamReader isr = new InputStreamReader(fis);
@@ -75,24 +77,7 @@ public class ReadAndUpdate implements Serializable {
             e.printStackTrace();
         }
         return null;
-    }
-
-    /**
-     * @param context  of the device
-     * @param sb       the string to write/overwrite the file
-     * @param FileName the name of the file which will have the contents of sb
-     */
-
-
-    void writeStringToFile(Context context, StringBuilder sb, String FileName) {
-        try {
-            FileOutputStream fileOut = context.openFileOutput(FileName, MODE_PRIVATE);
-            fileOut.write(sb.toString().getBytes());
-            fileOut.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+    }*/
 
     /**
      * @param user with the updated statistics
@@ -149,13 +134,17 @@ public class ReadAndUpdate implements Serializable {
      * @param newPassword to be changed
      * @param getOrChange the string which will tell the method if you want to return the password
      *                    or change the password
-     * @return the password or return true if the password was successfully changed
+     * @return the password or return true if the password was successfully changed and return false
+     *  is the password could not be retrieved
      */
 
     Object getOrChangePassword(Context context, IUser user, String newPassword, String getOrChange) {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = openFileForReading(context, GameConstants.USER_FILE);
+            if(br == null){
+                return false;
+            }
             String text;
 
             while ((text = br.readLine()) != null) {
@@ -180,5 +169,35 @@ public class ReadAndUpdate implements Serializable {
         }
         writeStringToFile(context, sb, GameConstants.USER_FILE);
         return true;
+    }
+    /**
+     * @param context of the device
+     * @param user    the current user which will not be in the ArrayList
+     * @return a list of all the users present in the file except the current user playing the game.
+     */
+
+    public ArrayList<IUser> getListOfAllUsers(Context context, IUser user) {
+        ArrayList<IUser> arr = new ArrayList<>();
+        try {
+            BufferedReader br = openFileForReading(context, GameConstants.USER_STATS_FILE);
+            if (br == null) {
+                return arr;
+            }
+            String text;
+
+            while ((text = br.readLine()) != null) {
+                int index_of_comma = text.indexOf(",");
+                String username = text.substring(0, index_of_comma);
+                if (!user.getEmail().equals(username)) {
+                    IUser NewUser = new User(username);
+                    setInfoInLineToUser(text, NewUser);
+                    arr.add(NewUser);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return arr;
     }
 }

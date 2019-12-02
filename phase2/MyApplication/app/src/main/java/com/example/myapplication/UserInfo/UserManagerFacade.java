@@ -1,14 +1,6 @@
 package com.example.myapplication.UserInfo;
 
 import android.content.Context;
-
-import com.example.myapplication.GameConstants;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class UserManagerFacade implements IUserManager {
@@ -78,7 +70,7 @@ public class UserManagerFacade implements IUserManager {
      */
 
     public ArrayList<IUser> getListOfAllUsers(Context context, IUser user) {
-        return handleAllAccounts.getListOfAllUsers(context, user);
+        return readAndUpdate.getListOfAllUsers(context, user);
     }
 
     /**

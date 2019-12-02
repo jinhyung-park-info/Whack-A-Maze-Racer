@@ -7,11 +7,11 @@ import com.example.myapplication.GameConstants;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+
+import static com.example.myapplication.GameConstants.openFileForReading;
+import static com.example.myapplication.GameConstants.writeStringToFile;
 
 public class HandleAllAccounts implements Serializable {
-
-    private ReadAndUpdate readAndUpdate = new ReadAndUpdate();
 
     /**
      * Add a statistic at a specific place for all accounts when applicable.
@@ -25,7 +25,7 @@ public class HandleAllAccounts implements Serializable {
         StringBuilder sb = new StringBuilder();
 
         try {
-            BufferedReader br = readAndUpdate.openFileForReading(context, GameConstants.USER_STATS_FILE);
+            BufferedReader br = openFileForReading(context, GameConstants.USER_STATS_FILE);
             if (br == null) {
                 return false;
             }
@@ -47,7 +47,7 @@ public class HandleAllAccounts implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        readAndUpdate.writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
+        writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
         return true;
     }
 
@@ -78,37 +78,6 @@ public class HandleAllAccounts implements Serializable {
                     "\0", ", 0");
             return firstHalf + middle + secondHalf + "\n";
         }
-    }
-
-    /**
-     * @param context of the device
-     * @param user    the current user which will not be in the ArrayList
-     * @return a list of all the users present in the file except the current user playing the game.
-     */
-
-    public ArrayList<IUser> getListOfAllUsers(Context context, IUser user) {
-        ArrayList<IUser> arr = new ArrayList<>();
-        try {
-            BufferedReader br = readAndUpdate.openFileForReading(context, GameConstants.USER_STATS_FILE);
-            if (br == null) {
-                return arr;
-            }
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                int index_of_comma = text.indexOf(",");
-                String username = text.substring(0, index_of_comma);
-                if (!user.getEmail().equals(username)) {
-                    IUser NewUser = new User(username);
-                    readAndUpdate.setInfoInLineToUser(text, NewUser);
-                    arr.add(NewUser);
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return arr;
     }
 
 }

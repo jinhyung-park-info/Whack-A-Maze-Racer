@@ -92,15 +92,7 @@ public class MazeView extends View {
      */
     private int backgroundColour;
 
-    /**
-     * the type of the player. by default, this is 0 which represents lindsey. 1 is paul
-     */
-    private int playerType;
 
-    /**
-     * Determines if the maze will have collectibles or not
-     */
-    private boolean collectiblesEnabled;
 
     private IUserManager userManager;
     private IUser userInMaze;
@@ -123,7 +115,6 @@ public class MazeView extends View {
         cells = new Cell[cols][rows];
 
         this.backgroundColour = backgroundColour;
-        this.playerType = playerType;
         this.userManager = user_1;
         this.userInMaze = user_1.getUser();
         mazeMaker = new MazeCreation();
@@ -138,8 +129,7 @@ public class MazeView extends View {
         exitPaint = new Paint();
         exitPaint.setColor(Color.BLACK);
 
-        collectiblesEnabled = true;
-        collectibles = new ArrayList<Collectible>();
+        collectibles = new ArrayList<>();
         collectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.a_plus);
         gemCollectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.gem);
         collectiblePaint = new Paint();
@@ -152,14 +142,6 @@ public class MazeView extends View {
 
         createMaze();
         distributeCollectibles();
-    }
-
-    public void setBackgroundColour(int backgroundColour) {
-        this.backgroundColour = backgroundColour;
-    }
-
-    public void setPlayerType(int playerType) {
-        this.playerType = playerType;
     }
 
     public void setDifficulty(GameConstants.Difficulty difficulty) {
@@ -245,10 +227,7 @@ public class MazeView extends View {
         }
 
         checkExit();
-
-        if (collectiblesEnabled) {
-            checkCollectibles();
-        }
+        checkCollectibles();
 
         invalidate();
     }
@@ -257,15 +236,13 @@ public class MazeView extends View {
         if (player == exit && gamesPlayed < GameConstants.TotalMazeGames) {
             gamesPlayed += 1;
             createMaze();
-            if (collectiblesEnabled)
-                distributeCollectibles();
+            distributeCollectibles();
 
             if (gamesPlayed >= GameConstants.TotalMazeGames) {
                 int CurrGamesPlayed = (int) userInMaze.getStatistic(GameConstants.MAZE, GameConstants.NumMazeGamesPlayed);
                 this.userInMaze.setStatistic(GameConstants.MAZE,
                         GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + gamesPlayed);
                 this.userInMaze.setLastPlayedLevel(GameConstants.defaultLevel);
-                //userManager.setOrUpdateStatistics(contexts, userInMaze, GameConstants.update);
                 Activity activity = (MazeCustomizationActivity) contexts;
                 ((MazeCustomizationActivity) contexts).reset();
                 activity.setContentView(R.layout.activity_maze_customization);
@@ -425,36 +402,9 @@ public class MazeView extends View {
                 (int) Math.floor(cellSize * 0.8), true);
     }
 
-    public void setSpecificCell(int i, int j, Cell cell) {
-        cells[i][j] = cell;
-    }
-
-    public Cell getSpecificCell(int i, int j) {
-        return cells[i][j];
-    }
-
-    public int getCols() {
-        return cols;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public int getBackgroundColour() {
-        return backgroundColour;
-    }
-
-    public int getPlayerType() {
-        return playerType;
-    }
 
     public Cell[][] getCells() {
         return cells;
-    }
-
-    public Cell getPlayer() {
-        return player;
     }
 }
 
