@@ -10,6 +10,7 @@ public abstract class GameConstants {
     public static final String set = "set";
     public static final String getPassword = "getPassword";
     public static final String changePassword = "changePassword";
+    public static final String overallScore = "overallScore";
     public static final int defaultLevel = 0;
 
     //In-app purchase Constants

@@ -44,6 +44,8 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     private int originalNumMazeItemsCollected;
 
+    private int originalOverallScore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +55,11 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
-            if( usermanager.getUser().getStatistic(GameConstants.MAZE,
-                    GameConstants.NumMazeGamesPlayed) != null) {
-                originalNumMazeGamesPlayed = (int) usermanager.getUser().getStatistic(GameConstants.MAZE,
-                        GameConstants.NumMazeGamesPlayed);
-            }
-            if(usermanager.getUser().getStatistic(GameConstants.MAZE,
-                        GameConstants.NumCollectiblesCollectedMaze) != null) {
-                originalNumMazeItemsCollected = (int) usermanager.getUser().getStatistic(GameConstants.MAZE,
-                        GameConstants.NumCollectiblesCollectedMaze);
-            }
+            originalNumMazeGamesPlayed = (int) usermanager.getUser().getStatistic(GameConstants.MAZE,
+                    GameConstants.NumMazeGamesPlayed);
+            originalNumMazeItemsCollected = (int) usermanager.getUser().getStatistic(GameConstants.MAZE,
+                    GameConstants.NumCollectiblesCollectedMaze);
+            originalOverallScore = usermanager.getUser().getOverallScore();
 
         }
         setContentView(R.layout.activity_maze_customization);
@@ -150,6 +147,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             intent.putExtra(GameConstants.gameName, GameConstants.mazeNameForIntent);
             intent.putExtra(GameConstants.NumMazeGamesPlayed, originalNumMazeGamesPlayed);
             intent.putExtra(GameConstants.NumCollectiblesCollectedMaze, originalNumMazeItemsCollected);
+            intent.putExtra(GameConstants.overallScore, originalOverallScore);
             startActivity(intent);
         } else
             Toast.makeText(getApplicationContext(), "Please pass this level first",

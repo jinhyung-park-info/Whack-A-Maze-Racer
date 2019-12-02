@@ -18,7 +18,8 @@ public class SaveScoreActivity extends AppCompatActivity {
     IUserManager userManager;
     IUser user;
     int originalNumMazeGamesPlayed;
-    int orginalMazeItemsCollected;
+    int originalMazeItemsCollected;
+    int originalOverallScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,9 @@ public class SaveScoreActivity extends AppCompatActivity {
             racerStreak = (int) intent.getSerializableExtra(GameConstants.TypeRacerStreak);
         }
         if(incomingGame.equals(GameConstants.mazeNameForIntent)){
-            orginalMazeItemsCollected = (int) intent.getSerializableExtra(GameConstants.NumCollectiblesCollectedMaze);
+            originalMazeItemsCollected = (int) intent.getSerializableExtra(GameConstants.NumCollectiblesCollectedMaze);
             originalNumMazeGamesPlayed = (int) intent.getSerializableExtra(GameConstants.NumMazeGamesPlayed);
+            originalOverallScore = (int) intent.getSerializableExtra(GameConstants.overallScore);
         }
 
     }
@@ -65,7 +67,8 @@ public class SaveScoreActivity extends AppCompatActivity {
     public void notSave(View view) {
         if(incomingGame.equals(GameConstants.mazeNameForIntent)){
             user.setStatistic(GameConstants.MAZE, GameConstants.NumMazeGamesPlayed, originalNumMazeGamesPlayed);
-            user.setStatistic(GameConstants.MAZE, GameConstants.NumCollectiblesCollectedMaze, orginalMazeItemsCollected);
+            user.setStatistic(GameConstants.MAZE, GameConstants.NumCollectiblesCollectedMaze, originalMazeItemsCollected);
+            user.setOverallScore(originalOverallScore);
         }
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
