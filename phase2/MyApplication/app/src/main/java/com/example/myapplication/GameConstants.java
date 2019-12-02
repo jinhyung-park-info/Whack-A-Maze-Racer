@@ -1,6 +1,16 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.graphics.Color;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public abstract class GameConstants {
     public static final String USERMANAGER = "UserManagerFacade";
@@ -96,6 +106,12 @@ public abstract class GameConstants {
         EASY, NORMAL, HARD
     }
 
+    /**
+     *
+     * @param GameName represents the name of the game
+     * @return the string array containing the game statistic names to be added to the map in user.
+     */
+
     public static String[] getArrayOfStatistics(String GameName) {
         switch (GameName) {
             case WHACK_A_MOLE:
@@ -104,9 +120,17 @@ public abstract class GameConstants {
                 return TypeRacerStatistics;
             case MAZE:
                 return MazeStatistics;
+            default:
+                return new String[]{};
         }
-        return new String[]{};
     }
+
+    /**
+     *
+     * @param line is the string
+     * @param character is the character whose occurrences needs to be counted
+     * @return the number of times character occurs in line
+     */
 
     public static int countOccurrences(String line, char character) {
         int count = 0;
@@ -117,5 +141,40 @@ public abstract class GameConstants {
         }
         return count;
     }
+
+    /**
+     * @param context  of the device
+     * @param fileName the name of the file which needs to be opened for reading
+     * @return the buffered reader with the file input stream to read over the file.
+     */
+
+    public static BufferedReader openFileForReading(Context context, String fileName) {
+        try {
+            FileInputStream fis = context.openFileInput(fileName);
+            InputStreamReader isr = new InputStreamReader(fis);
+            return new BufferedReader(isr);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @param context  of the device
+     * @param sb       the string to write/overwrite the file
+     * @param FileName the name of the file which will have the contents of sb
+     */
+
+
+    public static void writeStringToFile(Context context, StringBuilder sb, String FileName) {
+        try {
+            FileOutputStream fileOut = context.openFileOutput(FileName, MODE_PRIVATE);
+            fileOut.write(sb.toString().getBytes());
+            fileOut.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 }
