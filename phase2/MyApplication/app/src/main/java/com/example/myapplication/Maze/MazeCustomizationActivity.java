@@ -157,6 +157,13 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        usermanager.setOrUpdateStatistics(getApplicationContext(), usermanager.getUser(),
+                GameConstants.update);
+    }
+
     public void reset() {
         bgColour = Color.GREEN;
         difficulty = GameConstants.Difficulty.NORMAL;
