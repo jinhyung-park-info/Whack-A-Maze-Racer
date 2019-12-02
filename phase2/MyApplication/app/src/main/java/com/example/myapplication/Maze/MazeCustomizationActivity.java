@@ -16,8 +16,6 @@ import com.example.myapplication.UserInfo.IUserManager;
 
 public class MazeCustomizationActivity extends AppCompatActivity {
 
-    private static final String TAG = "MazeCustomizationActivity";
-
     /**
      * background colour of the screen. by default this is green
      */
@@ -33,7 +31,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
      */
     private int playerType = 0;
 
-    private IUserManager usermanager;
+    private IUserManager userManager;
 
 
     static boolean passed = false;
@@ -55,17 +53,17 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
-            originalNumMazeGamesPlayed = (int) usermanager.getUser().getStatistic(GameConstants.MAZE,
+            originalNumMazeGamesPlayed = (int) userManager.getUser().getStatistic(GameConstants.MAZE,
                     GameConstants.NumMazeGamesPlayed);
-            originalNumMazeItemsCollected = (int) usermanager.getUser().getStatistic(GameConstants.MAZE,
+            originalNumMazeItemsCollected = (int) userManager.getUser().getStatistic(GameConstants.MAZE,
                     GameConstants.NumCollectiblesCollectedMaze);
-            originalOverallScore = usermanager.getUser().getOverallScore();
+            originalOverallScore = userManager.getUser().getOverallScore();
 
         }
         setContentView(R.layout.activity_maze_customization);
 
-        usermanager.getUser().setLastPlayedLevel(GameConstants.mazeLevel);
-        usermanager.setOrUpdateStatistics(getApplicationContext(), usermanager.getUser(), GameConstants.update);
+        userManager.getUser().setLastPlayedLevel(GameConstants.mazeLevel);
+        userManager.setOrUpdateStatistics(getApplicationContext(), userManager.getUser(), GameConstants.update);
 
         //to reset customization after game is finished
         reset();
@@ -75,7 +73,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MazeInstructionsActivity.class);
-        intent.putExtra(GameConstants.USERMANAGER, usermanager);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
@@ -127,7 +125,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     private void setUserManager(IUserManager newManager) {
-        usermanager = newManager;
+        userManager = newManager;
     }
 
     public void startMazeGame(View view) {
@@ -135,7 +133,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     private void setupMaze() {
-        maze = new MazeView(this, bgColour, difficulty, playerType, usermanager);
+        maze = new MazeView(this, bgColour, difficulty, playerType, userManager);
         setContentView(maze);
     }
 
@@ -143,7 +141,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         if (passed) {
             passed = false;
             Intent intent = new Intent(this, SaveScoreActivity.class);
-            intent.putExtra(GameConstants.USERMANAGER, usermanager);
+            intent.putExtra(GameConstants.USERMANAGER, userManager);
             intent.putExtra(GameConstants.gameName, GameConstants.mazeNameForIntent);
             intent.putExtra(GameConstants.NumMazeGamesPlayed, originalNumMazeGamesPlayed);
             intent.putExtra(GameConstants.NumCollectiblesCollectedMaze, originalNumMazeItemsCollected);
@@ -160,7 +158,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        usermanager.setOrUpdateStatistics(getApplicationContext(), usermanager.getUser(),
+        userManager.setOrUpdateStatistics(getApplicationContext(), userManager.getUser(),
                 GameConstants.update);
     }
 
