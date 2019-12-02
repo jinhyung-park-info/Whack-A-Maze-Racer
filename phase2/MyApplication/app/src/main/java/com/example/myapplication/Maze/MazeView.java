@@ -93,7 +93,6 @@ public class MazeView extends View {
     private int backgroundColour;
 
 
-
     private IUserManager userManager;
     private IUser userInMaze;
     private int gamesPlayed = 0;

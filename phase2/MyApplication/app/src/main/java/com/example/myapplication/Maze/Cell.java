@@ -26,27 +26,51 @@ public class Cell {
         }
     }
 
-   boolean hasTopWall() { return hasTopWall; }
+    boolean hasTopWall() {
+        return hasTopWall;
+    }
 
-    void setHasTopWall(boolean hasTopWall) { this.hasTopWall = hasTopWall; }
+    void setHasTopWall(boolean hasTopWall) {
+        this.hasTopWall = hasTopWall;
+    }
 
-    boolean hasBottomWall() { return hasBottomWall; }
+    boolean hasBottomWall() {
+        return hasBottomWall;
+    }
 
-    void setHasBottomWall(boolean hasBottomWall) { this.hasBottomWall = hasBottomWall; }
+    void setHasBottomWall(boolean hasBottomWall) {
+        this.hasBottomWall = hasBottomWall;
+    }
 
-    boolean hasLeftWall() { return hasLeftWall; }
+    boolean hasLeftWall() {
+        return hasLeftWall;
+    }
 
-    void setHasLeftWall(boolean hasLeftWall) { this.hasLeftWall = hasLeftWall; }
+    void setHasLeftWall(boolean hasLeftWall) {
+        this.hasLeftWall = hasLeftWall;
+    }
 
-    boolean hasRightWall() { return hasRightWall; }
+    boolean hasRightWall() {
+        return hasRightWall;
+    }
 
-    void setHasRightWall(boolean hasRightWall) { this.hasRightWall = hasRightWall; }
+    void setHasRightWall(boolean hasRightWall) {
+        this.hasRightWall = hasRightWall;
+    }
 
-     int getCol() { return col; }
+    int getCol() {
+        return col;
+    }
 
-    int getRow() { return row; }
+    int getRow() {
+        return row;
+    }
 
-    boolean wasVisited() { return visited; }
+    boolean wasVisited() {
+        return visited;
+    }
 
-    void setVisited(boolean visited) { this.visited = visited; }
+    void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 }

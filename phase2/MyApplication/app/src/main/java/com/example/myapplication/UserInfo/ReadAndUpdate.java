@@ -135,14 +135,14 @@ public class ReadAndUpdate implements Serializable {
      * @param getOrChange the string which will tell the method if you want to return the password
      *                    or change the password
      * @return the password or return true if the password was successfully changed and return false
-     *  is the password could not be retrieved
+     * is the password could not be retrieved
      */
 
     Object getOrChangePassword(Context context, IUser user, String newPassword, String getOrChange) {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = openFileForReading(context, GameConstants.USER_FILE);
-            if(br == null){
+            if (br == null) {
                 return false;
             }
             String text;
@@ -170,6 +170,7 @@ public class ReadAndUpdate implements Serializable {
         writeStringToFile(context, sb, GameConstants.USER_FILE);
         return true;
     }
+
     /**
      * @param context of the device
      * @param user    the current user which will not be in the ArrayList
