@@ -9,6 +9,10 @@ interface MazeMaker {
     Cell[][] makeMaze(Cell[][] cells, int cols, int rows);
 }
 
+/**
+ * MazeCreation contains the algorithm for generating the maze
+ */
+
 public class MazeCreation implements MazeMaker {
 
     /**

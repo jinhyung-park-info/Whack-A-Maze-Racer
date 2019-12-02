@@ -1,5 +1,9 @@
 package com.example.myapplication.Maze;
 
+/**
+ * A cell object to be drawn in the maze
+ */
+
 public class Cell {
     private boolean hasTopWall = true;
 
@@ -22,59 +26,27 @@ public class Cell {
         }
     }
 
-    synchronized boolean hasTopWall() {
-        return hasTopWall;
-    }
+   boolean hasTopWall() { return hasTopWall; }
 
-    synchronized void setHasTopWall(boolean hasTopWall) {
-        this.hasTopWall = hasTopWall;
-    }
+    void setHasTopWall(boolean hasTopWall) { this.hasTopWall = hasTopWall; }
 
-    synchronized boolean hasBottomWall() {
-        return hasBottomWall;
-    }
+    boolean hasBottomWall() { return hasBottomWall; }
 
-    synchronized void setHasBottomWall(boolean hasBottomWall) {
-        this.hasBottomWall = hasBottomWall;
-    }
+    void setHasBottomWall(boolean hasBottomWall) { this.hasBottomWall = hasBottomWall; }
 
-    synchronized boolean hasLeftWall() {
-        return hasLeftWall;
-    }
+    boolean hasLeftWall() { return hasLeftWall; }
 
-    synchronized void setHasLeftWall(boolean hasLeftWall) {
-        this.hasLeftWall = hasLeftWall;
-    }
+    void setHasLeftWall(boolean hasLeftWall) { this.hasLeftWall = hasLeftWall; }
 
-    synchronized boolean hasRightWall() {
-        return hasRightWall;
-    }
+    boolean hasRightWall() { return hasRightWall; }
 
-    synchronized void setHasRightWall(boolean hasRightWall) {
-        this.hasRightWall = hasRightWall;
-    }
+    void setHasRightWall(boolean hasRightWall) { this.hasRightWall = hasRightWall; }
 
-    synchronized int getCol() {
-        return col;
-    }
+     int getCol() { return col; }
 
-    synchronized void setCol(int col) {
-        this.col = col;
-    }
+    int getRow() { return row; }
 
-    synchronized int getRow() {
-        return row;
-    }
+    boolean wasVisited() { return visited; }
 
-    synchronized void setRow(int row) {
-        this.row = row;
-    }
-
-    synchronized boolean wasVisited() {
-        return visited;
-    }
-
-    synchronized void setVisited(boolean visited) {
-        this.visited = visited;
-    }
+    void setVisited(boolean visited) { this.visited = visited; }
 }
