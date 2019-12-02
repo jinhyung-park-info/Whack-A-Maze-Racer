@@ -11,3 +11,5 @@ with same format as real one will do.
 
 4) Only alphanumeric characters are allowed for username and passwords.
 
+5) All file in our program is formatted using Google Format
+
