@@ -39,7 +39,6 @@ public class PlayGamesActivity extends AppCompatActivity {
         userManager.getUser().setStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats, "0");
         userManager.setOrUpdateStatistics(this, userManager.getUser(), GameConstants.update);
         Intent intent = new Intent(this, MoleInstructionActivity.class);
-
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }

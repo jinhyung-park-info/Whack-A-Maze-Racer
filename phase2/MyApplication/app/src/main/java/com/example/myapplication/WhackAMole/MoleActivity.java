@@ -14,7 +14,6 @@ import com.example.myapplication.R;
 import com.example.myapplication.SaveScoreActivity;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
-import com.example.myapplication.UserInfo.UserManager;
 
 public class MoleActivity extends AppCompatActivity {
     int numLives;
@@ -23,7 +22,6 @@ public class MoleActivity extends AppCompatActivity {
     int backgroundID = R.drawable.game_background;
     int molesHit;
     int score = 0;
-    public static boolean loaded;
 
     IUserManager userManager;
     IUser user;
@@ -42,11 +40,33 @@ public class MoleActivity extends AppCompatActivity {
         writeMoleStats();
         reset();
 
-        if (loaded && !user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats).equals("0")) {
-            load(user);
-        } else {
+        String loadStat = (String) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats);
+        if(loadStat.contains("-")) {
+            String[] stats = loadStat.split("-");
+            load(user, stats);
+        }else{
             setContentView(R.layout.activity_mole);
         }
+    }
+
+    public void load(IUser user, String[] stats) {
+
+        int lifeCount = Integer.parseInt(stats[0]);
+        if(lifeCount > 0) {
+            this.score = Integer.parseInt(stats[3]);
+            this.numLives = lifeCount;
+            this.numColumns = Integer.parseInt(stats[1]);
+            this.numRows = Integer.parseInt(stats[2]);
+            this.backgroundID = Integer.parseInt(stats[4]);
+        }else{
+            reset();
+        }
+        wamView = new WamView(this);
+        setContentView(wamView);
+        wamView.gameStatus = "inGame";
+        wamView.thread_active = true;
+        user.setStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats, "0");
+        writeMoleStats();
     }
 
     @Override
@@ -64,7 +84,11 @@ public class MoleActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        load(user);
+        String loadStat = (String) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats);
+        if(loadStat.contains("-")) {
+            String[] stats = loadStat.split("-");
+            load(user, stats);
+        }
     }
 
     @Override
@@ -132,9 +156,7 @@ public class MoleActivity extends AppCompatActivity {
     }
 
     public void play(View view) {
-        if (wamView == null) {
-            wamView = new WamView(this);
-        }
+        wamView = new WamView(this);
         wamView.thread_active = true;
         setContentView(wamView);
         wamView.gameStatus = "inGame";
@@ -191,22 +213,4 @@ public class MoleActivity extends AppCompatActivity {
         userManager.setOrUpdateStatistics(getApplicationContext(), user, GameConstants.update);
     }
 
-    public void load(IUser user) {
-        String load = (String) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats);
-        String[] stats = load.split("-");
-        int lifeCount = Integer.parseInt(stats[0]);
-        if (lifeCount > 0) {
-            this.score = Integer.parseInt(stats[3]);
-            this.numLives = lifeCount;
-            this.numColumns = Integer.parseInt(stats[1]);
-            this.numRows = Integer.parseInt(stats[2]);
-            this.backgroundID = Integer.parseInt(stats[4]);
-            WamView wamView = new WamView(this);
-            setContentView(wamView);
-        }
-        loaded = false;
-        user.setStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats, "0");
-        writeMoleStats();
-
-    }
 }

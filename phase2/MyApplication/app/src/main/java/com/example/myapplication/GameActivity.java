@@ -66,7 +66,6 @@ public class GameActivity extends AppCompatActivity {
     public void resume(View view){
         switch (userManager.getUser().getLastPlayedLevel()) {
             case GameConstants.whackAMoleLevel:
-                MoleActivity.loaded = true;
                 Intent intent = new Intent(this, MoleActivity.class);
                 intent.putExtra(GameConstants.USERMANAGER, userManager);
                 startActivity(intent);
