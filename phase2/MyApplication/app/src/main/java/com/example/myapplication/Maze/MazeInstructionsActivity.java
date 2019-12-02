@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myapplication.GameConstants;
+import com.example.myapplication.PlayGamesActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.UserInfo.IUserManager;
 
@@ -34,5 +35,12 @@ public class MazeInstructionsActivity extends AppCompatActivity {
 
     private void setUserManager(IUserManager newManager){
         userManager = newManager;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PlayGamesActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
     }
 }

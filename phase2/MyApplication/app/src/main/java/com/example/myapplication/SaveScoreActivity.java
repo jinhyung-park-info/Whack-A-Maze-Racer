@@ -17,6 +17,9 @@ public class SaveScoreActivity extends AppCompatActivity {
     private String incomingGame;
     IUserManager userManager;
     IUser user;
+    int originalNumMazeGamesPlayed;
+    int originalMazeItemsCollected;
+    int originalOverallScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,22 +27,26 @@ public class SaveScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_save_score);
 
         Intent intent = getIntent();
-        incomingGame = (String) intent.getSerializableExtra(GameConstants.gameName);
-        //if from MoleActivity
-        if (incomingGame.equals(GameConstants.moleName)) {
-            moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
-            moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
-        } else if (incomingGame.equals(GameConstants.mazeName)) {
-        } else if (incomingGame.equals(GameConstants.racerName)) {
-            racerStreak = (int) intent.getSerializableExtra(GameConstants.TypeRacerStreak);
-        }
-
-        //if from MazeCustomizationActivity
         IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
             user = userManager.getUser();
         }
+        incomingGame = (String) intent.getSerializableExtra(GameConstants.gameName);
+        //if from MoleActivity
+        if (incomingGame.equals(GameConstants.moleName)) {
+            moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
+            moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
+        } else if (incomingGame.equals(GameConstants.mazeNameForIntent)) {
+        } else if (incomingGame.equals(GameConstants.racerName)) {
+            racerStreak = (int) intent.getSerializableExtra(GameConstants.TypeRacerStreak);
+        }
+        if(incomingGame.equals(GameConstants.mazeNameForIntent)){
+            originalMazeItemsCollected = (int) intent.getSerializableExtra(GameConstants.NumCollectiblesCollectedMaze);
+            originalNumMazeGamesPlayed = (int) intent.getSerializableExtra(GameConstants.NumMazeGamesPlayed);
+            originalOverallScore = (int) intent.getSerializableExtra(GameConstants.overallScore);
+        }
+
     }
 
     private void setUserManager(IUserManager newManager) {
@@ -58,6 +65,11 @@ public class SaveScoreActivity extends AppCompatActivity {
     }
 
     public void notSave(View view) {
+        if(incomingGame.equals(GameConstants.mazeNameForIntent)){
+            user.setStatistic(GameConstants.MAZE, GameConstants.NumMazeGamesPlayed, originalNumMazeGamesPlayed);
+            user.setStatistic(GameConstants.MAZE, GameConstants.NumCollectiblesCollectedMaze, originalMazeItemsCollected);
+            user.setOverallScore(originalOverallScore);
+        }
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);

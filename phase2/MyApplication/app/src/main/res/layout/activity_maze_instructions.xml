@@ -28,7 +28,7 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:lineSpacingExtra="10sp"
-        android:text="-Navigate through the maze to reach the black square.\n\n-To move, drag your character up, down, left or right on the screen with your finger. \n\n-Touch collectibles to gain extra points.\n \n-Leaving the game midway scares away the collectibles, so collect them as quickly as you can!"
+        android:text="-Navigate through the maze to reach the black square in the bottom right of the maze.\n-To move, drag your character up, down, left or right on the screen.\n-Get the maze items(A+ collectible) to gain 10 extra points towards you're overall score.\n -You will have to navigate through the maze twice to finish the game. \n-Getting the gem will add 10 gems to you're account!"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

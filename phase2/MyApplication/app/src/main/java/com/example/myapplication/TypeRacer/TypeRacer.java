@@ -82,10 +82,15 @@ public class TypeRacer extends AppCompatActivity {
             int textColor = intent.getExtras().getInt("textColorKey", GameConstants.textColorDefault);
             int difficulty = intent.getExtras().getInt("difficulty", GameConstants.difficultyDefault);
 
-            setCustomization(backGroundColor, textColor, countLife, difficulty);
-            showNextQuestion();
-            prepareForScreenUpdate();
-
+            if (countLife <= 0) {
+                Intent backIntent = new Intent(this, TypeRacerCustomizationActivity.class);
+                intent.putExtra(GameConstants.USERMANAGER, userManager);
+                startActivity(backIntent);
+            } else {
+                setCustomization(backGroundColor, textColor, countLife, difficulty);
+                showNextQuestion();
+                prepareForScreenUpdate();
+            }
         }
     }
 
@@ -160,16 +165,17 @@ public class TypeRacer extends AppCompatActivity {
         if (questionNumber < questions.size()) {
             Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("countDown"))).setText("" + (int) GameConstants.timeLimitInMills / 1000);
             Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("question"))).setText(questions.get(questionNumber).getQuestionContent());
+
             if(questions.get(questionNumber) instanceof GoldenQuestion){
                 goldenQuestionMessage();
             }
+
             answer.setText("");
             answer.setEnabled(true);
             manageTime();
             questionNumber++;
         } else {
             user.setLastPlayedLevel(GameConstants.defaultLevel);
-            //user.setStreaks(countStreak);
             user.setStatistic(GameConstants.TYPE_RACER, GameConstants.TypeRacerStreak, countStreak);
             userManager.setOrUpdateStatistics(this, user, GameConstants.update);
             Intent goToEndGame = new Intent(getApplicationContext(), TypeRacerEnd.class);
@@ -177,6 +183,18 @@ public class TypeRacer extends AppCompatActivity {
             goToEndGame.putExtra("finalScore", "" + countScore);
             startActivity(goToEndGame);
         }
+    }
+
+    private void goldenQuestionMessage() {
+        Context context = getApplicationContext();
+        CharSequence text = "Golden Question";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context,text,duration);
+        toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+        LinearLayout toastLayout = (LinearLayout) toast.getView();
+        TextView toastTV = (TextView) toastLayout.getChildAt(0);
+        toastTV.setTextSize(33);
+        toast.show();
     }
 
 
@@ -273,12 +291,15 @@ public class TypeRacer extends AppCompatActivity {
         });
     }
 
+    private void fileInputOutput() {
+
+    }
+
 
     @Override
     public void onPause() {
         super.onPause();
         FileOutputStream fos = null;
-        // File file = new File(getApplicationContext().getFilesDir(), user.getEmail() + "_typeracer.txt");
         try {
             fos = getApplicationContext().openFileOutput(user.getEmail() + "_typeracer.txt", MODE_PRIVATE);
             try {
@@ -314,7 +335,6 @@ public class TypeRacer extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        Intent intent = getIntent();
         FileInputStream fis = null;
         try {
             fis = getApplicationContext().openFileInput(user.getEmail() + "_typeracer.txt");
@@ -362,16 +382,4 @@ public class TypeRacer extends AppCompatActivity {
 
     }
 
-    public void goldenQuestionMessage(){
-        Context context = getApplicationContext();
-        CharSequence text = "Golden Question";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context,text,duration);
-        toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
-        LinearLayout toastLayout = (LinearLayout) toast.getView();
-        TextView toastTV = (TextView) toastLayout.getChildAt(0);
-        toastTV.setTextSize(33);
-        toast.show();
-
-    }
 }

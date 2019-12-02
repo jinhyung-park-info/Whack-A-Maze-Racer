@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.myapplication.UserInfo.ILoginPresenter;
 import com.example.myapplication.UserInfo.ILoginView;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
@@ -17,7 +18,7 @@ import com.example.myapplication.UserInfo.UserManagerFacade;
 public class MainActivity extends AppCompatActivity implements ILoginView {
 
     private IUserManager userManager;
-    private LoginPresenter loginPresenter;
+    private ILoginPresenter loginPresenter;
     private UserManagerFacadeBuilder umfb;
 
     @Override

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.myapplication.UserInfo.ILoginPresenter;
 import com.example.myapplication.UserInfo.LoginPresenter;
 import com.example.myapplication.UserInfo.UserManagerFacade;
 
@@ -14,7 +15,7 @@ import com.example.myapplication.UserInfo.UserManagerFacade;
 public class CreateAccountActivity extends AppCompatActivity {
 
     private UserManagerFacade userManagerFacade;
-    private LoginPresenter loginPresenter;
+    private ILoginPresenter loginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

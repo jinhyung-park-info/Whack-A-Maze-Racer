@@ -35,9 +35,16 @@ public class MazeCustomizationActivity extends AppCompatActivity {
 
     private IUserManager usermanager;
 
+
     static boolean passed = false;
 
     MazeView maze;
+
+    private int originalNumMazeGamesPlayed;
+
+    private int originalNumMazeItemsCollected;
+
+    private int originalOverallScore;
 
 
     @Override
@@ -48,17 +55,29 @@ public class MazeCustomizationActivity extends AppCompatActivity {
         IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
+            originalNumMazeGamesPlayed = (int) usermanager.getUser().getStatistic(GameConstants.MAZE,
+                    GameConstants.NumMazeGamesPlayed);
+            originalNumMazeItemsCollected = (int) usermanager.getUser().getStatistic(GameConstants.MAZE,
+                    GameConstants.NumCollectiblesCollectedMaze);
+            originalOverallScore = usermanager.getUser().getOverallScore();
+
         }
         setContentView(R.layout.activity_maze_customization);
 
         usermanager.getUser().setLastPlayedLevel(GameConstants.mazeLevel);
         usermanager.setOrUpdateStatistics(getApplicationContext(), usermanager.getUser(), GameConstants.update);
+
+        //to reset customization after game is finished
         reset();
 
     }
 
     @Override
-    public void onBackPressed(){}
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MazeInstructionsActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, usermanager);
+        startActivity(intent);
+    }
 
     /**
      * Updates the customization according to the given view.
@@ -125,7 +144,10 @@ public class MazeCustomizationActivity extends AppCompatActivity {
             passed = false;
             Intent intent = new Intent(this, SaveScoreActivity.class);
             intent.putExtra(GameConstants.USERMANAGER, usermanager);
-            intent.putExtra(GameConstants.gameName, GameConstants.mazeName);
+            intent.putExtra(GameConstants.gameName, GameConstants.mazeNameForIntent);
+            intent.putExtra(GameConstants.NumMazeGamesPlayed, originalNumMazeGamesPlayed);
+            intent.putExtra(GameConstants.NumCollectiblesCollectedMaze, originalNumMazeItemsCollected);
+            intent.putExtra(GameConstants.overallScore, originalOverallScore);
             startActivity(intent);
         } else
             Toast.makeText(getApplicationContext(), "Please pass this level first",
