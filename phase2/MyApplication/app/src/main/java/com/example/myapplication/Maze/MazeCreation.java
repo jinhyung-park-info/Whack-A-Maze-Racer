@@ -23,7 +23,6 @@ public class MazeCreation implements MazeMaker {
      * @return a random cell neighbour of the current cell
      */
     private Cell getRandomNeighbour(Cell currentCell, Cell[][] cells, int numCols, int numRows) {
-        //check for unvisited neighbours
         ArrayList<Cell> neighbours = new ArrayList<>();
 
         //left neighbour
@@ -114,11 +113,9 @@ public class MazeCreation implements MazeMaker {
         current = cells[0][0];
         current.setVisited(true);
 
-        //do this until all cells have been visited
         do {
             next = getRandomNeighbour(current, cells, cols, rows);
 
-            //this is done when we find a neighbouring cell
             if (next != null) {
                 removeWall(current, next);
                 stackVisitedCells.push(current);
