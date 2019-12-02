@@ -29,7 +29,7 @@
         android:inputType="textMultiLine"
         android:lineSpacingExtra="10sp"
         android:text="-Navigate through the maze to reach the black square in the bottom right of the maze.\n\n-To move, drag your character up, down, left or right on the screen.
-          \n\n-Get the collectibles to gain 10 extra points towards you're overall score.\n \n-Getting the gem will add 10 gems to you're account!"
+          \n\n-Get the maze items(A+ collectible) to gain 10 extra points towards you're overall score.\n \n-Getting the gem will add 10 gems to you're account!"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
