@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
 
     }
 
+    @Override
+    public void onBackPressed(){
+    }
+
     private void buildUserManagerFacade() {
         umfb.buildWAC();
         umfb.buildRAU();
