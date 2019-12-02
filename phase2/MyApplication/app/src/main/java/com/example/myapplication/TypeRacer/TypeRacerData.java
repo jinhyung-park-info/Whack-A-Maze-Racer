@@ -4,7 +4,7 @@ package com.example.myapplication.TypeRacer;
 import java.util.ArrayList;
 
 public class TypeRacerData implements TypeRacerSubject {
-    private String correctness="0/25";
+    private String correctness = "0/25";
     private static TypeRacerData INSTANCE = null;
 
     private ArrayList<TypeRacerObserver> dataObservers;
@@ -20,7 +20,7 @@ public class TypeRacerData implements TypeRacerSubject {
 //        handler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-                setCorrectness(c);
+        setCorrectness(c);
 //            }
 //        }, 10000);
     }
@@ -46,13 +46,13 @@ public class TypeRacerData implements TypeRacerSubject {
 
     @Override
     public void notifyObservers() {
-        for (TypeRacerObserver observer: dataObservers) {
+        for (TypeRacerObserver observer : dataObservers) {
             observer.onUserDataChanged(correctness);
         }
     }
 
     private void setCorrectness(String c) {
-        this.correctness= c;
+        this.correctness = c;
 
     }
 }

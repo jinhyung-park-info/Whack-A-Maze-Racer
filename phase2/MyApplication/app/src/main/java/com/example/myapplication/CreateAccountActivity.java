@@ -23,30 +23,29 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
         Intent intent = getIntent();
         UserManagerFacade user_1 = (UserManagerFacade) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUserManagerFacade(user_1);
         }
-       loginPresenter = new LoginPresenter();
+        loginPresenter = new LoginPresenter();
 
     }
 
-    private void setUserManagerFacade(UserManagerFacade usermanager){
+    private void setUserManagerFacade(UserManagerFacade usermanager) {
         userManagerFacade = usermanager;
     }
 
-    public void DoneButton(View view){
-        EditText editTextUsername =  findViewById(R.id.answerEditText);
-        EditText editTextPassword =  findViewById(R.id.editText3);
+    public void DoneButton(View view) {
+        EditText editTextUsername = findViewById(R.id.answerEditText);
+        EditText editTextPassword = findViewById(R.id.editText3);
         String username = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
-        if(loginPresenter.validateCredentialsForAccountCreation(getApplicationContext(), username,
+        if (loginPresenter.validateCredentialsForAccountCreation(getApplicationContext(), username,
                 password, editTextUsername, editTextPassword)) {
             userManagerFacade.writeInfoToFile(getApplicationContext(), username, password, GameConstants.USER_FILE);
             userManagerFacade.writeInfoToFile(getApplicationContext(), username, password, GameConstants.USER_STATS_FILE);
             finish();
         }
     }
-
 
 
 }

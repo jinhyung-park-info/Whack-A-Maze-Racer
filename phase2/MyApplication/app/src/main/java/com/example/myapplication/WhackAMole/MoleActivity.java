@@ -41,10 +41,10 @@ public class MoleActivity extends AppCompatActivity {
         reset();
 
         String loadStat = (String) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats);
-        if(loadStat.contains("-")) {
+        if (loadStat.contains("-")) {
             String[] stats = loadStat.split("-");
             load(user, stats);
-        }else{
+        } else {
             setContentView(R.layout.activity_mole);
         }
     }
@@ -52,13 +52,13 @@ public class MoleActivity extends AppCompatActivity {
     public void load(IUser user, String[] stats) {
 
         int lifeCount = Integer.parseInt(stats[0]);
-        if(lifeCount > 0) {
+        if (lifeCount > 0) {
             this.score = Integer.parseInt(stats[3]);
             this.numLives = lifeCount;
             this.numColumns = Integer.parseInt(stats[1]);
             this.numRows = Integer.parseInt(stats[2]);
             this.backgroundID = Integer.parseInt(stats[4]);
-        }else{
+        } else {
             reset();
         }
         wamView = new WamView(this);
@@ -85,7 +85,7 @@ public class MoleActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         String loadStat = (String) user.getStatistic(GameConstants.WHACK_A_MOLE, GameConstants.MoleStats);
-        if(loadStat.contains("-")) {
+        if (loadStat.contains("-")) {
             String[] stats = loadStat.split("-");
             load(user, stats);
         }

@@ -23,13 +23,13 @@ public class typeRacerInstruction extends AppCompatActivity {
 
         Intent intent = getIntent();
         IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUserManager(user_1);
         }
 
     }
 
-    public void playTypeRacer(View v){
+    public void playTypeRacer(View v) {
         Intent intent = new Intent(this, TypeRacer.class);
         intent.putExtra("backGroundColorKey", Objects.requireNonNull(getIntent().getExtras()).getInt("backGroundColorKey"));
         intent.putExtra("textColorKey", getIntent().getExtras().getInt("textColorKey"));
@@ -39,7 +39,7 @@ public class typeRacerInstruction extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(IUserManager newManager){
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 }

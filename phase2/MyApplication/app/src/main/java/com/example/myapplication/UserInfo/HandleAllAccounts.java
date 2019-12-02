@@ -44,7 +44,7 @@ public class HandleAllAccounts implements Serializable {
                 }
             }
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         readAndUpdate.writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
@@ -105,8 +105,7 @@ public class HandleAllAccounts implements Serializable {
                 }
             }
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return arr;

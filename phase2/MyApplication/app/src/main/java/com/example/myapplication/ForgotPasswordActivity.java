@@ -22,7 +22,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         this.umfb = new UserManagerFacadeBuilder();
     }
 
-    private UserManagerFacade buildUserManagerFacade(){
+    private UserManagerFacade buildUserManagerFacade() {
         umfb.buildWAC();
         umfb.buildRAU();
         umfb.buildHAC();
@@ -30,24 +30,23 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         return umfb.getUmf();
     }
 
-    public void PasswordCheck(View view){
+    public void PasswordCheck(View view) {
         UserManagerFacade userManagerFacade = buildUserManagerFacade();
         EditText username = findViewById(R.id.UsernameCheck);
         IUser user = new User(username.getText().toString());
         Object validate = userManagerFacade.getOrChangePassword(getApplicationContext(),
                 user, null, GameConstants.getPassword);
-        if(validate instanceof String){
+        if (validate instanceof String) {
             TextView Password = findViewById(R.id.PasswordCheck);
             String text = "Your Password is: " + validate.toString();
             Password.setText(text);
-        }else{
+        } else {
             username.setError("Incorrect username was entered, only alphanumeric characters  are allowed");
         }
     }
 
 
-
-    public void backToLogin(View view){
+    public void backToLogin(View view) {
         finish();
     }
 }

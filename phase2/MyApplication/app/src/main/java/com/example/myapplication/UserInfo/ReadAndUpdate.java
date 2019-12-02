@@ -20,12 +20,11 @@ import static android.content.Context.MODE_PRIVATE;
 public class ReadAndUpdate implements Serializable {
 
     /**
-     *
-     * @param context of the device
-     * @param user whose statistics need to be set or updated
+     * @param context     of the device
+     * @param user        whose statistics need to be set or updated
      * @param setOrUpdate the string which will decide if the statistics will be set from the file or
-     *                   updated to the file. The string should be one one of either the
-     *                   string "update" or "set".
+     *                    updated to the file. The string should be one one of either the
+     *                    string "update" or "set".
      */
 
     public void setOrUpdateStatistics(Context context, IUser user, String setOrUpdate) {
@@ -62,8 +61,7 @@ public class ReadAndUpdate implements Serializable {
     }
 
     /**
-     *
-     * @param context of the device
+     * @param context  of the device
      * @param fileName the name of the file which needs to be opened for reading
      * @return the buffered reader with the file input stream to read over the file.
      */
@@ -80,9 +78,8 @@ public class ReadAndUpdate implements Serializable {
     }
 
     /**
-     *
-     * @param context of the device
-     * @param sb the string to write/overwrite the file
+     * @param context  of the device
+     * @param sb       the string to write/overwrite the file
      * @param FileName the name of the file which will have the contents of sb
      */
 
@@ -98,7 +95,6 @@ public class ReadAndUpdate implements Serializable {
     }
 
     /**
-     *
      * @param user with the updated statistics
      * @return the new line to be stored in the file with the updated statistics
      */
@@ -149,7 +145,7 @@ public class ReadAndUpdate implements Serializable {
 
     /**
      * @param context     of the device
-     * @param user which is the current user
+     * @param user        which is the current user
      * @param newPassword to be changed
      * @param getOrChange the string which will tell the method if you want to return the password
      *                    or change the password

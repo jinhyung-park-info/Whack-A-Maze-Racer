@@ -26,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
         IUserManager userManager1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (userManager1 != null){
+        if (userManager1 != null) {
             setUserManager(userManager1);
         }
         TextView gemDisplay = findViewById(R.id.gemDisplay);
@@ -35,26 +35,26 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    private void setUserManager(IUserManager usermanager){
+    private void setUserManager(IUserManager usermanager) {
         userManager = usermanager;
     }
 
-    public void view_stats(View view){
+    public void view_stats(View view) {
         Intent intent = new Intent(this, ViewStatisticsPopUpActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
     public void playGame(View view) {
-        File file_type = new File(getApplicationContext().getFilesDir(),userManager.getUser().getEmail() + "_typeracer.txt");
+        File file_type = new File(getApplicationContext().getFilesDir(), userManager.getUser().getEmail() + "_typeracer.txt");
         File file_maze = new File(getApplicationContext().getFilesDir(), userManager.getUser().getEmail() + "_maze_save_state.txt");
-        if(file_type.exists()){
-            if(file_type.delete()){
+        if (file_type.exists()) {
+            if (file_type.delete()) {
                 Log.i("File", "deleted the typeracer save file because new game was started");
             }
         }
-        if(file_maze.exists()){
-            if(file_maze.delete()){
+        if (file_maze.exists()) {
+            if (file_maze.delete()) {
                 Log.i("File", "delete the maze save file because new game was started");
             }
         }
@@ -63,7 +63,7 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void resume(View view){
+    public void resume(View view) {
         switch (userManager.getUser().getLastPlayedLevel()) {
             case GameConstants.whackAMoleLevel:
                 Intent intent = new Intent(this, MoleActivity.class);
@@ -88,29 +88,29 @@ public class GameActivity extends AppCompatActivity {
 
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void Logout(View view){
+    public void Logout(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void ViewAccountInfo(View view){
+    public void ViewAccountInfo(View view) {
         Intent intent = new Intent(this, AccountInformationActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
-    public void ViewScoreBoard(View view){
+    public void ViewScoreBoard(View view) {
         Intent intent = new Intent(this, ViewScoreBoardActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
-    public void buyGem(View view){
+    public void buyGem(View view) {
         Intent intent = new Intent(this, InGamePurchaseActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);

@@ -400,12 +400,12 @@ public class MazeView extends View {
                     exitPaint);
 
 
-                for (Collectible c : collectibles) {
-                    canvas.drawBitmap(c.resizeBitmap((int) Math.floor(cellSize * 0.8),
-                            (int) Math.floor(cellSize * 0.8)),
-                            c.getCol() * cellSize + margin,
-                            c.getRow() * cellSize + margin, collectiblePaint);
-                }
+            for (Collectible c : collectibles) {
+                canvas.drawBitmap(c.resizeBitmap((int) Math.floor(cellSize * 0.8),
+                        (int) Math.floor(cellSize * 0.8)),
+                        c.getCol() * cellSize + margin,
+                        c.getRow() * cellSize + margin, collectiblePaint);
+            }
         }
 
     }

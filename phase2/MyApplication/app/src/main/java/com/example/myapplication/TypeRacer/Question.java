@@ -13,7 +13,7 @@ class Question {
         // Generate Random String using ASCII code Values from 32 to 126
 
         for (int i = 0; i < d; i++) {
-            sb.append((char) ThreadLocalRandom.current().nextInt(32, 126+1));
+            sb.append((char) ThreadLocalRandom.current().nextInt(32, 126 + 1));
         }
         this.questionContent = sb.toString();
     }

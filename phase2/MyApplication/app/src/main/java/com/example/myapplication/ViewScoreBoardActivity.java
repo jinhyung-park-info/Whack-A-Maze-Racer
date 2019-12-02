@@ -23,8 +23,6 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
 
     private UserManagerFacadeBuilder umfb;
     private IUserManager userManager;
-    private String[] arr = new String[]{"Overall Score", "Moles Hit", "Num MazeGames Played",
-            "Num MazeItems Collected", "TypeRacerStreak", "Mole All Time High"};
     private List<IUser> ArrayOfUsers;
     private TextView[] ArrayOfTextView;
 
@@ -94,7 +92,7 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         userManager = usermanager;
     }
 
-    private void buildUserManagerFacade(){
+    private void buildUserManagerFacade() {
         umfb.buildWAC();
         umfb.buildRAU();
         umfb.buildHAC();

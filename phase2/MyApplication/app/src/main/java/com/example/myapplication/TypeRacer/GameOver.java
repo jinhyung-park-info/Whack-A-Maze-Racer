@@ -22,7 +22,7 @@ public class GameOver extends AppCompatActivity {
 
         Intent previous = getIntent();
         IUserManager user_1 = (IUserManager) previous.getSerializableExtra(GameConstants.USERMANAGER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUser(user_1);
         }
 
@@ -38,7 +38,7 @@ public class GameOver extends AppCompatActivity {
 
     }
 
-    private void setUser(IUserManager new_user){
+    private void setUser(IUserManager new_user) {
         userManager = new_user;
     }
 }

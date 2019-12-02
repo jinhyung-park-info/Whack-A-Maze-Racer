@@ -94,7 +94,7 @@ public class TypeRacer extends AppCompatActivity {
         }
     }
 
-    private void setUserManager(IUserManager newManager){
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 
@@ -166,7 +166,7 @@ public class TypeRacer extends AppCompatActivity {
             Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("countDown"))).setText("" + (int) GameConstants.timeLimitInMills / 1000);
             Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("question"))).setText(questions.get(questionNumber).getQuestionContent());
 
-            if(questions.get(questionNumber) instanceof GoldenQuestion){
+            if (questions.get(questionNumber) instanceof GoldenQuestion) {
                 goldenQuestionMessage();
             }
 
@@ -189,8 +189,8 @@ public class TypeRacer extends AppCompatActivity {
         Context context = getApplicationContext();
         CharSequence text = "Golden Question";
         int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context,text,duration);
-        toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         LinearLayout toastLayout = (LinearLayout) toast.getView();
         TextView toastTV = (TextView) toastLayout.getChildAt(0);
         toastTV.setTextSize(33);
@@ -202,7 +202,8 @@ public class TypeRacer extends AppCompatActivity {
         answer.addTextChangedListener(
                 new TextWatcher() {
                     @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -233,7 +234,8 @@ public class TypeRacer extends AppCompatActivity {
                     }
 
                     @Override
-                    public void afterTextChanged(Editable s) {}
+                    public void afterTextChanged(Editable s) {
+                    }
                 });
     }
 
@@ -244,11 +246,11 @@ public class TypeRacer extends AppCompatActivity {
 
     // method called to update the statistic.
     @SuppressLint("SetTextI18n")
-    public void updateStatistics(boolean isCorrect){
+    public void updateStatistics(boolean isCorrect) {
         if (isCorrect) {
             countScore = countScore + questions.get(questionNumber - 1).getPoint();
             countStreak++;
-            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("score"))).setText(""+countScore);
+            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("score"))).setText("" + countScore);
             Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("streak"))).setText("" + countStreak);
         } else {
             countStreak = 0;
@@ -347,21 +349,21 @@ public class TypeRacer extends AppCompatActivity {
 
             timerRunning = true;
             countDownTimer =
-                        new CountDownTimer(time * 1000, 1000) {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                                Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("countDown"))).setText(Long.toString(millisUntilFinished / 1000));
-                            }
+                    new CountDownTimer(time * 1000, 1000) {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            Objects.requireNonNull(Objects.requireNonNull(textViewMap.get("countDown"))).setText(Long.toString(millisUntilFinished / 1000));
+                        }
 
-                            @Override
-                            public void onFinish() {
-                                updateStatistics(false);
-                                Objects.requireNonNull(textViewMap.get("countDown")).setText("0");
-                                showNextQuestion();
-                                timerRunning = false;
-                            }
-                        }.start();
+                        @Override
+                        public void onFinish() {
+                            updateStatistics(false);
+                            Objects.requireNonNull(textViewMap.get("countDown")).setText("0");
+                            showNextQuestion();
+                            timerRunning = false;
+                        }
+                    }.start();
 
             prepareForScreenUpdate();
 

@@ -73,7 +73,7 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(this, MazeInstructionsActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, usermanager);
         startActivity(intent);
@@ -87,46 +87,46 @@ public class MazeCustomizationActivity extends AppCompatActivity {
      */
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
-        if(!(checked)){
+        if (!(checked)) {
             return;
         }
 
         switch (view.getId()) {
             case R.id.radioButtonGreen:
-                    bgColour = Color.GREEN;
+                bgColour = Color.GREEN;
                 break;
             case R.id.radioButtonBlue:
-                    bgColour = Color.BLUE;
+                bgColour = Color.BLUE;
                 break;
             case R.id.radioButtonRed:
-                    bgColour = Color.RED;
+                bgColour = Color.RED;
                 break;
             case R.id.radioButtonYellow:
-                    bgColour = Color.YELLOW;
+                bgColour = Color.YELLOW;
                 break;
             case R.id.radioButtonWhite:
-                    bgColour = Color.WHITE;
+                bgColour = Color.WHITE;
                 break;
             case R.id.radioButtonHard:
-                    difficulty = GameConstants.Difficulty.HARD;
+                difficulty = GameConstants.Difficulty.HARD;
                 break;
             case R.id.radioButtonNormal:
-                    difficulty = GameConstants.Difficulty.NORMAL;
+                difficulty = GameConstants.Difficulty.NORMAL;
                 break;
             case R.id.radioButtonEasy:
-                    difficulty = GameConstants.Difficulty.EASY;
+                difficulty = GameConstants.Difficulty.EASY;
                 break;
             case R.id.radioButtonChar1:
-                    playerType = 0;
+                playerType = 0;
                 break;
             case R.id.radioButtonCharTwo:
-                    playerType = 1;
+                playerType = 1;
                 break;
         }
 
     }
 
-    private void setUserManager(IUserManager newManager){
+    private void setUserManager(IUserManager newManager) {
         usermanager = newManager;
     }
 
@@ -158,8 +158,8 @@ public class MazeCustomizationActivity extends AppCompatActivity {
     }
 
     public void reset() {
-       bgColour = Color.GREEN;
+        bgColour = Color.GREEN;
         difficulty = GameConstants.Difficulty.NORMAL;
-       playerType = 0;
+        playerType = 0;
     }
 }

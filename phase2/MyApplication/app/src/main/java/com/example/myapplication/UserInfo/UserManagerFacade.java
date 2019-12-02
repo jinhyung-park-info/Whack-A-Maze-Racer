@@ -96,7 +96,7 @@ public class UserManagerFacade implements IUserManager {
 
     /**
      * @param context     of the device
-     * @param user  which is the current user
+     * @param user        which is the current user
      * @param newPassword to be changed
      * @param getOrChange the string which will tell the method if you want to return the password
      *                    or change the password

@@ -16,21 +16,21 @@ public class Cell {
     private int row;
 
     Cell(int col, int row) {
-        if(col >= 0 && row >= 0){
+        if (col >= 0 && row >= 0) {
             this.col = col;
             this.row = row;
         }
     }
 
     synchronized boolean hasTopWall() {
-            return hasTopWall;
+        return hasTopWall;
     }
 
-   synchronized void setHasTopWall(boolean hasTopWall) {
+    synchronized void setHasTopWall(boolean hasTopWall) {
         this.hasTopWall = hasTopWall;
     }
 
-     synchronized boolean hasBottomWall() {
+    synchronized boolean hasBottomWall() {
         return hasBottomWall;
     }
 
@@ -54,12 +54,12 @@ public class Cell {
         this.hasRightWall = hasRightWall;
     }
 
-    synchronized int  getCol() {
+    synchronized int getCol() {
         return col;
     }
 
     synchronized void setCol(int col) {
-            this.col = col;
+        this.col = col;
     }
 
     synchronized int getRow() {
@@ -70,7 +70,7 @@ public class Cell {
         this.row = row;
     }
 
-   synchronized boolean wasVisited() {
+    synchronized boolean wasVisited() {
         return visited;
     }
 

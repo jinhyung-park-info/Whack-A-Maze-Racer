@@ -5,18 +5,17 @@ import java.util.Random;
 import java.util.Stack;
 
 
-interface MazeMaker{
-   Cell[][] makeMaze(Cell[][] cells, int cols, int rows);
+interface MazeMaker {
+    Cell[][] makeMaze(Cell[][] cells, int cols, int rows);
 }
 
-public class MazeCreation implements MazeMaker{
+public class MazeCreation implements MazeMaker {
 
     /**
-     *
      * @param currentCell is the current cell
-     * @param cells is the 2D array of cells
-     * @param numCols is the total num of Columns
-     * @param numRows is the total num of rows
+     * @param cells       is the 2D array of cells
+     * @param numCols     is the total num of Columns
+     * @param numRows     is the total num of rows
      * @return a random cell neighbour of the current cell
      */
     private Cell getRandomNeighbour(Cell currentCell, Cell[][] cells, int numCols, int numRows) {
@@ -127,7 +126,7 @@ public class MazeCreation implements MazeMaker{
                 current = stackVisitedCells.pop();
             }
         } while (!stackVisitedCells.isEmpty());
-     return cells;
+        return cells;
 
     }
 }

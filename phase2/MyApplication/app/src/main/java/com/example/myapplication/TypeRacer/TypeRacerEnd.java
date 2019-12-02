@@ -31,7 +31,7 @@ public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver
 
         Intent intent = getIntent();
         IUserManager user_1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
-        if (user_1 != null){
+        if (user_1 != null) {
             setUserManager(user_1);
             user = userManager.getUser();
         }
@@ -60,7 +60,8 @@ public class TypeRacerEnd extends AppCompatActivity implements TypeRacerObserver
         });
 
     }
-    private void setUserManager(IUserManager newManager){
+
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 

@@ -34,17 +34,19 @@ public class SaveScoreActivity extends AppCompatActivity {
         }
         incomingGame = (String) intent.getSerializableExtra(GameConstants.gameName);
         //if from MoleActivity
-        if (incomingGame.equals(GameConstants.moleName)) {
-            moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
-            moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
-        } else if (incomingGame.equals(GameConstants.mazeNameForIntent)) {
-        } else if (incomingGame.equals(GameConstants.racerName)) {
-            racerStreak = (int) intent.getSerializableExtra(GameConstants.TypeRacerStreak);
-        }
-        if(incomingGame.equals(GameConstants.mazeNameForIntent)){
-            originalMazeItemsCollected = (int) intent.getSerializableExtra(GameConstants.NumCollectiblesCollectedMaze);
-            originalNumMazeGamesPlayed = (int) intent.getSerializableExtra(GameConstants.NumMazeGamesPlayed);
-            originalOverallScore = (int) intent.getSerializableExtra(GameConstants.overallScore);
+        switch (incomingGame) {
+            case GameConstants.moleName:
+                moleScore = (int) intent.getSerializableExtra(GameConstants.MoleScore);
+                moleHigh = (int) intent.getSerializableExtra(GameConstants.MoleHigh);
+                break;
+            case GameConstants.mazeNameForIntent:
+                originalMazeItemsCollected = (int) intent.getSerializableExtra(GameConstants.NumCollectiblesCollectedMaze);
+                originalNumMazeGamesPlayed = (int) intent.getSerializableExtra(GameConstants.NumMazeGamesPlayed);
+                originalOverallScore = (int) intent.getSerializableExtra(GameConstants.overallScore);
+                break;
+            case GameConstants.racerName:
+                racerStreak = (int) intent.getSerializableExtra(GameConstants.TypeRacerStreak);
+                break;
         }
 
     }
@@ -65,7 +67,7 @@ public class SaveScoreActivity extends AppCompatActivity {
     }
 
     public void notSave(View view) {
-        if(incomingGame.equals(GameConstants.mazeNameForIntent)){
+        if (incomingGame.equals(GameConstants.mazeNameForIntent)) {
             user.setStatistic(GameConstants.MAZE, GameConstants.NumMazeGamesPlayed, originalNumMazeGamesPlayed);
             user.setStatistic(GameConstants.MAZE, GameConstants.NumCollectiblesCollectedMaze, originalMazeItemsCollected);
             user.setOverallScore(originalOverallScore);

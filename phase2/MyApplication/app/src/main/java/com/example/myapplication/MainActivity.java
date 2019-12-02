@@ -13,7 +13,6 @@ import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.LoginPresenter;
 import com.example.myapplication.UserInfo.User;
-import com.example.myapplication.UserInfo.UserManagerFacade;
 
 public class MainActivity extends AppCompatActivity implements ILoginView {
 
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
 
     }
 
-    private void buildUserManagerFacade(){
+    private void buildUserManagerFacade() {
         umfb.buildWAC();
         umfb.buildRAU();
         umfb.buildHAC();

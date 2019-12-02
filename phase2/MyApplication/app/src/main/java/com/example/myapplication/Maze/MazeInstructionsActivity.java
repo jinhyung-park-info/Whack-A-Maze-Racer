@@ -33,7 +33,7 @@ public class MazeInstructionsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserManager(IUserManager newManager){
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 

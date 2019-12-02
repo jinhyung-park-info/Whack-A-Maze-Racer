@@ -37,22 +37,22 @@ public class ChangePasswordActivity extends AppCompatActivity {
         umfb = new UserManagerFacadeBuilder();
     }
 
-    private void setUserManager(UserManagerFacade newManager){
+    private void setUserManager(UserManagerFacade newManager) {
         userManager = newManager;
     }
 
-    public void done(View view){
-        EditText newp =  findViewById(R.id.newp);
+    public void done(View view) {
+        EditText newp = findViewById(R.id.newp);
         String newPass = newp.getText().toString();
 
-        EditText confirm =  findViewById(R.id.confirm);
+        EditText confirm = findViewById(R.id.confirm);
         String confirmPass = confirm.getText().toString();
 
         Pattern newPattern = Pattern.compile("^[a-zA-Z0-9]+$");
         Matcher newMatcher = newPattern.matcher(confirmPass);
 
-        if(newPass.equals(confirmPass) && newMatcher.matches()){
-            if(user.getCurrency() >= 100) {
+        if (newPass.equals(confirmPass) && newMatcher.matches()) {
+            if (user.getCurrency() >= 100) {
                 user.setPassword(newPass);
                 user.setCurrency(user.getCurrency() - 100);
                 back(view);
@@ -63,27 +63,27 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 umfb.buildUMF();
                 UserManagerFacade newUserManagerFacade = umfb.getUmf();
                 newUserManagerFacade.getOrChangePassword(this, user, newPass, GameConstants.changePassword);
-            }else{
+            } else {
                 Toast.makeText(getApplicationContext(), "Insufficient Gems"
                         , Toast.LENGTH_LONG).show();
             }
-        }else newp.setError("Invalid Password");
+        } else newp.setError("Invalid Password");
     }
 
-    public void back(View view){
+    public void back(View view) {
         Intent intent = new Intent(this, AccountInformationActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
-    public void buyGem(View view){
+    public void buyGem(View view) {
         Intent intent = new Intent(this, InGamePurchaseActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent intent = new Intent(this, AccountInformationActivity.class);
         intent.putExtra(GameConstants.USERMANAGER, userManager);
         startActivity(intent);

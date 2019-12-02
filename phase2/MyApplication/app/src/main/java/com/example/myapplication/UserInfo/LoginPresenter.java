@@ -19,7 +19,7 @@ public class LoginPresenter implements ILoginPresenter {
         buildUserManagerFacade();
     }
 
-    private void buildUserManagerFacade(){
+    private void buildUserManagerFacade() {
         umfb.buildWAC();
         umfb.buildRAU();
         umfb.buildHAC();

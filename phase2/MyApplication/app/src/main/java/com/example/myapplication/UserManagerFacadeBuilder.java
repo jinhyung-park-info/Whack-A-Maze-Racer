@@ -11,23 +11,23 @@ public class UserManagerFacadeBuilder {
     private HandleAllAccounts hac;
     private UserManagerFacade umf;
 
-    public void buildRAU(){
+    public void buildRAU() {
         this.rau = new ReadAndUpdate();
     }
 
-    public void buildWAC(){
+    public void buildWAC() {
         this.wac = new WriteAndCheck();
     }
 
-    public void buildHAC(){
+    public void buildHAC() {
         this.hac = new HandleAllAccounts();
     }
 
-    public void buildUMF(){
+    public void buildUMF() {
         this.umf = new UserManagerFacade(this.rau, this.wac, this.hac);
     }
 
-    public UserManagerFacade getUmf(){
+    public UserManagerFacade getUmf() {
         return this.umf;
     }
 }

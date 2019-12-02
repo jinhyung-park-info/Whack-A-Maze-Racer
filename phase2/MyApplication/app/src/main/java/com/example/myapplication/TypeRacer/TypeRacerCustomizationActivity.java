@@ -39,7 +39,7 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
         }
     }
 
-    private void setUserManager(IUserManager newManager){
+    private void setUserManager(IUserManager newManager) {
         userManager = newManager;
     }
 
@@ -92,11 +92,12 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
                 }
                 break;
 
-            }
+        }
     }
 
     @Override
-    public void onBackPressed(){}
+    public void onBackPressed() {
+    }
 
     public void playL2(View view) {
         Intent intent = new Intent(this, typeRacerInstruction.class);

@@ -57,13 +57,6 @@ public abstract class GameConstants {
     public static final int MazeWallThickness = 4;
     public static final int NumberOfMazeCollectibles = 3;
     public static final int PointsForACollectible = 10;
-    public static final int IndexOfColsInFile = 3;
-    public static final int IndexOfRowsInFile = 2;
-    public static final int IndexOfBgColorInFile = 0;
-    public static final int IndexOfPlayerTypeInFile = 1;
-    public static final int IndexOfPlayerColInFile = 5;
-    public static final int IndexOfPlayerRowInFile = 4;
-    public static final int StartingIndexOfMazeMapInFile = 6;
     public static final int RowsForEasyMaze = 7;
     public static final int ColsForEasyMaze = 5;
     public static final int RowsForNormalMaze = 11;
@@ -91,8 +84,8 @@ public abstract class GameConstants {
     public static final String TypeRacerStreak = "TypeRacerStreak";
     public static final String NumCollectiblesCollectedMaze = "NumCollectiblesCollectedMaze";
     public static final String[] WhackAMoleStatistics = new String[]{MoleStats, MoleHit, MoleAllTimeHigh};
-    public static final String[]  TypeRacerStatistics = new String[]{TypeRacerStreak};
-    public static final String[]  MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
+    public static final String[] TypeRacerStatistics = new String[]{TypeRacerStreak};
+    public static final String[] MazeStatistics = new String[]{NumMazeGamesPlayed, NumCollectiblesCollectedMaze};
     public static String[] GameNames = new String[]{WHACK_A_MOLE, TYPE_RACER, MAZE};
 
     public enum Direction {
@@ -103,8 +96,8 @@ public abstract class GameConstants {
         EASY, NORMAL, HARD
     }
 
-    public static String[] getArrayOfStatistics(String GameName){
-        switch (GameName){
+    public static String[] getArrayOfStatistics(String GameName) {
+        switch (GameName) {
             case WHACK_A_MOLE:
                 return WhackAMoleStatistics;
             case TYPE_RACER:
