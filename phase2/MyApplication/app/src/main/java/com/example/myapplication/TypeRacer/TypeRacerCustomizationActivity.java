@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.example.myapplication.GameConstants;
+import com.example.myapplication.PlayGamesActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.UserInfo.IUserManager;
 
@@ -97,6 +98,9 @@ public class TypeRacerCustomizationActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(this, PlayGamesActivity.class);
+        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        startActivity(intent);
     }
 
     public void playL2(View view) {
