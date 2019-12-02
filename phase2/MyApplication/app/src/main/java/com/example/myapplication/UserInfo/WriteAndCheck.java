@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import static android.content.Context.MODE_APPEND;
 import static android.content.Context.MODE_PRIVATE;
 
-class WriteAndCheck implements Serializable {
+public class WriteAndCheck implements Serializable {
     /**
      * @param context  of the device
      * @param username entered by the user

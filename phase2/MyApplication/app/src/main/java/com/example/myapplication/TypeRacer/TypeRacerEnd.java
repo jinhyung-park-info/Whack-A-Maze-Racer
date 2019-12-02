@@ -13,7 +13,6 @@ import com.example.myapplication.R;
 import com.example.myapplication.SaveScoreActivity;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
-import com.example.myapplication.UserInfo.UserManager;
 
 import java.util.Objects;
 

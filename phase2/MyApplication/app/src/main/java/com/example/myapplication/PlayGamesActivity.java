@@ -9,7 +9,6 @@ import android.view.View;
 import com.example.myapplication.Maze.MazeInstructionsActivity;
 import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.UserInfo.IUserManager;
-import com.example.myapplication.UserInfo.UserManager;
 import com.example.myapplication.WhackAMole.MoleInstructionActivity;
 
 public class PlayGamesActivity extends AppCompatActivity {

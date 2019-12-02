@@ -154,7 +154,7 @@ public class MazeView extends View {
         distributeCollectibles();
     }
 
-    /*public MazeView(Context context, UserManager user_1) {
+    /*public MazeView(Context context, UserManagerFacade user_1) {
         super(context);
         contexts = context;
 

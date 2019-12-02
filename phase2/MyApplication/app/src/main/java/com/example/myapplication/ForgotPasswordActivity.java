@@ -4,27 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.User;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.UserManagerFacade;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
+
+    UserManagerFacadeBuilder umfb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+        this.umfb = new UserManagerFacadeBuilder();
+    }
+
+    private UserManagerFacade buildUserManagerFacade(){
+        umfb.buildWAC();
+        umfb.buildRAU();
+        umfb.buildHAC();
+        umfb.buildUMF();
+        return umfb.getUmf();
     }
 
     public void PasswordCheck(View view){
-        UserManager userManager = new UserManager();
+        UserManagerFacade userManagerFacade = buildUserManagerFacade();
         EditText username = findViewById(R.id.UsernameCheck);
         IUser user = new User(username.getText().toString());
-        Object validate = userManager.getOrChangePassword(getApplicationContext(),
+        Object validate = userManagerFacade.getOrChangePassword(getApplicationContext(),
                 user, null, GameConstants.getPassword);
         if(validate instanceof String){
             TextView Password = findViewById(R.id.PasswordCheck);

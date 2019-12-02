@@ -12,21 +12,31 @@ import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.LoginPresenter;
 import com.example.myapplication.UserInfo.User;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.UserManagerFacade;
 
 public class MainActivity extends AppCompatActivity implements ILoginView {
 
     private IUserManager userManager;
     private LoginPresenter loginPresenter;
+    private UserManagerFacadeBuilder umfb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userManager = new UserManager();
+        umfb = new UserManagerFacadeBuilder();
+        buildUserManagerFacade();
         loginPresenter = new LoginPresenter();
 
 
+    }
+
+    private void buildUserManagerFacade(){
+        umfb.buildWAC();
+        umfb.buildRAU();
+        umfb.buildHAC();
+        umfb.buildUMF();
+        userManager = umfb.getUmf();
     }
 
     public void createAccount(View view) {

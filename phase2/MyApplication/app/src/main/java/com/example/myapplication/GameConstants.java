@@ -3,7 +3,7 @@ package com.example.myapplication;
 import android.graphics.Color;
 
 public abstract class GameConstants {
-    public static final String USERMANAGER = "UserManager";
+    public static final String USERMANAGER = "UserManagerFacade";
     public static final String USER_STATS_FILE = "user_stats.txt";
     public static final String USER_FILE = "user_data.txt";
     public static final String update = "update";

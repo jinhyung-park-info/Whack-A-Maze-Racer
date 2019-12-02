@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.UserManagerFacade;
 
 public class AccountInformationActivity extends AppCompatActivity {
 
@@ -26,7 +26,7 @@ public class AccountInformationActivity extends AppCompatActivity {
         EditTextPassword = findViewById(R.id.PasswordDsiplay);
 
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        UserManagerFacade user_1 = (UserManagerFacade) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
         }

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.UserManagerFacade;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,13 +19,14 @@ import java.util.regex.Pattern;
 public class ChangePasswordActivity extends AppCompatActivity {
     IUser user;
     IUserManager userManager;
+    UserManagerFacadeBuilder umfb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        UserManagerFacade user_1 = (UserManagerFacade) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
             setUserManager(user_1);
             user = userManager.getUser();
@@ -33,9 +34,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
         TextView gemDisplay = findViewById(R.id.gemDisplay);
         String text = "Gem: " + userManager.getUser().getCurrency();
         gemDisplay.setText(text);
+        umfb = new UserManagerFacadeBuilder();
     }
 
-    private void setUserManager(UserManager newManager){
+    private void setUserManager(UserManagerFacade newManager){
         userManager = newManager;
     }
 
@@ -55,8 +57,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 user.setCurrency(user.getCurrency() - 100);
                 back(view);
                 userManager.setOrUpdateStatistics(this, user, GameConstants.update);
-                UserManager newUserManager = new UserManager();
-                newUserManager.getOrChangePassword(this, user, newPass, GameConstants.changePassword);
+                umfb.buildWAC();
+                umfb.buildRAU();
+                umfb.buildHAC();
+                umfb.buildUMF();
+                UserManagerFacade newUserManagerFacade = umfb.getUmf();
+                newUserManagerFacade.getOrChangePassword(this, user, newPass, GameConstants.changePassword);
             }else{
                 Toast.makeText(getApplicationContext(), "Insufficient Gems"
                         , Toast.LENGTH_LONG).show();

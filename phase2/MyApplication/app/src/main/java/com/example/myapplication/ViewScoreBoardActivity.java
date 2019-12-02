@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
 import com.example.myapplication.UserInfo.SortingUser;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.UserManagerFacade;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +21,7 @@ import java.util.List;
 
 public class ViewScoreBoardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private UserManagerFacadeBuilder umfb;
     private IUserManager userManager;
     private String[] arr = new String[]{"Overall Score", "Moles Hit", "Num MazeGames Played",
             "Num MazeItems Collected", "TypeRacerStreak", "Mole All Time High"};
@@ -33,10 +34,12 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
         setContentView(R.layout.activity_view_score_board);
         Intent intent = getIntent();
         IUserManager userManager1 = (IUserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        umfb = new UserManagerFacadeBuilder();
+        buildUserManagerFacade();
         if (userManager1 != null) {
-            UserManager newUserManager = new UserManager();
+            UserManagerFacade newUserManagerFacade = umfb.getUmf();
             setUserManager(userManager1);
-            ArrayOfUsers = newUserManager.getListOfAllUsers(getApplicationContext(), userManager.getUser());
+            ArrayOfUsers = newUserManagerFacade.getListOfAllUsers(getApplicationContext(), userManager.getUser());
             ArrayOfUsers.add(userManager.getUser());
         }
 
@@ -89,6 +92,14 @@ public class ViewScoreBoardActivity extends AppCompatActivity implements Adapter
 
     private void setUserManager(IUserManager usermanager) {
         userManager = usermanager;
+    }
+
+    private void buildUserManagerFacade(){
+        umfb.buildWAC();
+        umfb.buildRAU();
+        umfb.buildHAC();
+        umfb.buildUMF();
+        userManager = umfb.getUmf();
     }
 
     @Override

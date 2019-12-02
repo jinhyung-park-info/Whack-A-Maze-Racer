@@ -3,7 +3,7 @@ package com.example.myapplication.Maze;
 import android.content.Context;
 
 import com.example.myapplication.GameConstants;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.UserManagerFacade;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,11 +26,11 @@ class MazeLoader implements Loadable {
 
     private MazeView mazeView;
     private Context context;
-    private UserManager userManager;
+    private UserManagerFacade userManagerFacade;
 
-    public MazeLoader(Context context, UserManager userManager) {
+    public MazeLoader(Context context, UserManagerFacade userManagerFacade) {
         this.context = context;
-        this.userManager = userManager;
+        this.userManagerFacade = userManagerFacade;
     }
 
     /**
@@ -130,7 +130,7 @@ class MazeLoader implements Loadable {
 
     @Override
     public MazeView startNewMaze(int bgColour, GameConstants.Difficulty difficulty, int playerType) {
-        this.mazeView = new MazeView(context, bgColour, difficulty, playerType, userManager);
+        this.mazeView = new MazeView(context, bgColour, difficulty, playerType, userManagerFacade);
         return mazeView;
     }
 

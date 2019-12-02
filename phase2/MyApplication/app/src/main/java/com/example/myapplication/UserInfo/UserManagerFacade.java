@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserManager implements IUserManager {
+public class UserManagerFacade implements IUserManager {
 
     private WriteAndCheck writeAndCheck;
     private ReadAndUpdate readAndUpdate;
@@ -40,10 +40,10 @@ public class UserManager implements IUserManager {
         this.user = user;
     }
 
-    public UserManager() {
-        this.writeAndCheck = new WriteAndCheck();
-        this.readAndUpdate = new ReadAndUpdate();
-        this.handleAllAccounts = new HandleAllAccounts();
+    public UserManagerFacade(ReadAndUpdate rau, WriteAndCheck wac, HandleAllAccounts hac) {
+        this.writeAndCheck = wac;
+        this.readAndUpdate = rau;
+        this.handleAllAccounts = hac;
     }
 
     /**

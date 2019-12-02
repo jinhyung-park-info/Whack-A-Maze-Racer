@@ -23,7 +23,6 @@ import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.UserInfo.IUser;
 import com.example.myapplication.UserInfo.IUserManager;
-import com.example.myapplication.UserInfo.UserManager;
 
 import java.io.BufferedReader;
 import java.io.File;

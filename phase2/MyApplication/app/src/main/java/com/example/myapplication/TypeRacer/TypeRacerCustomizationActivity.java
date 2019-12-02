@@ -11,7 +11,6 @@ import android.widget.RadioButton;
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
 import com.example.myapplication.UserInfo.IUserManager;
-import com.example.myapplication.UserInfo.UserManager;
 
 public class TypeRacerCustomizationActivity extends AppCompatActivity {
 

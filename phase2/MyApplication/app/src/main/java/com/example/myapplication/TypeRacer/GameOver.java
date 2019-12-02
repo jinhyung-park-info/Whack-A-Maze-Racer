@@ -9,9 +9,7 @@ import android.widget.Button;
 
 import com.example.myapplication.GameConstants;
 import com.example.myapplication.R;
-import com.example.myapplication.TypeRacer.TypeRacerCustomizationActivity;
 import com.example.myapplication.UserInfo.IUserManager;
-import com.example.myapplication.UserInfo.UserManager;
 
 public class GameOver extends AppCompatActivity {
 

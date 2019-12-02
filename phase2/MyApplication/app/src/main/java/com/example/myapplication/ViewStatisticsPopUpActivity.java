@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.myapplication.UserInfo.IUser;
-import com.example.myapplication.UserInfo.UserManager;
+import com.example.myapplication.UserInfo.UserManagerFacade;
 
 public class ViewStatisticsPopUpActivity extends Activity {
 
-    private UserManager userManager;
+    private UserManagerFacade userManagerFacade;
     private IUser user;
 
     @Override
@@ -21,10 +21,10 @@ public class ViewStatisticsPopUpActivity extends Activity {
         setContentView(R.layout.activity_pop_up);
 
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        UserManagerFacade user_1 = (UserManagerFacade) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null) {
-            setUserManager(user_1);
-            user = userManager.getUser();
+            setUserManagerFacade(user_1);
+            user = userManagerFacade.getUser();
         }
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -68,18 +68,18 @@ public class ViewStatisticsPopUpActivity extends Activity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        intent.putExtra(GameConstants.USERMANAGER, userManagerFacade);
         startActivity(intent);
     }
 
-    private void setUserManager(UserManager newManager) {
-        userManager = newManager;
+    private void setUserManagerFacade(UserManagerFacade newManager) {
+        userManagerFacade = newManager;
     }
 
     public void buyCurrency(View view) {
 
         Intent intent = new Intent(this, InGamePurchaseActivity.class);
-        intent.putExtra(GameConstants.USERMANAGER, userManager);
+        intent.putExtra(GameConstants.USERMANAGER, userManagerFacade);
         startActivity(intent);
     }
 }

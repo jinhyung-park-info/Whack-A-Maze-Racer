@@ -8,15 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.myapplication.UserInfo.LoginPresenter;
-import com.example.myapplication.UserInfo.UserManager;
-
-import java.io.FileOutputStream;
-import java.util.ArrayList;
+import com.example.myapplication.UserInfo.UserManagerFacade;
 
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    private UserManager userManager;
+    private UserManagerFacade userManagerFacade;
     private LoginPresenter loginPresenter;
 
     @Override
@@ -24,16 +21,16 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         Intent intent = getIntent();
-        UserManager user_1 = (UserManager) intent.getSerializableExtra(GameConstants.USERMANAGER);
+        UserManagerFacade user_1 = (UserManagerFacade) intent.getSerializableExtra(GameConstants.USERMANAGER);
         if (user_1 != null){
-            setUserManager(user_1);
+            setUserManagerFacade(user_1);
         }
        loginPresenter = new LoginPresenter();
 
     }
 
-    private void setUserManager(UserManager usermanager){
-        userManager = usermanager;
+    private void setUserManagerFacade(UserManagerFacade usermanager){
+        userManagerFacade = usermanager;
     }
 
     public void DoneButton(View view){
@@ -43,8 +40,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         String password = editTextPassword.getText().toString();
         if(loginPresenter.validateCredentialsForAccountCreation(getApplicationContext(), username,
                 password, editTextUsername, editTextPassword)) {
-            userManager.writeInfoToFile(getApplicationContext(), username, password, GameConstants.USER_FILE);
-            userManager.writeInfoToFile(getApplicationContext(), username, password, GameConstants.USER_STATS_FILE);
+            userManagerFacade.writeInfoToFile(getApplicationContext(), username, password, GameConstants.USER_FILE);
+            userManagerFacade.writeInfoToFile(getApplicationContext(), username, password, GameConstants.USER_STATS_FILE);
             finish();
         }
     }
