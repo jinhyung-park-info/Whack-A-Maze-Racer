@@ -5,17 +5,12 @@ import android.content.Context;
 import com.example.myapplication.GameConstants;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.myapplication.GameConstants.openFileForReading;
 import static com.example.myapplication.GameConstants.writeStringToFile;
 
@@ -61,23 +56,6 @@ public class ReadAndUpdate implements Serializable {
 
         writeStringToFile(context, sb, GameConstants.USER_STATS_FILE);
     }
-
-    /**
-     * @param context  of the device
-     * @param fileName the name of the file which needs to be opened for reading
-     * @return the buffered reader with the file input stream to read over the file.
-     */
-
-    /*BufferedReader openFileForReading(Context context, String fileName) {
-        try {
-            FileInputStream fis = context.openFileInput(fileName);
-            InputStreamReader isr = new InputStreamReader(fis);
-            return new BufferedReader(isr);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
 
     /**
      * @param user with the updated statistics
