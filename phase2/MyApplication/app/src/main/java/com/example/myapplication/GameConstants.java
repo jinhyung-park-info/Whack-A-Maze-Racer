@@ -76,7 +76,7 @@ public abstract class GameConstants {
     public static final String gameName = "name";
     public static final String moleName = "mole";
     public static final String racerName = "racer";
-    public static final String mazeName = "maze";
+    public static final String mazeNameForIntent = "maze";
     public static final int NumPeopleOnScoreBoard = 15;
     public static final String WHACK_A_MOLE = "Whack-A-Mole";
     public static final String TYPE_RACER = "TypeRacer";

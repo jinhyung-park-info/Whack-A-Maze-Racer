@@ -154,37 +154,6 @@ public class MazeView extends View {
         distributeCollectibles();
     }
 
-    /*public MazeView(Context context, UserManager user_1) {
-        super(context);
-        contexts = context;
-
-        this.userManager = user_1;
-        this.userInMaze = user_1.getUser();
-        mazeMaker = new MazeCreation();
-
-        wallPaint = new Paint();
-        wallPaint.setColor(Color.BLACK);
-        wallPaint.setStrokeWidth(GameConstants.MazeWallThickness);
-
-        playerPaint = new Paint();
-        playerPaint.setColor(Color.MAGENTA);
-
-        exitPaint = new Paint();
-        exitPaint.setColor(Color.BLACK);
-
-        collectiblesEnabled = true;
-        collectibles = new ArrayList<>();
-        collectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.a_plus);
-        gemCollectibleBitmap = BitmapFactory.decodeResource(res, R.drawable.gem);
-        collectiblePaint = new Paint();
-        collectiblePaint.setColor(Color.LTGRAY);
-
-        if (playerType == 0)
-            playerBitmap = BitmapFactory.decodeResource(res, R.drawable.lindsey_mole);
-        else
-            playerBitmap = BitmapFactory.decodeResource(res, R.drawable.paul_mole);
-    }*/
-
     public void setBackgroundColour(int backgroundColour) {
         this.backgroundColour = backgroundColour;
     }
@@ -296,7 +265,7 @@ public class MazeView extends View {
                 this.userInMaze.setStatistic(GameConstants.MAZE,
                         GameConstants.NumMazeGamesPlayed, CurrGamesPlayed + gamesPlayed);
                 this.userInMaze.setLastPlayedLevel(GameConstants.defaultLevel);
-                userManager.setOrUpdateStatistics(contexts, userInMaze, GameConstants.update);
+                //userManager.setOrUpdateStatistics(contexts, userInMaze, GameConstants.update);
                 Activity activity = (MazeCustomizationActivity) contexts;
                 ((MazeCustomizationActivity) contexts).reset();
                 activity.setContentView(R.layout.activity_maze_customization);
