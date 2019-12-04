@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:fontFamily="casual"
-        android:text="Would you like to save you're progress?"
+        android:text="Would you like to save your progress?"
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
