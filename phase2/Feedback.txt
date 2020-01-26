@@ -1,0 +1,37 @@
+Dear group_0609
+
+This semester, we talked about MVP, the Model-View-Presenter architecture. It has many advantages, particularly when working with Android. As you can see from your project, your activity classes have methods that are specific to Android. If you encapsulate the rest of your code sufficiently, it is possible to port it to another platform simply by creating a new UI (for example, a website).
+
+Encapsulation can take on many forms. You can package your View classes together. You can ensure that your dependencies go one-way, towards the inner more abstract layers. You can incorporate SOLID principles as much as possible and design patterns where they make sense.
+Here is feedback that is specific to your project:
+
+You made good use of…
++ Single responsibility principle and MVP design for the Login package. 
++ Builder pattern was used to build the User profile
++ The Maze game was built with extensibility aspect in mind. It would be easy to add new collectible items in the future by extending the Collectible class. To show that it is easy to add new collectibles, it should have been easy to add more items in addition to the GemCollectible class.
++ Observer pattern used in the Type Racer game to update the stats.
+
+The user sees…
++ A login screen when they open the app. The user enters new credentials to create an account.
++ Once logged in, the main page shows buttons (Start Game, Load Game, Scoreboard, Account Info, etc.) that the user can select.
++ There are three games that the user can play.
+  - A Maze game where the user collects gems and completed the game.
+  - Type Racer game where the user is prompted to type what’s on the screen as quickly as possible
+  - Whack A Mole game that has a single hole from which a mole pops up. The user needs to click on the Mole to collect points
++ The app also has an in-game purchasing mechanics, which add additional elements of fun and helps to monetize the app
+
+A good next step would be to…
++ Add consistent comments and Javadocs throughout your program (ex. In userinfo, typeracer, and wackamole packages)
++ All packages should follow the Java naming convention. The names should be lower case to not be confused with class names.
++ The GameConstants class should not contain unrelated helper methods, it should only contain Game constants and the related methods that deal with constants. All other methods should be in a separate class (ex. Utils, or Helper).
++ Whack A Mole game should have been made to have at least two holes. This would force you to think about encapsulation so that it would be easy to add new holes with moles to the game.
++ You have thought about MVP design for Whack A Mole game, it would be great to implement MVP design for other games as well. Or if you decide not to implement MVP have good reasons to back up your decision.
++ Your customization screen before each game looked very similar for two of the three games. It would have made sense to reuse the code. For example, have an abstract class or a superclass that customization screens would extend from.
++ To improve as software designers we suggest view the program from different scopes and frames. That is on the low-level, are your methods clean and well documented? As you move to higher scope, do your classes follow the SOLID principles? On the high level, how do your classes interact within games and between games? Is there a common abstract class or interface that each game implements/extends so that it is easy to implement new games? Which way are your dependencies pointing so that you can follow the clean architecture design? How did you implement the MVP design? This kind of low-level to high-level scoping and framing should be iteratively considered as you program. It will push you to make complex programming problems more intuitive, readable, extensible, and testable.
++ We believe you have done parts of the suggestions in the above bullet, some quite well. However, there is room for improvement, especially on the high-level scope.
+
+We hope that you enjoyed working on this project and found it a useful learning experience.
+
+Cheers,
+The CSC207 Instructional Team
+
