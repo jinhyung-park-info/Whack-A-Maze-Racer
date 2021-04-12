@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1b74210d-1a06-414e-82e5-2cfd57058fdc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/README" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/teaser1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/teaser2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/androidTest/java/com/example/myapplication/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/CreateAccountActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/GameActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/GameConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/GameOver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/InGamePurchaseActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/Maze/Cell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/Maze/Collectible.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeCreation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeCustomizationActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeInstructionsActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/PlayGamesActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/PopUp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/SaveScoreActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/SetAndUpdate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/SortingUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/GoldenQuestion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/Question.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/QuestionFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/ReadMeTypeRacer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/RegularQuestion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/ScoreDisplay.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerCustomizationActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerEnd.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerObserver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerSubject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/typeRacerInstruction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/UserManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/ViewScoreBoardActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/Hole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/LindseyMole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/Mole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/MoleActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/MoleFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/MoleInstructionActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/PaulMole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/ReadMe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/WamManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/WamView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/WriteAndCheck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/readMe.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/java/com/example/myapplication/uml_diagram.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/a_plus.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/game_background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/game_background_grass.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/game_background_space.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/hole.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/life.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/lindsey_mole.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/mole.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/paul_mole.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/scrollbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/scrollbar2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/drawable/text_bg_bmp.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_create_account.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_game.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_game_over.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_in_game_purchase.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_maze_customization.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_maze_instructions.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_mole.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_mole_instruction.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_play_games.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_pop_up.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_save_score.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_type_racer.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_type_racer_customization.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_type_racer_end.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_type_racer_instruction.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/layout/activity_view_score_board.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/app/src/test/java/com/example/myapplication/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/MyApplication/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/Feedback.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/androidTest/java/com/example/myapplication/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/AccountInformationActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/ChangePasswordActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/CreateAccountActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/ForgotPasswordActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/GameActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/GameConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/InGamePurchaseActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/Maze/Cell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/Maze/Collectible.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/Maze/GemCollectible.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeCreation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeCustomizationActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeInstructionsActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/Maze/MazeView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/PlayGamesActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/SaveScoreActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/GameOver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/GoldenQuestion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/Question.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/QuestionFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/ReadMeTypeRacer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/RegularQuestion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerCustomizationActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerEnd.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerObserver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/TypeRacerSubject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/TypeRacer/typeRacerInstruction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/HandleAllAccounts.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/ILoginPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/ILoginView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/IUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/IUserManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/LoginPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/ReadAndUpdate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/SortingUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/UserManagerFacade.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserInfo/WriteAndCheck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/UserManagerFacadeBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/ViewScoreBoardActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/ViewStatisticsPopUpActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/GemMole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/GenericMole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/Hole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/LindseyMole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/Mole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/MoleActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/MoleFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/MoleInstructionActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/PaulMole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/ReadMe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/WamManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/WhackAMole/WamView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/design.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/new_uml_diagram.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/java/com/example/myapplication/readMe.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/a_plus.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/game_background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/game_background_grass.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/game_background_space.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/gem.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/hole.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/life.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/lindsey_mole.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/mole.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/paul_mole.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/scrollbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/scrollbar2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/drawable/text_bg_bmp.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_account_information.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_change_password.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_create_account.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_forgot_password.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_game.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_game_over.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_in_game_purchase.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_maze_customization.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_maze_instructions.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_mole.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_mole_instruction.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_play_games.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_pop_up.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_save_score.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_type_racer.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_type_racer_customization.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_type_racer_end.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_type_racer_instruction.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/layout/activity_view_score_board.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/app/src/test/java/com/example/myapplication/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/MyApplication/settings.gradle" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1r4xzbR1xdHSqDMaLUsWtPfCh02" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\StudioProjects\Whack-A-Maze-Racer\utils" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b74210d-1a06-414e-82e5-2cfd57058fdc" name="Default Changelist" comment="" />
+      <created>1618249426100</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618249426100</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="770" y="376" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1618251944183">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="770" y="376" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1618251944183" />
+  </component>
+</project>
