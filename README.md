@@ -12,8 +12,8 @@
 
 
 ### Intro
- - This android app consists of 3 mini games - Whack-A-Mole, TypeRacer, Maze - interlocked each other within the MVP Architecture.
- - 6 Design Patterns (Factory, Observer, Facade, Strategy, Builder, Iterator) and SOLID Principles were implemented for maintainable, extensible program.
+ - This android app consists of 3 mini games - Whack-A-Mole, TypeRacer, Maze - interlocked each other within the **MVP Architecture**.
+ - **6 Design Patterns (Factory, Observer, Facade, Strategy, Builder, Iterator) and SOLID Principles** were implemented for maintainable, extensible program.
  - UofT, CSC207 2019 Fall, group_0609 Final Project
 
 ### Features
